@@ -29,6 +29,7 @@ public class TopicIncome implements Serializable {
             pkColumnValue = "topic_income")
     @GeneratedValue(generator = "topic_income_generator", strategy = GenerationType.TABLE)
     private Integer id;
+    private String name;
 
     public Integer getId() {
         return id;
@@ -36,6 +37,14 @@ public class TopicIncome implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
