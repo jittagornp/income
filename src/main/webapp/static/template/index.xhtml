@@ -4,12 +4,24 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Money</title>
+        <title>Income</title>
         <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/static/style/template.css"/>
     </h:head>
     <h:body>
         <div class="toolbar">
-            
+            <div class="appname">
+                income
+            </div>
+            <div class="user-details">
+                <h:outputLink value="#{facesContext.externalContext.requestContextPath}/signin/"
+                              rendered="#{empty facesContext.externalContext.userPrincipal.name}">
+                    <h:outputText value="เข้าสู่ระบบ"  styleClass="blue-text"/>
+                </h:outputLink>
+                <h:outputLink value="#{facesContext.externalContext.requestContextPath}/logout"
+                              rendered="#{not empty facesContext.externalContext.userPrincipal.name}">
+                    <h:outputText value="ออกจากระบบ"  styleClass="blue-text"/>
+                </h:outputLink>
+            </div>
         </div>
         <div class="sidebar">
             <ui:insert name="sidebar"/>
@@ -18,9 +30,9 @@
             <ui:insert name="container"/>
         </div>
         <div class="bottombar">
-            
+
         </div>
-        
+
         <ui:insert name="dialog"/>
     </h:body>
 </html>

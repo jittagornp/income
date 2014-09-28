@@ -66,10 +66,15 @@ a img { border: none; }
 
 /** money **/
 .toolbar{
+    position: fixed;
     height : 40px;
-    background: red;
+    line-height : 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: rgb(204, 204, 204);
     left : 0;
     right : 0;
+    z-index: 1; 
 }
 
 .sidebar{
@@ -79,6 +84,7 @@ a img { border: none; }
     width: 220px;
     bottom: 0;
     background: #fafafa;
+    z-index: 1; 
 }
 
 .container{
@@ -88,4 +94,19 @@ a img { border: none; }
     right : 0;
     min-height: 500px;
     padding: 10px;
+}
+
+.appname{
+    color: #fff;
+    font-size: 14pt;
+}
+
+.user-details{
+    position: absolute;
+    right: 10px;
+    top: 0;
+}
+
+.user-details a{
+    color: #fff;    
 }
