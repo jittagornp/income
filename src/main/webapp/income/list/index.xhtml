@@ -36,13 +36,13 @@
                          paginatorPosition="bottom"
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          rowsPerPageTemplate="5,10,15,25,50">
-                <p:column headerText="No.">
+                <p:column headerText="No." style="width: 5%">
                     <h:outputText value="#{counter + 1}"/>
                 </p:column>
                 <p:column headerText="name">
                     <h:outputText value="#{item.topic.name}"/>
                 </p:column>
-                <p:column>
+                <p:column headerText="value">
                     <h:outputText value="#{item.income}"/>
                 </p:column>
             </p:dataTable>
@@ -58,6 +58,7 @@
                   resizable="false">
             <h:form id="selectTopicDialogForm">
                 <p:commandButton value="new topic"
+                                 icon="ui-icon-plus"
                                  update=":addTopicDialogForm"
                                  oncomplete="PF('addTopicWidgetDialog').show(); PF('selectTopicWidgetDialog').hide();"
                                  actionListener="#{incomeItemCtrl.onCreateTopic()}"/>
@@ -72,9 +73,7 @@
                              rowIndexVar="counter"
                              paginator="true"
                              emptyMessage="not have data"
-                             paginatorPosition="bottom"
-                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15,25,50">
+                             paginatorPosition="bottom">
                     <p:column headerText="No." style="width: 10%">
                         <h:outputText value="#{counter + 1}"/>
                     </p:column>
@@ -105,11 +104,11 @@
                         <p:inputText value="#{incomeItemCtrl.topic.name}"/>
                     </p:outputPanel>
 
-
                     <p:commandButton value="save"
                                      update=":addItemDialogForm"
                                      oncomplete="PF('addTopicWidgetDialog').hide(); PF('addItemWidgetDialog').show();"
                                      actionListener="#{incomeItemCtrl.onAddTopic()}"/>
+                    <p:spacer width="10"/>
                     <p:commandButton value="cancel"
                                      onclick="PF('addTopicWidgetDialog').hide()"
                                      type="button"/>
@@ -140,7 +139,7 @@
                     </p:outputPanel>
 
                     <p:commandButton value="save"
-                                     update=":topicIncomeForm"
+                                     update=":topicIncomeForm, :notification"
                                      oncomplete="PF('addItemWidgetDialog').hide()"
                                      actionListener="#{incomeItemCtrl.onAddItem()}"/>
                     <p:commandButton value="cancel"

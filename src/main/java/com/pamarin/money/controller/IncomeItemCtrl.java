@@ -5,14 +5,18 @@
  */
 package com.pamarin.money.controller;
 
+import com.pamarin.money.controller.lazy.IncomeItemCtrlLazy;
 import com.pamarin.money.controller.lazy.TopicIncomeLazy;
 import com.pamarin.money.lazyload.LazyLoad;
 import com.pamarin.money.model.IncomeItem;
 import com.pamarin.money.model.TopicIncome;
+import com.pamarin.money.model.User;
 import com.pamarin.money.model.pk.IncomeItemPK;
 import com.pamarin.money.security.SecurityUtils;
 import com.pamarin.money.service.IncomeItemService;
 import com.pamarin.money.service.TopicIncomeService;
+import com.pamarin.money.util.Notification;
+import com.pamarin.money.util.NotifyCallback;
 import com.pamarin.money.util.RequestUtils;
 import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
@@ -43,6 +47,10 @@ public class IncomeItemCtrl {
 
     @PostConstruct
     public void postConstruct() {
+        reset();
+    }
+
+    private void reset() {
         lazy = new IncomeItemCtrlLazy();
         topicLazy = new TopicIncomeLazy();
     }
@@ -71,22 +79,38 @@ public class IncomeItemCtrl {
         this.item = item;
     }
 
+    private void setupItem() {
+        User user = SecurityUtils.getUserLogin();
+        item.setId(new IncomeItemPK(getTopic().getId(), user.getId()));
+        item.setTopic(getTopic());
+        item.setOwner(user);
+    }
+
     public void onCreateItem() {
         item = new IncomeItem();
-        item.setId(new IncomeItemPK(getTopic().getId(), SecurityUtils.getUserLogin().getId()));
-        item.setTopic(getTopic());
-        item.setOwner(SecurityUtils.getUserLogin());
     }
 
     public void onAddItem() {
-        itemService.save(item);
+        Notification.notifyPhase(new NotifyCallback("เพิ่มรายการค่าใช้จ่าย") {
+
+            @Override
+            public void process() throws Throwable {
+                itemService.save(item);
+            }
+
+            @Override
+            public void onFinally() {
+                reset();
+            }
+
+        });
     }
 
     public void onSelectTopic() {
         String topicId = RequestUtils.requestString("topicId");
         topic = topicLazy.getRowData(topicId);
         if (topic != null) {
-            onCreateItem();
+            setupItem();
         }
     }
 
@@ -96,15 +120,6 @@ public class IncomeItemCtrl {
 
     public void onAddTopic() {
         topic = topicService.saveTopic(topic);
-        onCreateItem();
-    }
-
-    public class IncomeItemCtrlLazy extends LazyLoad<IncomeItem> {
-
-        @Override
-        public Page<IncomeItem> load(Pageable page) {
-            return itemService.findAll(page);
-        }
-
+        setupItem();
     }
 }
