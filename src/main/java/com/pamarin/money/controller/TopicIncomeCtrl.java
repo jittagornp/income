@@ -29,6 +29,7 @@ public class TopicIncomeCtrl {
     @Autowired
     private TopicIncomeService service;
     private TopicIncomeLazy lazy;
+    private TopicIncome topic;
 
     @PostConstruct
     public void postContruct() {
@@ -37,6 +38,22 @@ public class TopicIncomeCtrl {
 
     public TopicIncomeLazy getLazy() {
         return lazy;
+    }
+
+    public void onCreateTopic() {
+        topic = new TopicIncome();
+    }
+
+    public TopicIncome getTopic() {
+        return topic;
+    }
+
+    public void setTopic(TopicIncome topic) {
+        this.topic = topic;
+    }
+    
+    public void onAddTopic(){
+        service.saveTopic(topic);
     }
 
     public class TopicIncomeLazy extends LazyLoad<TopicIncome> {

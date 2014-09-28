@@ -34,6 +34,7 @@ footer, header, hgroup, menu, nav, section {
 body {
     line-height: 1.5;
     background: white;
+    font-size: 10pt;
 }
 
 /* Tables still need 'cellspacing="0"' in the markup. */
@@ -86,4 +87,5 @@ a img { border: none; }
     position: absolute;
     right : 0;
     min-height: 500px;
+    padding: 10px;
 }
