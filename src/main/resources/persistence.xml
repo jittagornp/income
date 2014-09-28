@@ -5,6 +5,7 @@
     <non-jta-data-source/>
     <class>com.pamarin.money.model.TopicIncome</class>
     <class>com.pamarin.money.model.User</class>
+    <class>com.pamarin.money.model.IncomeItem</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <!--
