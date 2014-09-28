@@ -12,7 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public class SecurityUtils {
 

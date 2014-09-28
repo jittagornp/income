@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 @Embeddable
 public class IncomeItemPK implements Serializable{

@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public interface IncomeItemRepo extends JpaRepository<IncomeItem, IncomeItemPK> {
 

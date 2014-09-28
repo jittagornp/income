@@ -18,7 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 @Entity
 @Table(name = "user")

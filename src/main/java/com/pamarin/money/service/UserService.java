@@ -10,7 +10,7 @@ import com.pamarin.money.model.User;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public interface UserService {
     

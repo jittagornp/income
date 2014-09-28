@@ -8,7 +8,7 @@ package com.pamarin.money.util;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public abstract class NotifyCallback {
 

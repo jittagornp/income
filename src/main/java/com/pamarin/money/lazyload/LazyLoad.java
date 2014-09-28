@@ -22,7 +22,7 @@ import org.springframework.data.domain.Sort;
 
 /**
  *
- * @author redcrow
+ * @author jittagornp
  */
 public abstract class LazyLoad<T> extends LazyDataModel<T> {
 
