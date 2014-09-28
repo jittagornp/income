@@ -13,6 +13,7 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.springframework-version>4.1.0.RELEASE</org.springframework-version>
+        <org.springframework.security-version>3.2.5.RELEASE</org.springframework.security-version>
     </properties>
 
     <dependencies>
@@ -188,6 +189,38 @@
             <version>1.4.3.RELEASE</version>
         </dependency>
         <!-- spring data -->
+        
+        
+        <!-- security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${org.springframework.security-version}</version>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${org.springframework.security-version}</version>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-acl</artifactId>
+            <version>${org.springframework.security-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${org.springframework.security-version}</version>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${org.springframework.security-version}</version>
+        </dependency>
+        <!-- security -->
         <!-- spring ******************************************************** -->    
         
              

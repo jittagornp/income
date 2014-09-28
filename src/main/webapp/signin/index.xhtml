@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  template="/static/template/index.xhtml"
+                 xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="sidebar">
+        <style>
+            .sidebar{
+                display: none;
+            }
+            
+            .container{
+                left: 0;
+            }
+        </style>
+    </ui:define>
+
+    <ui:define name="container">
+        <form action="#{facesContext.externalContext.requestContextPath}/login" method="post">
+            <h:panelGrid columns="2">
+                <p:outputPanel>
+                    username
+                </p:outputPanel>
+                <p:outputPanel>
+                    <input name="username" type="text"/>
+                </p:outputPanel>
+                <p:outputPanel>
+                    password
+                </p:outputPanel>
+                <p:outputPanel>
+                    <input name="password" type="password"/>
+                </p:outputPanel>
+                <p:outputPanel>
+                    
+                </p:outputPanel>
+                <p:outputPanel>
+                    <input type="submit" value="login"/>
+                </p:outputPanel>
+            </h:panelGrid>
+        </form>
+    </ui:define>
+</ui:composition>
