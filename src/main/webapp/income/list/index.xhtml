@@ -108,7 +108,7 @@
 
                     <p:commandButton value="save"
                                      update=":addItemDialogForm"
-                                     oncomplete="PF('addTopicWidgetDialog').hide()"
+                                     oncomplete="PF('addTopicWidgetDialog').hide(); PF('addItemWidgetDialog').show();"
                                      actionListener="#{incomeItemCtrl.onAddTopic()}"/>
                     <p:commandButton value="cancel"
                                      onclick="PF('addTopicWidgetDialog').hide()"

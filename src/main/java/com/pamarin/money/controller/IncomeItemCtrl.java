@@ -95,7 +95,8 @@ public class IncomeItemCtrl {
     }
 
     public void onAddTopic() {
-        topicService.saveTopic(topic);
+        topic = topicService.saveTopic(topic);
+        onCreateItem();
     }
 
     public class IncomeItemCtrlLazy extends LazyLoad<IncomeItem> {
