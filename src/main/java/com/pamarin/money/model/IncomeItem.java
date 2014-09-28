@@ -55,6 +55,9 @@ public class IncomeItem implements Serializable {
 
     public void setTopic(TopicIncome topic) {
         this.topic = topic;
+        if (topic != null) {
+            this.getId().setTopicId(topic.getId());
+        }
     }
 
     public User getOwner() {
@@ -63,6 +66,9 @@ public class IncomeItem implements Serializable {
 
     public void setOwner(User owner) {
         this.owner = owner;
+        if (owner != null) {
+            this.getId().setUserId(owner.getId());
+        }
     }
 
     @Override

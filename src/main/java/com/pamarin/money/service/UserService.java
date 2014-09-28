@@ -14,6 +14,8 @@ import com.pamarin.money.model.User;
  */
 public interface UserService {
     
+    public User findByUsername(String username);
+    
     public User save(User user);
     
     public boolean hasUser(String username);

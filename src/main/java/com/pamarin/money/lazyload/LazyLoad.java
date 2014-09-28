@@ -87,6 +87,8 @@ public abstract class LazyLoad<T> extends LazyDataModel<T> {
 
     /**
      * callback method
+     * @param page
+     * @return 
      */
     public abstract Page<T> load(Pageable page);
 
@@ -97,6 +99,10 @@ public abstract class LazyLoad<T> extends LazyDataModel<T> {
             direction = Sort.Direction.ASC;
         } else {
             direction = Sort.Direction.DESC;
+        }
+        
+        if(sortField == null){
+            sortField = "id";
         }
 
         Page<T> page = load(new PageRequest(first / pageSize, pageSize, direction, sortField));

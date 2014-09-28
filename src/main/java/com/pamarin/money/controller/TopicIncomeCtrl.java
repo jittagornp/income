@@ -5,7 +5,7 @@
  */
 package com.pamarin.money.controller;
 
-import com.pamarin.money.lazyload.LazyLoad;
+import com.pamarin.money.controller.lazy.TopicIncomeLazy;
 import com.pamarin.money.model.TopicIncome;
 import com.pamarin.money.service.TopicIncomeService;
 import javax.annotation.PostConstruct;
@@ -13,8 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 /**
@@ -54,14 +52,5 @@ public class TopicIncomeCtrl {
     
     public void onAddTopic(){
         service.saveTopic(topic);
-    }
-
-    public class TopicIncomeLazy extends LazyLoad<TopicIncome> {
-
-        @Override
-        public Page<TopicIncome> load(Pageable page) {
-            return service.findAll(page);
-        }
-
     }
 }

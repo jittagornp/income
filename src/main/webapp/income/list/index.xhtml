@@ -19,14 +19,16 @@
         <h:form id="topicIncomeForm" prependId="false">
             <p:commandButton value="add"
                              actionListener="#{incomeItemCtrl.onCreateItem()}"
-                            
-                             oncomplete="PF('addWidgetDialog').show();"
+                             update=":selectTopicDialogForm"
+                             oncomplete="PF('selectTopicWidgetDialog').show();"
                              icon="ui-icon-plus"/>
+            <br/>
+            <br/>
             <p:dataTable value="#{incomeItemCtrl.lazy}"
                          var="item"
                          rows="25"
                          lazy="true"
-                         sortBy="#{item.id}"
+                         sortBy="#{item.id.topicId}"
                          sortOrder="ASCENDING"
                          rowIndexVar="counter"
                          paginator="true"
@@ -48,6 +50,104 @@
     </ui:define>
 
     <ui:define name="dialog">
-        
+        <p:dialog id="selectTopicDialog"
+                  widgetVar="selectTopicWidgetDialog"
+                  modal="true"
+                  width="600"
+                  header="select topic"
+                  resizable="false">
+            <h:form id="selectTopicDialogForm">
+                <p:commandButton value="new topic"
+                                 update=":addTopicDialogForm"
+                                 oncomplete="PF('addTopicWidgetDialog').show(); PF('selectTopicWidgetDialog').hide();"
+                                 actionListener="#{incomeItemCtrl.onCreateTopic()}"/>
+                <br/>
+                <br/>
+                <p:dataTable value="#{incomeItemCtrl.topicLazy}"
+                             var="item"
+                             rows="10"
+                             lazy="true"
+                             sortBy="#{item.id}"
+                             sortOrder="ASCENDING"
+                             rowIndexVar="counter"
+                             paginator="true"
+                             emptyMessage="not have data"
+                             paginatorPosition="bottom"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15,25,50">
+                    <p:column headerText="No." style="width: 10%">
+                        <h:outputText value="#{counter + 1}"/>
+                    </p:column>
+                    <p:column headerText="name">
+                        <p:commandLink value="#{item.name}"
+                                       update=":addItemDialogForm"
+                                       oncomplete="PF('selectTopicWidgetDialog').hide(); PF('addItemWidgetDialog').show();"
+                                       actionListener="#{incomeItemCtrl.onSelectTopic()}">
+                            <f:param name="topicId" value="#{item.id}"/>
+                        </p:commandLink>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="addTopicDialog"
+                  widgetVar="addTopicWidgetDialog"
+                  modal="true"
+                  width="600"
+                  header="add topic"
+                  resizable="false">
+            <h:form id="addTopicDialogForm">
+                <h:panelGrid columns="2">
+                    <p:outputPanel>
+                        name
+                    </p:outputPanel>
+                    <p:outputPanel>
+                        <p:inputText value="#{incomeItemCtrl.topic.name}"/>
+                    </p:outputPanel>
+
+
+                    <p:commandButton value="save"
+                                     update=":addItemDialogForm"
+                                     oncomplete="PF('addTopicWidgetDialog').hide()"
+                                     actionListener="#{incomeItemCtrl.onAddTopic()}"/>
+                    <p:commandButton value="cancel"
+                                     onclick="PF('addTopicWidgetDialog').hide()"
+                                     type="button"/>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="addItemDialog"
+                  widgetVar="addItemWidgetDialog"
+                  modal="true"
+                  width="600"
+                  header="add topic"
+                  resizable="false">
+            <h:form id="addItemDialogForm">
+                <h:panelGrid columns="2">
+                    <p:outputPanel>
+                        name
+                    </p:outputPanel>
+                    <p:outputPanel>
+                        <h:outputText value="#{incomeItemCtrl.item.topic.name}"/>
+                    </p:outputPanel>
+
+                    <p:outputPanel>
+                        value
+                    </p:outputPanel>
+                    <p:outputPanel>
+                        <p:inputText value="#{incomeItemCtrl.item.income}"/>
+                    </p:outputPanel>
+
+                    <p:commandButton value="save"
+                                     update=":topicIncomeForm"
+                                     oncomplete="PF('addItemWidgetDialog').hide()"
+                                     actionListener="#{incomeItemCtrl.onAddItem()}"/>
+                    <p:commandButton value="cancel"
+                                     onclick="PF('addItemWidgetDialog').hide()"
+                                     type="button"/>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
     </ui:define>
 </ui:composition>

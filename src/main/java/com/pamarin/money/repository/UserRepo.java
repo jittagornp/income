@@ -18,4 +18,6 @@ public interface UserRepo extends JpaRepository<User, Integer> {
     @Query("SELECT COUNT(u) FROM User u WHERE u.username = ?1")
     public long countByUsername(String username);
 
+    public User findByUsername(String username);
+
 }

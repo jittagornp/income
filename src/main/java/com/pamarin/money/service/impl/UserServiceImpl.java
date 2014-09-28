@@ -33,5 +33,10 @@ public class UserServiceImpl implements UserService{
     public boolean hasUser(String username) {
         return repo.countByUsername(username) > 0;
     }
+
+    @Override
+    public User findByUsername(String username) {
+        return repo.findByUsername(username);
+    }
     
 }
