@@ -5,8 +5,8 @@
  */
 package com.pamarin.income.controller;
 
-import com.pamarin.income.controller.lazy.IncomeItemCtrlLazy;
-import com.pamarin.income.controller.lazy.TopicIncomeLazy;
+import com.pamarin.income.lazyload.IncomeItemCtrlLazy;
+import com.pamarin.income.lazyload.TopicIncomeLazy;
 import com.pamarin.income.lazyload.LazyLoad;
 import com.pamarin.income.model.IncomeItem;
 import com.pamarin.income.model.TopicIncome;

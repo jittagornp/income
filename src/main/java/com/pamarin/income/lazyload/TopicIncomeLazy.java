@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.pamarin.income.controller.lazy;
+package com.pamarin.income.lazyload;
 
 import com.pamarin.income.lazyload.LazyLoad;
 import com.pamarin.income.model.TopicIncome;

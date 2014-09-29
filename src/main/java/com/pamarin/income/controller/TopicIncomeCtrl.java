@@ -5,7 +5,7 @@
  */
 package com.pamarin.income.controller;
 
-import com.pamarin.income.controller.lazy.TopicIncomeLazy;
+import com.pamarin.income.lazyload.TopicIncomeLazy;
 import com.pamarin.income.model.TopicIncome;
 import com.pamarin.income.service.TopicIncomeService;
 import javax.annotation.PostConstruct;
