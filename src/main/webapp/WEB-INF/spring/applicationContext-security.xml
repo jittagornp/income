@@ -26,7 +26,7 @@
         <remember-me key="rememberMeKey"
                      user-service-ref="userDetailsService"/>        
     </http>
-    <beans:bean id="userDetailsService" class="com.pamarin.money.security.UserDetailsServiceImpl"/>
+    <beans:bean id="userDetailsService" class="com.pamarin.income.security.UserDetailsServiceImpl"/>
     
     <authentication-manager alias="authenManager">
         <authentication-provider user-service-ref="userDetailsService">
