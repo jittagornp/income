@@ -5,7 +5,6 @@
  */
 package com.pamarin.income.lazyload;
 
-import com.pamarin.income.lazyload.LazyLoad;
 import com.pamarin.income.model.IncomeItem;
 import com.pamarin.income.service.IncomeItemService;
 import com.pamarin.income.util.SpringUtils;
@@ -16,11 +15,11 @@ import org.springframework.data.domain.Pageable;
  *
  * @author jittagornp
  */
-public class IncomeItemCtrlLazy extends LazyLoad<IncomeItem> {
+public class IncomeItemLazy extends LazyLoad<IncomeItem> {
 
     private final IncomeItemService itemService;
 
-    public IncomeItemCtrlLazy() {
+    public IncomeItemLazy() {
         this.itemService = SpringUtils.getBean(IncomeItemService.class);
     }
 

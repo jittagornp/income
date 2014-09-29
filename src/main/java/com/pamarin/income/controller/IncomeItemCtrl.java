@@ -5,7 +5,7 @@
  */
 package com.pamarin.income.controller;
 
-import com.pamarin.income.lazyload.IncomeItemCtrlLazy;
+import com.pamarin.income.lazyload.IncomeItemLazy;
 import com.pamarin.income.lazyload.TopicIncomeLazy;
 import com.pamarin.income.lazyload.LazyLoad;
 import com.pamarin.income.model.IncomeItem;
@@ -40,7 +40,7 @@ public class IncomeItemCtrl {
     private IncomeItemService itemService;
     @Autowired
     private TopicIncomeService topicService;
-    private IncomeItemCtrlLazy lazy;
+    private IncomeItemLazy lazy;
     private TopicIncomeLazy topicLazy;
     private IncomeItem item;
     private TopicIncome topic;
@@ -51,11 +51,11 @@ public class IncomeItemCtrl {
     }
 
     private void reset() {
-        lazy = new IncomeItemCtrlLazy();
+        lazy = new IncomeItemLazy();
         topicLazy = new TopicIncomeLazy();
     }
 
-    public IncomeItemCtrlLazy getLazy() {
+    public IncomeItemLazy getLazy() {
         return lazy;
     }
 
