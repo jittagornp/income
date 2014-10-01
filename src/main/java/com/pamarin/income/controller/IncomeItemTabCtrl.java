@@ -73,4 +73,8 @@ public class IncomeItemTabCtrl implements Serializable {
     public String getCurrentTab() {
         return currentTab;
     }
+    
+    public String activeTab(String tab){
+        return getCurrentTab().endsWith(tab) ? "active" : "";
+    }
 }
