@@ -29,80 +29,8 @@
                     };
                 })(PrimeFaces.ajax.Response.handle);
             </script>
-            <script>
-                (function($, doc) {
-                    $(function() {
-                        /**
-                         * define class TooltipBiding
-                         * for bind tooltip to element DOM 
-                         * by .tooltip-[POSITON : {n, w, e, s}] style class 
-                         */
-                        var TooltipBiding = (function() {
-
-                            function bind(selectror, gravity) {
-                                $(selectror).each(function() {
-                                    var $item = $(this);
-                                    if (!$item.attr('original-title')) {
-                                        $item.tipsy({
-                                            gravity: gravity
-                                        });
-                                    }
-                                });
-                            }
-
-                            function bindAndBlur(selectror, gravity) {
-                                $(doc).on('click', selectror, function() {
-                                    $(selectror).mouseout();
-                                });
-
-                                window.responseHandlers.push(function() {
-                                    var t = setTimeout(function() {
-                                        clearTimeout(t);
-                                        bind(selectror, gravity);
-                                    }, 100);
-                                });
-                            }
-
-                            return {
-                                bind: bind,
-                                bindAndBlur: bindAndBlur
-                            };
-                        }).call(this);
-
-                        TooltipBiding.bind('.tooltip-n', 'n');
-                        TooltipBiding.bind('.tooltip-s', 's');
-                        TooltipBiding.bind('.tooltip-e', 'e');
-                        TooltipBiding.bind('.tooltip-w', 'w');
-                        //
-                        TooltipBiding.bindAndBlur('.tooltip-n', 'n');
-                        TooltipBiding.bindAndBlur('.tooltip-s', 's');
-                        TooltipBiding.bindAndBlur('.tooltip-e', 'e');
-                        TooltipBiding.bindAndBlur('.tooltip-w', 'w');
-
-                        $('.ui-dialog-titlebar-close').attr('title', 'คลิกเพื่อปิด');
-                        TooltipBiding.bind('.ui-dialog-titlebar-close', 's');
-                        TooltipBiding.bindAndBlur('.ui-dialog-titlebar-close', 's');
-                    });
-                })(jQuery, document);
-            </script>
-            <!-- calendar librarys -->
-            <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/static/js/name/keith-wood/calendar/flora-calendars-picker.css"/>
-            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/name/keith-wood/calendar/jquery-calendars-min.js"></script>
-            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/name/keith-wood/calendar/jquery-calendars-plus-min.js"></script>
-            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/name/keith-wood/calendar/jquery-calendars-picker-min.js"></script>
-            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/name/keith-wood/calendar/jquery-calendars-thai-min.js"></script>
-            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/name/keith-wood/calendar/jquery-calendars-thai-th.js"></script>
-            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/name/keith-wood/calendar/jquery-calendars-picker-th.js"></script>
-            <!-- calendar librarys -->
-            <script type="text/javascript">
-                (function($) {
-                    $(function() {
-                        $('.ic-calendar').calendarsPicker({
-                            calendar: $.calendars.instance('thai', 'th')
-                        });
-                    });
-                }).call(this, jQuery);
-            </script>
+            <ui:include src="tooltip-setup.xhtml"/>
+            <ui:include src="calendar-setup.xhtml"/>
         </h:head>
         <h:body>
             <p:growl id="notification" 

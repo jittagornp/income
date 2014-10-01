@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:f="http://java.sun.com/jsf/core">
+    <script>
+        (function($, doc) {
+            $(function() {
+                /**
+                 * define class TooltipBiding
+                 * for bind tooltip to element DOM 
+                 * by .tooltip-[POSITON : {n, w, e, s}] style class 
+                 */
+                var TooltipBiding = (function() {
+
+                    function bind(selectror, gravity) {
+                        $(selectror).each(function() {
+                            var $item = $(this);
+                            if (!$item.attr('original-title')) {
+                                $item.tipsy({
+                                    gravity: gravity
+                                });
+                            }
+                        });
+                    }
+
+                    function bindAndBlur(selectror, gravity) {
+                        $(doc).on('click', selectror, function() {
+                            $(selectror).mouseout();
+                        });
+
+                        window.responseHandlers.push(function() {
+                            var t = setTimeout(function() {
+                                clearTimeout(t);
+                                bind(selectror, gravity);
+                            }, 100);
+                        });
+                    }
+
+                    return {
+                        bind: bind,
+                        bindAndBlur: bindAndBlur
+                    };
+                }).call(this);
+
+                TooltipBiding.bind('.tooltip-n', 'n');
+                TooltipBiding.bind('.tooltip-s', 's');
+                TooltipBiding.bind('.tooltip-e', 'e');
+                TooltipBiding.bind('.tooltip-w', 'w');
+                //
+                TooltipBiding.bindAndBlur('.tooltip-n', 'n');
+                TooltipBiding.bindAndBlur('.tooltip-s', 's');
+                TooltipBiding.bindAndBlur('.tooltip-e', 'e');
+                TooltipBiding.bindAndBlur('.tooltip-w', 'w');
+
+                $('.ui-dialog-titlebar-close').attr('title', 'คลิกเพื่อปิด');
+                TooltipBiding.bind('.ui-dialog-titlebar-close', 's');
+                TooltipBiding.bindAndBlur('.ui-dialog-titlebar-close', 's');
+            });
+        })(jQuery, document);
+    </script>
+</ui:composition>
