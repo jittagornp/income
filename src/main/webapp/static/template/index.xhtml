@@ -1,47 +1,58 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Income</title>
-        <link rel="stylesheet/less" href="#{facesContext.externalContext.requestContextPath}/static/style/less/integrated.less"/>
-        <script src="#{facesContext.externalContext.requestContextPath}/static/js/org/lesscss/less.js"></script>
-        <ui:include src="bugstyle.xhtml"/>
-    </h:head>
-    <h:body>
-        <p:growl id="notification" 
-                 showDetail="true"
-                 showSummary="true"
-                 life="10000"/>
+<f:view locale="th_TH"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:f="http://java.sun.com/jsf/core">
+    <html>
+        <h:head>
+            <title>Income</title>
+            <link rel="stylesheet/less" href="#{facesContext.externalContext.requestContextPath}/static/style/less/integrated.less"/>
+            <script src="#{facesContext.externalContext.requestContextPath}/static/js/org/lesscss/less.js"></script>
+            <ui:include src="bugstyle.xhtml"/>
+        </h:head>
+        <h:body>
+            <p:growl id="notification" 
+                     showDetail="true"
+                     showSummary="true"
+                     life="10000"/>
 
-        <div class="toolbar">
-            <div class="appname">
-                income
+            <div class="toolbar">
+                <div class="appname">
+                    income
+                </div>
+                <div class="user-details">
+                    <h:outputLink value="#{facesContext.externalContext.requestContextPath}/signin/"
+                                  rendered="#{empty facesContext.externalContext.userPrincipal.name}">
+                        <h:outputText value="#{message.signin}"  styleClass="blue-text"/>
+                    </h:outputLink>
+                    <h:outputLink value="#{facesContext.externalContext.requestContextPath}/logout"
+                                  rendered="#{not empty facesContext.externalContext.userPrincipal.name}">
+                        <h:outputText value="#{message.signout}"  styleClass="blue-text"/>
+                    </h:outputLink>
+                </div>
             </div>
-            <div class="user-details">
-                <h:outputLink value="#{facesContext.externalContext.requestContextPath}/signin/"
-                              rendered="#{empty facesContext.externalContext.userPrincipal.name}">
-                    <h:outputText value="เข้าสู่ระบบ"  styleClass="blue-text"/>
-                </h:outputLink>
-                <h:outputLink value="#{facesContext.externalContext.requestContextPath}/logout"
-                              rendered="#{not empty facesContext.externalContext.userPrincipal.name}">
-                    <h:outputText value="ออกจากระบบ"  styleClass="blue-text"/>
-                </h:outputLink>
+            <div class="sidebar">
+                <ul class="sidebar-menu">
+                    <li>
+                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/income/list/?tab=all">รายรับ</h:outputLink>
+                    </li>
+                    <li>
+                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/income/list/">รายรับ</h:outputLink>
+                    </li>
+                </ul>
             </div>
-        </div>
-        <div class="sidebar">
-            <ui:insert name="sidebar"/>
-        </div>
-        <div class="container">
-            <ui:insert name="container"/>
-        </div>
-        <div class="bottombar">
+            <div class="container">
+                <ui:insert name="container"/>
+            </div>
+            <div class="bottombar">
 
-        </div>
+            </div>
 
-        <ui:insert name="dialog"/>
-    </h:body>
-</html>
+            <ui:insert name="dialog"/>
+        </h:body>
+    </html>
+</f:view>
 

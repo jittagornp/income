@@ -5,13 +5,28 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:f="http://java.sun.com/jsf/core">
     <h:form id="topicIncomeForm" prependId="false">
-        <p:commandButton value="add"
-                         actionListener="#{incomeItemCtrl.onCreateItem()}"
-                         styleClass="green-button"
-                         oncomplete="PF('selectTopicWidgetDialog').show();"
-                         icon="ui-icon-plus"/>
-        <br/>
-        <br/>
+        <div class="operation-header"> 
+            <div class="operation-header-left">
+                <h:outputText value="start : "/>
+                <p:inputText value=""/>
+                <h:outputText value=" to : "/>
+                <p:inputText value=""/>
+                <p:spacer width="10"/>
+                <p:commandButton value="search"
+                                 icon="ui-icon-search"
+                                 styleClass="white-button"/>
+                <p:spacer width="5"/>
+                <p:commandButton icon="ui-icon-refresh"
+                                 styleClass="white-button"/>
+            </div>
+            <div class="operation-header-right">
+                <p:commandButton value="เพิ่มรายการ"
+                                 actionListener="#{incomeItemCtrl.onCreateItem()}"
+                                 styleClass="green-button"
+                                 oncomplete="PF('selectTopicWidgetDialog').show();"
+                                 icon="ui-icon-plus"/>
+            </div>
+        </div>
         <p:dataTable value="#{incomeItemCtrl.lazy}"
                      var="item"
                      rows="25"

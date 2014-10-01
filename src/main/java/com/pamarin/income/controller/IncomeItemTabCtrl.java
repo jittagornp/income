@@ -35,7 +35,8 @@ public class IncomeItemTabCtrl implements Serializable {
     private List<String> readAllTabs() {
         if (allTabs == null) {
             allTabs = new ArrayList<>();
-            String realPath = FacesUtils.getServletContext()
+            String realPath = FacesUtils
+                    .getServletContext()
                     .getRealPath("/income/list/");
             File folder = new File(realPath);
             for (File tab : folder.listFiles()) {
@@ -73,8 +74,8 @@ public class IncomeItemTabCtrl implements Serializable {
     public String getCurrentTab() {
         return currentTab;
     }
-    
-    public String activeTab(String tab){
+
+    public String activeTab(String tab) {
         return getCurrentTab().endsWith(tab) ? "active" : "";
     }
 }

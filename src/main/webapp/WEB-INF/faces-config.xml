@@ -16,5 +16,10 @@
             <default-locale>th_TH</default-locale>
             <supported-locale>th_TH</supported-locale>
         </locale-config>
+
+        <resource-bundle>
+            <base-name>language.message</base-name>
+            <var>message</var>
+        </resource-bundle>
     </application>
 </faces-config>
