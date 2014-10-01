@@ -28,9 +28,9 @@ public class UserServiceT extends AbstractTestNGSpringContextTests {
 
     @Test
     public void test() {
-//        if (!service.hasUser("admin")) {
-//            service.save(new User("admin", "admin"));
-//        }
+        if (!service.hasUser("admin")) {
+            service.save(new User("admin", "admin"));
+        }
     }
 
 }

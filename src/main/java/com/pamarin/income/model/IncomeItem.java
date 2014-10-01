@@ -19,7 +19,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
@@ -130,17 +129,6 @@ public class IncomeItem implements Serializable {
         this.tags = tags;
     }
 
-//    public List<IncomeTag> getTags() {
-//        if (tags == null) {
-//            tags = new ArrayList<>();
-//        }
-//
-//        return tags;
-//    }
-//
-//    public void setTags(List<IncomeTag> tags) {
-//        this.tags = tags;
-//    }
     @Override
     public int hashCode() {
         int hash = 7;
