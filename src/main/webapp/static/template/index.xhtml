@@ -85,6 +85,24 @@
                     });
                 })(jQuery, document);
             </script>
+            <!-- calendar librarys -->
+            <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/static/js/name/keith-wood/calendar/flora-calendars-picker.css"/>
+            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/name/keith-wood/calendar/jquery-calendars-min.js"></script>
+            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/name/keith-wood/calendar/jquery-calendars-plus-min.js"></script>
+            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/name/keith-wood/calendar/jquery-calendars-picker-min.js"></script>
+            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/name/keith-wood/calendar/jquery-calendars-thai-min.js"></script>
+            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/name/keith-wood/calendar/jquery-calendars-thai-th.js"></script>
+            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/name/keith-wood/calendar/jquery-calendars-picker-th.js"></script>
+            <!-- calendar librarys -->
+            <script type="text/javascript">
+                (function($) {
+                    $(function() {
+                        $('.ic-calendar').calendarsPicker({
+                            calendar: $.calendars.instance('thai', 'th')
+                        });
+                    });
+                }).call(this, jQuery);
+            </script>
         </h:head>
         <h:body>
             <p:growl id="notification" 

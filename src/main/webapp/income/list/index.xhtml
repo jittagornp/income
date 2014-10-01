@@ -69,7 +69,7 @@
                     </p:outputPanel>
                     <p:outputPanel>
                         <p:inputText id="addIncomeName" value=""/>
-                        <p:watermark for="addIncomeName" value="ชื่อ"/>
+                        <p:watermark for="addIncomeName" value="ชื่อรายรับ"/>
                     </p:outputPanel>
 
                     <p:outputPanel>
@@ -78,6 +78,14 @@
                     <p:outputPanel>
                         <p:inputText id="addIncomeValue" value=""/>
                         <p:watermark for="addIncomeValue" value="ตัวเลขเท่านั้น"/>
+                    </p:outputPanel>
+                    
+                    <p:outputPanel>
+                        <h:outputText value="วัน/เวลา"/>
+                    </p:outputPanel>
+                    <p:outputPanel>
+                        <p:inputText id="addIncomeDate" value="" styleClass="ic-calendar"/>
+                        <p:watermark for="addIncomeDate" value="เวลาที่มีรายรับ"/>
                     </p:outputPanel>
                 </h:panelGrid>
                 <div class="dialog-footer">
