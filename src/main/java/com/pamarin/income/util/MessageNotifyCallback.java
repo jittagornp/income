@@ -4,15 +4,16 @@
  * and open the template in the editor.
  */
 
-package com.pamarin.income.service;
-
-import com.pamarin.income.model.User;
+package com.pamarin.income.util;
 
 /**
  *
  * @author anonymous
  */
-public interface UserService {
-    
-    public User findByUserId(Integer id);
+public abstract class MessageNotifyCallback extends NotifyCallback{
+
+    public MessageNotifyCallback(String topic){
+        super(topic);
+    }
+
 }

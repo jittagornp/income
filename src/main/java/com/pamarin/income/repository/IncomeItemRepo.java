@@ -6,13 +6,12 @@
 package com.pamarin.income.repository;
 
 import com.pamarin.income.model.IncomeItem;
-import com.pamarin.income.model.pk.IncomeItemPK;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author jittagornp
  */
-public interface IncomeItemRepo extends JpaRepository<IncomeItem, IncomeItemPK> {
+public interface IncomeItemRepo extends JpaRepository<IncomeItem, Integer> {
 
 }

@@ -5,14 +5,22 @@
  */
 package com.pamarin.income.model;
 
-import com.pamarin.income.model.pk.IncomeItemPK;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
-import javax.persistence.EmbeddedId;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -22,42 +30,66 @@ import javax.persistence.Table;
 @Table(name = "income_item")
 public class IncomeItem implements Serializable {
 
-    @EmbeddedId
-    private IncomeItemPK id;
-    private Double income;
+    @Id
+    @TableGenerator(
+            name = "income_item_generator",
+            table = "income_sequence",
+            pkColumnName = "name",
+            valueColumnName = "value",
+            pkColumnValue = "income_item"
+    )
+    @GeneratedValue(
+            generator = "income_item_generator",
+            strategy = GenerationType.TABLE
+    )
+    private Integer id;
+    @Column(name = "income_name", nullable = false)
+    private String incomeName;
+    @Column(name = "income_value", nullable = false)
+    private Double incomeValue;
+    @Column(name = "income_date", nullable = false)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date incomeDate;
     //
     @ManyToOne
-    @JoinColumn(name = "topic_id", referencedColumnName = "id", insertable = false, updatable = false)
-    private TopicIncome topic;
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(
+            name = "user_id",
+            nullable = false
+    )
     private User owner;
+    @OneToMany(mappedBy = "item")
+    private List<IncomeTag> tags;
 
-    public IncomeItemPK getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(IncomeItemPK id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Double getIncome() {
-        return income;
+    public String getIncomeName() {
+        return incomeName;
     }
 
-    public void setIncome(Double income) {
-        this.income = income;
+    public void setIncomeName(String incomeName) {
+        this.incomeName = incomeName;
     }
 
-    public TopicIncome getTopic() {
-        return topic;
+    public Double getIncomeValue() {
+        return incomeValue;
     }
 
-    public void setTopic(TopicIncome topic) {
-        this.topic = topic;
-        if (topic != null) {
-            this.getId().setTopicId(topic.getId());
-        }
+    public void setIncomeValue(Double incomeValue) {
+        this.incomeValue = incomeValue;
+    }
+
+    public Date getIncomeDate() {
+        return incomeDate;
+    }
+
+    public void setIncomeDate(Date incomeDate) {
+        this.incomeDate = incomeDate;
     }
 
     public User getOwner() {
@@ -66,9 +98,18 @@ public class IncomeItem implements Serializable {
 
     public void setOwner(User owner) {
         this.owner = owner;
-        if (owner != null) {
-            this.getId().setUserId(owner.getId());
+    }
+
+    public List<IncomeTag> getTags() {
+        if (tags == null) {
+            tags = new ArrayList<>();
         }
+
+        return tags;
+    }
+
+    public void setTags(List<IncomeTag> tags) {
+        this.tags = tags;
     }
 
     @Override

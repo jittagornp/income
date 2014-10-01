@@ -6,25 +6,17 @@
 package com.pamarin.income.controller;
 
 import com.pamarin.income.lazyload.IncomeItemLazy;
-import com.pamarin.income.lazyload.TopicIncomeLazy;
-import com.pamarin.income.lazyload.LazyLoad;
 import com.pamarin.income.model.IncomeItem;
-import com.pamarin.income.model.TopicIncome;
 import com.pamarin.income.model.User;
-import com.pamarin.income.model.pk.IncomeItemPK;
 import com.pamarin.income.security.SecurityUtils;
 import com.pamarin.income.service.IncomeItemService;
-import com.pamarin.income.service.TopicIncomeService;
+import com.pamarin.income.util.MessageNotifyCallback;
 import com.pamarin.income.util.Notification;
-import com.pamarin.income.util.NotifyCallback;
-import com.pamarin.income.util.RequestUtils;
 import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 /**
@@ -38,37 +30,22 @@ public class IncomeItemCtrl {
     private static final Logger LOG = LoggerFactory.getLogger(IncomeItemCtrl.class);
     @Autowired
     private IncomeItemService itemService;
-    @Autowired
-    private TopicIncomeService topicService;
     private IncomeItemLazy lazy;
-    private TopicIncomeLazy topicLazy;
     private IncomeItem item;
-    private TopicIncome topic;
+    private User user;
 
     @PostConstruct
     public void postConstruct() {
         reset();
+        user = SecurityUtils.getUser();
     }
 
     private void reset() {
         lazy = new IncomeItemLazy();
-        topicLazy = new TopicIncomeLazy();
     }
 
     public IncomeItemLazy getLazy() {
         return lazy;
-    }
-
-    public TopicIncomeLazy getTopicLazy() {
-        return topicLazy;
-    }
-
-    public TopicIncome getTopic() {
-        return topic;
-    }
-
-    public void setTopic(TopicIncome topic) {
-        this.topic = topic;
     }
 
     public IncomeItem getItem() {
@@ -80,9 +57,6 @@ public class IncomeItemCtrl {
     }
 
     private void setupItem() {
-        User user = SecurityUtils.getUserLogin();
-        item.setId(new IncomeItemPK(getTopic().getId(), user.getId()));
-        item.setTopic(getTopic());
         item.setOwner(user);
     }
 
@@ -91,7 +65,7 @@ public class IncomeItemCtrl {
     }
 
     public void onAddItem() {
-        Notification.notifyPhase(new NotifyCallback("เพิ่มรายการค่าใช้จ่าย") {
+        Notification.notifyPhase(new MessageNotifyCallback("เพิ่มรายการค่าใช้จ่าย") {
 
             @Override
             public void process() throws Throwable {
@@ -104,22 +78,5 @@ public class IncomeItemCtrl {
             }
 
         });
-    }
-
-    public void onSelectTopic() {
-        String topicId = RequestUtils.requestString("topicId");
-        topic = topicLazy.getRowData(topicId);
-        if (topic != null) {
-            setupItem();
-        }
-    }
-
-    public void onCreateTopic() {
-        topic = new TopicIncome();
-    }
-
-    public void onAddTopic() {
-        topic = topicService.saveTopic(topic);
-        setupItem();
     }
 }

@@ -6,13 +6,13 @@
 
 package com.pamarin.income.repository;
 
-import com.pamarin.income.model.TopicIncome;
+import com.pamarin.income.model.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
- * @author jittagornp
+ * @author anonymous
  */
-public interface TopicIncomeRepo extends JpaRepository<TopicIncome, Integer>{
+public interface TagRepo extends JpaRepository<Tag, Integer>{
     
 }

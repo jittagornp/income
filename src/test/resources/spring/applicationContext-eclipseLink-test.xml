@@ -16,7 +16,7 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context-3.2.xsd">
      
-    <jpa:repositories base-package="com.pamarin.money.repository"/>    
+    <jpa:repositories base-package="com.pamarin.income.repository"/>    
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"/>

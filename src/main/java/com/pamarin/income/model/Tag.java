@@ -6,6 +6,8 @@
 package com.pamarin.income.model;
 
 import java.io.Serializable;
+import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,20 +17,25 @@ import javax.persistence.TableGenerator;
 
 /**
  *
- * @author jittagornp
+ * @author anonymous
  */
 @Entity
-@Table(name = "topic_income")
-public class TopicIncome implements Serializable {
+@Table(name = "tag")
+public class Tag implements Serializable {
 
     @Id
-    @TableGenerator(name = "topic_income_generator",
+    @TableGenerator(name = "tag_generator",
             table = "income_sequence",
             pkColumnName = "name",
             valueColumnName = "value",
-            pkColumnValue = "topic_income")
-    @GeneratedValue(generator = "topic_income_generator", strategy = GenerationType.TABLE)
+            pkColumnValue = "tag")
+    @GeneratedValue(
+            generator = "tag_generator", 
+            strategy = GenerationType.TABLE
+    )
+    @Column(name = "tag_id")
     private Integer id;
+    @Column(name = "tag_name")
     private String name;
 
     public Integer getId() {
@@ -50,7 +57,7 @@ public class TopicIncome implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 61 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 29 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -62,8 +69,8 @@ public class TopicIncome implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final TopicIncome other = (TopicIncome) obj;
-        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+        final Tag other = (Tag) obj;
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;

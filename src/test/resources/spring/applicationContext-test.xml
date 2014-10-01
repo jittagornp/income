@@ -8,5 +8,5 @@
      http://www.springframework.org/schema/context/spring-context-3.2.xsd">
     
     <context:annotation-config />
-    <context:component-scan base-package="com.pamarin.money" />
+    <context:component-scan base-package="com.pamarin.income" />
 </beans>

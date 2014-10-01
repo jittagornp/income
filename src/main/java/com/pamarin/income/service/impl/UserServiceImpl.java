@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.pamarin.income.service.impl;
 
 import com.pamarin.income.model.User;
@@ -15,28 +14,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author jittagornp
+ * @author anonymous
  */
 @Service
 @Transactional
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepo repo;
-    
-    @Override
-    public User save(User user) {
-        return repo.save(user);
-    }
 
     @Override
-    public boolean hasUser(String username) {
-        return repo.countByUsername(username) > 0;
+    public User findByUserId(Integer id) {
+        return repo.findOne(id);
     }
 
-    @Override
-    public User findByUsername(String username) {
-        return repo.findByUsername(username);
-    }
-    
 }

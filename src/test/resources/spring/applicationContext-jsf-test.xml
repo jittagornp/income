@@ -11,7 +11,7 @@
         <property name="scopes">
             <map>
                 <entry key="view">
-                    <bean class="com.pamarin.money.spring.ViewScope"/>
+                    <bean class="com.pamarin.income.spring.ViewScope"/>
                 </entry>
             </map>
         </property>

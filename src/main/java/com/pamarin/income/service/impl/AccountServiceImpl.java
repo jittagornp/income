@@ -6,12 +6,10 @@
 
 package com.pamarin.income.service.impl;
 
-import com.pamarin.income.model.TopicIncome;
-import com.pamarin.income.repository.TopicIncomeRepo;
-import com.pamarin.income.service.TopicIncomeService;
+import com.pamarin.income.model.Account;
+import com.pamarin.income.repository.AccountRepo;
+import com.pamarin.income.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,19 +19,24 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class TopicIncomeServiceImpl implements TopicIncomeService{
+public class AccountServiceImpl implements AccountService{
 
     @Autowired
-    private TopicIncomeRepo repo;
+    private AccountRepo repo;
     
     @Override
-    public TopicIncome saveTopic(TopicIncome topic) {
-        return repo.save(topic);
+    public Account save(Account user) {
+        return repo.save(user);
     }
 
     @Override
-    public Page<TopicIncome> findAll(Pageable page) {
-        return repo.findAll(page);
+    public boolean hasAccount(String username) {
+        return repo.countByUsername(username) > 0;
+    }
+
+    @Override
+    public Account findByUsername(String username) {
+        return repo.findByUsername(username);
     }
     
 }

@@ -3,9 +3,10 @@
   <persistence-unit name="income" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <non-jta-data-source/>
-    <class>com.pamarin.money.model.TopicIncome</class>
-    <class>com.pamarin.money.model.User</class>
-    <class>com.pamarin.money.model.IncomeItem</class>
+    <class>com.pamarin.income.model.IncomeItem</class>
+    <class>com.pamarin.income.model.User</class>
+    <class>com.pamarin.income.model.IncomeTag</class>
+    <class>com.pamarin.income.model.Tag</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <!--
@@ -51,17 +52,17 @@
       <!--
       Specify your application server:
        
-            JBoss: JBoss Application Server
-            OC4J: OC4J persistence provider
-            SAPNetWeaver_7_1: SAP NetWeaver Application Server 7.1 (and higher)
-            SunAS9: Sun Application Server 9
-            WebLogic: Oracle WebLogic Server
-            WebLogic_10: Oracle WebLogic Server 10
-            WebLogic_9: Oracle WebLogic Server 9
-            WebSphere: IBM WebSphere
-            WebSphere_6_1: IBM WebSphere 6.1
-            WebSphere_7: IBM WebSphere 7
-            Default (TargetServer.None)
+        JBoss: JBoss Application Server
+        OC4J: OC4J persistence provider
+        SAPNetWeaver_7_1: SAP NetWeaver Application Server 7.1 (and higher)
+        SunAS9: Sun Application Server 9
+        WebLogic: Oracle WebLogic Server
+        WebLogic_10: Oracle WebLogic Server 10
+        WebLogic_9: Oracle WebLogic Server 9
+        WebSphere: IBM WebSphere
+        WebSphere_6_1: IBM WebSphere 6.1
+        WebSphere_7: IBM WebSphere 7
+        Default (TargetServer.None)
         -->
       <property name="eclipselink.target-server" value="SunAS9"/>
       <!--
@@ -70,16 +71,15 @@
         and Plain Old Java Object (POJO) classes for such things as lazy loading, 
         change tracking, fetch groups, and internal optimizations.
  
-            Weaving can be performed either dynamically at runtime, when entities are loaded, 
-            or statically at compile time by post-processing the entity .class files. 
-            By default, EclipseLink uses dynamic weaving whenever possible. 
-            This includes inside an Java EE 5/6 application server and in Java SE 
-            when the EclipseLink agent is configured. Dynamic weaving is recommended as it is easy 
-            to configure and does not require any changes to a project's build process.
-            -->
+        Weaving can be performed either dynamically at runtime, when entities are loaded, 
+        or statically at compile time by post-processing the entity .class files. 
+        By default, EclipseLink uses dynamic weaving whenever possible. 
+        This includes inside an Java EE 5/6 application server and in Java SE 
+        when the EclipseLink agent is configured. Dynamic weaving is recommended as it is easy 
+        to configure and does not require any changes to a project's build process.
+        -->
       <property name="eclipselink.weaving" value="static"/>
-      <property name="eclipselink.ddl-generation" value="create-tables"/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
     </properties>
   </persistence-unit>
 </persistence>

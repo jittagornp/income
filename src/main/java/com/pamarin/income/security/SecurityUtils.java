@@ -5,7 +5,10 @@
  */
 package com.pamarin.income.security;
 
+import com.pamarin.income.model.Account;
 import com.pamarin.income.model.User;
+import com.pamarin.income.service.UserService;
+import com.pamarin.income.util.SpringUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,24 +19,41 @@ import org.springframework.security.core.context.SecurityContextHolder;
  */
 public class SecurityUtils {
 
-    public static User getUserLogin() {
+    private static final String ANONYMOUS = "anonymous";
+
+    public static Account getAccount() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
-        User user = null;
+        Account account = null;
 
         if (authentication != null) {
             Object principal = authentication.getPrincipal();
-            if (principal instanceof User) {
-                user = (User) principal;
+            if (principal instanceof Account) {
+                account = (Account) principal;
             } else {
-                user = new User("anonymous", null);
+                account = new Account(ANONYMOUS, null);
             }
         }
 
-        return user;
+        return account;
+    }
+
+    public static User getUser() {
+        Account account = getAccount();
+        if (isAnonymous(account)) {
+            return null;
+        }
+
+        return SpringUtils
+                .getBean(UserService.class)
+                .findByUserId(account.getId());
     }
 
     public static boolean isAnonymous() {
-        return "anonymous".equals(getUserLogin().getUsername());
+        return isAnonymous(getAccount());
+    }
+
+    public static boolean isAnonymous(Account account) {
+        return ANONYMOUS.equals(account.getUsername());
     }
 }

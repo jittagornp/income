@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.pamarin.income.repository;
 
-import com.pamarin.income.model.User;
+import com.pamarin.income.model.IncomeTag;
+import com.pamarin.income.model.pk.IncomeTagPK;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 /**
  *
- * @author jittagornp
+ * @author anonymous
  */
-public interface UserRepo extends JpaRepository<User, Integer> {
-
-
+public interface IncomeTagRepo extends JpaRepository<IncomeTag, IncomeTagPK>{
+    
 }
