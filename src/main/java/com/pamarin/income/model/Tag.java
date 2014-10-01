@@ -37,6 +37,7 @@ public class Tag implements Serializable {
     private Integer id;
     @Column(name = "tag_name")
     private String name;
+    //
 
     public Integer getId() {
         return id;
