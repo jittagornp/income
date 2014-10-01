@@ -15,6 +15,9 @@
             <ui:include src="bugstyle.xhtml"/>
             <script>
                 window.responseHandlers = [];
+                /**
+                 * primefaces 5.0 only
+                 */
                 PrimeFaces.ajax.Response.handle = (function(origin) {
                     return function() {
                         var length = window.responseHandlers.length;
@@ -96,11 +99,11 @@
                 <div class="user-details">
                     <h:outputLink value="#{facesContext.externalContext.requestContextPath}/signin/"
                                   rendered="#{empty facesContext.externalContext.userPrincipal.name}">
-                        <h:outputText value="#{message.signin}"  styleClass="blue-text"/>
+                        <h:outputText value="#{message.signin}"/>
                     </h:outputLink>
                     <h:outputLink value="#{facesContext.externalContext.requestContextPath}/logout"
                                   rendered="#{not empty facesContext.externalContext.userPrincipal.name}">
-                        <h:outputText value="#{message.signout}"  styleClass="blue-text"/>
+                        <h:outputText value="#{message.signout}"/>
                     </h:outputLink>
                 </div>
             </div>
