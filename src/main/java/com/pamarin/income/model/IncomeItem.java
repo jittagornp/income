@@ -16,6 +16,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -42,6 +44,7 @@ public class IncomeItem implements Serializable {
             generator = "income_item_generator",
             strategy = GenerationType.TABLE
     )
+    @Column(name = "item_id")
     private Integer id;
     @Column(name = "income_name", nullable = false)
     private String incomeName;
@@ -57,8 +60,23 @@ public class IncomeItem implements Serializable {
             nullable = false
     )
     private User owner;
-    @OneToMany(mappedBy = "item")
-    private List<IncomeTag> tags;
+    @ManyToMany
+    @JoinTable(
+            name = "item_tag",
+            joinColumns = {
+                @JoinColumn(
+                        name = "item_id",
+                        referencedColumnName = "item_id"
+                )
+            },
+            inverseJoinColumns = {
+                @JoinColumn(
+                        name = "tag_id",
+                        referencedColumnName = "tag_id"
+                )
+            }
+    )
+    private List<Tag> tags;
 
     public Integer getId() {
         return id;
@@ -100,7 +118,7 @@ public class IncomeItem implements Serializable {
         this.owner = owner;
     }
 
-    public List<IncomeTag> getTags() {
+    public List<Tag> getTags() {
         if (tags == null) {
             tags = new ArrayList<>();
         }
@@ -108,10 +126,21 @@ public class IncomeItem implements Serializable {
         return tags;
     }
 
-    public void setTags(List<IncomeTag> tags) {
+    public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
 
+//    public List<IncomeTag> getTags() {
+//        if (tags == null) {
+//            tags = new ArrayList<>();
+//        }
+//
+//        return tags;
+//    }
+//
+//    public void setTags(List<IncomeTag> tags) {
+//        this.tags = tags;
+//    }
     @Override
     public int hashCode() {
         int hash = 7;

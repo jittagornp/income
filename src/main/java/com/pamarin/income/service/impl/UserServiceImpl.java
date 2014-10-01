@@ -20,12 +20,23 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserServiceImpl implements UserService {
 
+
     @Autowired
     private UserRepo repo;
-
+    
     @Override
-    public User findByUserId(Integer id) {
-        return repo.findOne(id);
+    public User save(User user) {
+        return repo.save(user);
     }
 
+    @Override
+    public boolean hasUser(String username) {
+        return repo.countByUsername(username) > 0;
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return repo.findByUsername(username);
+    }
+    
 }

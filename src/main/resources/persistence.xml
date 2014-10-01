@@ -3,8 +3,8 @@
   <persistence-unit name="income" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <non-jta-data-source/>
-    <class>com.pamarin.income.model.IncomeItem</class>
     <class>com.pamarin.income.model.User</class>
+    <class>com.pamarin.income.model.IncomeItem</class>
     <class>com.pamarin.income.model.IncomeTag</class>
     <class>com.pamarin.income.model.Tag</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>

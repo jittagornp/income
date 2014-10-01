@@ -14,5 +14,9 @@ import com.pamarin.income.model.User;
  */
 public interface UserService {
     
-    public User findByUserId(Integer id);
+    public User findByUsername(String username);
+    
+    public User save(User user);
+    
+    public boolean hasUser(String username);
 }

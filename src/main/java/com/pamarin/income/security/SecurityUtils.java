@@ -5,7 +5,7 @@
  */
 package com.pamarin.income.security;
 
-import com.pamarin.income.model.Account;
+import com.pamarin.income.model.User;
 import com.pamarin.income.model.User;
 import com.pamarin.income.service.UserService;
 import com.pamarin.income.util.SpringUtils;
@@ -21,39 +21,28 @@ public class SecurityUtils {
 
     private static final String ANONYMOUS = "anonymous";
 
-    public static Account getAccount() {
+    public static User getUser() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
-        Account account = null;
+        User user = null;
 
         if (authentication != null) {
             Object principal = authentication.getPrincipal();
-            if (principal instanceof Account) {
-                account = (Account) principal;
+            if (principal instanceof User) {
+                user = (User) principal;
             } else {
-                account = new Account(ANONYMOUS, null);
+                user = new User(ANONYMOUS, null);
             }
         }
 
-        return account;
-    }
-
-    public static User getUser() {
-        Account account = getAccount();
-        if (isAnonymous(account)) {
-            return null;
-        }
-
-        return SpringUtils
-                .getBean(UserService.class)
-                .findByUserId(account.getId());
+        return user;
     }
 
     public static boolean isAnonymous() {
-        return isAnonymous(getAccount());
+        return isAnonymous(getUser());
     }
 
-    public static boolean isAnonymous(Account account) {
+    public static boolean isAnonymous(User account) {
         return ANONYMOUS.equals(account.getUsername());
     }
 }
