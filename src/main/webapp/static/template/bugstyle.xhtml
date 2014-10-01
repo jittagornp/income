@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:f="http://java.sun.com/jsf/core">
+    <style type="text/css">
+
+        .ui-button.ui-widget.ui-state-default.white-button .ui-icon,
+        .ui-button.ui-widget.ui-state-default.white-button:active .ui-icon,
+        .ui-button.ui-widget.ui-state-default.white-button:focus .ui-icon,
+
+        .ui-menubutton.white-button .ui-button.ui-widget.ui-state-default .ui-icon,
+        .ui-menubutton.white-button .ui-button.ui-widget.ui-state-default:active .ui-icon,
+        .ui-menubutton.white-button .ui-button.ui-widget.ui-state-default:focus .ui-icon,
+
+        .ui-fileupload .ui-button.ui-widget.ui-state-default .ui-icon,
+        .ui-fileupload .ui-button.ui-widget.ui-state-default:active .ui-icon,
+        .ui-fileupload .ui-button.ui-widget.ui-state-default:focus .ui-icon{
+            background-image : url('#{facesContext.externalContext.requestContextPath}/javax.faces.resource/images/ui-icons_454545_256x240.png.xhtml?ln=primefaces-delta') !important;
+        }
+
+        .ui-dialog-titlebar-icon{
+            background-image: url('#{facesContext.externalContext.requestContextPath}/resources/image/close-dialog.png') !important;
+            background-position: 0 0 !important;
+        }
+
+        .ui-accordion-header .ui-icon{
+            width : 25px;
+            height : 25px;
+            background-position : 0 0 !important;
+            margin-top: -9px !important; 
+            margin-left: -3px !important;
+        }
+
+        /* fixed bug : can't parse css sprite icon (JSF Mojara)*/
+        .ui-icon{
+            background-image : url('#{facesContext.externalContext.requestContextPath}/javax.faces.resource/images/ui-icons_888888_256x240.png.xhtml?ln=primefaces-delta') !important;
+        }
+
+        .green-button.ui-state-default .ui-icon,
+        .red-button.ui-state-default .ui-icon{
+            background-image : url('#{facesContext.externalContext.requestContextPath}/javax.faces.resource/images/ui-icons_ffffff_256x240.png.xhtml?ln=primefaces-delta') !important;
+        }
+        /* fixed bug : can't parse css sprite icon (JSF Mojara)*/
+    </style>
+</ui:composition>

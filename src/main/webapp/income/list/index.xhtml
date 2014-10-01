@@ -1,5 +1,4 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition  template="/static/template/index.xhtml"
                  xmlns="http://www.w3.org/1999/xhtml"
                  xmlns:h="http://java.sun.com/jsf/html"
@@ -16,38 +15,51 @@
     </ui:define>
 
     <ui:define name="container">
-        <p:tabView prependId="false">
-            <p:tab title="ภาพรวมทั้งหมด">
-                <h:form id="topicIncomeForm" prependId="false">
-                    <p:commandButton value="add"
-                                     actionListener="#{incomeItemCtrl.onCreateItem()}"
-                                     styleClass="green-button"
-                                     oncomplete="PF('selectTopicWidgetDialog').show();"
-                                     icon="ui-icon-plus"/>
-                    <br/>
-                    <br/>
-                    <p:dataTable value="#{incomeItemCtrl.lazy}"
-                                 var="item"
-                                 rows="25"
-                                 lazy="true"
-                                 sortBy="#{item.id}"
-                                 sortOrder="ASCENDING"
-                                 rowIndexVar="counter"
-                                 paginator="true"
-                                 emptyMessage="not have data"
-                                 paginatorPosition="bottom"
-                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                 rowsPerPageTemplate="5,10,15,25,50">
-                        <p:column headerText="No." style="width: 5%">
-                            <h:outputText value="#{counter + 1}"/>
-                        </p:column>
-                        <p:column headerText="value">
-                            <h:outputText value="#{item.income}"/>
-                        </p:column>
-                    </p:dataTable>
-                </h:form>
-            </p:tab>
-        </p:tabView>
+        <p:outputPanel styleClass="tab-header">
+            <h:form prependId="false">
+                <ul class="tab-menu">
+                    <li class="#{incomeItemTabCtrl.currentTab eq 'all' ? 'active' : ''}">
+                        <p:commandLink value="ทั้งหมด"
+                                       actionListener="#{incomeItemTabCtrl.onChangeTab()}"
+                                       update="@(.tab-container), @form">
+                            <f:param name="tab" value="all"/>
+                        </p:commandLink>
+                    </li>
+                    <li class="#{incomeItemTabCtrl.currentTab eq 'day' ? 'active' : ''}">
+                        <p:commandLink value="วัน"
+                                       actionListener="#{incomeItemTabCtrl.onChangeTab()}"
+                                       update="@(.tab-container), @form">
+                            <f:param name="tab" value="day"/>
+                        </p:commandLink>
+                    </li>
+                    <li class="#{incomeItemTabCtrl.currentTab eq 'week' ? 'active' : ''}">
+                        <p:commandLink value="สัปดาห์"
+                                       actionListener="#{incomeItemTabCtrl.onChangeTab()}"
+                                       update="@(.tab-container), @form">
+                            <f:param name="tab" value="week"/>
+                        </p:commandLink>
+                    </li>
+                    <li class="#{incomeItemTabCtrl.currentTab eq 'month' ? 'active' : ''}">
+                        <p:commandLink value="เดือน"
+                                       actionListener="#{incomeItemTabCtrl.onChangeTab()}"
+                                       update="@(.tab-container), @form">
+                            <f:param name="tab" value="month"/>
+                        </p:commandLink>
+                    </li>
+                    <li class="#{incomeItemTabCtrl.currentTab eq 'year' ? 'active' : ''}">
+                        <p:commandLink value="ปี"
+                                       actionListener="#{incomeItemTabCtrl.onChangeTab()}"
+                                       update="@(.tab-container), @form">
+                            <f:param name="tab" value="year"/>
+                        </p:commandLink>
+                    </li>
+                    <li class="clear"></li>
+                </ul>
+            </h:form>
+        </p:outputPanel>
+        <p:outputPanel styleClass="tab-container">
+            <ui:include src="/income/list/#{incomeItemTabCtrl.currentTab}/index.xhtml"/>
+        </p:outputPanel>
     </ui:define>
 
     <ui:define name="dialog">

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:f="http://java.sun.com/jsf/core">
+    <h:form id="topicIncomeForm" prependId="false">
+        <p:commandButton value="add"
+                         actionListener="#{incomeItemCtrl.onCreateItem()}"
+                         styleClass="green-button"
+                         oncomplete="PF('selectTopicWidgetDialog').show();"
+                         icon="ui-icon-plus"/>
+        <br/>
+        <br/>
+        <p:dataTable value="#{incomeItemCtrl.lazy}"
+                     var="item"
+                     rows="25"
+                     lazy="true"
+                     sortBy="#{item.id}"
+                     sortOrder="ASCENDING"
+                     rowIndexVar="counter"
+                     paginator="true"
+                     emptyMessage="not have data"
+                     paginatorPosition="bottom"
+                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="5,10,15,25,50">
+            <p:column headerText="No." style="width: 5%">
+                <h:outputText value="#{counter + 1}"/>
+            </p:column>
+            <p:column headerText="value">
+                <h:outputText value="#{item.income}"/>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</ui:composition>
