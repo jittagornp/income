@@ -7,17 +7,18 @@
     <h:form id="topicIncomeForm" prependId="false">
         <div class="operation-header"> 
             <div class="operation-header-left">
-                <h:outputText value="start : "/>
+                <h:outputText value="ตั้งแต่ : "/>
                 <p:inputText value=""/>
-                <h:outputText value=" to : "/>
+                <h:outputText value=" ถึง : "/>
                 <p:inputText value=""/>
                 <p:spacer width="10"/>
-                <p:commandButton value="search"
+                <p:commandButton value="ค้นหา"
                                  icon="ui-icon-search"
                                  styleClass="white-button"/>
                 <p:spacer width="5"/>
                 <p:commandButton icon="ui-icon-refresh"
-                                 styleClass="white-button"/>
+                                 title="เคลียร์"
+                                 styleClass="tooltip-w white-button"/>
             </div>
             <div class="operation-header-right">
                 <p:commandButton value="เพิ่มรายการ"
