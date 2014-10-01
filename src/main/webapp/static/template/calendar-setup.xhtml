@@ -16,20 +16,20 @@
     <script type="text/javascript">
         (function($) {
             $(function() {
-                function addCalendar() {
-                    $('.ic-calendar').calendarsPicker({
+                function addCalendar($element) {
+                    $element.calendarsPicker({
                         calendar: $.calendars.instance('thai', 'th')
                     });
                 }
 
-                addCalendar();
+                addCalendar($('.ic-calendar'));
                 window.responseHandlers.push(function() {
                     var t = setTimeout(function() {
                         clearTimeout(t);
                         $('.ic-calendar').each(function() {
                             var $that = $(this);
                             if (!$that.hasClass('hasCalendarsPicker')) {
-                                addCalendar();
+                                addCalendar($that);
                             }
                         });
                     }, 100);
