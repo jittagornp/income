@@ -4,7 +4,7 @@ body{
 
 .toolbar{
     position: fixed;
-    height : 40px;
+    height : 39px;
     line-height : 40px;
     padding-left: 10px;
     padding-right: 10px;
@@ -12,6 +12,8 @@ body{
     left : 0;
     right : 0;
     z-index: 1; 
+    .inner-box-shadow(0, 0, 10px, #159994);
+    border-bottom : solid 1px #eee;
 }
 
 .sidebar{
@@ -32,6 +34,24 @@ body{
     right : 0;
     min-height: 500px;
     padding: 10px;
+}
+
+.container-header{
+    height : 50px;
+    line-height : 50px;
+    position : relative;
+    margin-bottom : 15px;
+    border-bottom : solid 1px #eee;
+}
+
+.container-header-left{
+    position : absolute;
+    left : 0;
+    top : 0; 
+}
+
+.container-header-left h1{
+    margin-left : 15px;
 }
 
 .bottombar{
