@@ -62,7 +62,7 @@
     <ui:define name="dialog">
         <p:dialog header="เพิ่มรายการรายรับ"
                   modal="true"
-                  width="500"
+                  width="550"
                   resizable="false"
                   id="addIncomeItemDialog"
                   widgetVar="addIncomeItemWidgetDialog">
@@ -71,28 +71,30 @@
                              columns="2">
                     <p:outputPanel>
                         <h:outputText value="รายการ"/>
+                        <h:outputText value="*" styleClass="require"/>
                     </p:outputPanel>
                     <p:outputPanel>
                         <p:inputText id="addIncomeName" value=""/>
-                        <p:watermark for="addIncomeName" value="ชื่อรายรับ"/>
+                        <p:watermark for="addIncomeName" value="พิมพ์ชื่อรายรับ"/>
                     </p:outputPanel>
 
                     <p:outputPanel>
                         <h:outputText value="จำนวนเงิน"/>
+                        <h:outputText value="*" styleClass="require"/>
                     </p:outputPanel>
                     <p:outputPanel>
                         <p:inputText id="addIncomeValue" value=""/>
-                        <p:watermark for="addIncomeValue" value="ตัวเลขเท่านั้น"/>
+                        <p:watermark for="addIncomeValue" value="พิมพ์ตัวเลขเท่านั้น"/>
                     </p:outputPanel>
-                    
+
                     <p:outputPanel>
                         <h:outputText value="วัน/เวลา"/>
                     </p:outputPanel>
                     <p:outputPanel>
                         <p:inputText id="addIncomeDate" value="" styleClass="ic-calendar"/>
-                        <p:watermark for="addIncomeDate" value="เวลาที่มีรายรับ"/>
+                        <p:watermark for="addIncomeDate" value="เลือกวัน/เวลาที่มีรายรับ"/>
                     </p:outputPanel>
-                    
+
                     <p:outputPanel>
                         <h:outputText value="ป้ายกำกับ"/>
                     </p:outputPanel>
@@ -103,16 +105,21 @@
                     </p:outputPanel>
                 </h:panelGrid>
                 <div class="dialog-footer">
-                    <p:commandButton value="เพิ่ม"
-                                     oncomplete="PF('addIncomeItemWidgetDialog').hide();"
-                                     icon="ui-icon-check"
-                                     styleClass="green-button"/>
-                    <p:spacer width="10"/>
-                    <p:commandButton value="ยกเลิก"
-                                     type="button"
-                                     onclick="PF('addIncomeItemWidgetDialog').hide();"
-                                     icon="ui-icon-close"
-                                     styleClass="white-button"/>
+                    <div class="dialog-footer-left">
+                        <h:outputText value="* หมายถึง บังคับกรอก" styleClass="red-text"/>
+                    </div>
+                    <div class="dialog-footer-right">
+                        <p:commandButton value="เพิ่ม"
+                                         oncomplete="PF('addIncomeItemWidgetDialog').hide();"
+                                         icon="ui-icon-check"
+                                         styleClass="green-button"/>
+                        <p:spacer width="10"/>
+                        <p:commandButton value="ยกเลิก"
+                                         type="button"
+                                         onclick="PF('addIncomeItemWidgetDialog').hide();"
+                                         icon="ui-icon-close"
+                                         styleClass="white-button"/>
+                    </div>
                 </div>
             </h:form>
         </p:dialog>

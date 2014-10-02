@@ -47,8 +47,27 @@
 }
 
 .dialog-footer{
-    text-align : right;
     margin-top : 30px;
+    position : relative;
+    height : 30px;
+}
+
+.dialog-footer-left{
+    position : absolute;
+    left : 0;
+    bottom : 0;
+}
+
+.dialog-footer-right{
+    position : absolute;
+    right : 0;
+    bottom : 0;
+}
+
+.dialog-footer .warning-box{
+    padding : 5px 10px;
+    margin-bottom : 0px;
+    .round-box-all(3px);
 }
 
 .enabled-slimscroll::-webkit-scrollbar,
