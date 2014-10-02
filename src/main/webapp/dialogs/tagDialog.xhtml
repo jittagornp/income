@@ -11,54 +11,6 @@
               modal="true"
               resizable="false"
               header="เลือกป้ายกำกับ">
-        <style>
-            .tag-item{
-                float: left;
-                padding: 3px 5px;
-                background-color: #E8F4FF;
-                margin-right: 5px;
-                display: block;
-                border : solid 1px #CEE6F7;
-                border-radius: 3px;
-                -moz-border-radius: 3px;
-                -webkit-border-radius: 3px;
-                margin-bottom: 5px;
-            }
-            
-            .tag-item .ui-commandlink{
-                text-decoration: none;
-            }
-
-            .tag-list .ui-paginator{
-                clear: both;
-                background: none;
-                border: none;
-                position: relative;
-                top : 10px;
-            }
-
-            .tag-list .ui-widget-content{
-                border: none;
-            }
-            
-            .delete-tag-button{
-                width: 16px;
-                margin-left: 5px;
-                position: relative;
-                bottom : 2px;
-            }
-            
-            .delete-tag-button .ui-button-text{
-                padding: 0px;
-            }
-            
-            .check-tag{
-                position: relative;
-                top : 3px;
-                margin-right: 4px;
-            }
-        </style>
-
         <h:form id="tagDialogForm">
             <p:inputText id="addTagInput" value="#{tagCtrl.tag.name}"/>
             <p:watermark for="addTagInput" value="พิมพ์ชื่อป้ายกำกับแล้วคลิกปุ่มเพิ่ม"/>
@@ -83,9 +35,6 @@
                 <div class="tag-item">
                     <p:selectBooleanCheckbox value="#{item.selected}" styleClass="check-tag"/>
                     <p:commandLink value="#{item.data.name}"/>
-                    <p:commandButton icon="ui-icon-close"
-                                     title="คลิกเพื่อลบป้ายกำกับ"
-                                     styleClass="white-button delete-tag-button tooltip-w"/>
                 </div>
             </p:dataList>
             <div class="dialog-footer">
@@ -111,5 +60,14 @@
                 </div>
             </div>
         </h:form>
+        <script>
+            (function($){
+                $(function(){
+                    $(document).on('click', '.tag-item .ui-commandlink', function(){
+                        $(this).parent().find('.ui-chkbox-box').click();
+                    });
+                });
+            })(jQuery);
+        </script>
     </p:dialog>
 </ui:composition>
