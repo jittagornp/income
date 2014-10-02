@@ -74,7 +74,10 @@
                         <h:outputText value="*" styleClass="require"/>
                     </p:outputPanel>
                     <p:outputPanel>
-                        <p:inputText id="addIncomeName" value=""/>
+                        <p:inputText id="addIncomeName" 
+                                     required="true"
+                                     styleClass="require-title"
+                                     value=""/>
                         <p:watermark for="addIncomeName" value="พิมพ์ชื่อรายรับ"/>
                     </p:outputPanel>
 
@@ -83,7 +86,10 @@
                         <h:outputText value="*" styleClass="require"/>
                     </p:outputPanel>
                     <p:outputPanel>
-                        <p:inputText id="addIncomeValue" value=""/>
+                        <p:inputText id="addIncomeValue" 
+                                     required="true"
+                                     styleClass="require-title"
+                                     value=""/>
                         <p:watermark for="addIncomeValue" value="พิมพ์ตัวเลขเท่านั้น"/>
                     </p:outputPanel>
 
@@ -106,7 +112,7 @@
                 </h:panelGrid>
                 <div class="dialog-footer">
                     <div class="dialog-footer-left">
-                        <h:outputText value="* หมายถึง บังคับกรอก" styleClass="red-text"/>
+                        
                     </div>
                     <div class="dialog-footer-right">
                         <p:commandButton value="เพิ่ม"

@@ -57,6 +57,10 @@
                 $('.ui-dialog-titlebar-close').attr('title', 'คลิกเพื่อปิด');
                 TooltipBiding.bind('.ui-dialog-titlebar-close', 's');
                 TooltipBiding.bindAndBlur('.ui-dialog-titlebar-close', 's');
+                
+                $('.require-title').attr('title', 'บังคับกรอก');
+                TooltipBiding.bind('.require-title', 'w');
+                TooltipBiding.bindAndBlur('.require-title', 'w');
             });
         })(jQuery, document);
     </script>
