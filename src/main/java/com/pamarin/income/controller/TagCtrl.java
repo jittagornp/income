@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 /**
  *
@@ -65,10 +66,14 @@ public class TagCtrl {
     }
     
     public void onSelectTags(){
-        for(Tag tag : tagLazy.getSelected()){
-            LOG.debug("tag --> {}", tag.getName());
+        for(Tag t : tagLazy.getSelected()){
+            LOG.debug("tag --> {}", t.getName());
         }
         
-        tagLazy.getSelected().clear();
+        tagLazy.clearSelected();
+    }
+    
+    public void onClearSelected(){
+        tagLazy.clearSelected();
     }
 }

@@ -89,6 +89,12 @@
                 </div>
             </p:dataList>
             <div class="dialog-footer">
+                <div class="dialog-footer-left">
+                    <p:commandButton value="ไม่เลือกทั้งหมด"
+                                     update="@form"
+                                     actionListener="#{tagCtrl.onClearSelected()}"
+                                     styleClass="white-button"/>
+                </div>
                 <div class="dialog-footer-right">
                     <p:commandButton value="เลือก"
                                      oncomplete="PF('tagWidgetDialog').hide();"
