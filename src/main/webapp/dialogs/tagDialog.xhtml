@@ -46,24 +46,23 @@
                 </div>
                 <div class="dialog-footer-right">
                     <p:commandButton value="เลือก"
-                                     oncomplete="PF('tagWidgetDialog').hide();"
-                                     update="@form"
                                      icon="ui-icon-check"
+                                     oncomplete="PF('tagWidgetDialog').hide()"
+                                     update="@form, @(.has-tag-list)"
                                      actionListener="#{tagCtrl.onSelectTags()}"
                                      styleClass="green-button"/>
                     <p:spacer width="10"/>
                     <p:commandButton value="ปิด"
                                      type="button"
-                                     onclick="PF('tagWidgetDialog').hide();"
-                                     icon="ui-icon-close"
+                                     onclick="PF('tagWidgetDialog').hide()"
                                      styleClass="white-button"/>
                 </div>
             </div>
         </h:form>
         <script>
-            (function($){
-                $(function(){
-                    $(document).on('click', '.tag-item .ui-commandlink', function(){
+            (function($) {
+                $(function() {
+                    $(document).on('click', '.tag-item .ui-commandlink', function() {
                         $(this).parent().find('.ui-chkbox-box').click();
                     });
                 });

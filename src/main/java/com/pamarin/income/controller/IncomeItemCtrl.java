@@ -7,11 +7,13 @@ package com.pamarin.income.controller;
 
 import com.pamarin.income.lazyload.IncomeItemLazy;
 import com.pamarin.income.model.IncomeItem;
+import com.pamarin.income.model.Tag;
 import com.pamarin.income.model.User;
 import com.pamarin.income.security.SecurityUtils;
 import com.pamarin.income.service.IncomeItemService;
 import com.pamarin.income.util.MessageNotifyCallback;
 import com.pamarin.income.util.Notification;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +35,8 @@ public class IncomeItemCtrl {
     private IncomeItemLazy lazy;
     private IncomeItem item;
     private User user;
+    @Autowired
+    private TagCtrl tagCtrl;
 
     @PostConstruct
     public void postConstruct() {
@@ -49,6 +53,17 @@ public class IncomeItemCtrl {
     }
 
     public IncomeItem getItem() {
+        if(item == null){
+           item = new IncomeItem(); 
+        }
+        
+        List<Tag> tags = tagCtrl.getTagLazy().getSelected();
+        LOG.debug("tags size --> {}", tags.size());
+        
+        if (!tags.isEmpty()) {
+            item.setTags(tags);
+        }
+
         return item;
     }
 

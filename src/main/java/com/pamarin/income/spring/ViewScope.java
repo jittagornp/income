@@ -36,14 +36,14 @@ public class ViewScope implements Scope {
             viewMap.put(name, object);
         }
         
-        LOG.debug("get scope --> {}, {}", name, object);
+        //LOG.debug("get scope --> {}, {}", name, object);
         
         return object;
     }
 
     @Override
     public Object remove(String name) {
-        LOG.debug("remove scope --> {}", name);
+        //LOG.debug("remove scope --> {}", name);
         return getViewMap().remove(name);
     }
 

@@ -66,11 +66,12 @@ public class TagCtrl {
     }
     
     public void onSelectTags(){
-        for(Tag t : tagLazy.getSelected()){
+        LOG.debug("call onSelectTags");
+        for(Tag t : getTagLazy().getSelected()){
             LOG.debug("tag --> {}", t.getName());
         }
         
-        tagLazy.clearSelected();
+        //tagLazy.clearSelected();
     }
     
     public void onClearSelected(){
