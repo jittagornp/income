@@ -32,6 +32,10 @@ public class IncomeItemTabCtrl implements Serializable {
     private String currentTab = DEFAULT_TAB;
     private List<String> allTabs;
 
+    private boolean isTab(File folder) {
+        return folder.isDirectory() && !folder.getName().startsWith("_");
+    }
+
     private List<String> readAllTabs() {
         if (allTabs == null) {
             allTabs = new ArrayList<>();
@@ -40,7 +44,7 @@ public class IncomeItemTabCtrl implements Serializable {
                     .getRealPath("/income/list/");
             File folder = new File(realPath);
             for (File tab : folder.listFiles()) {
-                if (tab.isDirectory()) {
+                if (isTab(tab)) {
                     allTabs.add(tab.getName());
                 }
             }
