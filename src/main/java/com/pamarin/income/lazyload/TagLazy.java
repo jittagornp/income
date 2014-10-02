@@ -9,13 +9,15 @@ import com.pamarin.income.model.Tag;
 import com.pamarin.income.service.TagService;
 import com.pamarin.income.util.SpringUtils;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 /**
  *
  * @author anonymous
  */
-public class TagLazy extends LazyLoad<Tag> {
+public class TagLazy extends SelectionLazyLoad<Tag> {
 
     private final TagService service;
 
@@ -24,8 +26,9 @@ public class TagLazy extends LazyLoad<Tag> {
     }
 
     @Override
-    public Page<Tag> load(Pageable page) {
-        return service.findAll(page);
+    public Page<Tag> loadPage(Pageable page) {
+        PageRequest request = new PageRequest(page.getPageNumber(), page.getPageSize(), Sort.Direction.ASC, "id");
+        return service.findAll(request);
     }
 
 }

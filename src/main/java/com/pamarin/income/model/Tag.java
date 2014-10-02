@@ -6,6 +6,7 @@
 package com.pamarin.income.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -42,6 +44,9 @@ public class Tag implements Serializable {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User owner;
+    @Column(name = "create_date", nullable = false)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date createDate;
     //
 
     public Integer getId() {
@@ -66,6 +71,14 @@ public class Tag implements Serializable {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     @Override

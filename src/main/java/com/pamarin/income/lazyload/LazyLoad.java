@@ -120,6 +120,10 @@ public abstract class LazyLoad<T> extends LazyDataModel<T> {
     }
 
     public List<T> getContents() {
+        if(list == null){
+            list = new ArrayList<>();
+        }
+        
         return list;
     }
 

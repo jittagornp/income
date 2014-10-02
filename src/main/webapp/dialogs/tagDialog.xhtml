@@ -11,6 +11,54 @@
               modal="true"
               resizable="false"
               header="เลือกป้ายกำกับ">
+        <style>
+            .tag-item{
+                float: left;
+                padding: 3px 5px;
+                background-color: #E8F4FF;
+                margin-right: 5px;
+                display: block;
+                border : solid 1px #CEE6F7;
+                border-radius: 3px;
+                -moz-border-radius: 3px;
+                -webkit-border-radius: 3px;
+                margin-bottom: 5px;
+            }
+            
+            .tag-item .ui-commandlink{
+                text-decoration: none;
+            }
+
+            .tag-list .ui-paginator{
+                clear: both;
+                background: none;
+                border: none;
+                position: relative;
+                top : 10px;
+            }
+
+            .tag-list .ui-widget-content{
+                border: none;
+            }
+            
+            .delete-tag-button{
+                width: 16px;
+                margin-left: 5px;
+                position: relative;
+                bottom : 2px;
+            }
+            
+            .delete-tag-button .ui-button-text{
+                padding: 0px;
+            }
+            
+            .check-tag{
+                position: relative;
+                top : 3px;
+                margin-right: 4px;
+            }
+        </style>
+
         <h:form id="tagDialogForm">
             <p:inputText id="addTagInput" value="#{tagCtrl.tag.name}"/>
             <p:watermark for="addTagInput" value="พิมพ์ชื่อป้ายกำกับแล้วคลิกปุ่มเพิ่ม"/>
@@ -23,18 +71,32 @@
             <br/>
             <br/>
             <p:dataList value="#{tagCtrl.tagLazy}"
-                         var="item"
-                         rows="25"
-                         lazy="true"
-                         rowIndexVar="counter"
-                         paginator="true"
-                         emptyMessage="ยังไม่มีป้ายกำกับ"
-                         paginatorPosition="bottom">
+                        var="item"
+                        rows="25"
+                        lazy="true"
+                        rowIndexVar="counter"
+                        paginator="true"
+                        styleClass="tag-list"
+                        emptyMessage="ยังไม่มีป้ายกำกับ"
+                        paginatorPosition="bottom">
 
-                <h:outputText value="#{item.name}"/>
+                <div class="tag-item">
+                    <p:selectBooleanCheckbox value="#{item.selected}" styleClass="check-tag"/>
+                    <p:commandLink value="#{item.data.name}"/>
+                    <p:commandButton icon="ui-icon-close"
+                                     title="คลิกเพื่อลบป้ายกำกับ"
+                                     styleClass="white-button delete-tag-button tooltip-w"/>
+                </div>
             </p:dataList>
             <div class="dialog-footer">
                 <div class="dialog-footer-right">
+                    <p:commandButton value="เลือก"
+                                     oncomplete="PF('tagWidgetDialog').hide();"
+                                     update="@form"
+                                     icon="ui-icon-check"
+                                     actionListener="#{tagCtrl.onSelectTags()}"
+                                     styleClass="green-button"/>
+                    <p:spacer width="10"/>
                     <p:commandButton value="ปิด"
                                      type="button"
                                      onclick="PF('tagWidgetDialog').hide();"
