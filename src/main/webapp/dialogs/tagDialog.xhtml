@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:f="http://java.sun.com/jsf/core">
+
+    <p:dialog id="tagDialog"
+              widgetVar="tagWidgetDialog"
+              width="600"
+              modal="true"
+              resizable="false"
+              header="เลือกป้ายกำกับ">
+        <h:form id="tagDialogForm">
+            <p:inputText id="addTagInput" value="#{tagCtrl.tag.name}"/>
+            <p:watermark for="addTagInput" value="พิมพ์ชื่อป้ายกำกับแล้วคลิกปุ่มเพิ่ม"/>
+            <p:spacer width="5"/>
+            <p:commandButton value="เพิ่ม"
+                             actionListener="#{tagCtrl.onAddTag()}"
+                             update="@form"
+                             icon="ui-icon-plus"
+                             styleClass="green-button"/>
+            <br/>
+            <br/>
+            <p:dataList value="#{tagCtrl.tagLazy}"
+                         var="item"
+                         rows="25"
+                         lazy="true"
+                         rowIndexVar="counter"
+                         paginator="true"
+                         emptyMessage="ยังไม่มีป้ายกำกับ"
+                         paginatorPosition="bottom">
+
+                <h:outputText value="#{item.name}"/>
+            </p:dataList>
+            <div class="dialog-footer">
+                <div class="dialog-footer-right">
+                    <p:commandButton value="ปิด"
+                                     type="button"
+                                     onclick="PF('tagWidgetDialog').hide();"
+                                     icon="ui-icon-close"
+                                     styleClass="white-button"/>
+                </div>
+            </div>
+        </h:form>
+    </p:dialog>
+</ui:composition>

@@ -10,13 +10,15 @@
     <http  use-expressions="true" 
            auto-config="true">
         
-        <intercept-url pattern="/*"
+        <intercept-url pattern="/income/**"
+                       access="isAuthenticated()" />
+        <intercept-url pattern="/dialogs/**"
                        access="isAuthenticated()" />
         
         <logout logout-url="/logout" 
                 delete-cookies="JSSESSIONID"/>
         
-        <form-login login-page="/signin"
+        <form-login login-page="/signin/"
                     login-processing-url="/login"
                     username-parameter="username"
                     password-parameter="password"

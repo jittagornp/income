@@ -5,6 +5,7 @@
  */
 package com.pamarin.income.model;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import java.util.Collection;
 import java.util.Collections;
 import javax.persistence.Column;
@@ -39,9 +40,18 @@ public class User implements UserDetails {
     )
     @Column(name = "user_id")
     private Integer id;
-
+    @Column(unique = true, nullable = false)
     private String username;
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
+    private Boolean enabled = Boolean.TRUE;
+    @Column(name = "password_expired", nullable = false)
+    private Boolean passwordExpired = Boolean.FALSE;
+    @Column(name = "account_expired", nullable = false)
+    private Boolean accountExpired = Boolean.FALSE;
+    @Column(name = "account_locked", nullable = false)
+    private Boolean accountLocked = Boolean.FALSE;
 
     public User() {
     }
@@ -76,22 +86,22 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return !accountExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return !accountLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return !passwordExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 
     

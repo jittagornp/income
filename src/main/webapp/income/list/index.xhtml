@@ -107,6 +107,7 @@
                     <p:outputPanel>
                         <p:commandButton title="คลิกเพื่อเพิ่มป้ายกำกับ"
                                          icon="ui-icon-plus"
+                                         oncomplete="PF('tagWidgetDialog').show();"
                                          styleClass="white-button tooltip-w"/>
                     </p:outputPanel>
                 </h:panelGrid>
@@ -130,5 +131,6 @@
             </h:form>
         </p:dialog>
 
+        <ui:include src="/dialogs/tagDialog.xhtml"/>
     </ui:define>
 </ui:composition>

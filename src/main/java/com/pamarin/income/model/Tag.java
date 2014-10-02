@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
@@ -30,13 +32,16 @@ public class Tag implements Serializable {
             valueColumnName = "value",
             pkColumnValue = "tag")
     @GeneratedValue(
-            generator = "tag_generator", 
+            generator = "tag_generator",
             strategy = GenerationType.TABLE
     )
     @Column(name = "tag_id")
     private Integer id;
-    @Column(name = "tag_name")
+    @Column(name = "tag_name", nullable = false)
     private String name;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User owner;
     //
 
     public Integer getId() {
@@ -53,6 +58,14 @@ public class Tag implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     @Override
