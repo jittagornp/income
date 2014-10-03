@@ -8,8 +8,7 @@ package com.pamarin.income.controller;
 import com.pamarin.income.lazyload.IncomeItemLazy;
 import com.pamarin.income.model.IncomeItem;
 import com.pamarin.income.model.Tag;
-import com.pamarin.income.model.User;
-import com.pamarin.income.security.SecurityUtils;
+import com.pamarin.income.model.TagListener;
 import com.pamarin.income.service.IncomeItemService;
 import com.pamarin.income.util.MessageNotifyCallback;
 import com.pamarin.income.util.Notification;
@@ -22,7 +21,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- *
  * @author jittagornp
  */
 @Component
@@ -34,34 +32,35 @@ public class IncomeItemCtrl {
     private IncomeItemService itemService;
     private IncomeItemLazy lazy;
     private IncomeItem item;
-    private User user;
     @Autowired
     private TagCtrl tagCtrl;
 
     @PostConstruct
     public void postConstruct() {
-        reset();
-        user = SecurityUtils.getUser();
-    }
+        tagCtrl.addTagListener(new TagListener() {
 
-    private void reset() {
-        lazy = new IncomeItemLazy();
+            @Override
+            public void onSelect(List<Tag> tags) {
+                getItem().setTags(tags);
+            }
+        });
     }
 
     public IncomeItemLazy getLazy() {
+        if (lazy == null) {
+            lazy = new IncomeItemLazy();
+        }
+
         return lazy;
     }
 
+    public void setLazy(IncomeItemLazy lazy) {
+        this.lazy = lazy;
+    }
+
     public IncomeItem getItem() {
-        if(item == null){
-           item = new IncomeItem(); 
-        }
-        
-        List<Tag> tags = tagCtrl.getTagLazy().getSelected();
-        LOG.debug("tags size --> {}", tags.size());
-        
-        if (!tags.isEmpty()) {
-            item.setTags(tags);
+        if (item == null) {
+            item = new IncomeItem();
         }
 
         return item;
@@ -69,10 +68,6 @@ public class IncomeItemCtrl {
 
     public void setItem(IncomeItem item) {
         this.item = item;
-    }
-
-    private void setupItem() {
-        item.setOwner(user);
     }
 
     public void onCreateItem() {
@@ -86,12 +81,6 @@ public class IncomeItemCtrl {
             public void process() throws Throwable {
                 itemService.save(item);
             }
-
-            @Override
-            public void onFinally() {
-                reset();
-            }
-
         });
     }
 }

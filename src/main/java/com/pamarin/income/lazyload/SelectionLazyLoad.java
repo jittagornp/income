@@ -48,14 +48,17 @@ public abstract class SelectionLazyLoad<T> extends LazyLoad<SelectionModel<T>> {
     public Page<SelectionModel<T>> load(Pageable page) {
         backupSelected(); // main *****
 
-        Page<SelectionModel<T>> result = SelectionModel.toSelection(this.loadPage(page), page);
+        Page<SelectionModel<T>> result = SelectionModel.toSelection(
+                this.loadPage(page),
+                page
+        );
 
-        retureSelected(result); // main *****
+        returnSelected(result); // main *****
         return result;
     }
 
     private void backupSelected() {
-        for (SelectionModel<T> item : this.getContents()) {
+        for (SelectionModel<T> item : getContents()) {
             if (item.getSelected()) {
                 selected.add(item.getData());
             } else {
@@ -66,7 +69,7 @@ public abstract class SelectionLazyLoad<T> extends LazyLoad<SelectionModel<T>> {
         backup = true;
     }
 
-    private void retureSelected(Page<SelectionModel<T>> result) {
+    private void returnSelected(Page<SelectionModel<T>> result) {
         for (SelectionModel<T> item : result.getContent()) {
             if (selected.contains(item.getData())) {
                 item.setSelected(true);
@@ -76,14 +79,22 @@ public abstract class SelectionLazyLoad<T> extends LazyLoad<SelectionModel<T>> {
         backup = false;
     }
 
+    /**
+     * clear selected
+     */
     public void clearSelected() {
         for (SelectionModel<T> item : getContents()) {
             item.setSelected(false);
         }
-        
+
         getSelected().clear();
     }
 
+    /**
+     * get selected
+     *
+     * @return
+     */
     public List<T> getSelected() {
         if (!backup) {
             backupSelected();

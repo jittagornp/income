@@ -111,7 +111,7 @@ public abstract class LazyLoad<T> extends LazyDataModel<T> {
             totalElements = page.getTotalElements();
             this.setRowCount((int) totalElements);
         } else {
-            list = new ArrayList<>();
+            list = null;
             totalElements = 0L;
             setRowCount(0);
         }

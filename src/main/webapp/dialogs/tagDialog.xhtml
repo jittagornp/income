@@ -11,7 +11,8 @@
               modal="true"
               resizable="false"
               header="เลือกป้ายกำกับ">
-        <h:form id="tagDialogForm">
+
+        <h:form id="tagDialogForm" prependId="false">
             <p:inputText id="addTagInput" value="#{tagCtrl.tag.name}"/>
             <p:watermark for="addTagInput" value="พิมพ์ชื่อป้ายกำกับแล้วคลิกปุ่มเพิ่ม"/>
             <p:spacer width="5"/>
@@ -33,7 +34,8 @@
                         paginatorPosition="bottom">
 
                 <div class="tag-item">
-                    <p:selectBooleanCheckbox value="#{item.selected}" styleClass="check-tag"/>
+                    <p:selectBooleanCheckbox value="#{item.selected}" 
+                                             styleClass="check-tag"/>
                     <p:commandLink value="#{item.data.name}"/>
                 </div>
             </p:dataList>
@@ -62,9 +64,16 @@
         <script>
             (function($) {
                 $(function() {
-                    $(document).on('click', '.tag-item .ui-commandlink', function() {
-                        $(this).parent().find('.ui-chkbox-box').click();
-                    });
+                    $(document).on(
+                            'click',
+                            '.tag-item .ui-commandlink',
+                            function() {
+                                $(this)
+                                        .parent()
+                                        .find('.ui-chkbox-box')
+                                        .click();
+                            }
+                    );
                 });
             })(jQuery);
         </script>
