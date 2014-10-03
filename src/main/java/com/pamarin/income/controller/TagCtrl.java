@@ -13,7 +13,6 @@ import com.pamarin.income.service.TagService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +34,7 @@ public class TagCtrl {
     @Autowired
     private TagService service;
     private List<TagListener> listeners;
+    private List<Tag> selected;
 
     private void reset() {
         tag = null;
@@ -43,10 +43,15 @@ public class TagCtrl {
 
     public TagLazy getTagLazy() {
         if (tagLazy == null) {
-            tagLazy = new TagLazy();
+            tagLazy = new TagLazy(selected);
         }
 
         return tagLazy;
+    }
+
+    public void setSelected(List<Tag> selected) {
+        this.selected = selected;
+        reset();
     }
 
     public Tag getTag() {
@@ -63,9 +68,9 @@ public class TagCtrl {
 
     public void onAddTag() {
         try {
-            tag.setOwner(SecurityUtils.getUser());
-            tag.setCreateDate(new Date());
-            service.save(tag);
+            getTag().setOwner(SecurityUtils.getUser());
+            getTag().setCreateDate(new Date());
+            service.save(getTag());
         } finally {
             reset();
         }

@@ -12,6 +12,7 @@ import com.pamarin.income.model.TagListener;
 import com.pamarin.income.service.IncomeItemService;
 import com.pamarin.income.util.MessageNotifyCallback;
 import com.pamarin.income.util.Notification;
+import com.pamarin.income.util.RequestUtils;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
@@ -74,6 +75,10 @@ public class IncomeItemCtrl {
         item = new IncomeItem();
     }
 
+    public void onAddTag() {
+        tagCtrl.setSelected(getItem().getTags());
+    }
+
     public void onAddItem() {
         Notification.notifyPhase(new MessageNotifyCallback("เพิ่มรายการค่าใช้จ่าย") {
 
@@ -82,5 +87,13 @@ public class IncomeItemCtrl {
                 itemService.save(item);
             }
         });
+    }
+
+    public void onDeleteTag() {
+        Integer tagId = RequestUtils.requestInteger("tagId");
+        int indexOf = getItem().getTags().indexOf(new Tag(tagId));
+        if (indexOf != -1) {
+            getItem().getTags().remove(indexOf);
+        }
     }
 }

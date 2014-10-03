@@ -47,7 +47,14 @@ public class Tag implements Serializable {
     @Column(name = "create_date", nullable = false)
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date createDate;
+
     //
+    public Tag() {
+    }
+
+    public Tag(Integer id) {
+        this.id = id;
+    }
 
     public Integer getId() {
         return id;

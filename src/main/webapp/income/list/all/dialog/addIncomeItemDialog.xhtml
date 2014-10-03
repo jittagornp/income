@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:f="http://java.sun.com/jsf/core">
+    <p:dialog header="เพิ่มรายการรายรับ"
+              modal="true"
+              width="550"
+              resizable="false"
+              id="addIncomeItemDialog"
+              widgetVar="addIncomeItemWidgetDialog">
+        <h:form id="addIncomeItemDialogForm" 
+                styleClass="has-tag-list"
+                prependId="false">
+            <h:panelGrid class="form-grid"
+                         columns="2">
+                <p:outputPanel>
+                    <h:outputText value="รายการ"/>
+                    <h:outputText value="*" styleClass="require"/>
+                </p:outputPanel>
+                <p:outputPanel>
+                    <p:inputText id="addIncomeName" 
+                                 required="true"
+                                 styleClass="require-title"
+                                 value="#{incomeItemCtrl.item.incomeName}"/>
+                    <p:watermark for="addIncomeName" value="พิมพ์ชื่อรายรับ"/>
+                </p:outputPanel>
+
+                <p:outputPanel>
+                    <h:outputText value="จำนวนเงิน"/>
+                    <h:outputText value="*" styleClass="require"/>
+                </p:outputPanel>
+                <p:outputPanel>
+                    <p:inputText id="addIncomeValue" 
+                                 required="true"
+                                 styleClass="require-title"
+                                 value="#{incomeItemCtrl.item.incomeValue}"/>
+                    <p:watermark for="addIncomeValue" value="พิมพ์ตัวเลขเท่านั้น"/>
+                </p:outputPanel>
+
+                <p:outputPanel>
+                    <h:outputText value="วัน/เวลา"/>
+                </p:outputPanel>
+                <p:outputPanel>
+                    <p:inputText id="addIncomeDate" 
+                                 value="#{incomeItemCtrl.item.incomeDate}" 
+                                 styleClass="ic-calendar">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </p:inputText>
+                    <p:watermark for="addIncomeDate" value="เลือกวัน/เวลาที่มีรายรับ"/>
+                </p:outputPanel>
+
+                <p:outputPanel>
+                    <h:outputText value="ป้ายกำกับ"/>
+                </p:outputPanel>
+                <p:outputPanel>
+                    <p:dataList value="#{incomeItemCtrl.item.tags}"
+                                var="tag"
+                                rows="25"
+                                rowIndexVar="counter"
+                                styleClass="tag-list"
+                                emptyMessage="ยังไม่มีป้ายกำกับ"
+                                paginatorPosition="bottom">
+
+                        <div class="tag-item">
+                            <p:commandLink value="#{tag.name}"/>
+                            <p:commandButton icon="ui-icon-close"
+                                             update="@form"
+                                             process="@this"
+                                             actionListener="#{incomeItemCtrl.onDeleteTag()}"
+                                             styleClass="delete-tag-button white-button">
+                                <f:param name="tagId" value="#{tag.id}"/>
+                            </p:commandButton>
+                        </div>
+                    </p:dataList>
+                    <p:commandButton title="คลิกเพื่อเพิ่มป้ายกำกับ"
+                                     icon="ui-icon-plus"
+                                     update=":tagDialogForm"
+                                     process="@this"
+                                     actionListener="#{incomeItemCtrl.onAddTag()}" 
+                                     oncomplete="PF('tagWidgetDialog').show();"
+                                     styleClass="white-button tooltip-w"/>
+                </p:outputPanel>
+            </h:panelGrid>
+            <div class="dialog-footer">
+                <div class="dialog-footer-left">
+
+                </div>
+                <div class="dialog-footer-right">
+                    <p:commandButton value="เพิ่ม"
+                                     oncomplete="PF('addIncomeItemWidgetDialog').hide();"
+                                     icon="ui-icon-check"
+                                     styleClass="green-button"/>
+                    <p:spacer width="10"/>
+                    <p:commandButton value="ยกเลิก"
+                                     type="button"
+                                     onclick="PF('addIncomeItemWidgetDialog').hide();"
+                                     icon="ui-icon-close"
+                                     styleClass="white-button"/>
+                </div>
+            </div>
+        </h:form>
+    </p:dialog>
+</ui:composition>

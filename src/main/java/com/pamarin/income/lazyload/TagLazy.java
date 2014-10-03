@@ -8,6 +8,7 @@ package com.pamarin.income.lazyload;
 import com.pamarin.income.model.Tag;
 import com.pamarin.income.service.TagService;
 import com.pamarin.income.util.SpringUtils;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,11 @@ public class TagLazy extends SelectionLazyLoad<Tag> {
     private final TagService service;
 
     public TagLazy() {
+        this(null);
+    }
+
+    public TagLazy(List<Tag> tags) {
+        super(tags);
         service = SpringUtils.getBean(TagService.class);
     }
 
