@@ -7,6 +7,9 @@
 package com.pamarin.income.repository;
 
 import com.pamarin.income.model.Tag;
+import com.pamarin.income.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -14,5 +17,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author anonymous
  */
 public interface TagRepo extends JpaRepository<Tag, Integer>{
+
+    public Page<Tag> findByOwner(User user, Pageable pageable);
     
 }

@@ -6,8 +6,10 @@
 package com.pamarin.income.lazyload;
 
 import com.pamarin.income.model.IncomeItem;
+import com.pamarin.income.security.SecurityUtils;
 import com.pamarin.income.service.IncomeItemService;
 import com.pamarin.income.util.SpringUtils;
+import java.util.Date;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -18,14 +20,27 @@ import org.springframework.data.domain.Pageable;
 public class IncomeItemLazy extends LazyLoad<IncomeItem> {
 
     private final IncomeItemService itemService;
+    private Date startDate;
+    private Date endDate;
 
     public IncomeItemLazy() {
+        this(null, null);
+    }
+
+    public IncomeItemLazy(Date startDate, Date endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.itemService = SpringUtils.getBean(IncomeItemService.class);
     }
 
     @Override
     public Page<IncomeItem> load(Pageable page) {
-        return itemService.findAll(page);
+        return itemService.findByOwnerAndBetweenIncomeDate(
+                SecurityUtils.getUser(),
+                startDate,
+                endDate,
+                page
+        );
     }
 
 }

@@ -7,16 +7,17 @@
 package com.pamarin.income.service;
 
 import com.pamarin.income.model.Tag;
+import com.pamarin.income.model.User;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 
 /**
  *
  * @author anonymous
  */
 public interface TagService {
-    
-    Page<Tag> findAll(Pageable pageable);
-    
+
     Tag save(Tag tag);
+
+    Page<Tag> findByOwner(User user, PageRequest request);
 }

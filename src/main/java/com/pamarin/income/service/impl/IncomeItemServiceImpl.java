@@ -6,8 +6,12 @@
 package com.pamarin.income.service.impl;
 
 import com.pamarin.income.model.IncomeItem;
+import com.pamarin.income.model.User;
 import com.pamarin.income.repository.IncomeItemRepo;
 import com.pamarin.income.service.IncomeItemService;
+import java.util.Date;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,17 +26,29 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class IncomeItemServiceImpl implements IncomeItemService {
 
+    private static final Logger LOG = LoggerFactory.getLogger(IncomeItemServiceImpl.class);
+    
     @Autowired
     private IncomeItemRepo repo;
 
     @Override
-    public Page<IncomeItem> findAll(Pageable page) {
-        return repo.findAll(page);
+    public IncomeItem save(IncomeItem item) {
+        return repo.save(item);
     }
 
     @Override
-    public IncomeItem save(IncomeItem item) {
-        return repo.save(item);
+    public Page<IncomeItem> findByOwnerAndBetweenIncomeDate(
+            User user,
+            Date startDate,
+            Date endDate,
+            Pageable page
+    ) {
+        LOG.debug("startDate/endDate --> {}/{}", startDate, endDate);
+        if (startDate == null && endDate == null) {
+            return repo.findByOwner(user, page);
+        }
+
+        return repo.findByOwnerAndBetweenIncomeDate(user, startDate, endDate, page);
     }
 
 }

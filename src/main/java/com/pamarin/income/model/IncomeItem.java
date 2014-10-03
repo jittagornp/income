@@ -135,6 +135,20 @@ public class IncomeItem implements Serializable {
         return tags;
     }
 
+    public String getTagsString() {
+        String tgs = "";
+        String splitor = ", ";
+        for (Tag tag : getTags()) {
+            tgs = tgs + splitor + tag.getName();
+        }
+
+        if (tgs.startsWith(splitor)) {
+            return tgs.substring(splitor.length());
+        }
+
+        return tgs;
+    }
+
     public void setTags(List<Tag> tags) {
         this.tags = tags;
     }

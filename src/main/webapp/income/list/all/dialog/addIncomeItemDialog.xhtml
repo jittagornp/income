@@ -11,7 +11,6 @@
               id="addIncomeItemDialog"
               widgetVar="addIncomeItemWidgetDialog">
         <h:form id="addIncomeItemDialogForm" 
-                styleClass="has-tag-list"
                 prependId="false">
             <h:panelGrid class="form-grid"
                          columns="2">
@@ -54,7 +53,7 @@
                 <p:outputPanel>
                     <h:outputText value="ป้ายกำกับ"/>
                 </p:outputPanel>
-                <p:outputPanel>
+                <p:outputPanel styleClass="has-tag-list">
                     <p:dataList value="#{incomeItemCtrl.item.tags}"
                                 var="tag"
                                 rows="25"
@@ -90,6 +89,7 @@
                 </div>
                 <div class="dialog-footer-right">
                     <p:commandButton value="เพิ่ม"
+                                     actionListener="#{incomeItemCtrl.onAddItem()}"
                                      oncomplete="PF('addIncomeItemWidgetDialog').hide();"
                                      icon="ui-icon-check"
                                      styleClass="green-button"/>

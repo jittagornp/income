@@ -6,6 +6,7 @@
 package com.pamarin.income.lazyload;
 
 import com.pamarin.income.model.Tag;
+import com.pamarin.income.security.SecurityUtils;
 import com.pamarin.income.service.TagService;
 import com.pamarin.income.util.SpringUtils;
 import java.util.List;
@@ -40,7 +41,7 @@ public class TagLazy extends SelectionLazyLoad<Tag> {
                 "name"
         );
 
-        return service.findAll(request);
+        return service.findByOwner(SecurityUtils.getUser(), request);
     }
 
 }

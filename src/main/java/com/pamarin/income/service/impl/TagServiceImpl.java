@@ -6,11 +6,12 @@
 package com.pamarin.income.service.impl;
 
 import com.pamarin.income.model.Tag;
+import com.pamarin.income.model.User;
 import com.pamarin.income.repository.TagRepo;
 import com.pamarin.income.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,13 +27,13 @@ public class TagServiceImpl implements TagService {
     private TagRepo repo;
 
     @Override
-    public Page<Tag> findAll(Pageable pageable) {
-        return repo.findAll(pageable);
+    public Tag save(Tag tag) {
+        return repo.save(tag);
     }
 
     @Override
-    public Tag save(Tag tag) {
-        return repo.save(tag);
+    public Page<Tag> findByOwner(User user, PageRequest request) {
+        return repo.findByOwner(user, request);
     }
 
 }

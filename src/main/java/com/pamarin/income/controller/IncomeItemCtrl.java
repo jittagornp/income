@@ -9,10 +9,12 @@ import com.pamarin.income.lazyload.IncomeItemLazy;
 import com.pamarin.income.model.IncomeItem;
 import com.pamarin.income.model.Tag;
 import com.pamarin.income.model.TagListener;
+import com.pamarin.income.security.SecurityUtils;
 import com.pamarin.income.service.IncomeItemService;
 import com.pamarin.income.util.MessageNotifyCallback;
 import com.pamarin.income.util.Notification;
 import com.pamarin.income.util.RequestUtils;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
@@ -35,6 +37,9 @@ public class IncomeItemCtrl {
     private IncomeItem item;
     @Autowired
     private TagCtrl tagCtrl;
+    //
+    private Date startDate;
+    private Date endDate;
 
     @PostConstruct
     public void postConstruct() {
@@ -55,13 +60,23 @@ public class IncomeItemCtrl {
         return lazy;
     }
 
+    public void onSeach() {
+        LOG.debug("ons search --> {}, {}", getStartDate(), getEndDate());
+        lazy = new IncomeItemLazy(getStartDate(), getEndDate());
+    }
+
+    public void onClear() {
+        startDate = null;
+        endDate = null;
+    }
+
     public void setLazy(IncomeItemLazy lazy) {
         this.lazy = lazy;
     }
 
     public IncomeItem getItem() {
         if (item == null) {
-            item = new IncomeItem();
+            onCreateItem();
         }
 
         return item;
@@ -73,6 +88,8 @@ public class IncomeItemCtrl {
 
     public void onCreateItem() {
         item = new IncomeItem();
+        item.setIncomeDate(new Date());
+        item.setOwner(SecurityUtils.getUser());
     }
 
     public void onAddTag() {
@@ -96,4 +113,21 @@ public class IncomeItemCtrl {
             getItem().getTags().remove(indexOf);
         }
     }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
 }

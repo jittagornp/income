@@ -6,6 +6,8 @@
 package com.pamarin.income.service;
 
 import com.pamarin.income.model.IncomeItem;
+import com.pamarin.income.model.User;
+import java.util.Date;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,8 +17,13 @@ import org.springframework.data.domain.Pageable;
  */
 public interface IncomeItemService {
 
-    public Page<IncomeItem> findAll(Pageable page);
+    IncomeItem save(IncomeItem item);
 
-    public IncomeItem save(IncomeItem item);
+    Page<IncomeItem> findByOwnerAndBetweenIncomeDate(
+            User user,
+            Date startDate,
+            Date endDate,
+            Pageable page
+    );
 
 }
