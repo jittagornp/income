@@ -33,7 +33,13 @@ public class TagLazy extends SelectionLazyLoad<Tag> {
 
     @Override
     public Page<Tag> loadPage(Pageable page) {
-        PageRequest request = new PageRequest(page.getPageNumber(), page.getPageSize(), Sort.Direction.ASC, "id");
+        PageRequest request = new PageRequest(
+                page.getPageNumber(),
+                page.getPageSize(),
+                Sort.Direction.ASC,
+                "name"
+        );
+
         return service.findAll(request);
     }
 

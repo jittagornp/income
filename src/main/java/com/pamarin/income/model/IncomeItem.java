@@ -7,6 +7,8 @@ package com.pamarin.income.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -121,6 +123,14 @@ public class IncomeItem implements Serializable {
         if (tags == null) {
             tags = new ArrayList<>();
         }
+
+        Collections.sort(tags, new Comparator<Tag>() {
+
+            @Override
+            public int compare(Tag t1, Tag t2) {
+                return t1.getName().compareTo(t2.getName());
+            }
+        });
 
         return tags;
     }
