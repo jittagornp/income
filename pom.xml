@@ -261,7 +261,12 @@
         <!-- jpa *********************************************************** -->
              
              
-             
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>17.0</version>
+        </dependency>
+          
         <!-- apache common ************************************************* -->
         <dependency>
             <groupId>commons-fileupload</groupId>
@@ -333,6 +338,23 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>**/*.properties</exclude>
+                </excludes>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -409,4 +431,25 @@
         </repository>
     </repositories>
 
+
+    <profiles>
+        <profile>
+            <activation>
+                <activeByDefault/>
+            </activation>
+            <id>development</id>
+            <properties>
+                <upload.temp.dir>/home/guest/upload/</upload.temp.dir>
+            </properties>
+        </profile>
+        <profile>
+            <activation>
+                <activeByDefault/>
+            </activation>
+            <id>production</id>
+            <properties>
+                <upload.temp.dir>/home/guest/upload/</upload.temp.dir>
+            </properties>
+        </profile>
+    </profiles>
 </project>
