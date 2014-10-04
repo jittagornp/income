@@ -54,7 +54,15 @@ public class IncomeItemCtrl {
             }
         });
 
-        summaryIncomeCtrl.summary(getStartDate(), getEndDate());
+        summary();
+    }
+
+    private void summary() {
+        summaryIncomeCtrl.summary(
+                getStartDate(),
+                getEndDate()
+        );
+
     }
 
     public IncomeItemLazy getLazy() {
@@ -66,14 +74,18 @@ public class IncomeItemCtrl {
     }
 
     public void onSeach() {
-        lazy = new IncomeItemLazy(getStartDate(), getEndDate());
-        summaryIncomeCtrl.summary(getStartDate(), getEndDate());
+        lazy = new IncomeItemLazy(
+                getStartDate(), 
+                getEndDate()
+        );
+        
+        summary();
     }
 
     public void onClear() {
-        lazy = new IncomeItemLazy();
         startDate = null;
         endDate = null;
+        onSeach();
     }
 
     public void setLazy(IncomeItemLazy lazy) {
@@ -119,6 +131,12 @@ public class IncomeItemCtrl {
             public void process() throws Throwable {
                 itemService.save(item);
             }
+
+            @Override
+            public void onFinally() {
+                summary();
+            }
+
         });
     }
 
@@ -137,6 +155,12 @@ public class IncomeItemCtrl {
             public void process() throws Throwable {
                 itemService.delete(item);
             }
+
+            @Override
+            public void onFinally() {
+                summary();
+            }
+
         });
     }
 

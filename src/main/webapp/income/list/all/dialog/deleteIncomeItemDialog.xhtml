@@ -60,7 +60,7 @@
                 <div class="dialog-footer-right">
                     <p:commandButton value="ยืนยันการลบ"
                                      actionListener="#{incomeItemCtrl.onDeleteItem()}"
-                                     update="@(.item-list), :notification"
+                                     update="@(.item-list), @(.block-body), :notification"
                                      oncomplete="PF('deleteIncomeItemWidgetDialog').hide();"
                                      icon="ui-icon-check"
                                      styleClass="red-button"/>

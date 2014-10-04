@@ -94,7 +94,7 @@
                 <div class="dialog-footer-right">
                     <p:commandButton value="เพิ่ม"
                                      actionListener="#{incomeItemCtrl.onAddItem()}"
-                                     update="@(.item-list), :notification"
+                                     update="@(.item-list), @(.block-body), :notification"
                                      oncomplete="PF('addIncomeItemWidgetDialog').hide();"
                                      icon="ui-icon-check"
                                      styleClass="green-button"/>
