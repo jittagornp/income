@@ -70,7 +70,11 @@
             </p:column>
             <p:column headerText="วัน/เวลา">
                 <h:outputText value="#{item.incomeDate}">
-                    <f:convertDateTime pattern="#{localeCtrl.calendarTimeFormat}"/>
+                    <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
+                </h:outputText>
+                <p:spacer width="5"/>
+                <h:outputText value="#{item.incomeTime}">
+                    <f:convertDateTime pattern="HH:mm"/>
                 </h:outputText>
             </p:column>
             <p:column headerText="ป้ายกำกับ">
