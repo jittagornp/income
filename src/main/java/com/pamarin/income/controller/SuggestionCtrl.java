@@ -20,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,8 +40,8 @@ import org.springframework.stereotype.Component;
  * @author anonymous
  */
 @Component
-@Scope("view")
-public class SuggestionCtrl {
+@Scope("session")
+public class SuggestionCtrl implements Serializable{
 
     private static final Logger LOG = LoggerFactory.getLogger(SuggestionCtrl.class);
 
