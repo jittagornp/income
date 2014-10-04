@@ -84,6 +84,13 @@
                 </p:outputPanel>
             </h:panelGrid>
             <div class="dialog-footer">
+                <div class="dialog-footer-left">
+                    <p:commandButton value="เริ่มใหม่"
+                                     update="@form"
+                                     actionListener="#{incomeItemCtrl.onCreateItem()}"
+                                     styleClass="white-button"
+                                     icon="ui-icon-refresh"/>
+                </div>
                 <div class="dialog-footer-right">
                     <p:commandButton value="เพิ่ม"
                                      actionListener="#{incomeItemCtrl.onAddItem()}"

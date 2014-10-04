@@ -27,5 +27,6 @@ public interface IncomeItemService {
     );
     
     void delete(IncomeItem item);
-
+    
+    IncomeItem findByIdAndOwner(Integer id, User user);
 }

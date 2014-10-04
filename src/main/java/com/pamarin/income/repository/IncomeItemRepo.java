@@ -25,4 +25,6 @@ public interface IncomeItemRepo extends JpaRepository<IncomeItem, Integer> {
     @Query("SELECT item FROM IncomeItem item WHERE item.owner = ?1")
     public Page<IncomeItem> findByOwner(User user, Pageable page);
 
+    public IncomeItem findByIdAndOwner(Integer id, User user);
+
 }

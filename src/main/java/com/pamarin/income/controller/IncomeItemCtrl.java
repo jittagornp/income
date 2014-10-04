@@ -97,6 +97,11 @@ public class IncomeItemCtrl {
         item = lazy.getRowData(itemId);
     }
 
+    public void findItemById() {
+        Integer itemId = RequestUtils.requestInteger("itemId");
+        item = itemService.findByIdAndOwner(itemId, SecurityUtils.getUser());
+    }
+
     public void onAddTag() {
         tagCtrl.setSelected(getItem().getTags());
     }

@@ -55,4 +55,9 @@ public class IncomeItemServiceImpl implements IncomeItemService {
         repo.delete(item.getId());
     }
 
+    @Override
+    public IncomeItem findByIdAndOwner(Integer id, User user) {
+        return repo.findByIdAndOwner(id, user);
+    }
+
 }
