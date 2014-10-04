@@ -112,6 +112,22 @@
                     <p:spacer width="10"/>
                     <h:outputText value="รายการ"/>
                 </p:outputPanel>
+                <p:outputPanel>
+                    ตั้งแต่วันที่
+                </p:outputPanel>
+                <p:outputPanel>
+                    <h:outputText value="#{summaryIncomeCtrl.startDate}">
+                        <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
+                    </h:outputText>
+                </p:outputPanel>
+                <p:outputPanel>
+                    ถึงวันที่
+                </p:outputPanel>
+                <p:outputPanel>
+                    <h:outputText value="#{summaryIncomeCtrl.endDate}">
+                        <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
+                    </h:outputText>
+                </p:outputPanel>
             </h:panelGrid>  
         </div>
     </p:outputPanel>

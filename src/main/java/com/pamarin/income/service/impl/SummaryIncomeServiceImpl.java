@@ -42,4 +42,14 @@ public class SummaryIncomeServiceImpl implements SummaryIncomeService {
         return incomeItemRepo.countByOwnerAndBetweenIncomeDate(user, startDate, endDate);
     }
 
+    @Override
+    public Date findMaxIncomeDateByOwner(User user) {
+        return incomeItemRepo.findMaxIncomeDateByOwner(user);
+    }
+
+    @Override
+    public Date findMixIncomeDateByOwner(User user) {
+        return incomeItemRepo.findMinIncomeDateByOwner(user);
+    }
+
 }

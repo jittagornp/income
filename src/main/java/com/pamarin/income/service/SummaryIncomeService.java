@@ -15,6 +15,10 @@ import java.util.Date;
 public interface SummaryIncomeService {
 
     Double sumByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate);
-    
+
     Long countByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate);
+
+    Date findMaxIncomeDateByOwner(User user);
+    
+    Date findMixIncomeDateByOwner(User user);
 }

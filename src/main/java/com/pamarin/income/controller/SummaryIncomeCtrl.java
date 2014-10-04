@@ -23,6 +23,9 @@ public class SummaryIncomeCtrl {
 
     private Double summary;
     private Long totalItems;
+    private Date startDate;
+    private Date endDate;
+
     @Autowired
     private SummaryIncomeService summaryService;
 
@@ -33,12 +36,15 @@ public class SummaryIncomeCtrl {
                 startDate,
                 endDate
         );
-        
+
         totalItems = summaryService.countByOwnerAndBetweenIncomeDate(
-                user, 
-                startDate, 
+                user,
+                startDate,
                 endDate
         );
+
+        this.startDate = summaryService.findMixIncomeDateByOwner(user);
+        this.endDate = summaryService.findMaxIncomeDateByOwner(user);
     }
 
     public Double getSummary() {
@@ -47,6 +53,14 @@ public class SummaryIncomeCtrl {
 
     public Long getTotalItems() {
         return totalItems;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
     }
 
 }

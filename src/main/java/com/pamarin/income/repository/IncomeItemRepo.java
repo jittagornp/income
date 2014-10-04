@@ -39,4 +39,10 @@ public interface IncomeItemRepo extends JpaRepository<IncomeItem, Integer> {
     @Query("SELECT COUNT(item.incomeValue) FROM IncomeItem item WHERE item.owner = ?1 AND (item.incomeDate BETWEEN ?2 AND ?3)")
     public long countByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate);
 
+    @Query("SELECT MAX(item.incomeDate) FROM IncomeItem item WHERE item.owner = ?1")
+    public Date findMaxIncomeDateByOwner(User user);
+
+    @Query("SELECT MIN(item.incomeDate) FROM IncomeItem item WHERE item.owner = ?1")
+    public Date findMinIncomeDateByOwner(User user);
+
 }
