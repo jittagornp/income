@@ -74,9 +74,14 @@ public class SuggestionCtrl {
         this.suggestion = suggestion;
     }
 
+    private boolean isImage(String extension) {
+        return "png".equals(extension) || "jpg".equals(extension) || "jpeg".equals(extension);
+    }
+
     private void validateImageType() {
-        if (!file.getContentType().contains("image/")) {
-            throw new UserException("ต้องเป็นไฟล์รูปภาพเท่านั้น");
+        String exctension = FilenameUtils.getExtension(file.getFileName()).toLowerCase();
+        if (!isImage(exctension)) {
+            throw new UserException("ต้องเป็นไฟล์รูปภาพ .png, .jpg, .jpeg เท่านั้น");
         }
     }
 
@@ -150,8 +155,6 @@ public class SuggestionCtrl {
     }
 
     public void onSave() {
-        validateImageType();
-
         if (!SecurityUtils.isAnonymous()) {
             getSuggestion().setOwner(SecurityUtils.getUser());
         }
@@ -160,6 +163,8 @@ public class SuggestionCtrl {
 
             @Override
             public void process() throws Throwable {
+                validateImageType();
+
                 if (file != null) {
                     saveFile();
                 }
