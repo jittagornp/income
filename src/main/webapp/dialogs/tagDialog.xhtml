@@ -47,15 +47,16 @@
                                      styleClass="white-button"/>
                 </div>
                 <div class="dialog-footer-right">
-                    <p:commandButton value="เลือก"
+                    <p:commandButton value="ตกลง"
                                      icon="ui-icon-check"
                                      oncomplete="PF('tagWidgetDialog').hide()"
                                      update="@form, @(.has-tag-list)"
                                      actionListener="#{tagCtrl.onSelectTags()}"
                                      styleClass="green-button"/>
                     <p:spacer width="10"/>
-                    <p:commandButton value="ปิด"
+                    <p:commandButton value="ยกเลิก"
                                      type="button"
+                                     icon="ui-icon-close"
                                      onclick="PF('tagWidgetDialog').hide()"
                                      styleClass="white-button"/>
                 </div>

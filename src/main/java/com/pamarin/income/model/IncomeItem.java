@@ -52,8 +52,11 @@ public class IncomeItem implements Serializable {
     @Column(name = "income_value", nullable = false)
     private Double incomeValue;
     @Column(name = "income_date", nullable = false)
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date incomeDate;
+    @Column(name = "income_time", nullable = false)
+    @Temporal(javax.persistence.TemporalType.TIME)
+    private Date incomeTime;
     //
     @ManyToOne
     @JoinColumn(
@@ -111,6 +114,14 @@ public class IncomeItem implements Serializable {
         this.incomeDate = incomeDate;
     }
 
+    public Date getIncomeTime() {
+        return incomeTime;
+    }
+
+    public void setIncomeTime(Date incomeTime) {
+        this.incomeTime = incomeTime;
+    }
+
     public User getOwner() {
         return owner;
     }
@@ -136,6 +147,10 @@ public class IncomeItem implements Serializable {
     }
 
     public String getTagsString() {
+        if (getTags().isEmpty()) {
+            return "ไม่มีป้ายกำกับ";
+        }
+
         String tgs = "";
         String splitor = ", ";
         for (Tag tag : getTags()) {

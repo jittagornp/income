@@ -48,7 +48,7 @@
         </h:form>
         <p:dataTable value="#{incomeItemCtrl.lazy}"
                      var="item"
-                     rows="25"
+                     rows="15"
                      styleClass="item-list"
                      lazy="true"
                      sortBy="#{item.incomeDate}"
@@ -65,7 +65,7 @@
             <p:column headerText="รายการ">
                 <h:outputText value="#{item.incomeName}"/>
             </p:column>
-            <p:column headerText="ค่า">
+            <p:column headerText="จำนวนเงิน">
                 <h:outputText value="#{item.incomeValue}"/>
             </p:column>
             <p:column headerText="วัน/เวลา">
@@ -94,6 +94,118 @@
         </p:dataTable>
     </p:outputPanel>
     <p:outputPanel styleClass="block">
-        <h3>สถิติ</h3>
+        <h3 class="block-header">สรุป</h3>
+        <div class="block-body">
+            <h:panelGrid class="form-grid"
+                         columns="2">
+                <p:outputPanel>
+                    รายรับทั้งหมดตอนนี้ (sum)
+                </p:outputPanel>
+                <p:outputPanel>
+                    <h:outputText value="#{sumaryIncomeCtrl.sumary}"/>
+                </p:outputPanel>
+                <p:outputPanel>
+                    จำนวน (total)
+                </p:outputPanel>
+                <p:outputPanel>
+                    <h:outputText value="#{sumaryIncomeCtrl.totalItems}"/>
+                    <p:spacer width="10"/>
+                    <h:outputText value="รายการ"/>
+                </p:outputPanel>
+            </h:panelGrid>  
+        </div>
+    </p:outputPanel>
+    <p:outputPanel styleClass="block">
+        <h3 class="block-header">สถิติ</h3>
+        <div class="block-body">
+            <div>มองทีละรายการ</div>
+            <h:panelGrid class="form-grid"
+                         columns="4">
+                <p:outputPanel>
+                    รายรับสูงสุด &#8593;
+                </p:outputPanel>
+                <p:outputPanel>
+
+                </p:outputPanel>
+                <p:outputPanel>
+                    เป็นจำนวนเงิน
+                </p:outputPanel>
+                <p:outputPanel>
+
+                </p:outputPanel>
+                <p:outputPanel>
+                    รายรับต่ำสุด &#8595;
+                </p:outputPanel>
+                <p:outputPanel>
+
+                </p:outputPanel>
+                <p:outputPanel>
+                    เป็นจำนวนเงิน
+                </p:outputPanel>
+                <p:outputPanel>
+
+                </p:outputPanel>
+            </h:panelGrid>  
+            <div>จัดกลุ่มตามชื่อ</div>
+            <h:panelGrid class="form-grid"
+                         columns="4">
+                <p:outputPanel>
+                    รายรับสูงสุด &#8593;
+                </p:outputPanel>
+                <p:outputPanel>
+
+                </p:outputPanel>
+                <p:outputPanel>
+                    เป็นจำนวนเงิน
+                </p:outputPanel>
+                <p:outputPanel>
+
+                </p:outputPanel>
+                <p:outputPanel>
+                    รายรับต่ำสุด &#8595;
+                </p:outputPanel>
+                <p:outputPanel>
+
+                </p:outputPanel>
+                <p:outputPanel>
+                    เป็นจำนวนเงิน
+                </p:outputPanel>
+                <p:outputPanel>
+                </p:outputPanel>
+            </h:panelGrid>
+            <div>ตามป้ายกำกับ</div>
+            <h:panelGrid class="form-grid"
+                         columns="4">
+                <p:outputPanel>
+                    รายรับสูงสุด &#8593;
+                </p:outputPanel>
+                <p:outputPanel>
+
+                </p:outputPanel>
+                <p:outputPanel>
+                    เป็นจำนวนเงิน
+                </p:outputPanel>
+                <p:outputPanel>
+
+                </p:outputPanel>
+                <p:outputPanel>
+                    รายรับต่ำสุด &#8595;
+                </p:outputPanel>
+                <p:outputPanel>
+
+                </p:outputPanel>
+                <p:outputPanel>
+                    เป็นจำนวนเงิน
+                </p:outputPanel>
+                <p:outputPanel>
+                </p:outputPanel>
+            </h:panelGrid>
+        </div>
+    </p:outputPanel>
+    <p:outputPanel styleClass="block">
+        <h3 class="block-header">แนวโน้ม</h3>
+        <div class="block-body">
+            กราฟ
+        </div>
     </p:outputPanel>
 </ui:composition>

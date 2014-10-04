@@ -38,8 +38,10 @@
                 }
 
                 return {
-                    bind: bind,
-                    bindAndBlur: bindAndBlur
+                    binding: function(selectror, gravity) {
+                        bind(selectror, gravity);
+                        bindAndBlur(selectror, gravity);
+                    }
                 };
             }).call(this);
 
@@ -57,21 +59,12 @@
             }
 
             $(function() {
-                TooltipBiding.bind('.tooltip-n', 'n');
-                TooltipBiding.bind('.tooltip-s', 's');
-                TooltipBiding.bind('.tooltip-e', 'e');
-                TooltipBiding.bind('.tooltip-w', 'w');
-                //
-                TooltipBiding.bindAndBlur('.tooltip-n', 'n');
-                TooltipBiding.bindAndBlur('.tooltip-s', 's');
-                TooltipBiding.bindAndBlur('.tooltip-e', 'e');
-                TooltipBiding.bindAndBlur('.tooltip-w', 'w');
-
-                TooltipBiding.bind('.ui-dialog-titlebar-close', 's');
-                TooltipBiding.bindAndBlur('.ui-dialog-titlebar-close', 's');
-
-                TooltipBiding.bind('.require-title', 'w');
-                TooltipBiding.bindAndBlur('.require-title', 'w');
+                TooltipBiding.binding('.tooltip-n', 'n');
+                TooltipBiding.binding('.tooltip-s', 's');
+                TooltipBiding.binding('.tooltip-e', 'e');
+                TooltipBiding.binding('.tooltip-w', 'w');
+                TooltipBiding.binding('.ui-dialog-titlebar-close', 's');
+                TooltipBiding.binding('.require-title', 'w');
 
                 bindTitle('.require-title', 'บังคับกรอก');
                 bindTitle('.ui-dialog-titlebar-close', 'คลิกเพื่อปิด');

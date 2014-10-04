@@ -27,4 +27,16 @@ public interface IncomeItemRepo extends JpaRepository<IncomeItem, Integer> {
 
     public IncomeItem findByIdAndOwner(Integer id, User user);
 
+    @Query("SELECT SUM(item.incomeValue) FROM IncomeItem item WHERE item.owner = ?1")
+    public double sumByOwner(User user);
+
+    @Query("SELECT SUM(item.incomeValue) FROM IncomeItem item WHERE item.owner = ?1 AND (item.incomeDate BETWEEN ?2 AND ?3)")
+    public double sumByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate);
+
+    @Query("SELECT COUNT(item.incomeValue) FROM IncomeItem item WHERE item.owner = ?1")
+    public long countByOwner(User user);
+
+    @Query("SELECT COUNT(item.incomeValue) FROM IncomeItem item WHERE item.owner = ?1 AND (item.incomeDate BETWEEN ?2 AND ?3)")
+    public long countByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate);
+
 }

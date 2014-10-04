@@ -45,7 +45,7 @@
                     <p:inputText id="addIncomeDate" 
                                  value="#{incomeItemCtrl.item.incomeDate}" 
                                  styleClass="ic-calendar">
-                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        <f:convertDateTime pattern="#{localeCtrl.calendarTimeFormat}"/>
                     </p:inputText>
                     <p:watermark for="addIncomeDate" value="เลือกวัน/เวลาที่มีรายรับ"/>
                 </p:outputPanel>
