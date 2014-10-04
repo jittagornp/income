@@ -7,7 +7,7 @@ package com.pamarin.income.service.impl;
 
 import com.pamarin.income.model.User;
 import com.pamarin.income.repository.IncomeItemRepo;
-import com.pamarin.income.service.SumaryIncomeService;
+import com.pamarin.income.service.SummaryIncomeService;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class SumaryIncomeServiceImpl implements SumaryIncomeService {
+public class SummaryIncomeServiceImpl implements SummaryIncomeService {
 
     @Autowired
     private IncomeItemRepo incomeItemRepo;

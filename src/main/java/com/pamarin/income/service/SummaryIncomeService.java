@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author anonymous
  */
-public interface SumaryIncomeService {
+public interface SummaryIncomeService {
 
     Double sumByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate);
     

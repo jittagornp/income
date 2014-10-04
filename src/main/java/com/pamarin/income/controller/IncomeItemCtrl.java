@@ -42,7 +42,7 @@ public class IncomeItemCtrl {
     private Date endDate;
     //
     @Autowired
-    private SumaryIncomeCtrl sumaryIncomeCtrl;
+    private SummaryIncomeCtrl summaryIncomeCtrl;
 
     @PostConstruct
     public void postConstruct() {
@@ -54,7 +54,7 @@ public class IncomeItemCtrl {
             }
         });
 
-        sumaryIncomeCtrl.sumary(getStartDate(), getEndDate());
+        summaryIncomeCtrl.summary(getStartDate(), getEndDate());
     }
 
     public IncomeItemLazy getLazy() {
@@ -67,7 +67,7 @@ public class IncomeItemCtrl {
 
     public void onSeach() {
         lazy = new IncomeItemLazy(getStartDate(), getEndDate());
-        sumaryIncomeCtrl.sumary(getStartDate(), getEndDate());
+        summaryIncomeCtrl.summary(getStartDate(), getEndDate());
     }
 
     public void onClear() {

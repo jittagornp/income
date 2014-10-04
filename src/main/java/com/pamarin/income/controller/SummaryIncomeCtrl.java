@@ -7,7 +7,7 @@ package com.pamarin.income.controller;
 
 import com.pamarin.income.model.User;
 import com.pamarin.income.security.SecurityUtils;
-import com.pamarin.income.service.SumaryIncomeService;
+import com.pamarin.income.service.SummaryIncomeService;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -19,30 +19,30 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("view")
-public class SumaryIncomeCtrl {
+public class SummaryIncomeCtrl {
 
-    private Double sumary;
+    private Double summary;
     private Long totalItems;
     @Autowired
-    private SumaryIncomeService sumaryService;
+    private SummaryIncomeService summaryService;
 
-    public void sumary(Date startDate, Date endDate) {
+    public void summary(Date startDate, Date endDate) {
         User user = SecurityUtils.getUser();
-        sumary = sumaryService.sumByOwnerAndBetweenIncomeDate(
+        summary = summaryService.sumByOwnerAndBetweenIncomeDate(
                 user,
                 startDate,
                 endDate
         );
         
-        totalItems = sumaryService.countByOwnerAndBetweenIncomeDate(
+        totalItems = summaryService.countByOwnerAndBetweenIncomeDate(
                 user, 
                 startDate, 
                 endDate
         );
     }
 
-    public Double getSumary() {
-        return sumary;
+    public Double getSummary() {
+        return summary;
     }
 
     public Long getTotalItems() {
