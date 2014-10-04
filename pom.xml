@@ -335,6 +335,15 @@
             <version>${org.springframework-version}</version>
         </dependency>
         <!-- test ********************************************************** -->
+        
+        
+        <!-- mail -->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>10.0-b28</version>
+        </dependency>
+        <!-- mail -->
     </dependencies>
 
     <build>

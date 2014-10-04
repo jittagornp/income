@@ -3,19 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.pamarin.income.exception;
 
 /**
  *
  * @author anonymous
  */
-public class UserException extends RuntimeException {
+public class UncheckedMailException extends RuntimeException {
 
-    public UserException(String message) {
+    public UncheckedMailException(String message) {
         super(message);
     }
 
-    public UserException(Throwable cause) {
+    public UncheckedMailException(Throwable cause) {
         super(cause);
     }
 }

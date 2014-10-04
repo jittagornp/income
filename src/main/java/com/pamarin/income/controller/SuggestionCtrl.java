@@ -6,13 +6,14 @@
 package com.pamarin.income.controller;
 
 import com.google.common.io.ByteStreams;
+import com.pamarin.income.component.MailCallback;
+import com.pamarin.income.component.MailSender;
 import com.pamarin.income.exception.UserException;
 import com.pamarin.income.model.Suggestion;
 import com.pamarin.income.security.SecurityUtils;
 import com.pamarin.income.service.SuggestionService;
 import com.pamarin.income.util.MessageNotifyCallback;
 import com.pamarin.income.util.Notification;
-import com.pamarin.income.util.UploadUtils;
 import static com.pamarin.income.util.UploadUtils.getTempDirectory;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,13 +24,14 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
-import java.util.logging.Level;
 import org.apache.commons.io.FilenameUtils;
 import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 /**
@@ -42,11 +44,14 @@ public class SuggestionCtrl {
 
     private static final Logger LOG = LoggerFactory.getLogger(SuggestionCtrl.class);
 
+    private static final String DESTINATION_RECEIVE_EMAIL = "jittagornp@gmail.com";
     private static final String DEFAULT_TYPE = "SUGGESTION";
     private Suggestion suggestion;
     @Autowired
     private SuggestionService service;
     private UploadedFile file;
+    @Autowired
+    private MailSender mailSender;
 
     public UploadedFile getFile() {
         return file;
@@ -94,18 +99,18 @@ public class SuggestionCtrl {
             String extension = FilenameUtils.getExtension(file.getFileName());
             inputStream = file.getInputstream();
             File parentDir = getTempDirectoryDateTime();
-
-            outputStream = new FileOutputStream(
-                    new File(
-                            parentDir,
-                            randomName + "." + extension
-                    )
+            File attachFile = new File(
+                    parentDir,
+                    randomName + "." + extension
             );
-            
+
+            outputStream = new FileOutputStream(attachFile);
             ByteStreams.copy(inputStream, outputStream);
             getSuggestion().setImage(
                     "/" + parentDir.getName() + "/" + randomName + "." + extension
             );
+
+            sendEmail(attachFile);
         } catch (Exception ex) {
             throw new UserException(errorMessage);
         } finally {
@@ -125,6 +130,23 @@ public class SuggestionCtrl {
                 }
             }
         }
+    }
+
+    private void sendEmail(final File attachFile) {
+        mailSender.send(new MailCallback() {
+
+            @Override
+            public void execute(MimeMessageHelper helper) throws Exception {
+                if (attachFile != null) {
+                    FileSystemResource file = new FileSystemResource(attachFile);
+                    helper.addAttachment(attachFile.getName(), file);
+                }
+
+                helper.setSubject("ความคิดเห็นจากผู้ใช้");
+                helper.setText(getSuggestion().getType() + " : " + getSuggestion().getMessage());
+                helper.setTo(DESTINATION_RECEIVE_EMAIL);
+            }
+        });
     }
 
     public void onSave() {
