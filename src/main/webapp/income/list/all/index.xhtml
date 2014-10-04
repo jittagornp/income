@@ -5,75 +5,80 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:f="http://java.sun.com/jsf/core">
 
-    <h:form id="topicIncomeForm" prependId="false">
-        <div class="operation-header"> 
-            <div class="operation-header-left">
-                <h:outputText value="ตั้งแต่ : "/>
-                <p:inputText id="startDate" 
-                             value="#{incomeItemCtrl.startDate}" 
-                             styleClass="ic-calendar">
-                    <f:convertDateTime pattern="dd/MM/yyyy"/>
-                </p:inputText>
-                <p:watermark for="startDate" value="วันที่"/>
-                <h:outputText value=" ถึง : "/>
-                <p:inputText id="endDate" 
-                             value="#{incomeItemCtrl.endDate}" 
-                             styleClass="ic-calendar">
-                    <f:convertDateTime pattern="dd/MM/yyyy"/>
-                </p:inputText>
-                <p:watermark for="endDate" value="วันที่"/>
-                <p:spacer width="10"/>
-                <p:commandButton value="ค้นหา"
-                                 icon="ui-icon-search"
-                                 update="@(.item-list)"
-                                 actionListener="#{incomeItemCtrl.onSeach()}"
-                                 styleClass="white-button"/>
-                <p:spacer width="5"/>
-                <p:commandButton icon="ui-icon-refresh"
-                                 title="เคลียร์ผลลัพธ์"
-                                 update="@(.item-list)"
-                                 actionListener="#{incomeItemCtrl.onClear()}"
-                                 styleClass="tooltip-w white-button"/>
+    <p:outputPanel styleClass="block">
+        <h:form id="topicIncomeForm" prependId="false">
+            <div class="operation-header"> 
+                <div class="operation-header-left">
+                    <h:outputText value="ตั้งแต่ : "/>
+                    <p:inputText id="startDate" 
+                                 value="#{incomeItemCtrl.startDate}" 
+                                 styleClass="ic-calendar">
+                        <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
+                    </p:inputText>
+                    <p:watermark for="startDate" value="วันที่"/>
+                    <h:outputText value=" ถึง : "/>
+                    <p:inputText id="endDate" 
+                                 value="#{incomeItemCtrl.endDate}" 
+                                 styleClass="ic-calendar">
+                        <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
+                    </p:inputText>
+                    <p:watermark for="endDate" value="วันที่"/>
+                    <p:spacer width="10"/>
+                    <p:commandButton value="ค้นหา"
+                                     icon="ui-icon-search"
+                                     update="@(.item-list)"
+                                     actionListener="#{incomeItemCtrl.onSeach()}"
+                                     styleClass="white-button"/>
+                    <p:spacer width="5"/>
+                    <p:commandButton icon="ui-icon-refresh"
+                                     title="เคลียร์ผลลัพธ์"
+                                     update="@(.item-list), @form"
+                                     actionListener="#{incomeItemCtrl.onClear()}"
+                                     styleClass="tooltip-w white-button"/>
+                </div>
+                <div class="operation-header-right">
+                    <p:commandButton value="เพิ่มรายการ"
+                                     actionListener="#{incomeItemCtrl.onCreateItem()}"
+                                     update=":addIncomeItemDialogForm"
+                                     styleClass="green-button"
+                                     oncomplete="PF('addIncomeItemWidgetDialog').show();"
+                                     icon="ui-icon-plus"/>
+                </div>
             </div>
-            <div class="operation-header-right">
-                <p:commandButton value="เพิ่มรายการ"
-                                 actionListener="#{incomeItemCtrl.onCreateItem()}"
-                                 update=":addIncomeItemDialogForm"
-                                 styleClass="green-button"
-                                 oncomplete="PF('addIncomeItemWidgetDialog').show();"
-                                 icon="ui-icon-plus"/>
-            </div>
-        </div>
-    </h:form>
-    <p:dataTable value="#{incomeItemCtrl.lazy}"
-                 var="item"
-                 rows="25"
-                 styleClass="item-list"
-                 lazy="true"
-                 sortBy="#{item.id}"
-                 sortOrder="ASCENDING"
-                 rowIndexVar="counter"
-                 paginator="true"
-                 emptyMessage="not have data"
-                 paginatorPosition="bottom"
-                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                 rowsPerPageTemplate="5,10,15,25,50">
-        <p:column headerText="ที่" style="width: 5%">
-            <h:outputText value="#{counter + 1}"/>
-        </p:column>
-        <p:column headerText="รายการ">
-            <h:outputText value="#{item.incomeName}"/>
-        </p:column>
-        <p:column headerText="ค่า">
-            <h:outputText value="#{item.incomeValue}"/>
-        </p:column>
-        <p:column headerText="วัน/เวลา">
-            <h:outputText value="#{item.incomeDate}">
-                <f:convertDateTime pattern="dd/MM/yyyy"/>
-            </h:outputText>
-        </p:column>
-        <p:column headerText="ป้ายกำกับ">
-            <h:outputText value="#{item.tagsString}"/>
-        </p:column>
-    </p:dataTable>
+        </h:form>
+        <p:dataTable value="#{incomeItemCtrl.lazy}"
+                     var="item"
+                     rows="25"
+                     styleClass="item-list"
+                     lazy="true"
+                     sortBy="#{item.incomeDate}"
+                     sortOrder="DESCENDING"
+                     rowIndexVar="counter"
+                     paginator="true"
+                     emptyMessage="not have data"
+                     paginatorPosition="bottom"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="5,10,15,25,50">
+            <p:column headerText="ที่" style="width: 5%">
+                <h:outputText value="#{counter + 1}"/>
+            </p:column>
+            <p:column headerText="รายการ">
+                <h:outputText value="#{item.incomeName}"/>
+            </p:column>
+            <p:column headerText="ค่า">
+                <h:outputText value="#{item.incomeValue}"/>
+            </p:column>
+            <p:column headerText="วัน/เวลา">
+                <h:outputText value="#{item.incomeDate}">
+                    <f:convertDateTime pattern="#{localeCtrl.calendarTimeFormat}"/>
+                </h:outputText>
+            </p:column>
+            <p:column headerText="ป้ายกำกับ">
+                <h:outputText value="#{item.tagsString}"/>
+            </p:column>
+        </p:dataTable>
+    </p:outputPanel>
+    <p:outputPanel styleClass="block">
+        <h3>สถิติ</h3>
+    </p:outputPanel>
 </ui:composition>

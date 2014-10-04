@@ -32,6 +32,11 @@ public class IncomeItemTabCtrl implements Serializable {
     private String currentTab = DEFAULT_TAB;
     private List<String> allTabs;
 
+    @PostConstruct
+    public void postConstruct() {
+        changeTab();
+    }
+
     private boolean isTab(File folder) {
         return folder.isDirectory() && !folder.getName().startsWith("_");
     }
@@ -53,12 +58,7 @@ public class IncomeItemTabCtrl implements Serializable {
         return allTabs;
     }
 
-    @PostConstruct
-    public void postConstruct() {
-        changeTab();
-    }
-
-    public void changeTab() {
+    private void changeTab() {
         try {
             currentTab = RequestUtils.requestString(TAB_PARAMETER);
             LOG.debug("current tab --> {}", currentTab);
@@ -80,6 +80,10 @@ public class IncomeItemTabCtrl implements Serializable {
     }
 
     public String activeTab(String tab) {
-        return getCurrentTab().endsWith(tab) ? "active" : "";
+        return isTab(tab) ? "active" : "";
+    }
+
+    public boolean isTab(String tab) {
+        return getCurrentTab().endsWith(tab);
     }
 }

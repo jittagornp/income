@@ -61,11 +61,11 @@ public class IncomeItemCtrl {
     }
 
     public void onSeach() {
-        LOG.debug("ons search --> {}, {}", getStartDate(), getEndDate());
         lazy = new IncomeItemLazy(getStartDate(), getEndDate());
     }
 
     public void onClear() {
+        lazy = new IncomeItemLazy();
         startDate = null;
         endDate = null;
     }

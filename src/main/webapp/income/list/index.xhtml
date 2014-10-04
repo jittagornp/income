@@ -55,7 +55,29 @@
             </h:form>
         </p:outputPanel>
         <p:outputPanel styleClass="tab-container">
-            <ui:include src="/income/list/#{incomeItemTabCtrl.currentTab}/index.xhtml"/>
+            <p:outputPanel rendered="#{incomeItemTabCtrl.isTab('blank')}">
+                <ui:include src="/income/list/blank/index.xhtml"/>
+            </p:outputPanel>
+
+            <p:outputPanel rendered="#{incomeItemTabCtrl.isTab('all')}">
+                <ui:include src="/income/list/all/index.xhtml"/>
+            </p:outputPanel>
+
+            <p:outputPanel rendered="#{incomeItemTabCtrl.isTab('day')}">
+                <ui:include src="/income/list/day/index.xhtml"/>
+            </p:outputPanel>
+
+            <p:outputPanel rendered="#{incomeItemTabCtrl.isTab('week')}">
+                <ui:include src="/income/list/week/index.xhtml"/>
+            </p:outputPanel>
+            
+            <p:outputPanel rendered="#{incomeItemTabCtrl.isTab('month')}">
+                <ui:include src="/income/list/month/index.xhtml"/>
+            </p:outputPanel>
+            
+            <p:outputPanel rendered="#{incomeItemTabCtrl.isTab('year')}">
+                <ui:include src="/income/list/year/index.xhtml"/>
+            </p:outputPanel>
         </p:outputPanel>
     </ui:define>
 
