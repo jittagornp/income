@@ -58,7 +58,9 @@
                         <p:spacer width="10"/>
                         <h:outputLink value="#{facesContext.externalContext.requestContextPath}/settings/">ตั้งค่า</h:outputLink>
                         <p:spacer width="10"/>
-                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/logout">#{message.signout}</h:outputLink>
+                        <h:outputLink value="" onclick="return false;" style="text-decoration: none; cursor: default;">jittagornp@gmail.com</h:outputLink>
+                        <p:spacer width="10"/>
+                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/logout">#{message.signout} &#8594;</h:outputLink>
                     </p:outputPanel >
                 </div>
             </div>
@@ -76,9 +78,15 @@
                 <ui:insert name="container"/>
             </div>
             <div class="bottombar">
-
+                <div class="bottombar-left">
+                    <h:outputText value="เวอร์ชัน 1.0" styleClass="gray-text"/>
+                </div>
+                <div class="bottombar-right">
+                    <p:commandLink value="ความคิดเห็น" onclick="PF('suggesionWidgetDialog').show(); return false"/>
+                </div>
             </div>
 
+            <ui:include src="dialogs/suggestionDialog.xhtml"/>
             <ui:insert name="dialog"/>
         </h:body>
     </html>
