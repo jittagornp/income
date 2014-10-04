@@ -34,6 +34,8 @@
                 </div>
                 <div class="dialog-footer-right">
                     <p:commandButton value="ส่งความคิดเห็น &#8594;"
+                                     update=":notification"
+                                     actionListener="#{suggestionCtrl.onSave()}"
                                      oncomplete="PF('suggesionWidgetDialog').hide()"
                                      styleClass="green-button"/>
                     <p:spacer width="10"/>

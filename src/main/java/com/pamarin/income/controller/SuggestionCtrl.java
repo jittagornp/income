@@ -29,6 +29,7 @@ public class SuggestionCtrl {
     public Suggestion getSuggestion() {
         if (suggestion == null) {
             suggestion = new Suggestion();
+            suggestion.setType("SUGGESTION");
         }
 
         return suggestion;
@@ -53,6 +54,11 @@ public class SuggestionCtrl {
             @Override
             public String getSuccessBody() {
                 return "เสร็จเรียบร้อย - ขอบคุณสำหรับความคิดเห็น";
+            }
+
+            @Override
+            public void onFinally() {
+                suggestion = null;
             }
 
         });

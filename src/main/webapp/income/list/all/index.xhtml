@@ -74,7 +74,7 @@
                 </h:outputText>
             </p:column>
             <p:column headerText="ป้ายกำกับ">
-                <h:outputText value="#{item.tagsString}"/>
+                <h:outputText value="#{item.tagsString}" styleClass="#{item.tags.isEmpty() ? 'gray-text' : 'green-text'}"/>
             </p:column>
             <p:column headerText="#" style="width: 60px">
                 <p:commandLink value="แก้ไข"
