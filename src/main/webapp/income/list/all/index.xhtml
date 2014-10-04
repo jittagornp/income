@@ -106,13 +106,13 @@
                     รายรับทั้งหมด <br/> (ยังไม่หักรายจ่าย)
                 </p:outputPanel>
                 <p:outputPanel>
-                    <h:outputText value="#{summaryIncomeCtrl.summary}"/>
+                    <h:outputText value="#{summaryIncomeCtrl.summary}" styleClass="green-text"/>
                 </p:outputPanel>
                 <p:outputPanel>
                     จำนวน 
                 </p:outputPanel>
                 <p:outputPanel>
-                    <h:outputText value="#{summaryIncomeCtrl.totalItems}"/>
+                    <h:outputText value="#{summaryIncomeCtrl.totalItems}" styleClass="green-text"/>
                     <p:spacer width="10"/>
                     <h:outputText value="รายการ"/>
                 </p:outputPanel>
@@ -120,7 +120,7 @@
                     ตั้งแต่วันที่
                 </p:outputPanel>
                 <p:outputPanel>
-                    <h:outputText value="#{summaryIncomeCtrl.startDate}">
+                    <h:outputText value="#{summaryIncomeCtrl.startDate}" styleClass="green-text">
                         <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
                     </h:outputText>
                 </p:outputPanel>
@@ -128,7 +128,7 @@
                     ถึงวันที่
                 </p:outputPanel>
                 <p:outputPanel>
-                    <h:outputText value="#{summaryIncomeCtrl.endDate}">
+                    <h:outputText value="#{summaryIncomeCtrl.endDate}" styleClass="green-text">
                         <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
                     </h:outputText>
                 </p:outputPanel>
@@ -145,25 +145,25 @@
                     รายรับสูงสุด &#8593;
                 </p:outputPanel>
                 <p:outputPanel>
-
+                    <h:outputText value="#{statisticCtrl.maxItem.key}" styleClass="green-text"/>
                 </p:outputPanel>
                 <p:outputPanel>
                     เป็นจำนวนเงิน
                 </p:outputPanel>
                 <p:outputPanel>
-
+                    <h:outputText value="#{statisticCtrl.maxItem.value}" styleClass="green-text"/>
                 </p:outputPanel>
                 <p:outputPanel>
                     รายรับต่ำสุด &#8595;
                 </p:outputPanel>
                 <p:outputPanel>
-
+                    <h:outputText value="#{statisticCtrl.minItem.key}" styleClass="green-text"/>
                 </p:outputPanel>
                 <p:outputPanel>
                     เป็นจำนวนเงิน
                 </p:outputPanel>
                 <p:outputPanel>
-
+                    <h:outputText value="#{statisticCtrl.minItem.value}" styleClass="green-text"/>
                 </p:outputPanel>
             </h:panelGrid>  
             <div>จัดกลุ่มตามชื่อ</div>

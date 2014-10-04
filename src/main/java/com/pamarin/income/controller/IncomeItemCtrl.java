@@ -43,6 +43,8 @@ public class IncomeItemCtrl {
     //
     @Autowired
     private SummaryIncomeCtrl summaryIncomeCtrl;
+    @Autowired
+    private StatisticCtrl statisticCtrl;
 
     @PostConstruct
     public void postConstruct() {
@@ -63,6 +65,10 @@ public class IncomeItemCtrl {
                 getEndDate()
         );
 
+        statisticCtrl.process(
+                getStartDate(),
+                getEndDate()
+        );
     }
 
     public IncomeItemLazy getLazy() {
@@ -75,10 +81,10 @@ public class IncomeItemCtrl {
 
     public void onSeach() {
         lazy = new IncomeItemLazy(
-                getStartDate(), 
+                getStartDate(),
                 getEndDate()
         );
-        
+
         summary();
     }
 
