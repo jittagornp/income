@@ -5,45 +5,58 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:f="http://java.sun.com/jsf/core">
     <script>
-        (function($, doc) {
+        (function($, doc, win) {
+            /**
+             * define class TooltipBiding
+             * for bind tooltip to element DOM 
+             * by .tooltip-[POSITON : {n, w, e, s}] style class 
+             */
+            var TooltipBiding = (function() {
+
+                function bind(selectror, gravity) {
+                    $(selectror).each(function() {
+                        var $item = $(this);
+                        if (!$item.attr('original-title')) {
+                            $item.tipsy({
+                                gravity: gravity
+                            });
+                        }
+                    });
+                }
+
+                function bindAndBlur(selectror, gravity) {
+                    $(doc).on('click', selectror, function() {
+                        $(selectror).mouseout();
+                    });
+
+                    win.addResponseListner(function() {
+                        var t = setTimeout(function() {
+                            clearTimeout(t);
+                            bind(selectror, gravity);
+                        }, 500);
+                    });
+                }
+
+                return {
+                    bind: bind,
+                    bindAndBlur: bindAndBlur
+                };
+            }).call(this);
+
+            function bindTitle(selector, titleLabel) {
+                var t = setTimeout(function() {
+                    clearTimeout(t);
+                    $(selector).each(function() {
+                        var $that = $(this);
+                        var title = $that.attr('title');
+                        if (!title) {
+                            $that.attr('title', titleLabel);
+                        }
+                    });
+                }, 50);
+            }
+
             $(function() {
-                /**
-                 * define class TooltipBiding
-                 * for bind tooltip to element DOM 
-                 * by .tooltip-[POSITON : {n, w, e, s}] style class 
-                 */
-                var TooltipBiding = (function() {
-
-                    function bind(selectror, gravity) {
-                        $(selectror).each(function() {
-                            var $item = $(this);
-                            if (!$item.attr('original-title')) {
-                                $item.tipsy({
-                                    gravity: gravity
-                                });
-                            }
-                        });
-                    }
-
-                    function bindAndBlur(selectror, gravity) {
-                        $(doc).on('click', selectror, function() {
-                            $(selectror).mouseout();
-                        });
-
-                        window.responseHandlers.push(function() {
-                            var t = setTimeout(function() {
-                                clearTimeout(t);
-                                bind(selectror, gravity);
-                            }, 100);
-                        });
-                    }
-
-                    return {
-                        bind: bind,
-                        bindAndBlur: bindAndBlur
-                    };
-                }).call(this);
-
                 TooltipBiding.bind('.tooltip-n', 'n');
                 TooltipBiding.bind('.tooltip-s', 's');
                 TooltipBiding.bind('.tooltip-e', 'e');
@@ -58,19 +71,14 @@
                 TooltipBiding.bind('.ui-dialog-titlebar-close', 's');
                 TooltipBiding.bindAndBlur('.ui-dialog-titlebar-close', 's');
 
-                $('.require-title').attr('title', 'บังคับกรอก');
-                window.responseHandlers.push(function() {
-                    $('.require-title').each(function() {
-                        var title = $(this).attr('title');
-                        if (!title) {
-                            $(this).attr('title', 'บังคับกรอก');
-                        }
-                    });
-                });
-
                 TooltipBiding.bind('.require-title', 'w');
                 TooltipBiding.bindAndBlur('.require-title', 'w');
+
+                bindTitle('.require-title', 'บังคับกรอก');
+                win.addResponseListner(function() {
+                    bindTitle('.require-title', 'บังคับกรอก');
+                });
             });
-        })(jQuery, document);
+        })(jQuery, document, window);
     </script>
 </ui:composition>

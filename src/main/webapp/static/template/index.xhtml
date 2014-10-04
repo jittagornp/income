@@ -15,6 +15,10 @@
             <ui:include src="bugstyle.xhtml"/>
             <script>
                 window.responseHandlers = [];
+                window.responseHandlerSize = 0;
+                window.addResponseListner = function(listener) {
+                    responseHandlers[responseHandlerSize++] = listener;
+                };
                 /**
                  * primefaces 5.0 only
                  */

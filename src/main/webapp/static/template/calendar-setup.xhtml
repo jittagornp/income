@@ -23,7 +23,7 @@
                 }
 
                 addCalendar($('.ic-calendar'));
-                window.responseHandlers.push(function() {
+                window.addResponseListner(function() {
                     var t = setTimeout(function() {
                         clearTimeout(t);
                         $('.ic-calendar').each(function() {
