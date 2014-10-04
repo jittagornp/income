@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition  template="/static/template/index.xhtml"
+                 xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="container">
+        <div class="container-header">
+            <div class="container-header-left">
+                <h1>ตั้งค่า</h1>
+            </div>
+        </div>
+        <p:outputPanel styleClass="tab-container">
+            <p:outputPanel styleClass="block">
+                <h3 class="block-header">ทั่วไป</h3>
+                <p:outputPanel styleClass="block-body">
+                    <h:panelGrid class="form-grid"
+                                 columns="2">
+                        <p:outputPanel>
+                            ทศนิยมที่ต้องการให้แสดง
+                        </p:outputPanel>       
+                        <p:outputPanel>
+                            <p:inputText value=""/>
+                            <p:spacer width="10"/>
+                            <h:outputText value="หลัก"/>
+                        </p:outputPanel>
+                        
+                        <p:outputPanel>
+                            หน่วยเงิน
+                        </p:outputPanel>       
+                        <p:outputPanel>
+                            <p:inputText value=""/>
+                        </p:outputPanel>
+
+                        <p:outputPanel>
+
+                        </p:outputPanel>       
+                        <p:outputPanel>
+                            <p:commandButton value="บันทึก"
+                                             styleClass="white-button"
+                                             icon="ui-icon-check"/>
+                        </p:outputPanel>
+                    </h:panelGrid>
+                </p:outputPanel>
+            </p:outputPanel>
+
+            <p:outputPanel styleClass="block">
+                <h3 class="block-header">บัญชีผู้ใช้</h3>
+                <p:outputPanel styleClass="block-body">
+                    <h:panelGrid class="form-grid"
+                                 columns="2">
+                        <p:outputPanel>
+                            บัญชี
+                        </p:outputPanel>       
+                        <p:outputPanel>
+                            jittagornp@gmail.com
+                        </p:outputPanel>
+
+                        <p:outputPanel>
+                            รหัสผ่านเก่า
+                            <h:outputText value="*" styleClass="require"/>
+                        </p:outputPanel>       
+                        <p:outputPanel>
+                            <p:inputText value="" styleClass="require-title"/>
+                        </p:outputPanel>
+
+                        <p:outputPanel>
+                            รหัสผ่านใหม่
+                            <h:outputText value="*" styleClass="require"/>
+                        </p:outputPanel>       
+                        <p:outputPanel>
+                            <p:inputText value="" styleClass="require-title"/>
+                        </p:outputPanel>
+
+                        <p:outputPanel>
+                            ยืนยันรหัสผ่านใหม่
+                            <h:outputText value="*" styleClass="require"/>
+                        </p:outputPanel>       
+                        <p:outputPanel>
+                            <p:inputText value="" styleClass="require-title"/>
+                        </p:outputPanel>
+
+                        <p:outputPanel>
+
+                        </p:outputPanel>       
+                        <p:outputPanel>
+                            <p:commandButton value="บันทึก"
+                                             styleClass="white-button"
+                                             icon="ui-icon-check"/>
+                        </p:outputPanel>
+                    </h:panelGrid>
+                </p:outputPanel>
+            </p:outputPanel>
+        </p:outputPanel>
+    </ui:define>
+</ui:composition>

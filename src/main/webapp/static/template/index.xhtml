@@ -34,7 +34,9 @@
                 })(PrimeFaces.ajax.Response.handle);
             </script>
             <ui:include src="tooltip-setup.xhtml"/>
-            <ui:include src="calendar-setup.xhtml"/>
+            <p:outputPanel rendered="#{not empty facesContext.externalContext.userPrincipal.name}">
+                <ui:include src="calendar-setup.xhtml"/>
+            </p:outputPanel>
         </h:head>
         <h:body>
             <p:growl id="notification" 
@@ -51,10 +53,13 @@
                                   rendered="#{empty facesContext.externalContext.userPrincipal.name}">
                         <h:outputText value="#{message.signin}"/>
                     </h:outputLink>
-                    <h:outputLink value="#{facesContext.externalContext.requestContextPath}/logout"
-                                  rendered="#{not empty facesContext.externalContext.userPrincipal.name}">
-                        <h:outputText value="#{message.signout}"/>
-                    </h:outputLink>
+                    <p:outputPanel rendered="#{not empty facesContext.externalContext.userPrincipal.name}">
+                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/manual/">คู่มือการใช้</h:outputLink>
+                        <p:spacer width="10"/>
+                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/settings/">ตั้งค่า</h:outputLink>
+                        <p:spacer width="10"/>
+                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/logout">#{message.signout}</h:outputLink>
+                    </p:outputPanel >
                 </div>
             </div>
             <div class="sidebar">

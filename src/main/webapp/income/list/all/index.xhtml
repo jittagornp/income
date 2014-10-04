@@ -94,18 +94,18 @@
         </p:dataTable>
     </p:outputPanel>
     <p:outputPanel styleClass="block">
-        <h3 class="block-header">สรุป</h3>
+        <h3 class="block-header">สรุปทั้งหมด</h3>
         <p:outputPanel styleClass="block-body">
             <h:panelGrid class="form-grid"
                          columns="2">
                 <p:outputPanel>
-                    รายรับทั้งหมดตอนนี้ (sum)
+                    รายรับทั้งหมด <br/> (ยังไม่หักรายจ่าย)
                 </p:outputPanel>
                 <p:outputPanel>
                     <h:outputText value="#{summaryIncomeCtrl.summary}"/>
                 </p:outputPanel>
                 <p:outputPanel>
-                    จำนวน (total)
+                    จำนวน 
                 </p:outputPanel>
                 <p:outputPanel>
                     <h:outputText value="#{summaryIncomeCtrl.totalItems}"/>
@@ -132,7 +132,7 @@
         </p:outputPanel>
     </p:outputPanel>
     <p:outputPanel styleClass="block">
-        <h3 class="block-header">สถิติ</h3>
+        <h3 class="block-header">สถิติทั้งหมด</h3>
         <p:outputPanel styleClass="block-body">
             <div>มองทีละรายการ</div>
             <h:panelGrid class="form-grid"
@@ -219,7 +219,7 @@
         </p:outputPanel>
     </p:outputPanel>
     <p:outputPanel styleClass="block">
-        <h3 class="block-header">แนวโน้ม</h3>
+        <h3 class="block-header">แนวโน้มทั้งหมด</h3>
         <p:outputPanel styleClass="block-body">
             กราฟ
         </p:outputPanel>

@@ -12,6 +12,8 @@
         
         <intercept-url pattern="/income/**"
                        access="isAuthenticated()" />
+        <intercept-url pattern="/settings/**"
+                       access="isAuthenticated()" />
         <intercept-url pattern="/dialogs/**"
                        access="isAuthenticated()" />
         
