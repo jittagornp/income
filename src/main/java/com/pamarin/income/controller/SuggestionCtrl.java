@@ -160,7 +160,10 @@ public class SuggestionCtrl {
 
             @Override
             public void process() throws Throwable {
-                saveFile();
+                if (file != null) {
+                    saveFile();
+                }
+
                 service.save(suggestion);
             }
 
@@ -172,6 +175,7 @@ public class SuggestionCtrl {
             @Override
             public void onFinally() {
                 suggestion = null;
+                file = null;
             }
 
         });
