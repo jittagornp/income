@@ -13,6 +13,14 @@
     <script src="#{facesContext.externalContext.requestContextPath}/static/js/name/keith-wood/calendar/jquery-calendars-thai-th.js"></script>
     <script src="#{facesContext.externalContext.requestContextPath}/static/js/name/keith-wood/calendar/jquery-calendars-picker-th.js"></script>
     <!-- calendar librarys -->
+
+    <!-- clock -->
+    <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/static/js/com/jqueryrain/clockpicker-gh-pages/dist/jquery-clockpicker.css"/>
+    <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/static/js/com/jqueryrain/clockpicker-gh-pages/src/clockpicker.css"/>
+    <script src="#{facesContext.externalContext.requestContextPath}/static/js/com/jqueryrain/clockpicker-gh-pages/dist/jquery-clockpicker.min.js"></script>
+    <script src="#{facesContext.externalContext.requestContextPath}/static/js/com/jqueryrain/clockpicker-gh-pages/src/clockpicker.js"></script>
+    <!-- clock -->
+
     <script type="text/javascript">
         (function($) {
             $(function() {
@@ -20,6 +28,11 @@
                     $element.calendarsPicker({
                         calendar: $.calendars.instance('thai', 'th')
                     });
+                }
+
+                function addClockPicker($element) {
+                    $element.clockpicker();
+                    $element.addClass('hasClockPicker');
                 }
 
                 addCalendar($('.ic-calendar'));
@@ -34,6 +47,21 @@
                         });
                     }, 100);
                 });
+
+                addClockPicker($('.clockpicker'));
+                window.addResponseListner(function() {
+                    var t = setTimeout(function() {
+                        clearTimeout(t);
+                        $('.clockpicker').each(function() {
+                            var $that = $(this);
+                            if (!$that.hasClass('hasClockPicker')) {
+                                addClockPicker($that);
+                            }
+                        });
+                    }, 100);
+                });
+
+
             });
         }).call(this, jQuery);
     </script>

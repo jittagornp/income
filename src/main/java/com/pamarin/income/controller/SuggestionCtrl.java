@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 @Scope("view")
 public class SuggestionCtrl {
 
+    private static final String DEFAULT_TYPE = "SUGGESTION";
     private Suggestion suggestion;
     @Autowired
     private SuggestionService service;
@@ -29,7 +30,7 @@ public class SuggestionCtrl {
     public Suggestion getSuggestion() {
         if (suggestion == null) {
             suggestion = new Suggestion();
-            suggestion.setType("SUGGESTION");
+            suggestion.setType(DEFAULT_TYPE);
         }
 
         return suggestion;

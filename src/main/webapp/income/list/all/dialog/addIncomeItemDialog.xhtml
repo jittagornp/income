@@ -39,15 +39,32 @@
                 </p:outputPanel>
 
                 <p:outputPanel>
-                    <h:outputText value="วัน/เวลา"/>
+                    <h:outputText value="วัน"/>
                 </p:outputPanel>
                 <p:outputPanel>
                     <p:inputText id="addIncomeDate" 
+                                 style="width: 180px;"
                                  value="#{incomeItemCtrl.item.incomeDate}" 
                                  styleClass="ic-calendar">
-                        <f:convertDateTime pattern="#{localeCtrl.calendarTimeFormat}"/>
+                        <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
                     </p:inputText>
-                    <p:watermark for="addIncomeDate" value="เลือกวัน/เวลาที่มีรายรับ"/>
+                    <p:watermark for="addIncomeDate" value="เลือกวันที่มีรายรับ"/>
+                    <p:spacer width="5"/>
+                    <h:outputText value="เวลา" style="text-align: center; width: 30px; display: inline-block"/>
+                    <p:spacer width="5"/>
+                    <div style="display: inline-block" 
+                         class="input-group clockpicker" 
+                         data-placement="right" 
+                         data-align="bottom" 
+                         data-autoclose="true">
+                        <p:inputText value="#{incomeItemCtrl.item.incomeTime}"
+                                     style="width: 115px">
+                            <f:convertDateTime pattern="HH:mm"/>
+                        </p:inputText>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-time"></span>
+                        </span>
+                    </div>
                 </p:outputPanel>
 
                 <p:outputPanel>
