@@ -92,16 +92,39 @@ public class IncomeItemCtrl {
         item.setOwner(SecurityUtils.getUser());
     }
 
+    public void onSelectItem() {
+        String itemId = RequestUtils.requestString("itemId");
+        item = lazy.getRowData(itemId);
+    }
+
     public void onAddTag() {
         tagCtrl.setSelected(getItem().getTags());
     }
 
-    public void onAddItem() {
-        Notification.notifyPhase(new MessageNotifyCallback("เพิ่มรายการค่าใช้จ่าย") {
+    public void saveItem(String title) {
+        Notification.notifyPhase(new MessageNotifyCallback(title) {
 
             @Override
             public void process() throws Throwable {
                 itemService.save(item);
+            }
+        });
+    }
+
+    public void onAddItem() {
+        saveItem("เพิ่มรายการค่าใช้จ่าย");
+    }
+
+    public void onEditItem() {
+        saveItem("แก้ไขรายการค่าใช้จ่าย");
+    }
+
+    public void onDeleteItem() {
+        Notification.notifyPhase(new MessageNotifyCallback("ลบรายการค่าใช้จ่าย") {
+
+            @Override
+            public void process() throws Throwable {
+                itemService.delete(item);
             }
         });
     }

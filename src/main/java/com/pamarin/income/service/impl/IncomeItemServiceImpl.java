@@ -46,4 +46,13 @@ public class IncomeItemServiceImpl implements IncomeItemService {
         return repo.findByOwnerAndBetweenIncomeDate(user, startDate, endDate, page);
     }
 
+    @Override
+    public void delete(IncomeItem item) {
+        if (item == null) {
+            throw new NullPointerException("item is null.");
+        }
+
+        repo.delete(item.getId());
+    }
+
 }

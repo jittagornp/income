@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:f="http://java.sun.com/jsf/core">
+    <p:dialog header="ลบรายการรายรับ"
+              modal="true"
+              width="550"
+              resizable="false"
+              id="deleteIncomeItemDialog"
+              widgetVar="deleteIncomeItemWidgetDialog">
+        <h:form id="deleteIncomeItemDialogForm" 
+                prependId="false">
+            <h:panelGrid class="form-grid"
+                         columns="2">
+                <p:outputPanel>
+                    <h:outputText value="รายการ"/>
+                </p:outputPanel>
+                <p:outputPanel>
+                    <h:outputText value="#{incomeItemCtrl.item.incomeName}"/>
+                </p:outputPanel>
+
+                <p:outputPanel>
+                    <h:outputText value="จำนวนเงิน"/>
+                </p:outputPanel>
+                <p:outputPanel>
+                    <h:outputText value="#{incomeItemCtrl.item.incomeValue}"/>
+                </p:outputPanel>
+
+                <p:outputPanel>
+                    <h:outputText value="วัน/เวลา"/>
+                </p:outputPanel>
+                <p:outputPanel>
+                    <h:outputText value="#{incomeItemCtrl.item.incomeDate}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:outputPanel>
+
+                <p:outputPanel>
+                    <h:outputText value="ป้ายกำกับ"/>
+                </p:outputPanel>
+                <p:outputPanel styleClass="has-tag-list">
+                    <p:dataList value="#{incomeItemCtrl.item.tags}"
+                                var="tag"
+                                rows="25"
+                                rowIndexVar="counter"
+                                styleClass="tag-list"
+                                emptyMessage="ยังไม่มีป้ายกำกับ"
+                                paginatorPosition="bottom">
+
+                        <div class="tag-item">
+                            <p:commandLink value="#{tag.name}"/>
+                        </div>
+                    </p:dataList>
+                    <div class="clear"></div>
+                </p:outputPanel>
+            </h:panelGrid>
+            <div class="dialog-footer">
+                <div class="dialog-footer-right">
+                    <p:commandButton value="ยืนยันการลบ"
+                                     actionListener="#{incomeItemCtrl.onDeleteItem()}"
+                                     update="@(.item-list), :notification"
+                                     oncomplete="PF('deleteIncomeItemWidgetDialog').hide();"
+                                     icon="ui-icon-check"
+                                     styleClass="red-button"/>
+                    <p:spacer width="10"/>
+                    <p:commandButton value="ยกเลิก"
+                                     type="button"
+                                     onclick="PF('deleteIncomeItemWidgetDialog').hide();"
+                                     icon="ui-icon-close"
+                                     styleClass="white-button"/>
+                </div>
+            </div>
+        </h:form>
+    </p:dialog>
+</ui:composition>

@@ -25,5 +25,7 @@ public interface IncomeItemService {
             Date endDate,
             Pageable page
     );
+    
+    void delete(IncomeItem item);
 
 }

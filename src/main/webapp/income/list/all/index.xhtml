@@ -55,7 +55,7 @@
                      sortOrder="DESCENDING"
                      rowIndexVar="counter"
                      paginator="true"
-                     emptyMessage="not have data"
+                     emptyMessage="ยังไม่มีข้อมูล"
                      paginatorPosition="bottom"
                      paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                      rowsPerPageTemplate="5,10,15,25,50">
@@ -75,6 +75,21 @@
             </p:column>
             <p:column headerText="ป้ายกำกับ">
                 <h:outputText value="#{item.tagsString}"/>
+            </p:column>
+            <p:column headerText="#" style="width: 60px">
+                <p:commandLink value="แก้ไข"
+                               update=":editIncomeItemDialogForm"
+                               oncomplete="PF('editIncomeItemWidgetDialog').show()"
+                               actionListener="#{incomeItemCtrl.onSelectItem()}">
+                    <f:param name="itemId" value="#{item.id}"/>
+                </p:commandLink>
+                <p:spacer width="5"/>
+                <p:commandLink value="ลบ"
+                               update=":deleteIncomeItemDialogForm"
+                               oncomplete="PF('deleteIncomeItemWidgetDialog').show()"
+                               actionListener="#{incomeItemCtrl.onSelectItem()}">
+                    <f:param name="itemId" value="#{item.id}"/>
+                </p:commandLink>
             </p:column>
         </p:dataTable>
     </p:outputPanel>

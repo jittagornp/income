@@ -4,13 +4,13 @@
                  xmlns:p="http://primefaces.org/ui"
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:f="http://java.sun.com/jsf/core">
-    <p:dialog header="เพิ่มรายการรายรับ"
+    <p:dialog header="แก้ไขรายการรายรับ"
               modal="true"
               width="550"
               resizable="false"
-              id="addIncomeItemDialog"
-              widgetVar="addIncomeItemWidgetDialog">
-        <h:form id="addIncomeItemDialogForm" 
+              id="editIncomeItemDialog"
+              widgetVar="editIncomeItemWidgetDialog">
+        <h:form id="editIncomeItemDialogForm" 
                 prependId="false">
             <h:panelGrid class="form-grid"
                          columns="2">
@@ -19,11 +19,11 @@
                     <h:outputText value="*" styleClass="require"/>
                 </p:outputPanel>
                 <p:outputPanel>
-                    <p:inputText id="addIncomeName" 
+                    <p:inputText id="editIncomeName" 
                                  required="true"
                                  styleClass="require-title"
                                  value="#{incomeItemCtrl.item.incomeName}"/>
-                    <p:watermark for="addIncomeName" value="พิมพ์ชื่อรายรับ"/>
+                    <p:watermark for="editIncomeName" value="พิมพ์ชื่อรายรับ"/>
                 </p:outputPanel>
 
                 <p:outputPanel>
@@ -31,23 +31,23 @@
                     <h:outputText value="*" styleClass="require"/>
                 </p:outputPanel>
                 <p:outputPanel>
-                    <p:inputText id="addIncomeValue" 
+                    <p:inputText id="editIncomeValue" 
                                  required="true"
                                  styleClass="require-title"
                                  value="#{incomeItemCtrl.item.incomeValue}"/>
-                    <p:watermark for="addIncomeValue" value="พิมพ์ตัวเลขเท่านั้น"/>
+                    <p:watermark for="editIncomeValue" value="พิมพ์ตัวเลขเท่านั้น"/>
                 </p:outputPanel>
 
                 <p:outputPanel>
                     <h:outputText value="วัน/เวลา"/>
                 </p:outputPanel>
                 <p:outputPanel>
-                    <p:inputText id="addIncomeDate" 
+                    <p:inputText id="editIncomeDate" 
                                  value="#{incomeItemCtrl.item.incomeDate}" 
                                  styleClass="ic-calendar">
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                     </p:inputText>
-                    <p:watermark for="addIncomeDate" value="เลือกวัน/เวลาที่มีรายรับ"/>
+                    <p:watermark for="editIncomeDate" value="เลือกวัน/เวลาที่มีรายรับ"/>
                 </p:outputPanel>
 
                 <p:outputPanel>
@@ -84,17 +84,20 @@
                 </p:outputPanel>
             </h:panelGrid>
             <div class="dialog-footer">
+                <div class="dialog-footer-left">
+
+                </div>
                 <div class="dialog-footer-right">
-                    <p:commandButton value="เพิ่ม"
-                                     actionListener="#{incomeItemCtrl.onAddItem()}"
+                    <p:commandButton value="บันทึก"
+                                     actionListener="#{incomeItemCtrl.onEditItem()}"
                                      update="@(.item-list), :notification"
-                                     oncomplete="PF('addIncomeItemWidgetDialog').hide();"
+                                     oncomplete="PF('editIncomeItemWidgetDialog').hide();"
                                      icon="ui-icon-check"
                                      styleClass="green-button"/>
                     <p:spacer width="10"/>
                     <p:commandButton value="ยกเลิก"
                                      type="button"
-                                     onclick="PF('addIncomeItemWidgetDialog').hide();"
+                                     onclick="PF('editIncomeItemWidgetDialog').hide();"
                                      icon="ui-icon-close"
                                      styleClass="white-button"/>
                 </div>

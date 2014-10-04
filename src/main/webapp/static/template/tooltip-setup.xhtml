@@ -67,7 +67,6 @@
                 TooltipBiding.bindAndBlur('.tooltip-e', 'e');
                 TooltipBiding.bindAndBlur('.tooltip-w', 'w');
 
-                $('.ui-dialog-titlebar-close').attr('title', 'คลิกเพื่อปิด');
                 TooltipBiding.bind('.ui-dialog-titlebar-close', 's');
                 TooltipBiding.bindAndBlur('.ui-dialog-titlebar-close', 's');
 
@@ -75,8 +74,10 @@
                 TooltipBiding.bindAndBlur('.require-title', 'w');
 
                 bindTitle('.require-title', 'บังคับกรอก');
+                bindTitle('.ui-dialog-titlebar-close', 'คลิกเพื่อปิด');
                 win.addResponseListner(function() {
                     bindTitle('.require-title', 'บังคับกรอก');
+                    bindTitle('.ui-dialog-titlebar-close', 'คลิกเพื่อปิด');
                 });
             });
         })(jQuery, document, window);
