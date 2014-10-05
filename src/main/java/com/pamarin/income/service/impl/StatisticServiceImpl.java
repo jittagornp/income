@@ -69,7 +69,7 @@ public class StatisticServiceImpl implements StatisticService {
 
     @Override
     public Statistic findMaxItemGroupByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate) {
-        return nativeRepo.findGroupItemByOwner(
+        return nativeRepo.findItemGroupByOwner(
                 user,
                 "DESC",
                 startDate,
@@ -79,7 +79,27 @@ public class StatisticServiceImpl implements StatisticService {
 
     @Override
     public Statistic findMinItemGroupByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate) {
-        return nativeRepo.findGroupItemByOwner(
+        return nativeRepo.findItemGroupByOwner(
+                user,
+                "ASC",
+                startDate,
+                endDate
+        );
+    }
+
+    @Override
+    public Statistic findMaxItemTagByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate) {
+        return nativeRepo.findItemTagByOwner(
+                user,
+                "DESC",
+                startDate,
+                endDate
+        );
+    }
+
+    @Override
+    public Statistic findMinItemTagByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate) {
+        return nativeRepo.findItemTagByOwner(
                 user,
                 "ASC",
                 startDate,

@@ -22,4 +22,8 @@ public interface StatisticService {
     Statistic findMaxItemGroupByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate);
 
     Statistic findMinItemGroupByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate);
+
+    Statistic findMaxItemTagByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate);
+
+    Statistic findMinItemTagByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate);
 }

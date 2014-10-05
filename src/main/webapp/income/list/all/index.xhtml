@@ -201,32 +201,27 @@
                     รายรับสูงสุด &#8593;
                 </p:outputPanel>
                 <p:outputPanel>
-
+                    <h:outputText value="#{statisticCtrl.maxItemTag.key}" styleClass="green-text"/>
                 </p:outputPanel>
                 <p:outputPanel>
                     เป็นจำนวนเงิน
                 </p:outputPanel>
                 <p:outputPanel>
-
+                    <h:outputText value="#{statisticCtrl.maxItemTag.value}" styleClass="green-text"/>
                 </p:outputPanel>
                 <p:outputPanel>
                     รายรับต่ำสุด &#8595;
                 </p:outputPanel>
                 <p:outputPanel>
-
+                    <h:outputText value="#{statisticCtrl.minItemTag.key}" styleClass="green-text"/>
                 </p:outputPanel>
                 <p:outputPanel>
                     เป็นจำนวนเงิน
                 </p:outputPanel>
                 <p:outputPanel>
+                    <h:outputText value="#{statisticCtrl.minItemTag.value}" styleClass="green-text"/>
                 </p:outputPanel>
             </h:panelGrid>
-        </p:outputPanel>
-    </p:outputPanel>
-    <p:outputPanel styleClass="block">
-        <h3 class="block-header">แนวโน้มทั้งหมด</h3>
-        <p:outputPanel styleClass="block-body">
-            กราฟ
         </p:outputPanel>
     </p:outputPanel>
 </ui:composition>

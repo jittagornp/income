@@ -34,7 +34,7 @@ public class NativeIncomeItemRepoT extends AbstractTestNGSpringContextTests {
     public void test() {
         User owner = new User();
         owner.setId(1);
-        Statistic statistic = repo.findGroupItemByOwner(owner, "DESC", new Date(), new Date());
+        Statistic statistic = repo.findItemGroupByOwner(owner, "DESC", new Date(), new Date());
         assertEquals("โอที", statistic.getKey());
     }
 }

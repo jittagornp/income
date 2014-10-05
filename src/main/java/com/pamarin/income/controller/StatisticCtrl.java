@@ -26,6 +26,8 @@ public class StatisticCtrl {
     private Statistic minItem;
     private Statistic maxItemGroup;
     private Statistic minItemGroup;
+    private Statistic maxItemTag;
+    private Statistic minItemTag;
 
     @Autowired
     private StatisticService service;
@@ -55,6 +57,18 @@ public class StatisticCtrl {
                 startDate,
                 endDate
         );
+
+        maxItemTag = service.findMaxItemTagByOwnerAndBetweenIncomeDate(
+                user,
+                startDate,
+                endDate
+        );
+
+        minItemTag = service.findMinItemTagByOwnerAndBetweenIncomeDate(
+                user,
+                startDate,
+                endDate
+        );
     }
 
     public Statistic getMaxItem() {
@@ -71,6 +85,14 @@ public class StatisticCtrl {
 
     public Statistic getMinItemGroup() {
         return minItemGroup;
+    }
+
+    public Statistic getMaxItemTag() {
+        return maxItemTag;
+    }
+
+    public Statistic getMinItemTag() {
+        return minItemTag;
     }
 
 }
