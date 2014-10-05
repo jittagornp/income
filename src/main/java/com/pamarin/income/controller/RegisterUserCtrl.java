@@ -8,7 +8,9 @@ package com.pamarin.income.controller;
 import com.pamarin.income.component.MailCallback;
 import com.pamarin.income.component.MailSender;
 import com.pamarin.income.exception.UserException;
+import com.pamarin.income.model.Settings;
 import com.pamarin.income.model.User;
+import com.pamarin.income.service.SettingsService;
 import com.pamarin.income.service.UserService;
 import com.pamarin.income.spring.PasswordEncryptor;
 import com.pamarin.income.util.MessageNotifyCallback;
@@ -40,6 +42,8 @@ public class RegisterUserCtrl {
     private PasswordEncryptor encryptor;
     @Autowired
     private MailSender mailSender;
+    @Autowired
+    private SettingsService settingsService;
 
     public String getEmail() {
         if (email == null) {
@@ -112,21 +116,28 @@ public class RegisterUserCtrl {
                 .redirect(UrlUtils.buildHostUrl() + "/register/checkEmail/?email=" + getEmail());
     }
 
+    private void defaultSettings(User user) {
+        Settings settings = new Settings(user);
+        settings.setFloatingPoint(2);
+        settings.setCurrencyCode("THB");
+        settingsService.save(settings);
+    }
+
     private void createUser() {
         final String activateCode = "1234";
-        final User user = new User(getEmail(), encryptor.encrypt(getPassword()));
+        User user = new User(getEmail(), encryptor.encrypt(getPassword()));
         user.setEnabled(Boolean.FALSE);
         user.setActivateCode(activateCode);
-        userService.save(user);
-
+        defaultSettings(userService.save(user));
+        
         mailSender.send(new MailCallback() {
 
             @Override
             public void execute(MimeMessageHelper helper) throws Exception {
                 helper.setSubject("ยืนยันบัญชีผู้ใช้โปรแกรมวางแผนรายรับ-รายจ่ายส่วนตัว");
-                helper.setTo(user.getUsername());
+                helper.setTo(getEmail());
                 helper.setText(
-                        "ขอบคุณสำหรับการลงทะเบียนผู้ใช้ \n"
+                        "ขอบคุณสำหรับการลงทะเบียนผู้ใช้ "
                         + "กรุณายืนยันบัญชีผู้ใช้โดยการคลิก ที่ลิ้งค์นี้ "
                         + UrlUtils.buildHostUrl() + "/register/activate/?code=" + activateCode
                 );
