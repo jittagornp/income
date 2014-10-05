@@ -16,33 +16,42 @@
             <p:outputPanel styleClass="block">
                 <h3 class="block-header">ทั่วไป</h3>
                 <p:outputPanel styleClass="block-body">
-                    <h:panelGrid class="form-grid"
-                                 columns="2">
-                        <p:outputPanel>
-                            ทศนิยมที่ต้องการให้แสดง
-                        </p:outputPanel>       
-                        <p:outputPanel>
-                            <p:inputText value=""/>
-                            <p:spacer width="10"/>
-                            <h:outputText value="หลัก"/>
-                        </p:outputPanel>
-                        
-                        <p:outputPanel>
-                            สกุลเงิน
-                        </p:outputPanel>       
-                        <p:outputPanel>
-                            <p:inputText value=""/>
-                        </p:outputPanel>
+                    <h:form>
+                        <h:panelGrid class="form-grid"
+                                     columns="2">
+                            <p:outputPanel>
+                                ทศนิยมที่ต้องการให้แสดง
+                            </p:outputPanel>       
+                            <p:outputPanel>
+                                <p:inputText style="width: 50px;" value="#{normalSettingsCtrl.settings.floatingPoint}"/>
+                                <p:spacer width="10"/>
+                                <h:outputText value="หลัก"/>
+                            </p:outputPanel>
 
-                        <p:outputPanel>
+                            <p:outputPanel>
+                                สกุลเงิน
+                            </p:outputPanel>       
+                            <p:outputPanel>
+                                <p:selectOneMenu value="#{normalSettingsCtrl.settings.currencyCode}">
+                                    <f:selectItems value="#{normalSettingsCtrl.currencys}"
+                                                   var="item"
+                                                   itemLabel="#{item.symbol} - #{item.displayName}"
+                                                   itemValue="#{item.currencyCode}"/>
+                                </p:selectOneMenu>
+                            </p:outputPanel>
 
-                        </p:outputPanel>       
-                        <p:outputPanel>
-                            <p:commandButton value="บันทึก"
-                                             styleClass="white-button"
-                                             icon="ui-icon-check"/>
-                        </p:outputPanel>
-                    </h:panelGrid>
+                            <p:outputPanel>
+
+                            </p:outputPanel>       
+                            <p:outputPanel>
+                                <p:commandButton value="บันทึก"
+                                                 update=":notification"
+                                                 actionListener="#{normalSettingsCtrl.onSave()}"
+                                                 styleClass="white-button"
+                                                 icon="ui-icon-check"/>
+                            </p:outputPanel>
+                        </h:panelGrid>
+                    </h:form>
                 </p:outputPanel>
             </p:outputPanel>
 

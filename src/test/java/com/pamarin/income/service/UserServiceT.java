@@ -5,6 +5,7 @@
  */
 package com.pamarin.income.service;
 
+import com.pamarin.income.model.Settings;
 import com.pamarin.income.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -24,12 +25,19 @@ import org.testng.annotations.Test;
 public class UserServiceT extends AbstractTestNGSpringContextTests {
 
     @Autowired
-    private UserService service;
+    private UserService userService;
+    @Autowired
+    private SettingsService settingsService;
 
     @Test
     public void test() {
-        if (!service.hasUser("admin")) {
-            service.save(new User("admin", "admin"));
+        if (!userService.hasUser("admin")) {
+            User user = userService.save(new User("admin", "admin"));
+
+            Settings settings = new Settings(user);
+            settings.setFloatingPoint(2);
+            settings.setCurrencyCode("THB");
+            settingsService.save(settings);
         }
     }
 

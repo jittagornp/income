@@ -65,7 +65,7 @@
             <p:column headerText="รายการ">
                 <h:outputText value="#{item.incomeName}"/>
             </p:column>
-            <p:column headerText="จำนวนเงิน">
+            <p:column headerText="จำนวนเงิน" styleClass="number">
                 <h:outputText value="#{numerFormat.format(item.incomeValue)}" styleClass="green-text"/>
             </p:column>
             <p:column headerText="วัน/เวลา">

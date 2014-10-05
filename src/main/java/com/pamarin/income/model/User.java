@@ -8,11 +8,13 @@ package com.pamarin.income.model;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,7 +37,7 @@ public class User implements UserDetails {
             pkColumnValue = "user"
     )
     @GeneratedValue(
-            generator = "user_generator", 
+            generator = "user_generator",
             strategy = GenerationType.TABLE
     )
     @Column(name = "user_id")
@@ -52,6 +54,9 @@ public class User implements UserDetails {
     private Boolean accountExpired = Boolean.FALSE;
     @Column(name = "account_locked", nullable = false)
     private Boolean accountLocked = Boolean.FALSE;
+    //
+    @OneToOne(mappedBy = "owner")
+    private Settings settings;
 
     public User() {
     }
@@ -104,5 +109,34 @@ public class User implements UserDetails {
         return enabled;
     }
 
-    
+    public Settings getSettings() {
+        return settings;
+    }
+
+    public void setSettings(Settings settings) {
+        this.settings = settings;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+
 }
