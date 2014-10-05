@@ -62,7 +62,8 @@ public class NormalSettingsCtrl {
 
             @Override
             public void process() throws Throwable {
-                settingsService.save(settings);
+                settings = settingsService.save(settings);
+                SecurityUtils.getUser().setSettings(settings);
             }
         });
     }

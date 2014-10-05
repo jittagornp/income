@@ -27,7 +27,7 @@ public class IncomeItemTabCtrl implements Serializable {
 
     private static final Logger LOG = LoggerFactory.getLogger(IncomeItemTabCtrl.class);
 
-    private static final String DEFAULT_TAB = "blank";
+    private static final String DEFAULT_TAB = "all";
     private static final String TAB_PARAMETER = "tab";
     private String currentTab = DEFAULT_TAB;
     private List<String> allTabs;

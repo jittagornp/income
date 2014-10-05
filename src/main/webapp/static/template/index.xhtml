@@ -10,7 +10,7 @@
         <h:head>
             <h:outputText rendered="#{not empty facesContext.externalContext.getSession(true)}"/>
             #{localeCtrl.reset()}
-            
+
             <title>Income</title>
             <link rel="stylesheet/less" href="#{facesContext.externalContext.requestContextPath}/static/style/less/integrated.less"/>
             <script src="#{facesContext.externalContext.requestContextPath}/static/js/org/lesscss/less.js"></script>
@@ -49,13 +49,14 @@
 
             <div class="toolbar">
                 <div class="appname">
-                    โปรแกรมวางแผนรายรับ-รายจ่ายส่วนตัว
+                    <h:outputLink value="#{facesContext.externalContext.requestContextPath}">โปรแกรมวางแผนรายรับ-รายจ่ายส่วนตัว</h:outputLink>
                 </div>
                 <div class="user-details">
-                    <h:outputLink value="#{facesContext.externalContext.requestContextPath}/signin/"
-                                  rendered="#{empty facesContext.externalContext.userPrincipal.name}">
-                        <h:outputText value="#{message.signin}"/>
-                    </h:outputLink>
+                    <p:outputPanel rendered="#{empty facesContext.externalContext.userPrincipal.name}">
+                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/signin/">สร้างบัญชีผู้ใช้ใหม่</h:outputLink>
+                        <p:spacer width="10"/>
+                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/signin/">&#8592; #{message.signin}</h:outputLink>
+                    </p:outputPanel>
                     <p:outputPanel rendered="#{not empty facesContext.externalContext.userPrincipal.name}">
                         <h:outputLink value="#{facesContext.externalContext.requestContextPath}/manual/">คู่มือการใช้</h:outputLink>
                         <p:spacer width="10"/>
@@ -69,8 +70,8 @@
             </div>
             <div class="sidebar">
                 <ul class="sidebar-menu">
-                    <li>
-                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/income/list/?tab=all">รายรับ</h:outputLink>
+                    <li style="display: #{empty facesContext.externalContext.userPrincipal.name ? 'none' : 'list-item'}">
+                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/income/list/">รายรับ</h:outputLink>
                     </li>
                 </ul>
             </div>
@@ -82,7 +83,8 @@
                     <h:outputText value="เวอร์ชัน 1.0" styleClass="gray-text"/>
                 </div>
                 <div class="bottombar-right">
-                    <p:commandLink value="ความคิดเห็น" onclick="PF('suggesionWidgetDialog').show(); return false"/>
+                    <p:commandLink value="ความคิดเห็น" onclick="PF('suggesionWidgetDialog').show();
+                            return false"/>
                 </div>
             </div>
 

@@ -55,10 +55,6 @@
             </h:form>
         </p:outputPanel>
         <p:outputPanel styleClass="tab-container">
-            <p:outputPanel rendered="#{incomeItemTabCtrl.isTab('blank')}">
-                <ui:include src="/income/list/blank/index.xhtml"/>
-            </p:outputPanel>
-
             <p:outputPanel rendered="#{incomeItemTabCtrl.isTab('all')}">
                 <ui:include src="/income/list/all/index.xhtml"/>
             </p:outputPanel>
