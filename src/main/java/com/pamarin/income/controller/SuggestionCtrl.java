@@ -8,6 +8,7 @@ package com.pamarin.income.controller;
 import com.google.common.io.ByteStreams;
 import com.pamarin.income.component.MailCallback;
 import com.pamarin.income.component.MailSender;
+import com.pamarin.income.exception.UncheckedIOException;
 import com.pamarin.income.exception.UserException;
 import com.pamarin.income.model.Suggestion;
 import com.pamarin.income.security.SecurityUtils;
@@ -20,7 +21,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.Serializable;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,8 +40,8 @@ import org.springframework.stereotype.Component;
  * @author anonymous
  */
 @Component
-@Scope("session")
-public class SuggestionCtrl implements Serializable{
+@Scope("view")
+public class SuggestionCtrl {
 
     private static final Logger LOG = LoggerFactory.getLogger(SuggestionCtrl.class);
 
@@ -76,7 +76,9 @@ public class SuggestionCtrl implements Serializable{
     }
 
     private boolean isImage(String extension) {
-        return "png".equals(extension) || "jpg".equals(extension) || "jpeg".equals(extension);
+        return "png".equals(extension)
+                || "jpg".equals(extension)
+                || "jpeg".equals(extension);
     }
 
     private void validateImageType() {
@@ -118,13 +120,14 @@ public class SuggestionCtrl implements Serializable{
 
             sendEmail(attachFile);
         } catch (Exception ex) {
-            throw new UserException(errorMessage);
+            LOG.warn(null, ex);
+            throw new UncheckedIOException(errorMessage);
         } finally {
             if (outputStream != null) {
                 try {
                     outputStream.close();
                 } catch (IOException ex) {
-                    throw new UserException(errorMessage);
+                    throw new UncheckedIOException(errorMessage);
                 }
             }
 
@@ -132,7 +135,7 @@ public class SuggestionCtrl implements Serializable{
                 try {
                     inputStream.close();
                 } catch (IOException ex) {
-                    throw new UserException(errorMessage);
+                    throw new UncheckedIOException(errorMessage);
                 }
             }
         }
