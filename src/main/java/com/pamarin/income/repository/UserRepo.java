@@ -8,6 +8,7 @@ package com.pamarin.income.repository;
 
 import com.pamarin.income.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 /**
@@ -20,4 +21,8 @@ public interface UserRepo extends JpaRepository<User, Integer>{
     public long countByUsername(String username);
 
     public User findByUsername(String username);
+
+    @Modifying
+    @Query("UPDATE User u SET u.password = ?2 WHERE u.id = ?1")
+    public void updatePassword(Integer id, String password);
 }

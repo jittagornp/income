@@ -6,9 +6,6 @@
 package com.pamarin.income.security;
 
 import com.pamarin.income.model.User;
-import com.pamarin.income.model.User;
-import com.pamarin.income.service.UserService;
-import com.pamarin.income.util.SpringUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;

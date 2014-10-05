@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.pamarin.income.service;
 
 import com.pamarin.income.model.User;
@@ -13,10 +12,12 @@ import com.pamarin.income.model.User;
  * @author anonymous
  */
 public interface UserService {
-    
-    public User findByUsername(String username);
-    
-    public User save(User user);
-    
-    public boolean hasUser(String username);
+
+    User findByUsername(String username);
+
+    User save(User user);
+
+    boolean hasUser(String username);
+
+    void updatePassword(User user, String password);
 }

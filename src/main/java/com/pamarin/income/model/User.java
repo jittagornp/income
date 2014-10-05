@@ -84,6 +84,10 @@ public class User implements UserDetails {
         return password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.EMPTY_LIST;

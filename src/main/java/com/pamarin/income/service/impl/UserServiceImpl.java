@@ -8,6 +8,7 @@ package com.pamarin.income.service.impl;
 import com.pamarin.income.model.User;
 import com.pamarin.income.repository.UserRepo;
 import com.pamarin.income.service.UserService;
+import com.pamarin.income.spring.PasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,10 +21,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-
     @Autowired
     private UserRepo repo;
-    
+
     @Override
     public User save(User user) {
         return repo.save(user);
@@ -38,5 +38,12 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         return repo.findByUsername(username);
     }
-    
+
+    @Override
+    public void updatePassword(User user, String password) {
+        String encrypted = PasswordEncryptor.encrypt(password);
+        repo.updatePassword(user.getId(), encrypted);
+        user.setPassword(encrypted);
+    }
+
 }

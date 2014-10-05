@@ -7,6 +7,7 @@ package com.pamarin.income.service;
 
 import com.pamarin.income.model.Settings;
 import com.pamarin.income.model.User;
+import com.pamarin.income.spring.PasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -32,7 +33,7 @@ public class UserServiceT extends AbstractTestNGSpringContextTests {
     @Test
     public void test() {
         if (!userService.hasUser("admin")) {
-            User user = userService.save(new User("admin", "admin"));
+            User user = userService.save(new User("admin", PasswordEncryptor.encrypt("admin")));
 
             Settings settings = new Settings(user);
             settings.setFloatingPoint(2);
