@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author anonymous
  */
 public class Statistic {
-    
+
     public static final Statistic EMPTY = new Statistic("ไม่ทราบ", null);
 
     private String key;
@@ -24,6 +24,10 @@ public class Statistic {
     }
 
     public String getKey() {
+        if (key == null) {
+            key = "ไม่ทราบ";
+        }
+
         return key;
     }
 

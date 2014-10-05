@@ -18,10 +18,6 @@ public class StatisticRowMapper implements RowMapper<Statistic> {
 
     @Override
     public Statistic mapRow(ResultSet rs, int i) throws SQLException {
-//        if (i == 0) {
-//            return null;
-//        }
-
         return new Statistic(
                 rs.getString("income_name"),
                 rs.getDouble("income_value")

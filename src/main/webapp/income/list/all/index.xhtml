@@ -66,7 +66,7 @@
                 <h:outputText value="#{item.incomeName}"/>
             </p:column>
             <p:column headerText="จำนวนเงิน">
-                <h:outputText value="#{item.incomeValue}"/>
+                <h:outputText value="#{numerFormat.format(item.incomeValue)}" styleClass="green-text"/>
             </p:column>
             <p:column headerText="วัน/เวลา">
                 <h:outputText value="#{item.incomeDate}">
@@ -106,7 +106,7 @@
                     รายรับทั้งหมด <br/> (ยังไม่หักรายจ่าย)
                 </p:outputPanel>
                 <p:outputPanel>
-                    <h:outputText value="#{summaryIncomeCtrl.summary}" styleClass="green-text"/>
+                    <h:outputText value="#{numerFormat.format(summaryIncomeCtrl.summary)}" styleClass="green-text"/>
                 </p:outputPanel>
                 <p:outputPanel>
                     จำนวน 
@@ -151,7 +151,7 @@
                     เป็นจำนวนเงิน
                 </p:outputPanel>
                 <p:outputPanel>
-                    <h:outputText value="#{statisticCtrl.maxItem.value}" styleClass="green-text"/>
+                    <h:outputText value="#{numerFormat.format(statisticCtrl.maxItem.value)}" styleClass="green-text"/>
                 </p:outputPanel>
                 <p:outputPanel>
                     รายรับต่ำสุด &#8595;
@@ -163,7 +163,7 @@
                     เป็นจำนวนเงิน
                 </p:outputPanel>
                 <p:outputPanel>
-                    <h:outputText value="#{statisticCtrl.minItem.value}" styleClass="green-text"/>
+                    <h:outputText value="#{numerFormat.format(statisticCtrl.minItem.value)}" styleClass="green-text"/>
                 </p:outputPanel>
             </h:panelGrid>  
             <div>มองตามชื่อ <span class="gray-text">(หมายถึง group ตามชื่อ)</span></div>
@@ -179,7 +179,7 @@
                     เป็นจำนวนเงิน
                 </p:outputPanel>
                 <p:outputPanel>
-                    <h:outputText value="#{statisticCtrl.maxItemGroup.value}" styleClass="green-text"/>
+                    <h:outputText value="#{numerFormat.format(statisticCtrl.maxItemGroup.value)}" styleClass="green-text"/>
                 </p:outputPanel>
                 <p:outputPanel>
                     รายรับต่ำสุด &#8595;
@@ -191,7 +191,7 @@
                     เป็นจำนวนเงิน
                 </p:outputPanel>
                 <p:outputPanel>
-                    <h:outputText value="#{statisticCtrl.minItemGroup.value}" styleClass="green-text"/>
+                    <h:outputText value="#{numerFormat.format(statisticCtrl.minItemGroup.value)}" styleClass="green-text"/>
                 </p:outputPanel>
             </h:panelGrid>
             <div>มองตามป้ายกำกับ <span class="gray-text">(หมายถึง group ตามป้ายกำกับ)</span></div>
@@ -207,7 +207,7 @@
                     เป็นจำนวนเงิน
                 </p:outputPanel>
                 <p:outputPanel>
-                    <h:outputText value="#{statisticCtrl.maxItemTag.value}" styleClass="green-text"/>
+                    <h:outputText value="#{numerFormat.format(statisticCtrl.maxItemTag.value)}" styleClass="green-text"/>
                 </p:outputPanel>
                 <p:outputPanel>
                     รายรับต่ำสุด &#8595;
@@ -219,7 +219,7 @@
                     เป็นจำนวนเงิน
                 </p:outputPanel>
                 <p:outputPanel>
-                    <h:outputText value="#{statisticCtrl.minItemTag.value}" styleClass="green-text"/>
+                    <h:outputText value="#{numerFormat.format(statisticCtrl.minItemTag.value)}" styleClass="green-text"/>
                 </p:outputPanel>
             </h:panelGrid>
         </p:outputPanel>
