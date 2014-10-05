@@ -40,8 +40,8 @@ public class StatisticServiceImpl implements StatisticService {
             result = repo.findItemByOwnerAndBetweenIncomeDate(user, startDate, endDate, request);
         }
 
-        if (result.getSize() == 0) {
-            return null;
+        if (result.getTotalElements() == 0) {
+            return Statistic.EMPTY;
         }
 
         return result.getContent().get(0);

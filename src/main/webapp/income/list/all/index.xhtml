@@ -26,13 +26,13 @@
                     <p:spacer width="10"/>
                     <p:commandButton value="ค้นหา"
                                      icon="ui-icon-search"
-                                     update="@(.item-list)"
+                                     update="@(.block-body), @(.item-list)"
                                      actionListener="#{incomeItemCtrl.onSeach()}"
                                      styleClass="white-button"/>
                     <p:spacer width="5"/>
                     <p:commandButton icon="ui-icon-refresh"
                                      title="เคลียร์ผลลัพธ์"
-                                     update="@(.item-list), @form"
+                                     update="@(.block-body), @(.item-list), @form"
                                      actionListener="#{incomeItemCtrl.onClear()}"
                                      styleClass="tooltip-w white-button"/>
                 </div>
@@ -166,7 +166,7 @@
                     <h:outputText value="#{statisticCtrl.minItem.value}" styleClass="green-text"/>
                 </p:outputPanel>
             </h:panelGrid>  
-            <div>จัดกลุ่มตามชื่อ</div>
+            <div>มองตามชื่อ <span class="gray-text">(หมายถึง group ตามชื่อ)</span></div>
             <h:panelGrid class="form-grid"
                          columns="4">
                 <p:outputPanel>
@@ -194,7 +194,7 @@
                     <h:outputText value="#{statisticCtrl.minItemGroup.value}" styleClass="green-text"/>
                 </p:outputPanel>
             </h:panelGrid>
-            <div>ตามป้ายกำกับ</div>
+            <div>มองตามป้ายกำกับ <span class="gray-text">(หมายถึง group ตามป้ายกำกับ)</span></div>
             <h:panelGrid class="form-grid"
                          columns="4">
                 <p:outputPanel>

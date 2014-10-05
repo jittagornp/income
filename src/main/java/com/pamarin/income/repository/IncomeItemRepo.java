@@ -46,7 +46,7 @@ public interface IncomeItemRepo extends JpaRepository<IncomeItem, Integer> {
             + "FROM IncomeItem item "
             + "WHERE item.owner = ?1"
     )
-    public double sumByOwner(User user);
+    public Double sumByOwner(User user);
 
     @Query(
             "SELECT SUM(item.incomeValue) "
@@ -54,7 +54,7 @@ public interface IncomeItemRepo extends JpaRepository<IncomeItem, Integer> {
             + "WHERE item.owner = ?1 "
             + "AND (item.incomeDate BETWEEN ?2 AND ?3)"
     )
-    public double sumByOwnerAndBetweenIncomeDate(
+    public Double sumByOwnerAndBetweenIncomeDate(
             User user,
             Date startDate,
             Date endDate

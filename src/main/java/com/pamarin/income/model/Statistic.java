@@ -12,6 +12,8 @@ import java.util.Objects;
  * @author anonymous
  */
 public class Statistic {
+    
+    public static final Statistic EMPTY = new Statistic("ไม่ทราบ", null);
 
     private String key;
     private Double value;

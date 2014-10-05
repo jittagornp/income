@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -41,31 +42,35 @@ public class NativeIncomeItemRepo {
                 + ") "
                 + "ORDER BY income_value " + direction + " "
                 + "LIMIT 1 OFFSET 0",
-                new Object[]{ user.getId() },
+                new Object[]{user.getId()},
                 new StatisticRowMapper());
     }
 
     public Statistic findGroupItemByOwner(User user, String direction, Date startDate, Date endDate) {
-        if (startDate == null || endDate == null) {
-            return findGroupItemByOwner(user, direction);
-        }
+        try {
+            if (startDate == null || endDate == null) {
+                return findGroupItemByOwner(user, direction);
+            }
 
-        Format format = new SimpleDateFormat("yyyy-MM-dd");
-        return jdbcTemplate.queryForObject(
-                "SELECT income_name, income_value "
-                + "FROM ( "
-                + "	SELECT income_name, SUM(income_value) income_value "
-                + "	FROM income_item "
-                + "	WHERE (user_id = ?) AND (income_date BETWEEN ? AND ?)"
-                + "	GROUP BY income_name "
-                + ") "
-                + "ORDER BY income_value " + direction + " "
-                + "LIMIT 1 OFFSET 0",
-                new Object[]{
-                    user.getId(),
-                    format.format(startDate),
-                    format.format(endDate)
-                },
-                new StatisticRowMapper());
+            Format format = new SimpleDateFormat("yyyy-MM-dd");
+            return jdbcTemplate.queryForObject(
+                    "SELECT income_name, income_value "
+                    + "FROM ( "
+                    + "	SELECT income_name, SUM(income_value) income_value "
+                    + "	FROM income_item "
+                    + "	WHERE (user_id = ?) AND (income_date BETWEEN ? AND ?)"
+                    + "	GROUP BY income_name "
+                    + ") "
+                    + "ORDER BY income_value " + direction + " "
+                    + "LIMIT 1 OFFSET 0",
+                    new Object[]{
+                        user.getId(),
+                        format.format(startDate),
+                        format.format(endDate)
+                    },
+                    new StatisticRowMapper());
+        } catch (EmptyResultDataAccessException ex) {
+            return Statistic.EMPTY;
+        }
     }
 }
