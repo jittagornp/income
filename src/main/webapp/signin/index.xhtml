@@ -7,40 +7,64 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:f="http://java.sun.com/jsf/core">
 
-    <ui:define name="sidebar">
+    <ui:define name="container">
         <style>
+            body{
+                background-color: #fff;
+            }
+            
             .sidebar{
                 display: none;
             }
-            
+
             .container{
                 left: 0;
             }
-        </style>
-    </ui:define>
 
-    <ui:define name="container">
-        <form action="#{facesContext.externalContext.requestContextPath}/login" method="post">
-            <h:panelGrid columns="2">
-                <p:outputPanel>
-                    username
-                </p:outputPanel>
-                <p:outputPanel>
-                    <input name="username" type="text"/>
-                </p:outputPanel>
-                <p:outputPanel>
-                    password
-                </p:outputPanel>
-                <p:outputPanel>
-                    <input name="password" type="password"/>
-                </p:outputPanel>
-                <p:outputPanel>
-                    
-                </p:outputPanel>
-                <p:outputPanel>
-                    <input type="submit" value="login"/>
-                </p:outputPanel>
-            </h:panelGrid>
-        </form>
+            .signin-box{
+                position: relative;
+                left: 50%;
+                width: 270px;
+                margin-left: -135px;
+                text-align: center;
+                margin-top: 10%;
+            }
+
+            .ui-inputfield{
+                border : solid 1px #ddd;
+            }
+
+            .signin-box form td{
+                padding: 5px;
+            }
+        </style>
+
+        <div class="signin-box">
+            <form id="signinForm" action="#{facesContext.externalContext.requestContextPath}/login" method="post">
+                <h:panelGrid columns="2">
+                    <p:outputPanel>
+                        username
+                    </p:outputPanel>
+                    <p:outputPanel>
+                        <input name="username" type="text" class="ui-inputfield ui-corner-all"/>
+                    </p:outputPanel>
+                    <p:outputPanel>
+                        password
+                    </p:outputPanel>
+                    <p:outputPanel>
+                        <input name="password" type="password" class="ui-inputfield ui-corner-all"/>
+                    </p:outputPanel>
+                    <p:outputPanel>
+
+                    </p:outputPanel>
+                    <p:outputPanel>
+                        <p:commandButton value="login"
+                                         type="button"
+                                         onclick="jQuery('#signinForm').submit()"
+                                         styleClass="white-button"/>
+                    </p:outputPanel>
+                </h:panelGrid>
+            </form>
+        </div>
     </ui:define>
 </ui:composition>

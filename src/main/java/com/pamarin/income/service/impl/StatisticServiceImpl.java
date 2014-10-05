@@ -8,6 +8,7 @@ package com.pamarin.income.service.impl;
 import com.pamarin.income.model.Statistic;
 import com.pamarin.income.model.User;
 import com.pamarin.income.repository.IncomeItemRepo;
+import com.pamarin.income.repository.NativeIncomeItemRepo;
 import com.pamarin.income.service.StatisticService;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class StatisticServiceImpl implements StatisticService {
 
     @Autowired
     private IncomeItemRepo repo;
+    @Autowired
+    private NativeIncomeItemRepo nativeRepo;
 
     private Statistic findItemByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate, Sort.Direction direction) {
         PageRequest request = new PageRequest(0, 1, direction, "incomeValue");
@@ -61,6 +64,26 @@ public class StatisticServiceImpl implements StatisticService {
                 startDate,
                 endDate,
                 Sort.Direction.ASC
+        );
+    }
+
+    @Override
+    public Statistic findMaxItemGroupByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate) {
+        return nativeRepo.findGroupItemByOwner(
+                user,
+                "DESC",
+                startDate,
+                endDate
+        );
+    }
+
+    @Override
+    public Statistic findMinItemGroupByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate) {
+        return nativeRepo.findGroupItemByOwner(
+                user,
+                "ASC",
+                startDate,
+                endDate
         );
     }
 

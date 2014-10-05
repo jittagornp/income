@@ -24,13 +24,37 @@ public class StatisticCtrl {
 
     private Statistic maxItem;
     private Statistic minItem;
+    private Statistic maxItemGroup;
+    private Statistic minItemGroup;
+
     @Autowired
     private StatisticService service;
 
     public void process(Date startDate, Date endDate) {
         User user = SecurityUtils.getUser();
-        maxItem = service.findMaxItemByOwnerAndBetweenIncomeDate(user, startDate, endDate);
-        minItem = service.findMinItemByOwnerAndBetweenIncomeDate(user, startDate, endDate);
+        maxItem = service.findMaxItemByOwnerAndBetweenIncomeDate(
+                user,
+                startDate,
+                endDate
+        );
+
+        minItem = service.findMinItemByOwnerAndBetweenIncomeDate(
+                user,
+                startDate,
+                endDate
+        );
+
+        maxItemGroup = service.findMaxItemGroupByOwnerAndBetweenIncomeDate(
+                user,
+                startDate,
+                endDate
+        );
+
+        minItemGroup = service.findMinItemGroupByOwnerAndBetweenIncomeDate(
+                user,
+                startDate,
+                endDate
+        );
     }
 
     public Statistic getMaxItem() {
@@ -39,6 +63,14 @@ public class StatisticCtrl {
 
     public Statistic getMinItem() {
         return minItem;
+    }
+
+    public Statistic getMaxItemGroup() {
+        return maxItemGroup;
+    }
+
+    public Statistic getMinItemGroup() {
+        return minItemGroup;
     }
 
 }

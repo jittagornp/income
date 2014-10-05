@@ -7,12 +7,10 @@ package com.pamarin.income.repo;
 
 import com.pamarin.income.model.Statistic;
 import com.pamarin.income.model.User;
-import com.pamarin.income.repository.IncomeItemRepo;
-import junit.framework.Assert;
+import com.pamarin.income.repository.NativeIncomeItemRepo;
+import java.util.Date;
+import static junit.framework.Assert.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
@@ -27,17 +25,16 @@ import org.testng.annotations.Test;
     "/spring/applicationContext-security-test.xml",
     "/spring/applicationContext-eclipseLink-test.xml"
 })
-public class IncomeItemRepoT extends AbstractTestNGSpringContextTests {
+public class NativeIncomeItemRepoT extends AbstractTestNGSpringContextTests {
 
     @Autowired
-    private IncomeItemRepo repo;
+    private NativeIncomeItemRepo repo;
 
     @Test
-    public void findMaxItemByOwner() {
+    public void test() {
         User owner = new User();
         owner.setId(1);
-        PageRequest request = new PageRequest(0, 1, Sort.Direction.DESC, "incomeValue");
-        Page<Statistic> result = repo.findItemByOwner(owner, request);
-        Assert.assertEquals("yyy", result.getContent().get(0).getKey());
+        Statistic statistic = repo.findGroupItemByOwner(owner, "DESC", new Date(), new Date());
+        assertEquals("โอที", statistic.getKey());
     }
 }
