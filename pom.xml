@@ -344,6 +344,12 @@
             <version>10.0-b28</version>
         </dependency>
         <!-- mail -->
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.4.0</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
     <build>

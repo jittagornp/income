@@ -53,7 +53,7 @@
                 </div>
                 <div class="user-details">
                     <p:outputPanel rendered="#{empty facesContext.externalContext.userPrincipal.name}">
-                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/signin/">สร้างบัญชีผู้ใช้ใหม่</h:outputLink>
+                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/register/">สร้างบัญชีผู้ใช้ใหม่</h:outputLink>
                         <p:spacer width="10"/>
                         <h:outputLink value="#{facesContext.externalContext.requestContextPath}/signin/">&#8592; #{message.signin}</h:outputLink>
                     </p:outputPanel>

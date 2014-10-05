@@ -5,7 +5,6 @@
  */
 package com.pamarin.income.model;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
@@ -14,9 +13,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import org.eclipse.persistence.annotations.Index;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -42,6 +43,7 @@ public class User implements UserDetails {
     )
     @Column(name = "user_id")
     private Integer id;
+    @Index
     @Column(unique = true, nullable = false)
     private String username;
     @Column(nullable = false)
@@ -54,6 +56,9 @@ public class User implements UserDetails {
     private Boolean accountExpired = Boolean.FALSE;
     @Column(name = "account_locked", nullable = false)
     private Boolean accountLocked = Boolean.FALSE;
+    @Lob
+    @Column(name = "activate_code")
+    private String activateCode;
     //
     @OneToOne(mappedBy = "owner")
     private Settings settings;
@@ -119,6 +124,18 @@ public class User implements UserDetails {
 
     public void setSettings(Settings settings) {
         this.settings = settings;
+    }
+
+    public String getActivateCode() {
+        return activateCode;
+    }
+
+    public void setActivateCode(String activateCode) {
+        this.activateCode = activateCode;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override

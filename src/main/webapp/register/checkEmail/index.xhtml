@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition  template="/static/template/index.xhtml"
+                 xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="container">
+        <style>
+            body{
+                background-color: #fff;
+            }
+
+            .sidebar{
+                display: none;
+            }
+
+            .container{
+                left: 0;
+            }
+
+            .user-details{
+                display: none;
+            }
+        </style>
+
+        <div style="font-size: 12pt; padding: 20px;">กรุณาตรวจสอบ  email <span class="blue-text">#{request.getParameter('email')}</span> เพื่อยืนยันการใช้งาน</div>
+
+    </ui:define>
+</ui:composition>
