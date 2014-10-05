@@ -23,6 +23,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepo repo;
+    @Autowired
+    private PasswordEncryptor encryptor;
 
     @Override
     public User save(User user) {
@@ -41,7 +43,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updatePassword(User user, String password) {
-        String encrypted = PasswordEncryptor.encrypt(password);
+        String encrypted = encryptor.encrypt(password);
         repo.updatePassword(user.getId(), encrypted);
         user.setPassword(encrypted);
     }

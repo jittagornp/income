@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.pamarin.income.util;
 
+import com.pamarin.income.exception.UserException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.slf4j.Logger;
@@ -34,9 +34,9 @@ public class Notification {
             LOG.warn(null, ex);
             ex = new OptimisticLockingFailureException("มีผู้ใช้ท่านอื่นได้เปลี่ยนแปลงข้อมูลชุดนี้ไปแล้ว  กรณาทำการโหลดข้อมูลและลองบันทึกใหม่ดูอีกครั้ง");
             notifyClient(FacesMessage.SEVERITY_ERROR, callback.getTitle(), callback.getErrorBody(ex));
-        /*} catch (UserException ex) {
+        } catch (UserException ex) {
             notifyClient(FacesMessage.SEVERITY_ERROR, callback.getTitle(), callback.getErrorBody(ex));
-        */} catch (Throwable ex) {
+        } catch (Throwable ex) {
             LOG.warn(null, ex);
             notifyClient(FacesMessage.SEVERITY_ERROR, callback.getTitle(), callback.getErrorBody(ex));
         } finally {

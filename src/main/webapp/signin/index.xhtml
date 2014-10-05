@@ -68,6 +68,14 @@
                                          onclick="jQuery('#signinForm').submit()"
                                          styleClass="white-button"/>
                     </p:outputPanel>
+                    
+                    <p:outputPanel>
+                        
+                    </p:outputPanel>
+                    <p:outputPanel>
+                        <h:outputText value="${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}"
+                                      styleClass="red-text"/>
+                    </p:outputPanel>
                 </h:panelGrid>
             </form>
         </div>

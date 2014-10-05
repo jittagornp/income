@@ -6,6 +6,7 @@
 package com.pamarin.income.controller;
 
 import com.pamarin.income.exception.UserException;
+import com.pamarin.income.model.User;
 import com.pamarin.income.security.SecurityUtils;
 import com.pamarin.income.service.UserService;
 import com.pamarin.income.spring.PasswordEncryptor;
@@ -29,6 +30,8 @@ public class AccountSettingsCtrl {
     //
     @Autowired
     private UserService userService;
+    @Autowired
+    private PasswordEncryptor encryptor;
 
     public String getOldPassword() {
         return oldPassword;
@@ -67,17 +70,26 @@ public class AccountSettingsCtrl {
 
             @Override
             public void process() throws Throwable {
-                String password = SecurityUtils.getUser().getPassword();
-                if (!PasswordEncryptor.matches(oldPassword, password)) {
+                User user = SecurityUtils.getUser();
+                String password = user.getPassword();
+                if (!encryptor.matches(oldPassword, password)) {
                     throw new UserException("รหัสผ่านเก่าไม่ถูกต้อง");
                 }
 
                 if (!getNewPassword().equals(getConfirmPassword())) {
                     throw new UserException("รหัสผ่านใหม่ ไม่ตรงกับ ยืนยันรหัสผ่านใหม่");
                 }
-                
-                //userService.save(null)
+
+                userService.updatePassword(user, newPassword);
             }
+
+            @Override
+            public void onFinally() {
+                oldPassword = null;
+                newPassword = null;
+                confirmPassword = null;
+            }
+
         });
     }
 }

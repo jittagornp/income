@@ -58,48 +58,58 @@
             <p:outputPanel styleClass="block">
                 <h3 class="block-header">บัญชีผู้ใช้</h3>
                 <p:outputPanel styleClass="block-body">
-                    <h:panelGrid class="form-grid"
-                                 columns="2">
-                        <p:outputPanel>
-                            บัญชี
-                        </p:outputPanel>       
-                        <p:outputPanel>
-                            jittagornp@gmail.com
-                        </p:outputPanel>
+                    <h:form>
+                        <h:panelGrid class="form-grid"
+                                     columns="2">
+                            <p:outputPanel>
+                                บัญชี
+                            </p:outputPanel>       
+                            <p:outputPanel>
+                                jittagornp@gmail.com
+                            </p:outputPanel>
 
-                        <p:outputPanel>
-                            รหัสผ่านเก่า
-                            <h:outputText value="*" styleClass="require"/>
-                        </p:outputPanel>       
-                        <p:outputPanel>
-                            <p:inputText value="" styleClass="require-title"/>
-                        </p:outputPanel>
+                            <p:outputPanel>
+                                รหัสผ่านเก่า
+                                <h:outputText value="*" styleClass="require"/>
+                            </p:outputPanel>       
+                            <p:outputPanel>
+                                <p:inputText value="#{accountSettingsCtrl.oldPassword}" 
+                                             type="password"
+                                             styleClass="require-title"/>
+                            </p:outputPanel>
 
-                        <p:outputPanel>
-                            รหัสผ่านใหม่
-                            <h:outputText value="*" styleClass="require"/>
-                        </p:outputPanel>       
-                        <p:outputPanel>
-                            <p:inputText value="" styleClass="require-title"/>
-                        </p:outputPanel>
+                            <p:outputPanel>
+                                รหัสผ่านใหม่
+                                <h:outputText value="*" styleClass="require"/>
+                            </p:outputPanel>       
+                            <p:outputPanel>
+                                <p:inputText value="#{accountSettingsCtrl.newPassword}" 
+                                             type="password"
+                                             styleClass="require-title"/>
+                            </p:outputPanel>
 
-                        <p:outputPanel>
-                            ยืนยันรหัสผ่านใหม่
-                            <h:outputText value="*" styleClass="require"/>
-                        </p:outputPanel>       
-                        <p:outputPanel>
-                            <p:inputText value="" styleClass="require-title"/>
-                        </p:outputPanel>
+                            <p:outputPanel>
+                                ยืนยันรหัสผ่านใหม่
+                                <h:outputText value="*" styleClass="require"/>
+                            </p:outputPanel>       
+                            <p:outputPanel>
+                                <p:inputText value="#{accountSettingsCtrl.confirmPassword}" 
+                                             type="password"
+                                             styleClass="require-title"/>
+                            </p:outputPanel>
 
-                        <p:outputPanel>
+                            <p:outputPanel>
 
-                        </p:outputPanel>       
-                        <p:outputPanel>
-                            <p:commandButton value="บันทึก"
-                                             styleClass="white-button"
-                                             icon="ui-icon-check"/>
-                        </p:outputPanel>
-                    </h:panelGrid>
+                            </p:outputPanel>       
+                            <p:outputPanel>
+                                <p:commandButton value="บันทึก"
+                                                 update=":notification, @form"
+                                                 actionListener="#{accountSettingsCtrl.onSave()}"
+                                                 styleClass="white-button"
+                                                 icon="ui-icon-check"/>
+                            </p:outputPanel>
+                        </h:panelGrid>
+                    </h:form>
                 </p:outputPanel>
             </p:outputPanel>
         </p:outputPanel>

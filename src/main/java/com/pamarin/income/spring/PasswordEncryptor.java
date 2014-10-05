@@ -5,22 +5,25 @@
  */
 package com.pamarin.income.spring;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author anonymous
  */
+@Component
 public class PasswordEncryptor {
 
-    public static String encrypt(String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(11);
-        String hashedPassword = passwordEncoder.encode(password);
-        return hashedPassword;
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
+    public String encrypt(String password) {
+        return encoder.encode(password);
     }
 
-    public static boolean matches(String password, String encryted) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(11);
-        return passwordEncoder.matches(password, encryted);
+    public boolean matches(String password, String encryted) {
+        return encoder.matches(password, encryted);
     }
 }

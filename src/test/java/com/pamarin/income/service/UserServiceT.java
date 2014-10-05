@@ -29,11 +29,13 @@ public class UserServiceT extends AbstractTestNGSpringContextTests {
     private UserService userService;
     @Autowired
     private SettingsService settingsService;
+    @Autowired
+    private PasswordEncryptor encryptor;
 
     @Test
     public void test() {
         if (!userService.hasUser("admin")) {
-            User user = userService.save(new User("admin", PasswordEncryptor.encrypt("admin")));
+            User user = userService.save(new User("admin", encryptor.encrypt("admin")));
 
             Settings settings = new Settings(user);
             settings.setFloatingPoint(2);
