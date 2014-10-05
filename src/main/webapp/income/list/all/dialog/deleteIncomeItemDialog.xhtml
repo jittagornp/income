@@ -25,7 +25,9 @@
                     <h:outputText value="จำนวนเงิน"/>
                 </p:outputPanel>
                 <p:outputPanel>
-                    <h:outputText value="#{incomeItemCtrl.item.incomeValue}"/>
+                    <h:outputText value="#{incomeItemCtrl.item.incomeValue}" styleClass="green-text"/>
+                    <p:spacer width="10"/>
+                    <h:outputText value="#{localeCtrl.currency.symbol}"/>
                 </p:outputPanel>
 
                 <p:outputPanel>
