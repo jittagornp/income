@@ -48,4 +48,16 @@ public class UserServiceImpl implements UserService {
         user.setPassword(encrypted);
     }
 
+    @Override
+    public User activateAccount(String code) {
+        User user = repo.findByActivateCode(code);
+        if (user == null) {
+            return null;
+        }
+
+        user.setActivateCode(null);
+        user.setEnabled(Boolean.TRUE);
+        return user;
+    }
+
 }

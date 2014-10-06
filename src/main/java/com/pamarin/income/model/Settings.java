@@ -43,6 +43,9 @@ public class Settings implements Serializable {
 
     public Settings(User owner) {
         this.owner = owner;
+        if (owner != null) {
+            this.id = owner.getId();
+        }
     }
 
     public Integer getId() {

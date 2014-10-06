@@ -12,6 +12,7 @@ import java.util.Properties;
 import javax.activation.CommandMap;
 import javax.activation.MailcapCommandMap;
 import javax.mail.internet.MimeMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Component;
 public class MailSenderImpl implements MailSender {
 
     private static final String SMTP_HOST_NAME = "smtp.gmail.com";
+    private static final String EMAIL_CONFIG = "/email.properties";
 
     static {
         MailcapCommandMap mc = (MailcapCommandMap) CommandMap.getDefaultCommandMap();
@@ -35,25 +37,49 @@ public class MailSenderImpl implements MailSender {
         CommandMap.setDefaultCommandMap(mc);
     }
 
+    private Properties propertiesSetup() {
+        Properties pro = new Properties();
+        pro.setProperty("mail.smtps.auth", "true");
+        pro.setProperty("mail.smtps.starttls.enable", "true");
+        pro.setProperty("mail.debug", "true");
+
+        return pro;
+    }
+
+    private JavaMailSender senderSetup() throws IOException {
+        Properties config = loadMailConfig();
+        Properties pro = propertiesSetup();
+        String username = config.getProperty("email.username");
+        String password = config.getProperty("email.password");
+
+        if (username == null) {
+            throw new UncheckedMailException(
+                    "require property email.username on classpath:" + EMAIL_CONFIG
+            );
+        }
+
+        if (password == null) {
+            throw new UncheckedMailException(
+                    "require property email.password on classpath:" + EMAIL_CONFIG
+            );
+        }
+
+        JavaMailSenderImpl sender = new JavaMailSenderImpl();
+        sender.setJavaMailProperties(pro);
+        sender.setUsername(username);
+        sender.setPassword(password);
+        sender.setProtocol("smtps");
+        sender.setPort(465);
+        sender.setHost(SMTP_HOST_NAME);
+        sender.setDefaultEncoding("utf-8");
+
+        return sender;
+    }
+
     @Override
     public void send(MailCallback callback) {
         try {
-            JavaMailSenderImpl sender = new JavaMailSenderImpl();
-            Properties config = loadMailConfig();
-
-            Properties pro = new Properties();
-            pro.setProperty("mail.smtps.auth", "true");
-            pro.setProperty("mail.smtps.starttls.enable", "true");
-            pro.setProperty("mail.debug", "true");
-
-            sender.setJavaMailProperties(pro);
-            sender.setUsername(config.getProperty("email.username"));
-            sender.setPassword(config.getProperty("email.password"));
-            sender.setProtocol("smtps");
-            sender.setPort(465);
-            sender.setHost(SMTP_HOST_NAME);
-            sender.setDefaultEncoding("utf-8");
-
+            JavaMailSender sender = senderSetup();
             MimeMessage message = sender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
@@ -66,6 +92,6 @@ public class MailSenderImpl implements MailSender {
     }
 
     private Properties loadMailConfig() throws IOException {
-        return PropertiesFileUtils.load("/email.properties");
+        return PropertiesFileUtils.load(EMAIL_CONFIG);
     }
 }

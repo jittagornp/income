@@ -20,4 +20,6 @@ public interface UserService {
     boolean hasUser(String username);
 
     void updatePassword(User user, String password);
+
+    User activateAccount(String code);
 }

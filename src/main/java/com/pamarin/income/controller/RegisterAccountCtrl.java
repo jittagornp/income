@@ -15,6 +15,7 @@ import com.pamarin.income.service.UserService;
 import com.pamarin.income.spring.PasswordEncryptor;
 import com.pamarin.income.util.MessageNotifyCallback;
 import com.pamarin.income.util.Notification;
+import com.pamarin.income.util.StringRandom;
 import com.pamarin.income.util.UrlUtils;
 import java.io.IOException;
 import javax.faces.context.FacesContext;
@@ -30,7 +31,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("view")
-public class RegisterUserCtrl {
+public class RegisterAccountCtrl {
 
     private String email;
     private String password;
@@ -124,7 +125,7 @@ public class RegisterUserCtrl {
     }
 
     private void createUser() {
-        final String activateCode = "1234";
+        final String activateCode = StringRandom.random2048bit();
         User user = new User(getEmail(), encryptor.encrypt(getPassword()));
         user.setEnabled(Boolean.FALSE);
         user.setActivateCode(activateCode);

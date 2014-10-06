@@ -18,13 +18,25 @@
             .container{
                 left: 0;
             }
-            
+
             .user-details{
                 display: none;
             }
+
+            .activate-block{
+                font-size: 12pt;
+                padding: 20px;
+            }
         </style>
 
-        <div style="font-size: 12pt; padding: 20px;">กำลังตรวจสอบรหัส <span class="blue-text">#{request.getParameter('code')}</span></div>
-
+        <div class="activate-block">กำลังตรวจสอบรหัส <span class="blue-text" style="word-wrap : break-word;">#{request.getParameter('code')}</span></div>
+        <div class="activate-block red-text">#{activateAccountCtrl.errorMessage}</div>
+        <script>
+            setTimeout(function() {
+                if (#{empty activateAccountCtrl.errorMessage}) {
+                    window.location.href = '#{facesContext.externalContext.requestContextPath}/signin/';
+                }
+            }, 3000);
+        </script>
     </ui:define>
 </ui:composition>

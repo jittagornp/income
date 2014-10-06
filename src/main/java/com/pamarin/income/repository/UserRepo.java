@@ -25,4 +25,6 @@ public interface UserRepo extends JpaRepository<User, Integer>{
     @Modifying
     @Query("UPDATE User u SET u.password = ?2 WHERE u.id = ?1")
     public void updatePassword(Integer id, String password);
+    
+    public User findByActivateCode(String code);
 }

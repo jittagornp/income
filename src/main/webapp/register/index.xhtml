@@ -54,7 +54,7 @@
                         email
                     </p:outputPanel>
                     <p:outputPanel>
-                        <p:inputText id="email" value="#{registerUserCtrl.email}">
+                        <p:inputText id="email" value="#{registerAccountCtrl.email}">
                             <p:ajax event="blur" global="false"/>
                         </p:inputText>
                     </p:outputPanel>
@@ -65,18 +65,18 @@
                     <p:outputPanel>
                         <p:commandButton value="ตรวจสอบ email ที่ใช้"
                                          update="message"
-                                         actionListener="#{registerUserCtrl.checkEmail()}"
+                                         actionListener="#{registerAccountCtrl.checkEmail()}"
                                          styleClass="white-button"/>
                         <br/>
-                        <h:outputText id="message" value="#{registerUserCtrl.errorMessage}" 
-                                      styleClass="#{(empty registerUserCtrl.errorMessage) or (not registerUserCtrl.errorMessage.startsWith('email')) ? 'green-text' : 'red-text'}"/>
+                        <h:outputText id="message" value="#{registerAccountCtrl.errorMessage}" 
+                                      styleClass="#{(empty registerAccountCtrl.errorMessage) or (not registerAccountCtrl.errorMessage.startsWith('email')) ? 'green-text' : 'red-text'}"/>
                     </p:outputPanel>
 
                     <p:outputPanel>
                         password
                     </p:outputPanel>
                     <p:outputPanel>
-                        <p:inputText value="#{registerUserCtrl.password}" type="password"/>
+                        <p:inputText value="#{registerAccountCtrl.password}" type="password"/>
                     </p:outputPanel>
                     <p:outputPanel>
 
@@ -84,7 +84,7 @@
                     <p:outputPanel>
                         <p:commandButton value="สร้าง"
                                          update=":notification"
-                                         actionListener="#{registerUserCtrl.onCreateUser()}"
+                                         actionListener="#{registerAccountCtrl.onCreateUser()}"
                                          icon="ui-icon-arrowthick-1-e"
                                          styleClass="green-button"/>
                     </p:outputPanel>
