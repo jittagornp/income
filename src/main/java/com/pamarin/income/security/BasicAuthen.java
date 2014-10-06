@@ -13,5 +13,5 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  */
 public interface BasicAuthen {
 
-    public void login(String username, String password) throws UsernameNotFoundException ;
+    void login(String username, String password) throws UsernameNotFoundException ;
 }
