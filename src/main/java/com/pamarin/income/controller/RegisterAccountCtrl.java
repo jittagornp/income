@@ -10,6 +10,7 @@ import com.pamarin.income.component.MailSender;
 import com.pamarin.income.exception.UserException;
 import com.pamarin.income.model.Settings;
 import com.pamarin.income.model.User;
+import com.pamarin.income.security.BasicAuthen;
 import com.pamarin.income.service.SettingsService;
 import com.pamarin.income.service.UserService;
 import com.pamarin.income.spring.PasswordEncryptor;
@@ -45,6 +46,8 @@ public class RegisterAccountCtrl {
     private MailSender mailSender;
     @Autowired
     private SettingsService settingsService;
+    @Autowired
+    private BasicAuthen authen;
 
     public String getEmail() {
         if (email == null) {
@@ -103,11 +106,27 @@ public class RegisterAccountCtrl {
 
             @Override
             public void process() throws Throwable {
-                validateCheckEmail();
+                try {
+                    validateCheckEmail();
+                } catch (Exception ex) {
+                    if ("email นี้มีถูกใช้งานแล้ว".equals(ex.getMessage())) {
+                        authen.login(getEmail(), getPassword());
+                        redirect2HomePage();
+                        return;
+                    }
+                }
+
                 createUser();
                 redirect2CheckEmail();
             }
         });
+    }
+
+    private void redirect2HomePage() throws IOException {
+        FacesContext
+                .getCurrentInstance()
+                .getExternalContext()
+                .redirect(UrlUtils.buildHostUrl() + "/");
     }
 
     private void redirect2CheckEmail() throws IOException {
@@ -130,7 +149,7 @@ public class RegisterAccountCtrl {
         user.setEnabled(Boolean.FALSE);
         user.setActivateCode(activateCode);
         defaultSettings(userService.save(user));
-        
+
         mailSender.send(new MailCallback() {
 
             @Override
