@@ -2,7 +2,7 @@
 <img src="https://lh3.googleusercontent.com/-yYp7O91kQ4M/VDLx5jTeq0I/AAAAAAAAPPg/PsWejdtl2Nk/w958-h515-no/10-4-2014%2B3-46-32%2BPM.png"/>
 <h1>Technologies</h1>
 
-- JSF (JaveServer Faces) Primefacs 5.0
+- JSF (JaveServer Faces) Primefaces 5.0
 - Springframework 4.1.0.RELEASE
 - EclipseLink 2.5.2
 - jUnit 4.10
