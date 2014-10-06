@@ -15,6 +15,16 @@
         <org.springframework-version>4.1.0.RELEASE</org.springframework-version>
         <org.springframework.security-version>3.2.5.RELEASE</org.springframework.security-version>
     </properties>
+    
+    <developers>
+        <developer>
+            <id>redcrow</id>
+            <name>jittagorn pitakmetagoon</name>
+            <email>jittagornp@gmail.com</email>
+            <timezone>+7</timezone>
+            <url>http://na5cent.blogspot.com/</url>
+        </developer>
+    </developers>
 
     <dependencies>
         <!-- Jasper Report **************************************************-->
@@ -439,11 +449,6 @@
             <layout>default</layout>
             <name>Repository for library PrimeFaces 3.2</name>
         </repository>
-        <repository>
-            <id>unknown-jars-temp-repo</id>
-            <name>A temporary repository created by NetBeans for libraries and jars it could not identify. Please replace the dependencies in this repository with correct ones and delete this repository.</name>
-            <url>file:${project.basedir}/lib</url>
-        </repository>
     </repositories>
 
 
@@ -463,7 +468,7 @@
             </activation>
             <id>production</id>
             <properties>
-                <upload.temp.dir>/home/guest/upload/</upload.temp.dir>
+                <upload.temp.dir>~/upload/</upload.temp.dir>
             </properties>
         </profile>
     </profiles>

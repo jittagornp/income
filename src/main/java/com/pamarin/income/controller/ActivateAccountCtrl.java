@@ -31,15 +31,16 @@ public class ActivateAccountCtrl {
 
     @PostConstruct
     public void postConstruct() {
+        String failMessage = "การยืนยันบัญชีผู้ใช้ล้มเหลว";
         try {
             String code = RequestUtils.requestString("code");
             User user = service.activateAccount(code);
             if (user == null) {
-                errorMessage = "การยืนยันบัญชีผู้ใช้ล้มเหลว";
+                errorMessage = failMessage;
             }
         } catch (Exception ex) {
             LOG.warn(null, ex);
-            errorMessage = "การยืนยันบัญชีผู้ใช้ล้มเหลว";
+            errorMessage = failMessage;
         }
     }
 

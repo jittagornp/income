@@ -21,7 +21,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "settings")
 public class Settings implements Serializable {
-
+    
     @Id
     @Column(name = "user_id")
     private Integer id;

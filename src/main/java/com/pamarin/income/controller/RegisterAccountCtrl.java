@@ -101,6 +101,11 @@ public class RegisterAccountCtrl {
         }
     }
 
+    private void immediateAuthen() throws IOException {
+        authen.login(getEmail(), getPassword());
+        redirect2HomePage();
+    }
+
     public void onCreateUser() {
         Notification.notifyPhase(new MessageNotifyCallback("สร้างบัญชีผู้ใช้ใหม่") {
 
@@ -110,8 +115,7 @@ public class RegisterAccountCtrl {
                     validateCheckEmail();
                 } catch (Exception ex) {
                     if ("email นี้มีถูกใช้งานแล้ว".equals(ex.getMessage())) {
-                        authen.login(getEmail(), getPassword());
-                        redirect2HomePage();
+                        immediateAuthen();
                         return;
                     }
                 }

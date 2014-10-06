@@ -7,11 +7,11 @@
     <script>
         (function($, doc, win) {
             /**
-             * define class TooltipBiding
+             * define class TooltipBinding
              * for bind tooltip to element DOM 
              * by .tooltip-[POSITON : {n, w, e, s}] style class 
              */
-            var TooltipBiding = (function() {
+            var TooltipBinding = (function() {
 
                 function bind(selectror, gravity) {
                     $(selectror).each(function() {
@@ -38,7 +38,7 @@
                 }
 
                 return {
-                    binding: function(selectror, gravity) {
+                    bind: function(selectror, gravity) {
                         bind(selectror, gravity);
                         bindAndBlur(selectror, gravity);
                     }
@@ -59,12 +59,12 @@
             }
 
             $(function() {
-                TooltipBiding.binding('.tooltip-n', 'n');
-                TooltipBiding.binding('.tooltip-s', 's');
-                TooltipBiding.binding('.tooltip-e', 'e');
-                TooltipBiding.binding('.tooltip-w', 'w');
-                TooltipBiding.binding('.ui-dialog-titlebar-close', 's');
-                TooltipBiding.binding('.require-title', 'w');
+                TooltipBinding.bind('.tooltip-n', 'n');
+                TooltipBinding.bind('.tooltip-s', 's');
+                TooltipBinding.bind('.tooltip-e', 'e');
+                TooltipBinding.bind('.tooltip-w', 'w');
+                TooltipBinding.bind('.ui-dialog-titlebar-close', 's');
+                TooltipBinding.bind('.require-title', 'w');
 
                 bindTitle('.require-title', 'บังคับกรอก');
                 bindTitle('.ui-dialog-titlebar-close', 'คลิกเพื่อปิด');
