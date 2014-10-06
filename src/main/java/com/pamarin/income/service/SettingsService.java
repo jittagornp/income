@@ -10,7 +10,7 @@ import com.pamarin.income.model.User;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public interface SettingsService {
 

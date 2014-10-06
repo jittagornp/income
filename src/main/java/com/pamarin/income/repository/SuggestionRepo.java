@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public interface SuggestionRepo extends JpaRepository<Suggestion, Integer>{
 

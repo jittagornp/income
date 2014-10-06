@@ -15,7 +15,7 @@ import org.springframework.data.domain.Pageable;
 
 /**
  *
- * @author redcrow
+ * @author jittagornp
  */
 public class SelectionModel<T> implements Serializable {
 

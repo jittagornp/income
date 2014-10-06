@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public class EmailValidatorT {
     

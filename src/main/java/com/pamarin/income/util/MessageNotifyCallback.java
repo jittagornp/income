@@ -8,7 +8,7 @@ package com.pamarin.income.util;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public abstract class MessageNotifyCallback extends NotifyCallback{
 

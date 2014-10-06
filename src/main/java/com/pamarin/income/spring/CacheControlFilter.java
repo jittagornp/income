@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Redcrow
+ * @author jittagornp
  */
 @WebFilter(urlPatterns = "/*", filterName = "cacheControlFilter")
 public class CacheControlFilter implements Filter {

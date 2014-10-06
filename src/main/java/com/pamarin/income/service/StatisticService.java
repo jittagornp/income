@@ -11,7 +11,7 @@ import java.util.Date;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public interface StatisticService {
 

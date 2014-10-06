@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 @Entity
 @Table(name = "settings")

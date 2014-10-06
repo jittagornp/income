@@ -9,7 +9,7 @@ import java.util.Objects;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public class Statistic {
 

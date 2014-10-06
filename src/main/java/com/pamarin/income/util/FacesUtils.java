@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public class FacesUtils {
 

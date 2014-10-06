@@ -10,7 +10,7 @@ import org.apache.commons.codec.binary.Base64;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public class StringRandom {
 

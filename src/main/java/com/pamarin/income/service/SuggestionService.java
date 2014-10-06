@@ -9,7 +9,7 @@ import com.pamarin.income.model.Suggestion;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public interface SuggestionService {
 

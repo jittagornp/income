@@ -8,7 +8,7 @@ package com.pamarin.income.component;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public interface MailSender {
 

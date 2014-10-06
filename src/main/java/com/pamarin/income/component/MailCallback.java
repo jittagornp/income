@@ -9,7 +9,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public interface MailCallback {
 

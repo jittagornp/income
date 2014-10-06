@@ -18,7 +18,7 @@ import javax.persistence.TableGenerator;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 @Entity
 @Table(name = "suggestion")

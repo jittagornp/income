@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 @Service
 public class DefaultBasicAuthenImpl implements BasicAuthen {

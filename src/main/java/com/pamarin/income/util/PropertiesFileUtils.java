@@ -11,7 +11,7 @@ import java.util.Properties;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public class PropertiesFileUtils {
 

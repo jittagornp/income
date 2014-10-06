@@ -8,7 +8,7 @@ package com.pamarin.income.exception;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public class UncheckedMailException extends RuntimeException {
 

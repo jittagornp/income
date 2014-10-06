@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- * @author anonymous
+ * @author jittagornp
  */
 @Component
 @Scope("session")

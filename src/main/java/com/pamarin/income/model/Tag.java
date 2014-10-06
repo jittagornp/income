@@ -21,7 +21,7 @@ import javax.persistence.Temporal;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 @Entity
 @Table(name = "tag")

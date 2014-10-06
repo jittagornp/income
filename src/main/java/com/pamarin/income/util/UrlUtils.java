@@ -13,7 +13,7 @@ import org.springframework.util.StringUtils;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public class UrlUtils {
 

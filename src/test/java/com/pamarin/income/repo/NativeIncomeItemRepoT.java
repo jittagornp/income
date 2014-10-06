@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 @ContextConfiguration(locations = {
     "/spring/applicationContext-test.xml",

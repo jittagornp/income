@@ -1,7 +1,7 @@
 /**
  * for check browser query string match with key value or key/value pairs parameter
  * 
- * @author redcrow (jittagorn pitakmetagoon)
+ * @author jittagornp (jittagorn pitakmetagoon)
  * create 29/11/2013
  * link http://na5cent.blogspot.com/2013/12/query-string-matcher-javascript.html
  */

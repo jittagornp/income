@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public class StatisticRowMapper implements RowMapper<Statistic> {
 

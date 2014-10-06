@@ -17,7 +17,7 @@ import org.springframework.data.domain.Pageable;
 
 /**
  *
- * @author redcrow
+ * @author jittagornp
  */
 public abstract class SelectionLazyLoad<T> extends LazyLoad<SelectionModel<T>> {
 

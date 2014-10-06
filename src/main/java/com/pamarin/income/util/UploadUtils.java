@@ -14,7 +14,7 @@ import java.util.Properties;
 
 /**
  *
- * @author anonymous
+ * @author jittagornp
  */
 public class UploadUtils {
     
