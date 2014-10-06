@@ -1,4 +1,4 @@
-<h1>เทคโนโลยีที่ใช้</h1>
+<h1>Technologies</h1>
 
 - JSF (JaveServer Faces) Primefacs 5.0
 - Springframework 4.1.0.RELEASE
