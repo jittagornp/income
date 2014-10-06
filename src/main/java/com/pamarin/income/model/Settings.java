@@ -76,6 +76,10 @@ public class Settings implements Serializable {
     }
 
     public Integer getFloatingPoint() {
+        if(floatingPoint == null){
+            floatingPoint = 0;
+        }
+        
         return floatingPoint;
     }
 
