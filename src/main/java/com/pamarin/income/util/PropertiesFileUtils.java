@@ -15,14 +15,10 @@ import java.util.Properties;
  */
 public class PropertiesFileUtils {
 
-    private static Properties properties;
-
-    public static synchronized Properties load(String path) throws IOException {
-        if (properties == null) {
-            properties = new Properties();
-        }
-
+    public static Properties load(String path) throws IOException {
+        Properties properties = new Properties();
         InputStream inputStream = null;
+        
         try {
             inputStream = PropertiesFileUtils.class.getResourceAsStream(path);
             properties.load(inputStream);
@@ -31,7 +27,7 @@ public class PropertiesFileUtils {
                 inputStream.close();
             }
         }
-        
+
         return properties;
     }
 }
