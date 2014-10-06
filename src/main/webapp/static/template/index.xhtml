@@ -42,6 +42,18 @@
             </p:outputPanel>
         </h:head>
         <h:body>
+            <p:ajaxStatus id="ajax">
+                <f:facet name="start">  
+                    <p:panel styleClass="ajax-start">
+                        <h:graphicImage value="/static/image/ajax-loader.gif" styleClass="image-loader"/>
+                        <h:outputText value="กำลังดำเนินการ ..." styleClass="text-loader"/>
+                    </p:panel>
+                </f:facet>
+                <f:facet name="complete">  
+                    <h:outputText value="" />  
+                </f:facet>
+            </p:ajaxStatus>
+
             <p:growl id="notification" 
                      showDetail="true"
                      showSummary="true"
