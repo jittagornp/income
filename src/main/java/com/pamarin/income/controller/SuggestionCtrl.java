@@ -26,7 +26,6 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
-import java.util.logging.Level;
 import javax.annotation.PostConstruct;
 import org.apache.commons.io.FilenameUtils;
 import org.primefaces.model.UploadedFile;
@@ -51,7 +50,7 @@ public class SuggestionCtrl {
     private static final String EMAIL_CONFIG = "/email.properties";
     private static final String DEFAULT_TYPE = "SUGGESTION";
 
-    private String destinationRecieveEmail;
+    private String destinationReceiveEmail;
     private Suggestion suggestion;
     @Autowired
     private SuggestionService service;
@@ -62,7 +61,7 @@ public class SuggestionCtrl {
     @PostConstruct
     public void postConstruct() {
         try {
-            destinationRecieveEmail = PropertiesFileUtils
+            destinationReceiveEmail = PropertiesFileUtils
                     .load(EMAIL_CONFIG)
                     .getProperty("email.username");
         } catch (IOException ex) {
@@ -171,7 +170,7 @@ public class SuggestionCtrl {
 
                 helper.setSubject("ความคิดเห็นจากผู้ใช้");
                 helper.setText(getSuggestion().getType() + " : " + getSuggestion().getMessage());
-                helper.setTo(destinationRecieveEmail);
+                helper.setTo(destinationReceiveEmail);
             }
         });
     }
