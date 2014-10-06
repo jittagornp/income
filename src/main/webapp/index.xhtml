@@ -23,10 +23,14 @@
                 margin-bottom: 15px;
             }
 
+            h3{
+                margin-bottom: 15px;
+            }
+
             table td{
                 padding: 0 10px;
             }
-            
+
             .creator{
                 margin-left: 10px;
                 border-radius: 5px;
@@ -35,11 +39,23 @@
             }
         </style>
 
-        <h1>ตัวอย่างการเขียน jsf primefaces </h1>
+        <h1>ตัวอย่างการเขียน java web application ด้วย jsf primefaces</h1>
+        <h3>(เปิดเผย source code "โปรแกรมวางแผนรายรับ-รายจ่ายส่วนตัว" ที่สามารถใช้งานได้จริงบางส่วน)</h3>
         <p:outputPanel>
-            source code : <h:outputLink class="sourcecode" value="https://github.com/jittagornp/income" target="_blank">https://github.com/jittagornp/income</h:outputLink>
+            Github : <h:outputLink class="sourcecode" value="https://github.com/jittagornp/income" target="_blank">https://github.com/jittagornp/income</h:outputLink>
         </p:outputPanel>
-        <br/>
+        <h1>ข้อตกลงการนำไปใช้</h1>
+        <h:panelGrid columns="1">
+            <p:outputPanel>
+                ผมอนุญาตให้สามารถนำโปรเจ็คนี้ไปต่อยอด เพื่อการค้าขายได้ครับ<br/>
+                แต่ผม<u>ไม่</u>อนุญาตให้นำโปรเจ็คนี้ ไปขายเป็น ตัวอย่าง/สื่อการสอน  เพราะว่าผมทำแจกฟรี<br/>
+                หากใครที่ต้องการดัดแปลงเพื่อเป็น ตัวอย่าง/สื่อการสอน เพิ่มเติม ผมขอให้แนบเครดิตให้ผมด้วย<br/><br/>
+                
+                ผมหวังว่าคนที่นำไปใช้  จะทำตามข้อตกลง<br/>
+                เพราะผมเชื่อว่าทุกคนมีเกียรติ  และจะสามารถรักษาเกียรติที่ตนเองมีไว้ได้ตลอดไปครับ
+            </p:outputPanel>
+        </h:panelGrid>
+        <h1>ผู้จัดทำ</h1>
         <img class="creator" src="#{facesContext.externalContext.requestContextPath}/static/image/jittagornp_100x100.png"/>
         <br/>
         <br/>
@@ -110,13 +126,16 @@
         <h1>Require</h1>
         <h:panelGrid columns="1">
             <p:outputPanel>
-                java 1.7 up
+                Java 1.7 up
             </p:outputPanel>
             <p:outputPanel>
                 Apache Maven 3.0.4 up
             </p:outputPanel>
             <p:outputPanel>
                 Glassfish 3.2.2 (Application Server)
+            </p:outputPanel>
+            <p:outputPanel>
+                set email and password on <span class="red-text">classpath:/email.properties</span>
             </p:outputPanel>
         </h:panelGrid>
         <h1>Optional</h1>
