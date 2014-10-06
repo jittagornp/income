@@ -28,7 +28,9 @@
                     always-use-default-target="true" />
          
         <remember-me key="rememberMeKey"
-                     user-service-ref="userDetailsService"/>        
+                     user-service-ref="userDetailsService"/>  
+        
+        <custom-filter ref="sessionManagementFilter" before="SESSION_MANAGEMENT_FILTER"/>      
     </http>
     <beans:bean id="userDetailsService" class="com.pamarin.income.security.UserDetailsServiceImpl"/>
     
@@ -47,4 +49,16 @@
         <beans:property name="basename" value="springsecurity"/>
     </beans:bean>
 
+
+    <beans:bean id="sessionManagementFilter" class="org.springframework.security.web.session.SessionManagementFilter">
+        <beans:constructor-arg name="securityContextRepository" ref="httpSessionSecurityContextRepository" />
+        <beans:property name="invalidSessionStrategy" ref="redirectStrategy"/>
+    </beans:bean>
+ 
+    <beans:bean id="redirectStrategy" class="com.pamarin.income.spring.JsfRedirectStrategy">
+        <beans:constructor-arg name="invalidSessionUrl" value="/signin/" />
+    </beans:bean>
+ 
+    <beans:bean id="httpSessionSecurityContextRepository" class="org.springframework.security.web.context.HttpSessionSecurityContextRepository"/>
+ 
 </beans:beans>
