@@ -55,7 +55,7 @@
         <beans:property name="invalidSessionStrategy" ref="redirectStrategy"/>
     </beans:bean>
  
-    <beans:bean id="redirectStrategy" class="com.pamarin.income.spring.JsfRedirectStrategy">
+    <beans:bean id="redirectStrategy" class="com.pamarin.income.security.JsfRedirectStrategy">
         <beans:constructor-arg name="invalidSessionUrl" value="/signin/" />
     </beans:bean>
  

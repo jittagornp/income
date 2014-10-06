@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.pamarin.income.spring;
+package com.pamarin.income.security;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
