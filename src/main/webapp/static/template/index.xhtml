@@ -15,6 +15,9 @@
             <link rel="stylesheet/less" href="#{facesContext.externalContext.requestContextPath}/static/style/less/integrated.less"/>
             <script src="#{facesContext.externalContext.requestContextPath}/static/js/org/lesscss/less.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/onehackoranother/jQueryTipsy.js"></script>
+            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/PrimefacesDialog.js"></script>
+            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/Windows.js"></script>
+            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/DialogReposition.js"></script>
             <ui:include src="bugstyle.xhtml"/>
             <script>
                 window.responseHandlers = [];
@@ -37,6 +40,7 @@
                 })(PrimeFaces.ajax.Response.handle);
             </script>
             <ui:include src="tooltip-setup.xhtml"/>
+            <ui:include src="dialog-setup.xhtml"/>
             <p:outputPanel rendered="#{not empty facesContext.externalContext.userPrincipal.name}">
                 <ui:include src="calendar-setup.xhtml"/>
             </p:outputPanel>
@@ -61,7 +65,7 @@
 
             <div class="toolbar">
                 <div class="appname">
-                    <h:outputLink value="#{facesContext.externalContext.requestContextPath}">โปรแกรมวางแผนรายรับ-รายจ่ายส่วนตัว</h:outputLink>
+                    <h:outputLink value="#{facesContext.externalContext.requestContextPath}">#{app.name}</h:outputLink>
                 </div>
                 <div class="user-details">
                     <p:outputPanel rendered="#{empty facesContext.externalContext.userPrincipal.name}">

@@ -5,6 +5,7 @@
  */
 package com.pamarin.income.controller;
 
+import com.pamarin.income.App;
 import com.pamarin.income.component.MailCallback;
 import com.pamarin.income.component.MailSender;
 import com.pamarin.income.exception.UserException;
@@ -48,6 +49,8 @@ public class RegisterAccountCtrl {
     private SettingsService settingsService;
     @Autowired
     private BasicAuthen authen;
+    @Autowired
+    private App app;
 
     public String getEmail() {
         if (email == null) {
@@ -158,7 +161,7 @@ public class RegisterAccountCtrl {
 
             @Override
             public void execute(MimeMessageHelper helper) throws Exception {
-                helper.setSubject("ยืนยันบัญชีผู้ใช้โปรแกรมวางแผนรายรับ-รายจ่ายส่วนตัว");
+                helper.setSubject("ยืนยันบัญชีผู้ใช้" + app.getName());
                 helper.setTo(getEmail());
                 helper.setText(
                         "ขอบคุณสำหรับการลงทะเบียนผู้ใช้ "

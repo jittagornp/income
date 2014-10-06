@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:f="http://java.sun.com/jsf/core">
+    <style>
+        .body-fixed{
+            position: fixed !important;
+        }
+    </style>
+    <script>
+        (function(PD) {
+            var dialogs = [];
+            var scrollTop;
+            PD.on('show', function(dialog) {
+                if (dialogs.length === 0) {
+                    scrollTop = $(window).scrollTop();
+                    jQuery('.container')
+                            .addClass('body-fixed')
+                            .css('top', -scrollTop + $('.toolbar').height() + 'px');
+                }
+
+                dialogs.push(dialog);
+            }).on('hide', function() {
+                dialogs.pop();
+                if (dialogs.length === 0) {
+                    jQuery('.container')
+                            .removeClass('body-fixed')
+                            .css('top', $('.toolbar').height() + 'px');
+                    $(window).scrollTop(scrollTop);
+                }
+            });
+        })(PrimefacesDialog);
+    </script>
+</ui:composition>
