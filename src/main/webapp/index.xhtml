@@ -7,15 +7,124 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:f="http://java.sun.com/jsf/core">
 
-    <ui:define name="sidebar">
-        <ul class="sidebar-menu">
-            <li>
-                <h:outputLink value="#{facesContext.externalContext.requestContextPath}/income/list/">รายรับ</h:outputLink>
-            </li>
-        </ul>
-    </ui:define>
-    
     <ui:define name="container">
-        
+        <style>
+            .sidebar{
+                display: #{empty facesContext.externalContext.userPrincipal.name ? 'none' :'block'};
+            }
+
+            .container{
+                left: #{empty facesContext.externalContext.userPrincipal.name ? '0' :'220'}px;
+                padding: 20px;
+            }
+
+            h1{
+                margin-top: 15px;
+                margin-bottom: 15px;
+            }
+
+            table td{
+                padding: 0 10px;
+            }
+            
+            .creator{
+                margin-left: 10px;
+                border-radius: 5px;
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
+            }
+        </style>
+
+        <h1>ตัวอย่างการเขียน jsf primefaces </h1>
+        <p:outputPanel>
+            source code : <h:outputLink class="sourcecode" value="https://github.com/jittagornp/income" target="_blank">https://github.com/jittagornp/income</h:outputLink>
+        </p:outputPanel>
+        <br/>
+        <img class="creator" src="#{facesContext.externalContext.requestContextPath}/static/image/jittagornp_100x100.png"/>
+        <br/>
+        <br/>
+        <h:panelGrid columns="2">
+            <p:outputPanel>
+                จัดทำโดย
+            </p:outputPanel>
+            <p:outputPanel>
+                จิตกร พิทักษ์เมธากุล (เดียร์)
+            </p:outputPanel>
+
+            <p:outputPanel>
+                email
+            </p:outputPanel>
+            <p:outputPanel>
+                jittagornp@gmail.com
+            </p:outputPanel>
+
+            <p:outputPanel>
+                website
+            </p:outputPanel>
+            <p:outputPanel>
+                <h:outputLink value="http://na5cent.blogspot.com" target="_blank">http://na5cent.blogspot.com</h:outputLink>
+            </p:outputPanel>
+        </h:panelGrid>
+        <h1>เทคโนโลยีที่ใช้</h1>
+        <h:panelGrid columns="1">
+            <p:outputPanel>
+                JSF (JaveServer Faces) Primefacs 5.0
+            </p:outputPanel>
+            <p:outputPanel>
+                Springframework 4.1.0.RELEASE
+            </p:outputPanel>
+            <p:outputPanel>
+                EclipseLink 2.5.2
+            </p:outputPanel>
+            <p:outputPanel>
+                jUnit 4.10
+            </p:outputPanel>
+            <p:outputPanel>
+                TestNG 6.8.8
+            </p:outputPanel>
+            <p:outputPanel>
+                Mockito 1.9.5
+            </p:outputPanel>
+            <p:outputPanel>
+                H2 (Database) 1.3.174
+            </p:outputPanel>
+            <p:outputPanel>
+                Apache Software (Commons)
+            </p:outputPanel>
+            <p:outputPanel>
+                Google Libraries (Guava)
+            </p:outputPanel>
+            <p:outputPanel>
+                Logback Classic 1.0.13
+            </p:outputPanel> 
+            <p:outputPanel>
+                jQuery Clock Picker
+            </p:outputPanel>
+            <p:outputPanel>
+                jQuery Calendar
+            </p:outputPanel>
+            <p:outputPanel>
+                Less Css
+            </p:outputPanel>
+        </h:panelGrid>
+        <h1>Require</h1>
+        <h:panelGrid columns="1">
+            <p:outputPanel>
+                java 1.7 up
+            </p:outputPanel>
+            <p:outputPanel>
+                Apache Maven 3.0.4 up
+            </p:outputPanel>
+            <p:outputPanel>
+                Glassfish 3.2.2 (Application Server)
+            </p:outputPanel>
+        </h:panelGrid>
+        <h1>Optional</h1>
+        <h:panelGrid columns="1">
+            <p:outputPanel>
+                NetBeansIDE 7.4 up
+            </p:outputPanel>
+        </h:panelGrid>
+        <div style="height: 60px;"></div>
     </ui:define>
 </ui:composition>

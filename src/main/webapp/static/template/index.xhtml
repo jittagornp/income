@@ -74,8 +74,6 @@
                         <h:outputLink value="#{facesContext.externalContext.requestContextPath}/signin/">&#8592; #{message.signin}</h:outputLink>
                     </p:outputPanel>
                     <p:outputPanel rendered="#{not empty facesContext.externalContext.userPrincipal.name}">
-                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/manual/">คู่มือการใช้</h:outputLink>
-                        <p:spacer width="10"/>
                         <h:outputLink value="#{facesContext.externalContext.requestContextPath}/settings/">ตั้งค่า</h:outputLink>
                         <p:spacer width="10"/>
                         <h:outputLink value="" onclick="return false;" style="text-decoration: none; cursor: default;">jittagornp@gmail.com</h:outputLink>
