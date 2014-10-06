@@ -15,6 +15,7 @@ import com.pamarin.income.security.SecurityUtils;
 import com.pamarin.income.service.SuggestionService;
 import com.pamarin.income.util.MessageNotifyCallback;
 import com.pamarin.income.util.Notification;
+import com.pamarin.income.util.PropertiesFileUtils;
 import static com.pamarin.income.util.UploadUtils.getTempDirectory;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,6 +26,8 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
+import java.util.logging.Level;
+import javax.annotation.PostConstruct;
 import org.apache.commons.io.FilenameUtils;
 import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
@@ -45,14 +48,29 @@ public class SuggestionCtrl {
 
     private static final Logger LOG = LoggerFactory.getLogger(SuggestionCtrl.class);
 
-    private static final String DESTINATION_RECEIVE_EMAIL = "jittagornp@gmail.com";
+    private static final String EMAIL_CONFIG = "/email.properties";
     private static final String DEFAULT_TYPE = "SUGGESTION";
+
+    private String destinationRecieveEmail;
     private Suggestion suggestion;
     @Autowired
     private SuggestionService service;
     private UploadedFile file;
     @Autowired
     private MailSender mailSender;
+
+    @PostConstruct
+    public void postConstruct() {
+        try {
+            destinationRecieveEmail = PropertiesFileUtils
+                    .load(EMAIL_CONFIG)
+                    .getProperty("email.username");
+        } catch (IOException ex) {
+            throw new UncheckedIOException(
+                    "require property email.username on classpath:" + EMAIL_CONFIG
+            );
+        }
+    }
 
     public UploadedFile getFile() {
         return file;
@@ -153,7 +171,7 @@ public class SuggestionCtrl {
 
                 helper.setSubject("ความคิดเห็นจากผู้ใช้");
                 helper.setText(getSuggestion().getType() + " : " + getSuggestion().getMessage());
-                helper.setTo(DESTINATION_RECEIVE_EMAIL);
+                helper.setTo(destinationRecieveEmail);
             }
         });
     }
