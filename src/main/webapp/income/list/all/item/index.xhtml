@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:f="http://java.sun.com/jsf/core">
+    <p:dataTable value="#{incomeItemCtrl.lazy}"
+                 var="item"
+                 rows="15"
+                 styleClass="item-list"
+                 lazy="true"
+                 sortBy="#{item.incomeDate}"
+                 sortOrder="DESCENDING"
+                 rowIndexVar="counter"
+                 paginator="true"
+                 emptyMessage="ยังไม่มีข้อมูล"
+                 paginatorPosition="bottom"
+                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 rowsPerPageTemplate="5,10,15,25,50">
+        <p:column headerText="ที่" style="width: 5%">
+            <h:outputText value="#{counter + 1}"/>
+        </p:column>
+        <p:column headerText="รายการ">
+            <h:outputText value="#{item.incomeName}"/>
+        </p:column>
+        <p:column headerText="จำนวนเงิน (#{localeCtrl.currency.symbol})" styleClass="number">
+            <h:outputText value="#{numerFormat.format(item.incomeValue)}" styleClass="green-text"/>
+        </p:column>
+        <p:column headerText="วัน/เวลา">
+            <h:outputText value="#{item.incomeDate}">
+                <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
+            </h:outputText>
+            <p:spacer width="5"/>
+            <h:outputText value="#{item.incomeTime}">
+                <f:convertDateTime pattern="HH:mm"/>
+            </h:outputText>
+        </p:column>
+        <p:column headerText="ป้ายกำกับ">
+            <h:outputText value="#{item.tagsString}" styleClass="#{item.tags.isEmpty() ? 'gray-text' : 'green-text'}"/>
+        </p:column>
+        <p:column headerText="#" style="width: 60px">
+            <p:commandLink value="แก้ไข"
+                           update=":editIncomeItemDialogForm"
+                           oncomplete="PF('editIncomeItemWidgetDialog').show()"
+                           actionListener="#{incomeItemCtrl.onSelectItem()}">
+                <f:param name="itemId" value="#{item.id}"/>
+            </p:commandLink>
+            <p:spacer width="5"/>
+            <p:commandLink value="ลบ"
+                           update=":deleteIncomeItemDialogForm"
+                           oncomplete="PF('deleteIncomeItemWidgetDialog').show()"
+                           actionListener="#{incomeItemCtrl.onSelectItem()}">
+                <f:param name="itemId" value="#{item.id}"/>
+            </p:commandLink>
+        </p:column>
+    </p:dataTable>
+</ui:composition>

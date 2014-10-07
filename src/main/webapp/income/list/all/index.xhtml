@@ -37,6 +37,21 @@
                                      styleClass="tooltip-w white-button"/>
                 </div>
                 <div class="operation-header-right">
+                    <span class="button-group">
+                        <p:commandButton value="item"
+                                         styleClass="white-button #{incomeItemViewCtrl.active('item')}"
+                                         actionListener="#{incomeItemViewCtrl.onChangeView()}"
+                                         update="@form, :incomeList">
+                            <f:param name="view" value="item"/>
+                        </p:commandButton>
+                        <p:commandButton value="tag"
+                                         styleClass="white-button #{incomeItemViewCtrl.active('tag')}"
+                                         actionListener="#{incomeItemViewCtrl.onChangeView()}"
+                                         update="@form, :incomeList">
+                            <f:param name="view" value="tag"/>
+                        </p:commandButton>
+                    </span>
+                    <p:spacer width="10"/>
                     <p:commandButton value="เพิ่มรายการ"
                                      actionListener="#{incomeItemCtrl.onCreateItem()}"
                                      update=":addIncomeItemDialogForm"
@@ -46,56 +61,14 @@
                 </div>
             </div>
         </h:form>
-        <p:dataTable value="#{incomeItemCtrl.lazy}"
-                     var="item"
-                     rows="15"
-                     styleClass="item-list"
-                     lazy="true"
-                     sortBy="#{item.incomeDate}"
-                     sortOrder="DESCENDING"
-                     rowIndexVar="counter"
-                     paginator="true"
-                     emptyMessage="ยังไม่มีข้อมูล"
-                     paginatorPosition="bottom"
-                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                     rowsPerPageTemplate="5,10,15,25,50">
-            <p:column headerText="ที่" style="width: 5%">
-                <h:outputText value="#{counter + 1}"/>
-            </p:column>
-            <p:column headerText="รายการ">
-                <h:outputText value="#{item.incomeName}"/>
-            </p:column>
-            <p:column headerText="จำนวนเงิน (#{localeCtrl.currency.symbol})" styleClass="number">
-                <h:outputText value="#{numerFormat.format(item.incomeValue)}" styleClass="green-text"/>
-            </p:column>
-            <p:column headerText="วัน/เวลา">
-                <h:outputText value="#{item.incomeDate}">
-                    <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
-                </h:outputText>
-                <p:spacer width="5"/>
-                <h:outputText value="#{item.incomeTime}">
-                    <f:convertDateTime pattern="HH:mm"/>
-                </h:outputText>
-            </p:column>
-            <p:column headerText="ป้ายกำกับ">
-                <h:outputText value="#{item.tagsString}" styleClass="#{item.tags.isEmpty() ? 'gray-text' : 'green-text'}"/>
-            </p:column>
-            <p:column headerText="#" style="width: 60px">
-                <p:commandLink value="แก้ไข"
-                               update=":editIncomeItemDialogForm"
-                               oncomplete="PF('editIncomeItemWidgetDialog').show()"
-                               actionListener="#{incomeItemCtrl.onSelectItem()}">
-                    <f:param name="itemId" value="#{item.id}"/>
-                </p:commandLink>
-                <p:spacer width="5"/>
-                <p:commandLink value="ลบ"
-                               update=":deleteIncomeItemDialogForm"
-                               oncomplete="PF('deleteIncomeItemWidgetDialog').show()"
-                               actionListener="#{incomeItemCtrl.onSelectItem()}">
-                    <f:param name="itemId" value="#{item.id}"/>
-                </p:commandLink>
-            </p:column>
-        </p:dataTable>
+        <p:outputPanel id="incomeList">
+            <p:outputPanel rendered="#{incomeItemViewCtrl.isView('item')}">
+                <ui:include src="item/index.xhtml"/>
+            </p:outputPanel>
+            <p:outputPanel rendered="#{incomeItemViewCtrl.isView('tag')}">
+                <ui:include src="tag/index.xhtml"/>
+            </p:outputPanel>
+        </p:outputPanel>
     </p:outputPanel>
     <p:outputPanel styleClass="block">
         <h3 class="block-header">สรุปทั้งหมด</h3>
