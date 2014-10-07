@@ -122,8 +122,9 @@ public class RegisterAccountCtrl {
                         return;
                     }
                 }
-
-                createUser();
+                
+                String activateCode = createUser();
+                sendEmail(activateCode);
                 redirect2CheckEmail();
             }
         });
@@ -150,13 +151,7 @@ public class RegisterAccountCtrl {
         settingsService.save(settings);
     }
 
-    private void createUser() {
-        final String activateCode = StringRandom.random2048bit();
-        User user = new User(getEmail(), encryptor.encrypt(getPassword()));
-        user.setEnabled(Boolean.FALSE);
-        user.setActivateCode(activateCode);
-        defaultSettings(userService.save(user));
-
+    private void sendEmail(final String activateCode) {
         mailSender.send(new MailCallback() {
 
             @Override
@@ -170,5 +165,15 @@ public class RegisterAccountCtrl {
                 );
             }
         });
+    }
+
+    private String createUser() {
+        String activateCode = StringRandom.random2048bit();
+        User user = new User(getEmail(), encryptor.encrypt(getPassword()));
+        user.setEnabled(Boolean.FALSE);
+        user.setActivateCode(activateCode);
+        defaultSettings(userService.save(user));
+
+        return activateCode;
     }
 }
