@@ -12,10 +12,22 @@
 
     <ui:define name="itemSearch">
         <p:inputText id="startDate" 
-                     value="#{incomeItemCtrl.startDate}" 
+                     value="#{dayIncomeItemCtrl.startDate}" 
                      styleClass="ic-calendar">
             <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
         </p:inputText>
         <p:watermark for="startDate" value="วันที่"/>
+        <p:spacer width="10"/>
+        <p:commandButton value="ค้นหา"
+                         icon="ui-icon-search"
+                         update="@(.block-body), @(.item-list)"
+                         actionListener="#{dayIncomeItemCtrl.onSearch()}"
+                         styleClass="white-button"/>
+        <p:spacer width="5"/>
+        <p:commandButton icon="ui-icon-refresh"
+                         title="เคลียร์ผลลัพธ์"
+                         update="@(.block-body), @(.item-list), @form"
+                         actionListener="#{dayIncomeItemCtrl.onClear()}"
+                         styleClass="tooltip-w white-button"/>
     </ui:define>
 </ui:composition>
