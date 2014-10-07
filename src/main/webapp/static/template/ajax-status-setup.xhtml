@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:f="http://java.sun.com/jsf/core">
+    <script>
+        window.AjaxStatus = window.AjaxStatus || {};
+        window.AjaxStatus.setMessage = function(msg) {
+            window.AjaxStatus.message = msg;
+        };
+
+        jQuery(function() {
+            function init() {
+                var Proxy = function(origin, callback) {
+                    return function() {
+                        var that = this;
+                        callback.apply(that, arguments);
+                        origin.apply(that, arguments);
+                    };
+                };
+
+                var defaultMessage = 'กำลังดำเนินการ ...';
+                PrimeFaces.widgets.ajaxWidget.trigger = Proxy(PrimeFaces.widgets.ajaxWidget.trigger, function() {
+                    var loading = jQuery('#ajax').find('.text-loader');
+                    if (window.AjaxStatus.message) {
+                        loading.text(window.AjaxStatus.message);
+                        window.AjaxStatus.message = null;
+                    } else {
+                        loading.text(defaultMessage);
+                    }
+                });
+            }
+
+            setTimeout(init, 100);
+            jQuery(document).on('mouseover', '.ajax-loading', function() {
+                AjaxStatus.setMessage('กำลังโหลดข้อมูล...');
+            });
+        });
+    </script>
+
+    <p:ajaxStatus id="ajax" widgetVar="ajaxWidget">
+        <f:facet name="start">  
+            <p:panel styleClass="ajax-start">
+                <h:graphicImage value="/static/image/ajax-loader.gif" styleClass="image-loader"/>
+                <h:outputText value="" styleClass="text-loader"/>
+            </p:panel>
+        </f:facet>
+        <f:facet name="complete">  
+            <h:outputText value="" />  
+        </f:facet>
+    </p:ajaxStatus>
+</ui:composition>

@@ -17,6 +17,7 @@
                 <ul class="tab-menu">
                     <li class="#{incomeItemTabCtrl.activeTab('all')}">
                         <p:commandLink value="ทั้งหมด"
+                                       styleClass="ajax-loading"
                                        actionListener="#{incomeItemTabCtrl.onChangeTab()}"
                                        update="@(.tab-container), @form">
                             <f:param name="tab" value="all"/>
@@ -24,6 +25,7 @@
                     </li>
                     <li class="#{incomeItemTabCtrl.activeTab('day')}">
                         <p:commandLink value="วัน"
+                                       styleClass="ajax-loading"
                                        actionListener="#{incomeItemTabCtrl.onChangeTab()}"
                                        update="@(.tab-container), @form">
                             <f:param name="tab" value="day"/>
@@ -31,6 +33,7 @@
                     </li>
                     <li class="#{incomeItemTabCtrl.activeTab('week')}">
                         <p:commandLink value="สัปดาห์"
+                                       styleClass="ajax-loading"
                                        actionListener="#{incomeItemTabCtrl.onChangeTab()}"
                                        update="@(.tab-container), @form">
                             <f:param name="tab" value="week"/>
@@ -38,6 +41,7 @@
                     </li>
                     <li class="#{incomeItemTabCtrl.activeTab('month')}">
                         <p:commandLink value="เดือน"
+                                       styleClass="ajax-loading"
                                        actionListener="#{incomeItemTabCtrl.onChangeTab()}"
                                        update="@(.tab-container), @form">
                             <f:param name="tab" value="month"/>
@@ -45,6 +49,7 @@
                     </li>
                     <li class="#{incomeItemTabCtrl.activeTab('year')}">
                         <p:commandLink value="ปี"
+                                       styleClass="ajax-loading"
                                        actionListener="#{incomeItemTabCtrl.onChangeTab()}"
                                        update="@(.tab-container), @form">
                             <f:param name="tab" value="year"/>
