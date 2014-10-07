@@ -14,9 +14,8 @@
             function init() {
                 var Proxy = function(origin, callback) {
                     return function() {
-                        var that = this;
-                        callback.apply(that, arguments);
-                        origin.apply(that, arguments);
+                        callback.apply(this, arguments);
+                        origin.apply(this, arguments);
                     };
                 };
 

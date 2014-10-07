@@ -25,6 +25,7 @@ public class DayIncomeItemCtrl {
 
     public void reset() {
         search(null);
+        startDate = null;
     }
 
     private void search(Date date) {
@@ -58,6 +59,6 @@ public class DayIncomeItemCtrl {
     }
 
     public void onClear() {
-        search(null);
+        reset();
     }
 }
