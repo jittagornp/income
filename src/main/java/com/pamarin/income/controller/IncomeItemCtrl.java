@@ -56,7 +56,7 @@ public class IncomeItemCtrl {
             }
         });
 
-        summary();
+        //summary();
     }
 
     private void summary() {

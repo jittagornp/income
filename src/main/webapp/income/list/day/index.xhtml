@@ -1,8 +1,21 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition  template="/income/list/template/index.xhtml"
+                 xmlns="http://www.w3.org/1999/xhtml"
                  xmlns:h="http://java.sun.com/jsf/html"
                  xmlns:p="http://primefaces.org/ui"
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:f="http://java.sun.com/jsf/core">
-   กำลังพัฒนา...
+
+    <ui:define name="itemReset">
+        #{dayIncomeItemCtrl.reset()}
+    </ui:define>
+
+    <ui:define name="itemSearch">
+        <p:inputText id="startDate" 
+                     value="#{incomeItemCtrl.startDate}" 
+                     styleClass="ic-calendar">
+            <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
+        </p:inputText>
+        <p:watermark for="startDate" value="วันที่"/>
+    </ui:define>
 </ui:composition>
