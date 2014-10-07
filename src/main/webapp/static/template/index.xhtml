@@ -9,9 +9,11 @@
     <html>
         <h:head>
             <h:outputText rendered="#{not empty facesContext.externalContext.getSession(true)}"/>
+            #{sessionCtrl.reset()}
             #{localeCtrl.reset()}
 
             <title>Income</title>
+            <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/static/image/favicon.png"/>
             <link rel="stylesheet/less" href="#{facesContext.externalContext.requestContextPath}/static/style/less/integrated.less"/>
             <script src="#{facesContext.externalContext.requestContextPath}/static/js/org/lesscss/less.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/onehackoranother/jQueryTipsy.js"></script>
@@ -76,7 +78,7 @@
                     <p:outputPanel rendered="#{not empty facesContext.externalContext.userPrincipal.name}">
                         <h:outputLink value="#{facesContext.externalContext.requestContextPath}/settings/">ตั้งค่า</h:outputLink>
                         <p:spacer width="10"/>
-                        <h:outputLink value="" onclick="return false;" style="text-decoration: none; cursor: default;">jittagornp@gmail.com</h:outputLink>
+                        <h:outputLink value="" onclick="return false;" style="text-decoration: none; cursor: default;">#{sessionCtrl.user.username}</h:outputLink>
                         <p:spacer width="10"/>
                         <h:outputLink value="#{facesContext.externalContext.requestContextPath}/logout">#{message.signout} &#8594;</h:outputLink>
                     </p:outputPanel >
