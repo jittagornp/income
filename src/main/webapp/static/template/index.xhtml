@@ -22,6 +22,14 @@
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/DialogReposition.js"></script>
             <ui:include src="bugstyle.xhtml"/>
             <script>
+                var Proxy = function(origin, callback) {
+                    return function() {
+                        callback.apply(this, arguments);
+                        return origin.apply(this, arguments);
+                    };
+                };
+            </script>
+            <script>
                 window.responseHandlers = [];
                 window.responseHandlerSize = 0;
                 window.addResponseListner = function(listener) {
@@ -30,20 +38,16 @@
                 /**
                  * primefaces 5.0 only
                  */
-                PrimeFaces.ajax.Response.handle = (function(origin) {
-                    return function() {
-                        var length = window.responseHandlers.length;
-                        while (length !== 0) {
-                            window.responseHandlers[--length].apply(this, arguments);
-                        }
-
-                        return origin.apply(this, arguments);
-                    };
-                })(PrimeFaces.ajax.Response.handle);
+                PrimeFaces.ajax.Response.handle = Proxy(PrimeFaces.ajax.Response.handle, function() {
+                    var length = window.responseHandlers.length;
+                    while (length !== 0) {
+                        window.responseHandlers[--length].apply(this, arguments);
+                    }
+                });
             </script>
             <ui:include src="tooltip-setup.xhtml"/>
             <ui:include src="dialog-setup.xhtml"/>
-            
+
             <p:outputPanel rendered="#{not empty facesContext.externalContext.userPrincipal.name}">
                 <ui:include src="calendar-setup.xhtml"/>
             </p:outputPanel>
