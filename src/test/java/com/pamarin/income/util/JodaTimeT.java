@@ -5,6 +5,7 @@
  */
 package com.pamarin.income.util;
 
+import java.util.Date;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 import org.slf4j.Logger;
@@ -21,7 +22,7 @@ public class JodaTimeT {
     
     @Test
     public void firstDateOfThisWeek() {
-        LocalDate now = new LocalDate();
+        LocalDate now = new LocalDate(new Date().getTime());
         LOG.debug("first date of week --> {}", now.withDayOfWeek(DateTimeConstants.MONDAY));
         LOG.debug("last date of week --> {}", now.withDayOfWeek(DateTimeConstants.SUNDAY)); 
     }
