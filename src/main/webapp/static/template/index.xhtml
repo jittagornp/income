@@ -38,12 +38,14 @@
                 /**
                  * primefaces 5.0 only
                  */
-                PrimeFaces.ajax.Response.handle = Proxy(PrimeFaces.ajax.Response.handle, function() {
-                    var length = window.responseHandlers.length;
-                    while (length !== 0) {
-                        window.responseHandlers[--length].apply(this, arguments);
-                    }
-                });
+                PrimeFaces.ajax.Response.handle = Proxy(
+                        PrimeFaces.ajax.Response.handle,
+                        function() {
+                            var length = window.responseHandlers.length;
+                            while (length !== 0) {
+                                window.responseHandlers[--length].apply(this, arguments);
+                            }
+                        });
             </script>
             <ui:include src="tooltip-setup.xhtml"/>
             <ui:include src="dialog-setup.xhtml"/>
