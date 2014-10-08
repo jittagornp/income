@@ -184,9 +184,8 @@ public class SuggestionCtrl {
 
             @Override
             public void process() throws Throwable {
-                validateImageType();
-
                 if (file != null) {
+                    validateImageType();
                     saveFile();
                 }
 
