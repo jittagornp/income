@@ -36,6 +36,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 /**
  *
@@ -99,6 +100,7 @@ public class SuggestionCtrl {
     }
 
     private void validateImageType() {
+        LOG.debug("file name --> {}", file.getFileName());
         String exctension = FilenameUtils.getExtension(file.getFileName()).toLowerCase();
         if (!isImage(exctension)) {
             throw new UserException("ต้องเป็นไฟล์รูปภาพ .png, .jpg, .jpeg เท่านั้น");
@@ -115,16 +117,19 @@ public class SuggestionCtrl {
         return dateFile;
     }
 
-    private void saveFile() {
+    private File saveFile() {
+        File attachFile = null;
         String errorMessage = "ไม่สามารถบันทึกไฟล์รูปภาพได้";
+
         InputStream inputStream = null;
         OutputStream outputStream = null;
+
         try {
             String randomName = UUID.randomUUID().toString();
             String extension = FilenameUtils.getExtension(file.getFileName());
             inputStream = file.getInputstream();
             File parentDir = getTempDirectoryDateTime();
-            File attachFile = new File(
+            attachFile = new File(
                     parentDir,
                     randomName + "." + extension
             );
@@ -134,16 +139,16 @@ public class SuggestionCtrl {
             getSuggestion().setImage(
                     "/" + parentDir.getName() + "/" + randomName + "." + extension
             );
-
-            sendEmail(attachFile);
         } catch (Exception ex) {
             LOG.warn(null, ex);
+            attachFile = null;
             throw new UncheckedIOException(errorMessage);
         } finally {
             if (outputStream != null) {
                 try {
                     outputStream.close();
                 } catch (IOException ex) {
+                    attachFile = null;
                     throw new UncheckedIOException(errorMessage);
                 }
             }
@@ -152,10 +157,13 @@ public class SuggestionCtrl {
                 try {
                     inputStream.close();
                 } catch (IOException ex) {
+                    attachFile = null;
                     throw new UncheckedIOException(errorMessage);
                 }
             }
         }
+
+        return attachFile;
     }
 
     private void sendEmail(final File attachFile) {
@@ -175,6 +183,10 @@ public class SuggestionCtrl {
         });
     }
 
+    private boolean hasFile() {
+        return file != null && StringUtils.hasText(file.getFileName());
+    }
+
     public void onSave() {
         if (!SecurityUtils.isAnonymous()) {
             getSuggestion().setOwner(SecurityUtils.getUser());
@@ -184,11 +196,13 @@ public class SuggestionCtrl {
 
             @Override
             public void process() throws Throwable {
-                if (file != null) {
+                File attachFile = null;
+                if (hasFile()) {
                     validateImageType();
-                    saveFile();
+                    attachFile = saveFile();
                 }
 
+                sendEmail(attachFile);
                 service.save(suggestion);
             }
 
