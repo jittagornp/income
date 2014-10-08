@@ -121,6 +121,8 @@ public class RegisterAccountCtrl {
                         immediateAuthen();
                         return;
                     }
+                    
+                    throw ex;
                 }
                 
                 String activateCode = createUser();
