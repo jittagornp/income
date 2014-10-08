@@ -28,21 +28,30 @@ public class DayIncomeItemCtrl {
         startDate = null;
     }
 
+    private Date findStartTime(Calendar instance) {
+        instance.set(Calendar.HOUR, 0);
+        instance.set(Calendar.MINUTE, 0);
+        instance.set(Calendar.SECOND, 0);
+
+        return instance.getTime();
+    }
+
+    private Date findEndTime(Calendar instance) {
+        instance.set(Calendar.HOUR, 23);
+        instance.set(Calendar.MINUTE, 59);
+        instance.set(Calendar.SECOND, 0);
+
+        return instance.getTime();
+    }
+
     private void search(Date date) {
         Calendar instance = Calendar.getInstance();
         if (date != null) {
             instance.setTime(date);
         }
 
-        instance.set(Calendar.HOUR, 0);
-        instance.set(Calendar.MINUTE, 0);
-        instance.set(Calendar.SECOND, 0);
-        itemCtrl.setStartDate(instance.getTime());
-
-        instance.set(Calendar.HOUR, 23);
-        instance.set(Calendar.MINUTE, 59);
-        instance.set(Calendar.SECOND, 0);
-        itemCtrl.setEndDate(instance.getTime());
+        itemCtrl.setStartDate(findStartTime(instance));
+        itemCtrl.setEndDate(findEndTime(instance));
         itemCtrl.onSeach();
     }
 

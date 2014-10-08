@@ -30,9 +30,7 @@ public class WeekIncomeItemCtrl {
         startDate = null;
     }
 
-    private Date findFirstDateOfWeek(Date date) {
-        Calendar instance = Calendar.getInstance();
-        LocalDate now = new LocalDate(date);
+    private Date findFirstDateOfWeek(Calendar instance, LocalDate now) {
         instance.setTime(now.withDayOfWeek(DateTimeConstants.MONDAY).toDate());
         instance.set(Calendar.HOUR, 0);
         instance.set(Calendar.MINUTE, 0);
@@ -41,15 +39,13 @@ public class WeekIncomeItemCtrl {
         return instance.getTime();
     }
 
-    private Date findLastDateWeek(Date date) {
-        Calendar instance = Calendar.getInstance();
-        LocalDate now = new LocalDate(date);
+    private Date findLastDateWeek(Calendar instance, LocalDate now) {
         instance.setTime(now.withDayOfWeek(DateTimeConstants.SUNDAY).toDate());
         instance.set(Calendar.HOUR, 23);
         instance.set(Calendar.MINUTE, 59);
         instance.set(Calendar.SECOND, 0);
 
-        return instance.getTime();        
+        return instance.getTime();
     }
 
     private void search(Date date) {
@@ -57,8 +53,10 @@ public class WeekIncomeItemCtrl {
             date = new Date();
         }
 
-        itemCtrl.setStartDate(findFirstDateOfWeek(date));
-        itemCtrl.setEndDate(findLastDateWeek(date));
+        Calendar instance = Calendar.getInstance();
+        LocalDate now = new LocalDate(date);
+        itemCtrl.setStartDate(findFirstDateOfWeek(instance, now));
+        itemCtrl.setEndDate(findLastDateWeek(instance, now));
         itemCtrl.onSeach();
     }
 
