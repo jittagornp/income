@@ -18,21 +18,24 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("session")
-public class NumerFormat implements Serializable {
+public class NumberFormat implements Serializable {
 
     private static final String BEFORE_POINT = "#,###,###,###,##0";
-    
-    public String format(double number) {
-        long longNumb = (long) number;
-        if (number - longNumb == 0) {
-            return (new DecimalFormat(BEFORE_POINT)).format(number);
-        }
 
+    public String format(double number) {
         if (SecurityUtils.isAnonymous()) {
             return (new DecimalFormat(BEFORE_POINT + ".00")).format(number);
+
+        }
+        
+        Settings settings = SecurityUtils.getUser().getSettings();
+        if (!settings.getForceFloating()) {
+            long longNumb = (long) number;
+            if (number - longNumb == 0) {
+                return (new DecimalFormat(BEFORE_POINT)).format(number);
+            }
         }
 
-        Settings settings = SecurityUtils.getUser().getSettings();
         String fpoint = StringUtils.rightPad("", settings.getFloatingPoint(), "0");
         if (settings.getFloatingPoint() > 0) {
             fpoint = "." + fpoint;

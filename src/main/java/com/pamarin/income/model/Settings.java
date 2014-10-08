@@ -21,7 +21,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "settings")
 public class Settings implements Serializable {
-    
+
     @Id
     @Column(name = "user_id")
     private Integer id;
@@ -37,6 +37,8 @@ public class Settings implements Serializable {
     private String currencyCode;
     @Column(name = "floating_point", nullable = false)
     private Integer floatingPoint;
+    @Column(name = "force_floating", nullable = false)
+    private Boolean forceFloating = Boolean.FALSE;
 
     public Settings() {
     }
@@ -76,15 +78,23 @@ public class Settings implements Serializable {
     }
 
     public Integer getFloatingPoint() {
-        if(floatingPoint == null){
+        if (floatingPoint == null) {
             floatingPoint = 0;
         }
-        
+
         return floatingPoint;
     }
 
     public void setFloatingPoint(Integer floatingPoint) {
         this.floatingPoint = floatingPoint;
+    }
+
+    public Boolean getForceFloating() {
+        return forceFloating;
+    }
+
+    public void setForceFloating(Boolean forceFloating) {
+        this.forceFloating = forceFloating;
     }
 
     @Override

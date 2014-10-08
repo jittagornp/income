@@ -7,6 +7,13 @@
                  xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:define name="container">
+        <style>
+            .example{
+                display: inline;
+                position: relative;
+                bottom : 4px;
+            }
+        </style>
         <div class="container-header">
             <div class="container-header-left">
                 <h1>ตั้งค่า</h1>
@@ -20,12 +27,30 @@
                         <h:panelGrid class="form-grid"
                                      columns="2">
                             <p:outputPanel>
-                                ทศนิยมที่ต้องการให้แสดง
+                                ทศนิยม
                             </p:outputPanel>       
                             <p:outputPanel>
                                 <p:inputText style="width: 50px;" value="#{normalSettingsCtrl.settings.floatingPoint}"/>
                                 <p:spacer width="10"/>
                                 <h:outputText value="หลัก"/>
+                            </p:outputPanel>
+
+                            <p:outputPanel>
+                                บังคับทศนิยม
+                            </p:outputPanel>       
+                            <p:outputPanel>
+                                <p:selectBooleanCheckbox value="#{normalSettingsCtrl.settings.forceFloating}">
+                                    <p:ajax event="change" update="@(.example)" global="false"/>
+                                </p:selectBooleanCheckbox>
+                                <p:spacer width="10"/>
+                                <p:outputPanel styleClass="example">
+                                    <h:outputText value="เช่น 1 ให้แสดงเป็น #{numberFormat.format(1.0)}"
+                                                  rendered="#{normalSettingsCtrl.settings.forceFloating}"
+                                                  styleClass="gray-text"/>
+                                    <h:outputText value="เช่น 1 ให้แสดงเป็น 1"
+                                                  rendered="#{not normalSettingsCtrl.settings.forceFloating}"
+                                                  styleClass="gray-text"/>
+                                </p:outputPanel>
                             </p:outputPanel>
 
                             <p:outputPanel>
@@ -45,7 +70,7 @@
                             </p:outputPanel>       
                             <p:outputPanel>
                                 <p:commandButton value="บันทึก"
-                                                 update=":notification"
+                                                 update=":notification, @form"
                                                  actionListener="#{normalSettingsCtrl.onSave()}"
                                                  styleClass="white-button"
                                                  icon="ui-icon-check"/>
