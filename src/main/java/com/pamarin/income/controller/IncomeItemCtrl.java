@@ -55,8 +55,6 @@ public class IncomeItemCtrl {
                 getItem().setTags(tags);
             }
         });
-
-        //summary();
     }
 
     private void summary() {

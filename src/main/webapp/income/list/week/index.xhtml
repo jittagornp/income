@@ -1,8 +1,33 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition  template="/income/list/template/index.xhtml"
+                 xmlns="http://www.w3.org/1999/xhtml"
                  xmlns:h="http://java.sun.com/jsf/html"
                  xmlns:p="http://primefaces.org/ui"
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:f="http://java.sun.com/jsf/core">
-    กำลังพัฒนา...
+
+    <ui:define name="itemReset">
+        #{weekIncomeItemCtrl.reset()}
+    </ui:define>
+
+    <ui:define name="itemSearch">
+        <p:inputText id="startDate" 
+                     value="#{weekIncomeItemCtrl.startDate}" 
+                     styleClass="ic-calendar">
+            <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
+        </p:inputText>
+        <p:watermark for="startDate" value="เลือกวันที่"/>
+        <p:spacer width="10"/>
+        <p:commandButton value="ค้นหา"
+                         icon="ui-icon-search"
+                         update="@(.block-body), @(.item-list)"
+                         actionListener="#{weekIncomeItemCtrl.onSearch()}"
+                         styleClass="white-button"/>
+        <p:spacer width="5"/>
+        <p:commandButton icon="ui-icon-refresh"
+                         title="เคลียร์ผลลัพธ์"
+                         update="@(.block-body), @(.item-list), @form"
+                         actionListener="#{weekIncomeItemCtrl.onClear()}"
+                         styleClass="tooltip-w white-button"/>
+    </ui:define>
 </ui:composition>
