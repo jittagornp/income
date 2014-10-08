@@ -10,13 +10,13 @@
         }
     </style>
     <script>
-        (function(PD) {
+        (function(PD, $) {
             var dialogs = [];
             var scrollTop;
             PD.on('show', function(dialog) {
                 if (dialogs.length === 0) {
                     scrollTop = $(window).scrollTop();
-                    jQuery('.container')
+                    $('.container')
                             .addClass('body-fixed')
                             .css('top', -scrollTop + $('.toolbar').height() + 'px');
                 }
@@ -25,12 +25,12 @@
             }).on('hide', function() {
                 dialogs.pop();
                 if (dialogs.length === 0) {
-                    jQuery('.container')
+                    $('.container')
                             .removeClass('body-fixed')
                             .css('top', $('.toolbar').height() + 'px');
                     $(window).scrollTop(scrollTop);
                 }
             });
-        })(PrimefacesDialog);
+        })(PrimefacesDialog, jQuery);
     </script>
 </ui:composition>
