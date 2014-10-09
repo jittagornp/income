@@ -9,6 +9,7 @@ import com.pamarin.income.model.IncomeItem;
 import com.pamarin.income.model.Statistic;
 import com.pamarin.income.model.User;
 import java.util.Date;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -92,7 +93,7 @@ public interface IncomeItemRepo extends JpaRepository<IncomeItem, Integer> {
 
     @Query("SELECT MAX(item.incomeDate) "
             + "FROM IncomeItem item "
-            + "WHERE item.owner = ?1"
+            + "WHERE item.owner = ?1 "
             + "AND (item.incomeDate BETWEEN ?2 AND ?3)"
     )
     public Date findMaxIncomeDateByOwner(
@@ -103,7 +104,7 @@ public interface IncomeItemRepo extends JpaRepository<IncomeItem, Integer> {
 
     @Query("SELECT MIN(item.incomeDate) "
             + "FROM IncomeItem item "
-            + "WHERE item.owner = ?1"
+            + "WHERE item.owner = ?1 "
             + "AND (item.incomeDate BETWEEN ?2 AND ?3)"
     )
     public Date findMinIncomeDateByOwner(
@@ -130,5 +131,26 @@ public interface IncomeItemRepo extends JpaRepository<IncomeItem, Integer> {
             Date startDate,
             Date endDate,
             Pageable page
+    );
+
+    @Query(
+            "SELECT item "
+            + "FROM IncomeItem item "
+            + "WHERE item.owner = ?1 "
+            + "ORDER BY item.incomeDate, item.incomeTime"
+    )
+    public List<IncomeItem> findByOwner(User user);
+
+    @Query(
+            "SELECT item "
+            + "FROM IncomeItem item "
+            + "WHERE item.owner = ?1 "
+            + "AND (item.incomeDate BETWEEN ?2 AND ?3) "
+            + "ORDER BY item.incomeDate, item.incomeTime"
+    )
+    public List<IncomeItem> findByOwnerAndBetweenIncomeDate(
+            User user,
+            Date startDate,
+            Date endDate
     );
 }

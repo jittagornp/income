@@ -10,6 +10,7 @@ import com.pamarin.income.model.User;
 import com.pamarin.income.repository.IncomeItemRepo;
 import com.pamarin.income.service.IncomeItemService;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -58,6 +59,15 @@ public class IncomeItemServiceImpl implements IncomeItemService {
     @Override
     public IncomeItem findByIdAndOwner(Integer id, User user) {
         return repo.findByIdAndOwner(id, user);
+    }
+
+    @Override
+    public List<IncomeItem> findByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate) {
+        if (startDate == null || endDate == null) {
+            return repo.findByOwner(user);
+        }
+
+        return repo.findByOwnerAndBetweenIncomeDate(user, startDate, endDate);
     }
 
 }

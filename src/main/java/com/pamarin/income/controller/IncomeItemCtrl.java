@@ -45,6 +45,8 @@ public class IncomeItemCtrl {
     private SummaryIncomeCtrl summaryIncomeCtrl;
     @Autowired
     private StatisticCtrl statisticCtrl;
+    @Autowired
+    private ChartIncomeCtrl chartIncomeCtrl;
 
     @PostConstruct
     public void postConstruct() {
@@ -64,6 +66,11 @@ public class IncomeItemCtrl {
         );
 
         statisticCtrl.process(
+                getStartDate(),
+                getEndDate()
+        );
+
+        chartIncomeCtrl.createChart(
                 getStartDate(),
                 getEndDate()
         );
@@ -127,14 +134,13 @@ public class IncomeItemCtrl {
     public void onAddTag() {
         tagCtrl.setSelected(getItem().getTags());
     }
-    
+
     public void saveItem(String title) {
         Notification.notifyPhase(new MessageNotifyCallback(title) {
 
             @Override
             public void process() throws Throwable {
-                
-                
+
                 itemService.save(item);
             }
 

@@ -192,4 +192,12 @@
             </h:panelGrid>
         </p:outputPanel>
     </p:outputPanel>
+    <p:outputPanel styleClass="block">
+        <h3 class="block-header">กราฟ</h3>
+        <p:outputPanel styleClass="block-body">
+            <h:form>
+                <p:chart type="line" model="#{chartIncomeCtrl.lineChartModel}" style="width:800px;" />
+            </h:form>
+        </p:outputPanel>
+    </p:outputPanel>
 </ui:composition>

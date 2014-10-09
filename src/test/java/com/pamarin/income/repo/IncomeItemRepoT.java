@@ -5,9 +5,11 @@
  */
 package com.pamarin.income.repo;
 
+import com.pamarin.income.model.IncomeItem;
 import com.pamarin.income.model.Statistic;
 import com.pamarin.income.model.User;
 import com.pamarin.income.repository.IncomeItemRepo;
+import java.util.List;
 import junit.framework.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,12 +34,22 @@ public class IncomeItemRepoT extends AbstractTestNGSpringContextTests {
     @Autowired
     private IncomeItemRepo repo;
 
+//    @Test
+//    public void findMaxItemByOwner() {
+//        User owner = new User();
+//        owner.setId(1);
+//        PageRequest request = new PageRequest(0, 1, Sort.Direction.DESC, "incomeValue");
+//        Page<Statistic> result = repo.findItemByOwner(owner, request);
+//        Assert.assertEquals("yyy", result.getContent().get(0).getKey());
+//    }
+
     @Test
-    public void findMaxItemByOwner() {
+    public void findByOwner() {
         User owner = new User();
         owner.setId(1);
-        PageRequest request = new PageRequest(0, 1, Sort.Direction.DESC, "incomeValue");
-        Page<Statistic> result = repo.findItemByOwner(owner, request);
-        Assert.assertEquals("yyy", result.getContent().get(0).getKey());
+        List<IncomeItem> items = repo.findByOwner(owner);
+        Assert.assertEquals(5, items.size());
+        Assert.assertEquals("ทดสอบ", items.get(0).getIncomeName());
+        Assert.assertEquals("www", items.get(4).getIncomeName());
     }
 }
