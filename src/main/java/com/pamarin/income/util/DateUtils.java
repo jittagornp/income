@@ -16,30 +16,25 @@ import org.joda.time.LocalDate;
  */
 public class DateUtils {
 
-    public static Date toStartTime(Date date) {
+    private static Date toTime(Date date, int hour, int minute, int second) {
         Calendar instance = Calendar.getInstance();
         if (date != null) {
             instance.setTime(date);
         }
 
-        instance.set(Calendar.HOUR, 0);
-        instance.set(Calendar.MINUTE, 0);
-        instance.set(Calendar.SECOND, 0);
+        instance.set(Calendar.HOUR, hour);
+        instance.set(Calendar.MINUTE, minute);
+        instance.set(Calendar.SECOND, second);
 
         return instance.getTime();
     }
 
+    public static Date toStartTime(Date date) {
+        return toTime(date, 0, 0, 0);
+    }
+
     public static Date toEndTime(Date date) {
-        Calendar instance = Calendar.getInstance();
-        if (date != null) {
-            instance.setTime(date);
-        }
-
-        instance.set(Calendar.HOUR, 23);
-        instance.set(Calendar.MINUTE, 59);
-        instance.set(Calendar.SECOND, 0);
-
-        return instance.getTime();
+        return toTime(date, 23, 59, 0);
     }
 
     public static Date toFirstDateOfWeek(Date date) {
