@@ -58,6 +58,10 @@ public class DateUtils {
     }
 
     public static Date minusDate(Date date, int minus) {
+        if (date == null) {
+            date = new Date();
+        }
+
         DateTime dateTime = new DateTime(date.getTime());
         DateTime minusDays = dateTime.minusDays(minus);
         return toStartTime(minusDays.toDate());

@@ -17,25 +17,36 @@
             <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
         </p:inputText>
         <p:watermark for="date" value="เลือกวันที่"/>
-        <p:spacer width="10"/>
-        <p:commandButton value="ค้นหา"
-                         icon="ui-icon-search"
-                         update="@(.block-body), @(.item-list)"
-                         actionListener="#{weekIncomeItemCtrl.onSearch()}"
-                         styleClass="white-button"/>
         <p:spacer width="5"/>
-        <p:commandButton icon="ui-icon-refresh"
-                         title="เคลียร์ผลลัพธ์"
-                         update="@(.block-body), @(.item-list), @form"
-                         actionListener="#{weekIncomeItemCtrl.onClear()}"
-                         styleClass="tooltip-w white-button"/>
+        <span class="button-group">
+            <p:commandButton value="ค้นหา"
+                             icon="ui-icon-search"
+                             update="@(.block-body), @(.item-list), @form"
+                             actionListener="#{weekIncomeItemCtrl.onSearch()}"
+                             styleClass="white-button"/>
+            <p:commandButton icon="ui-icon-refresh"
+                             title="เคลียร์ผลลัพธ์"
+                             update="@(.block-body), @(.item-list), @form"
+                             actionListener="#{weekIncomeItemCtrl.onClear()}"
+                             styleClass="tooltip-w white-button"/>
+        </span>
+        <span class="date-condition">
+            เงื่อนไข
+            <h:outputText value="#{weekIncomeItemCtrl.firstDate}">
+                <f:convertDateTime pattern="#{localeCtrl.shortDateCalendarFormat}"/>
+            </h:outputText>
+            -
+            <h:outputText value="#{weekIncomeItemCtrl.lastDate}">
+                <f:convertDateTime pattern="#{localeCtrl.shortDateCalendarFormat}"/>
+            </h:outputText>
+        </span>
     </ui:define>
-    
+
+
     <ui:define name="itemOptional">
-        <h:outputText value="คิดแบบ "/>
-        <p:selectOneRadio>
-            <f:selectItem itemLabel="วันจันทร์ถึงวันศุกร์" itemValue=""/>
-            <f:selectItem itemLabel="ย้อนหลังไป 7 วัน" itemValue=""/>
+        <p:selectOneRadio value="#{weekIncomeItemCtrl.type}">
+            <f:selectItem itemLabel="วันจันทร์ถึงวันอาทิตย์" itemValue="#{weekIncomeItemCtrl.MONDAY2SUNDAY}"/>
+            <f:selectItem itemLabel="ย้อนหลังไป 7 วัน" itemValue="#{weekIncomeItemCtrl.MINUS7DAY}"/>
         </p:selectOneRadio>
     </ui:define>
 </ui:composition>

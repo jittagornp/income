@@ -26,11 +26,22 @@ public class WeekIncomeItemCtrl {
     private IncomeItemCtrl itemCtrl;
     private Date date;
     private String type;
+    //
+    private Date firstDate;
+    private Date lastDate;
 
     public void reset() {
+        type = MONDAY2SUNDAY;
         search(null);
         date = null;
-        type = MONDAY2SUNDAY;
+    }
+
+    public String getMONDAY2SUNDAY() {
+        return MONDAY2SUNDAY;
+    }
+
+    public String getMINUS7DAY() {
+        return MINUS7DAY;
     }
 
     public String getType() {
@@ -43,12 +54,15 @@ public class WeekIncomeItemCtrl {
 
     private void search(Date date) {
         if (MONDAY2SUNDAY.equals(type)) {
-            itemCtrl.setStartDate(DateUtils.toFirstDateOfWeek(date));
-            itemCtrl.setEndDate(DateUtils.toLastDateOfWeek(date));
+            firstDate = DateUtils.toFirstDateOfWeek(date);
+            lastDate = DateUtils.toLastDateOfWeek(date);
         } else {
-            itemCtrl.setStartDate(DateUtils.minusDate(date, 7));
-            itemCtrl.setEndDate(DateUtils.toEndTime(date));
+            firstDate = DateUtils.minusDate(date, 6);
+            lastDate = DateUtils.toEndTime(date);
         }
+
+        itemCtrl.setStartDate(firstDate);
+        itemCtrl.setEndDate(lastDate);
 
         itemCtrl.onSeach();
     }
@@ -59,6 +73,14 @@ public class WeekIncomeItemCtrl {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Date getFirstDate() {
+        return firstDate;
+    }
+
+    public Date getLastDate() {
+        return lastDate;
     }
 
     public void onSearch() {

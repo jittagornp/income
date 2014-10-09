@@ -25,17 +25,18 @@
             <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
         </p:inputText>
         <p:watermark for="endDate" value="วันที่"/>
-        <p:spacer width="10"/>
-        <p:commandButton value="ค้นหา"
-                         icon="ui-icon-search"
-                         update="@(.block-body), @(.item-list)"
-                         actionListener="#{incomeItemCtrl.onSeach()}"
-                         styleClass="white-button"/>
         <p:spacer width="5"/>
-        <p:commandButton icon="ui-icon-refresh"
-                         title="เคลียร์ผลลัพธ์"
-                         update="@(.block-body), @(.item-list), @form"
-                         actionListener="#{incomeItemCtrl.onClear()}"
-                         styleClass="tooltip-w white-button"/>
+        <span class="button-group">
+            <p:commandButton value="ค้นหา"
+                             icon="ui-icon-search"
+                             update="@(.block-body), @(.item-list), @form"
+                             actionListener="#{incomeItemCtrl.onSeach()}"
+                             styleClass="white-button"/>
+            <p:commandButton icon="ui-icon-refresh"
+                             title="เคลียร์ผลลัพธ์"
+                             update="@(.block-body), @(.item-list), @form"
+                             actionListener="#{incomeItemCtrl.onClear()}"
+                             styleClass="tooltip-w white-button"/>
+        </span>
     </ui:define>
 </ui:composition>

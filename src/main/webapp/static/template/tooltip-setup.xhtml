@@ -13,12 +13,14 @@
              */
             var TooltipBinding = (function() {
 
+                var TIPSY_ATTRIBUTE = 'original-title';
+
                 function removeAllTooltips() {
                     $('.tipsy').remove();
                 }
 
                 function removeTipsy($element) {
-                    var title = $element.attr('original-title');
+                    var title = $element.attr(TIPSY_ATTRIBUTE);
                     $('.tipsy-inner').each(function() {
                         var $that = $(this);
                         if ($that.text() !== title) {
@@ -28,22 +30,22 @@
                 }
 
                 var timeout = null;
-                $(document).on('mouseover', function(event) {
-                    if(timeout){
+                $(doc).on('mouseover', function(event) {
+                    if (timeout) {
                         clearTimeout(timeout);
                     }
-                    
+
                     timeout = setTimeout(function() {
                         clearTimeout(timeout);
-                        
+
                         var $el = $(event.target);
-                        var parents = $el.parents('[original-title]');
+                        var parents = $el.parents('[' + TIPSY_ATTRIBUTE + ']');
                         if (parents.length !== 0) {
                             removeTipsy(parents);
                             return;
                         }
 
-                        if ($el.is('[original-title]')) {
+                        if ($el.is('[' + TIPSY_ATTRIBUTE + ']')) {
                             removeTipsy($el);
                             return;
                         }
@@ -55,7 +57,7 @@
                 function bind(selectror, gravity) {
                     $(selectror).each(function() {
                         var $item = $(this);
-                        if (!$item.attr('original-title')) {
+                        if (!$item.attr(TIPSY_ATTRIBUTE)) {
                             $item.tipsy({
                                 gravity: gravity
                             });

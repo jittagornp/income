@@ -36,6 +36,10 @@ public class LocaleCtrl implements Serializable {
     public String getCalendarTimeFormat() {
         return "dd/MM/yyyy HH:mm:ss น.";
     }
+    
+    public String getShortDateCalendarFormat(){
+        return "EE dd/MM/yyyy";
+    }
 
     public Currency getCurrency() {
         return currency;
