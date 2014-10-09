@@ -36,30 +36,23 @@ public class DateUtils {
     public static Date toEndTime(Date date) {
         return toTime(date, 23, 59, 0);
     }
-
-    public static Date toFirstDateOfWeek(Date date) {
+    
+    private static Date toDateOfWeek(Date date, int index){
         if (date == null) {
             date = new Date();
         }
 
         LocalDate now = new LocalDate(date);
         return toStartTime(
-                now.withDayOfWeek(
-                        DateTimeConstants.MONDAY
-                ).toDate()
+                now.withDayOfWeek(index).toDate()
         );
     }
 
-    public static Date toLastDateOfWeek(Date date) {
-        if (date == null) {
-            date = new Date();
-        }
+    public static Date toFirstDateOfWeek(Date date) {
+        return toDateOfWeek(date, DateTimeConstants.MONDAY);
+    }
 
-        LocalDate now = new LocalDate(date);
-        return toEndTime(
-                now.withDayOfWeek(
-                        DateTimeConstants.SUNDAY
-                ).toDate()
-        );
+    public static Date toLastDateOfWeek(Date date) {
+        return toDateOfWeek(date, DateTimeConstants.SUNDAY);
     }
 }
