@@ -5,6 +5,7 @@
  */
 package com.pamarin.income.util;
 
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import javax.faces.context.FacesContext;
@@ -166,5 +167,12 @@ public class UrlUtils {
         port = isReservePort(port) ? "" : (":" + port);
 
         return protocol + "://" + domain + port + contextPath;
+    }
+
+    public static void redirectPath(String path) throws IOException {
+        FacesContext
+                .getCurrentInstance()
+                .getExternalContext()
+                .redirect(buildHostUrl() + path);
     }
 }

@@ -94,7 +94,7 @@ public class RegisterAccountCtrl {
 
         User user = userService.findByUsername(getEmail());
         if (user != null) {
-            throw new AlreadyExistMailException("email นี้มีถูกใช้งานแล้ว");
+            throw new AlreadyExistMailException("email นี้ถูกใช้งานแล้ว");
         }
     }
 
@@ -111,16 +111,19 @@ public class RegisterAccountCtrl {
         authen.login(getEmail(), getPassword());
     }
 
-    private void checkAccount() throws IOException {
+    private void checkAccount() throws Exception {
         try {
             validateCheckEmail();
         } catch (AlreadyExistMailException ex) {
             try {
                 immediateAuthen();
                 redirect2HomePage();
+                return;
             } catch (AuthenticationException aex) {
                 /* swallow exception */
             }
+
+            throw ex;
         }
     }
 
@@ -139,17 +142,11 @@ public class RegisterAccountCtrl {
     }
 
     private void redirect2HomePage() throws IOException {
-        FacesContext
-                .getCurrentInstance()
-                .getExternalContext()
-                .redirect(UrlUtils.buildHostUrl() + "/");
+        UrlUtils.redirectPath("/");
     }
 
     private void redirect2CheckEmail() throws IOException {
-        FacesContext
-                .getCurrentInstance()
-                .getExternalContext()
-                .redirect(UrlUtils.buildHostUrl() + "/register/checkEmail/?email=" + getEmail());
+        UrlUtils.redirectPath("/register/checkEmail/?email=" + getEmail());
     }
 
     private void defaultSettings(User user) {

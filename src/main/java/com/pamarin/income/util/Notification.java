@@ -58,7 +58,7 @@ public class Notification {
         } catch (InvalidMailException ex) {
             notifyFail(callback, new InvalidMailException("email ไม่ถูกต้อง"));
         } catch (AlreadyExistMailException ex) {
-            notifyFail(callback, new InvalidMailException("email นี้มีถูกใช้งานแล้ว"));
+            notifyFail(callback, new InvalidMailException("email นี้ถูกใช้งานแล้ว"));
         } catch (UncheckedMailException ex) {
             LOG.warn(null, ex);
             notifyFail(callback, new UncheckedMailException("ไม่สามารถส่ง email ได้"));
