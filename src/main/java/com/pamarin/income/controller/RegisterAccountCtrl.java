@@ -108,22 +108,26 @@ public class RegisterAccountCtrl {
         authen.login(getEmail(), getPassword());
     }
 
+    private void checkAccount() throws IOException {
+        try {
+            validateCheckEmail();
+        } catch (Exception ex) {
+            if ("email นี้มีถูกใช้งานแล้ว".equals(ex.getMessage())) {
+                immediateAuthen();
+                redirect2HomePage();
+                return;
+            }
+
+            throw ex;
+        }
+    }
+
     public void onCreateUser() {
         Notification.notifyPhase(new MessageNotifyCallback("สร้างบัญชีผู้ใช้ใหม่") {
 
             @Override
             public void process() throws Throwable {
-                try {
-                    validateCheckEmail();
-                } catch (Exception ex) {
-                    if ("email นี้มีถูกใช้งานแล้ว".equals(ex.getMessage())) {
-                        immediateAuthen();
-                        redirect2HomePage();
-                        return;
-                    }
-
-                    throw ex;
-                }
+                checkAccount();
 
                 String activateCode = createUser();
                 sendEmail(activateCode);
