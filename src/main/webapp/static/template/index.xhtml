@@ -12,7 +12,7 @@
             #{sessionCtrl.reset()}
             #{localeCtrl.reset()}
 
-            <title>Income</title>
+            <title>#{app.name}</title>
             <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/static/image/favicon.png"/>
             <link rel="stylesheet/less" href="#{facesContext.externalContext.requestContextPath}/static/style/less/integrated.less"/>
             <script src="#{facesContext.externalContext.requestContextPath}/static/js/org/lesscss/less.js"></script>
@@ -57,7 +57,7 @@
                 <ui:include src="calendar-setup.xhtml"/>
             </p:outputPanel>
         </h:head>
-        <h:body styleClass="enabled-slimscroll">
+        <h:body>
             <ui:include src="ajax-status-setup.xhtml"/>
 
             <p:growl id="notification" 

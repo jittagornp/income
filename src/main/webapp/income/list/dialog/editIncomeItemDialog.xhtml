@@ -86,9 +86,10 @@
                             <p:commandLink value="#{tag.name}"/>
                             <p:commandButton icon="ui-icon-close"
                                              update="@form"
+                                             title="ลบ"
                                              process="@this"
                                              actionListener="#{incomeItemCtrl.onDeleteTag()}"
-                                             styleClass="delete-tag-button white-button">
+                                             styleClass="tooltip-s delete-tag-button white-button">
                                 <f:param name="tagId" value="#{tag.id}"/>
                             </p:commandButton>
                         </div>

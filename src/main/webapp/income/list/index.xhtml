@@ -17,6 +17,7 @@
                 <ul class="tab-menu">
                     <li class="#{incomeItemTabCtrl.activeTab('all')}">
                         <p:commandLink value="ทั้งหมด"
+                                       title="ตั้งแต่เริ่มบันทึก"
                                        styleClass="ajax-status-loading"
                                        actionListener="#{incomeItemTabCtrl.onChangeTab()}"
                                        update="@(.tab-container), @form">
