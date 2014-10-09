@@ -106,7 +106,6 @@ public class RegisterAccountCtrl {
 
     private void immediateAuthen() throws IOException {
         authen.login(getEmail(), getPassword());
-        redirect2HomePage();
     }
 
     public void onCreateUser() {
@@ -119,12 +118,13 @@ public class RegisterAccountCtrl {
                 } catch (Exception ex) {
                     if ("email นี้มีถูกใช้งานแล้ว".equals(ex.getMessage())) {
                         immediateAuthen();
+                        redirect2HomePage();
                         return;
                     }
-                    
+
                     throw ex;
                 }
-                
+
                 String activateCode = createUser();
                 sendEmail(activateCode);
                 redirect2CheckEmail();
