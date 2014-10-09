@@ -25,6 +25,7 @@
                     </li>
                     <li class="#{incomeItemTabCtrl.activeTab('day')}">
                         <p:commandLink value="วัน"
+                                       title="#{dateFormat.format(currentCtrl.date, 'EEEE dd MMMM yyyy')}"
                                        styleClass="ajax-status-loading"
                                        actionListener="#{incomeItemTabCtrl.onChangeTab()}"
                                        update="@(.tab-container), @form">
@@ -33,6 +34,7 @@
                     </li>
                     <li class="#{incomeItemTabCtrl.activeTab('week')}">
                         <p:commandLink value="สัปดาห์"
+                                       title="#{dateFormat.format(currentCtrl.firstDateOfWeek, 'EEE dd MMM yyyy')} - #{dateFormat.format(currentCtrl.lastDateOfWeek, 'EEE dd MMM yyyy')}"
                                        styleClass="ajax-status-loading"
                                        actionListener="#{incomeItemTabCtrl.onChangeTab()}"
                                        update="@(.tab-container), @form">
@@ -41,6 +43,7 @@
                     </li>
                     <li class="#{incomeItemTabCtrl.activeTab('month')}">
                         <p:commandLink value="เดือน"
+                                       title="#{dateFormat.format(currentCtrl.date, 'MMMM')}"
                                        styleClass="ajax-status-loading"
                                        actionListener="#{incomeItemTabCtrl.onChangeTab()}"
                                        update="@(.tab-container), @form">
@@ -49,6 +52,7 @@
                     </li>
                     <li class="#{incomeItemTabCtrl.activeTab('year')}">
                         <p:commandLink value="ปี"
+                                       title="#{dateFormat.format(currentCtrl.date, 'yyyy')}"
                                        styleClass="ajax-status-loading"
                                        actionListener="#{incomeItemTabCtrl.onChangeTab()}"
                                        update="@(.tab-container), @form">

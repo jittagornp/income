@@ -14,13 +14,15 @@
                 <div class="operation-header-right">
                     <span class="button-group">
                         <p:commandButton value="item"
-                                         styleClass="white-button #{incomeItemViewCtrl.active('item')}"
+                                         title="ดูในมุมมองรายการ"
+                                         styleClass="tooltip-s white-button #{incomeItemViewCtrl.active('item')}"
                                          actionListener="#{incomeItemViewCtrl.onChangeView()}"
                                          update="@form, @(.view-panel)">
                             <f:param name="view" value="item"/>
                         </p:commandButton>
                         <p:commandButton value="tag"
-                                         styleClass="white-button #{incomeItemViewCtrl.active('tag')}"
+                                         title="ดูในมุมมองป้ายกำกับ"
+                                         styleClass="tooltip-s white-button #{incomeItemViewCtrl.active('tag')}"
                                          actionListener="#{incomeItemViewCtrl.onChangeView()}"
                                          update="@form, @(.view-panel)">
                             <f:param name="view" value="tag"/>

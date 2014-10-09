@@ -5,10 +5,8 @@
  */
 package com.pamarin.income.controller;
 
-import java.util.Calendar;
+import com.pamarin.income.util.DateUtils;
 import java.util.Date;
-import org.joda.time.DateTimeConstants;
-import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -30,33 +28,9 @@ public class WeekIncomeItemCtrl {
         startDate = null;
     }
 
-    private Date findFirstDateOfWeek(Calendar instance, LocalDate now) {
-        instance.setTime(now.withDayOfWeek(DateTimeConstants.MONDAY).toDate());
-        instance.set(Calendar.HOUR, 0);
-        instance.set(Calendar.MINUTE, 0);
-        instance.set(Calendar.SECOND, 0);
-
-        return instance.getTime();
-    }
-
-    private Date findLastDateWeek(Calendar instance, LocalDate now) {
-        instance.setTime(now.withDayOfWeek(DateTimeConstants.SUNDAY).toDate());
-        instance.set(Calendar.HOUR, 23);
-        instance.set(Calendar.MINUTE, 59);
-        instance.set(Calendar.SECOND, 0);
-
-        return instance.getTime();
-    }
-
     private void search(Date date) {
-        if (date == null) {
-            date = new Date();
-        }
-
-        Calendar instance = Calendar.getInstance();
-        LocalDate now = new LocalDate(date);
-        itemCtrl.setStartDate(findFirstDateOfWeek(instance, now));
-        itemCtrl.setEndDate(findLastDateWeek(instance, now));
+        itemCtrl.setStartDate(DateUtils.findFirstDateOfWeek(date));
+        itemCtrl.setEndDate(DateUtils.findLastDateOfWeek(date));
         itemCtrl.onSeach();
     }
 

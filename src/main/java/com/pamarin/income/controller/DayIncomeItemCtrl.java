@@ -5,7 +5,7 @@
  */
 package com.pamarin.income.controller;
 
-import java.util.Calendar;
+import com.pamarin.income.util.DateUtils;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -21,50 +21,42 @@ public class DayIncomeItemCtrl {
 
     @Autowired
     private IncomeItemCtrl itemCtrl;
-    private Date startDate;
+    private Date date;
+    private Date startTime;
+    private Date endTime;
 
     public void reset() {
         search(null);
-        startDate = null;
-    }
-
-    private Date findStartTime(Calendar instance) {
-        instance.set(Calendar.HOUR, 0);
-        instance.set(Calendar.MINUTE, 0);
-        instance.set(Calendar.SECOND, 0);
-
-        return instance.getTime();
-    }
-
-    private Date findEndTime(Calendar instance) {
-        instance.set(Calendar.HOUR, 23);
-        instance.set(Calendar.MINUTE, 59);
-        instance.set(Calendar.SECOND, 0);
-
-        return instance.getTime();
+        date = null;
     }
 
     private void search(Date date) {
-        Calendar instance = Calendar.getInstance();
-        if (date != null) {
-            instance.setTime(date);
-        }
+        startTime = DateUtils.toStartTime(date);
+        endTime = DateUtils.toEndTime(date);
 
-        itemCtrl.setStartDate(findStartTime(instance));
-        itemCtrl.setEndDate(findEndTime(instance));
+        itemCtrl.setStartDate(startTime);
+        itemCtrl.setEndDate(endTime);
         itemCtrl.onSeach();
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
     }
 
     public void onSearch() {
-        search(startDate);
+        search(date);
     }
 
     public void onClear() {
