@@ -89,12 +89,12 @@ public class RegisterAccountCtrl {
 
     private void validateCheckEmail() {
         if (!isEmail()) {
-            throw new InvalidMailException();
+            throw new InvalidMailException("email ไม่ถูกต้อง");
         }
 
         User user = userService.findByUsername(getEmail());
         if (user != null) {
-            throw new AlreadyExistMailException();
+            throw new AlreadyExistMailException("email นี้มีถูกใช้งานแล้ว");
         }
     }
 
