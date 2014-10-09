@@ -11,12 +11,12 @@
     </ui:define>
 
     <ui:define name="itemSearch">
-        <p:inputText id="startDate" 
-                     value="#{weekIncomeItemCtrl.startDate}" 
+        <p:inputText id="date" 
+                     value="#{weekIncomeItemCtrl.date}" 
                      styleClass="ic-calendar">
             <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
         </p:inputText>
-        <p:watermark for="startDate" value="เลือกวันที่"/>
+        <p:watermark for="date" value="เลือกวันที่"/>
         <p:spacer width="10"/>
         <p:commandButton value="ค้นหา"
                          icon="ui-icon-search"
@@ -29,5 +29,13 @@
                          update="@(.block-body), @(.item-list), @form"
                          actionListener="#{weekIncomeItemCtrl.onClear()}"
                          styleClass="tooltip-w white-button"/>
+    </ui:define>
+    
+    <ui:define name="itemOptional">
+        <h:outputText value="คิดแบบ "/>
+        <p:selectOneRadio>
+            <f:selectItem itemLabel="วันจันทร์ถึงวันศุกร์" itemValue=""/>
+            <f:selectItem itemLabel="ย้อนหลังไป 7 วัน" itemValue=""/>
+        </p:selectOneRadio>
     </ui:define>
 </ui:composition>

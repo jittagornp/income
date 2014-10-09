@@ -7,6 +7,7 @@ package com.pamarin.income.util;
 
 import java.util.Calendar;
 import java.util.Date;
+import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 
@@ -36,8 +37,8 @@ public class DateUtils {
     public static Date toEndTime(Date date) {
         return toTime(date, 23, 59, 0);
     }
-    
-    private static Date toDateOfWeek(Date date, int index){
+
+    private static Date toDateOfWeek(Date date, int index) {
         if (date == null) {
             date = new Date();
         }
@@ -54,5 +55,11 @@ public class DateUtils {
 
     public static Date toLastDateOfWeek(Date date) {
         return toDateOfWeek(date, DateTimeConstants.SUNDAY);
+    }
+
+    public static Date minusDate(Date date, int minus) {
+        DateTime dateTime = new DateTime(date.getTime());
+        DateTime minusDays = dateTime.minusDays(minus);
+        return toStartTime(minusDays.toDate());
     }
 }

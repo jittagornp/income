@@ -19,31 +19,50 @@ import org.springframework.stereotype.Component;
 @Scope("view")
 public class WeekIncomeItemCtrl {
 
+    private static final String MONDAY2SUNDAY = "monday2sunday";
+    private static final String MINUS7DAY = "minus7day";
+
     @Autowired
     private IncomeItemCtrl itemCtrl;
-    private Date startDate;
+    private Date date;
+    private String type;
 
     public void reset() {
         search(null);
-        startDate = null;
+        date = null;
+        type = MONDAY2SUNDAY;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     private void search(Date date) {
-        itemCtrl.setStartDate(DateUtils.toFirstDateOfWeek(date));
-        itemCtrl.setEndDate(DateUtils.toLastDateOfWeek(date));
+        if (MONDAY2SUNDAY.equals(type)) {
+            itemCtrl.setStartDate(DateUtils.toFirstDateOfWeek(date));
+            itemCtrl.setEndDate(DateUtils.toLastDateOfWeek(date));
+        } else {
+            itemCtrl.setStartDate(DateUtils.minusDate(date, 7));
+            itemCtrl.setEndDate(DateUtils.toEndTime(date));
+        }
+
         itemCtrl.onSeach();
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public void onSearch() {
-        search(startDate);
+        search(date);
     }
 
     public void onClear() {
