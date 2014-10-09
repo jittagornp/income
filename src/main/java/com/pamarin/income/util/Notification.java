@@ -5,16 +5,11 @@
  */
 package com.pamarin.income.util;
 
-import com.pamarin.income.exception.AlreadyExistMailException;
-import com.pamarin.income.exception.InvalidMailException;
-import com.pamarin.income.exception.UncheckedMailException;
-import com.pamarin.income.exception.UserException;
+import com.pamarin.income.exception.ErrorMessage;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.persistence.RollbackException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.dao.OptimisticLockingFailureException;
 
 /**
  *
@@ -33,14 +28,6 @@ public class Notification {
         context.addMessage(null, new FacesMessage(messageType, title, body));
     }
 
-    private static void notifyFail(NotifyCallback callback, Throwable ex) {
-        notifyClient(
-                FacesMessage.SEVERITY_ERROR,
-                callback.getTitle(),
-                callback.getErrorBody(ex)
-        );
-    }
-
     public static void notifyPhase(NotifyCallback callback) {
         try {
             callback.beforeProcess();
@@ -50,26 +37,13 @@ public class Notification {
                     callback.getTitle(),
                     callback.getSuccessBody()
             );
-        } catch (OptimisticLockingFailureException ex) {
-            LOG.warn(null, ex);
-            notifyFail(callback, new OptimisticLockingFailureException(
-                    "มีผู้ใช้ท่านอื่นได้เปลี่ยนแปลงข้อมูลชุดนี้ไปแล้ว กรณาทำการโหลดข้อมูลและลองบันทึกใหม่ดูอีกครั้ง"
-            ));
-        } catch (InvalidMailException ex) {
-            notifyFail(callback, new InvalidMailException("email ไม่ถูกต้อง"));
-        } catch (AlreadyExistMailException ex) {
-            notifyFail(callback, new InvalidMailException("email นี้ถูกใช้งานแล้ว"));
-        } catch (UncheckedMailException ex) {
-            LOG.warn(null, ex);
-            notifyFail(callback, new UncheckedMailException("ไม่สามารถส่ง email ได้"));
-        } catch (UserException ex) {
-            notifyFail(callback, ex);
-        } catch (RollbackException ex) {
-            LOG.warn(null, ex);
-            notifyFail(callback, new RollbackException("ไม่สามารถบันทึกข้อมูลได้"));
         } catch (Throwable ex) {
             LOG.warn(null, ex);
-            notifyFail(callback, new Throwable("มีข้อผิดพลาดเกิดขึ้นในระหว่างการประมวลผล"));
+            notifyClient(
+                    FacesMessage.SEVERITY_ERROR,
+                    callback.getTitle(),
+                    callback.getErrorBody(new Throwable(ErrorMessage.from(ex)))
+            );
         } finally {
             callback.onFinally();
         }

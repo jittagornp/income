@@ -9,6 +9,7 @@ import com.pamarin.income.App;
 import com.pamarin.income.component.MailCallback;
 import com.pamarin.income.component.MailSender;
 import com.pamarin.income.exception.AlreadyExistMailException;
+import com.pamarin.income.exception.ErrorMessage;
 import com.pamarin.income.exception.InvalidMailException;
 import com.pamarin.income.model.Settings;
 import com.pamarin.income.model.User;
@@ -21,13 +22,11 @@ import com.pamarin.income.util.Notification;
 import com.pamarin.income.util.StringRandom;
 import com.pamarin.income.util.UrlUtils;
 import java.io.IOException;
-import javax.faces.context.FacesContext;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 /**
@@ -89,12 +88,12 @@ public class RegisterAccountCtrl {
 
     private void validateCheckEmail() {
         if (!isEmail()) {
-            throw new InvalidMailException("email ไม่ถูกต้อง");
+            throw new InvalidMailException();
         }
 
         User user = userService.findByUsername(getEmail());
         if (user != null) {
-            throw new AlreadyExistMailException("email นี้ถูกใช้งานแล้ว");
+            throw new AlreadyExistMailException();
         }
     }
 
@@ -103,7 +102,7 @@ public class RegisterAccountCtrl {
             validateCheckEmail();
             errorMessage = "สามารถใช้ email นี้ได้";
         } catch (Exception ex) {
-            errorMessage = ex.getMessage();
+            errorMessage = ErrorMessage.from(ex);
         }
     }
 
@@ -172,7 +171,6 @@ public class RegisterAccountCtrl {
         user.setActivateCode(activateCode);
         user = userService.save(user);
         settingsService.save(Settings.createDefaults(user));
-        
 
         return activateCode;
     }
