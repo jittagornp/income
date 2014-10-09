@@ -13,6 +13,45 @@
              */
             var TooltipBinding = (function() {
 
+                function removeAllTooltips() {
+                    $('.tipsy').remove();
+                }
+
+                function removeTipsy($element) {
+                    var title = $element.attr('original-title');
+                    $('.tipsy-inner').each(function() {
+                        var $that = $(this);
+                        if ($that.text() !== title) {
+                            $that.parents('.tipsy').remove();
+                        }
+                    });
+                }
+
+                var timeout = null;
+                $(document).on('mouseover', function(event) {
+                    if(timeout){
+                        clearTimeout(timeout);
+                    }
+                    
+                    timeout = setTimeout(function() {
+                        clearTimeout(timeout);
+                        
+                        var $el = $(event.target);
+                        var parents = $el.parents('[original-title]');
+                        if (parents.length !== 0) {
+                            removeTipsy(parents);
+                            return;
+                        }
+
+                        if ($el.is('[original-title]')) {
+                            removeTipsy($el);
+                            return;
+                        }
+
+                        removeAllTooltips();
+                    }, 50);
+                });
+
                 function bind(selectror, gravity) {
                     $(selectror).each(function() {
                         var $item = $(this);
@@ -25,10 +64,6 @@
                 }
 
                 function bindAndBlur(selectror, gravity) {
-                    $(doc).on('click', selectror, function() {
-                        $('.tipsy').remove();
-                    });
-
                     win.addResponseListner(function() {
                         var t = setTimeout(function() {
                             clearTimeout(t);
