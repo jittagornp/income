@@ -7,18 +7,19 @@ package com.pamarin.income.exception;
 
 /**
  *
- * @author jittagornp
+ * @author anonymous
  */
-public class UncheckedMailException extends RuntimeException {
+public class AlreadyExistMailException extends UncheckedMailException {
 
-    public UncheckedMailException() {
+    public AlreadyExistMailException() {
     }
 
-    public UncheckedMailException(String message) {
+    public AlreadyExistMailException(String message) {
         super(message);
     }
 
-    public UncheckedMailException(Throwable cause) {
+    public AlreadyExistMailException(Throwable cause) {
         super(cause);
     }
+
 }

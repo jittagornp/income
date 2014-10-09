@@ -7,18 +7,19 @@ package com.pamarin.income.exception;
 
 /**
  *
- * @author jittagornp
+ * @author anonymous
  */
-public class UncheckedMailException extends RuntimeException {
+public class InvalidMailException extends UncheckedMailException {
 
-    public UncheckedMailException() {
+    public InvalidMailException() {
+        super();
     }
 
-    public UncheckedMailException(String message) {
+    public InvalidMailException(String message) {
         super(message);
     }
 
-    public UncheckedMailException(Throwable cause) {
+    public InvalidMailException(Throwable cause) {
         super(cause);
     }
 }

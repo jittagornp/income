@@ -8,7 +8,8 @@ package com.pamarin.income.controller;
 import com.pamarin.income.App;
 import com.pamarin.income.component.MailCallback;
 import com.pamarin.income.component.MailSender;
-import com.pamarin.income.exception.UserException;
+import com.pamarin.income.exception.AlreadyExistMailException;
+import com.pamarin.income.exception.InvalidMailException;
 import com.pamarin.income.model.Settings;
 import com.pamarin.income.model.User;
 import com.pamarin.income.security.BasicAuthen;
@@ -86,12 +87,12 @@ public class RegisterAccountCtrl {
 
     private void validateCheckEmail() {
         if (!isEmail()) {
-            throw new UserException("email ไม่ถูกต้อง");
+            throw new InvalidMailException();
         }
 
         User user = userService.findByUsername(getEmail());
         if (user != null) {
-            throw new UserException("email นี้มีถูกใช้งานแล้ว");
+            throw new AlreadyExistMailException();
         }
     }
 
@@ -111,14 +112,9 @@ public class RegisterAccountCtrl {
     private void checkAccount() throws IOException {
         try {
             validateCheckEmail();
-        } catch (Exception ex) {
-            if ("email นี้มีถูกใช้งานแล้ว".equals(ex.getMessage())) {
-                immediateAuthen();
-                redirect2HomePage();
-                return;
-            }
-
-            throw ex;
+        } catch (AlreadyExistMailException ex) {
+            immediateAuthen();
+            redirect2HomePage();
         }
     }
 

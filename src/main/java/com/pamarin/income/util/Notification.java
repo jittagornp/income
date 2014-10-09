@@ -5,6 +5,9 @@
  */
 package com.pamarin.income.util;
 
+import com.pamarin.income.exception.AlreadyExistMailException;
+import com.pamarin.income.exception.InvalidMailException;
+import com.pamarin.income.exception.UncheckedMailException;
 import com.pamarin.income.exception.UserException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -52,6 +55,13 @@ public class Notification {
             notifyFail(callback, new OptimisticLockingFailureException(
                     "มีผู้ใช้ท่านอื่นได้เปลี่ยนแปลงข้อมูลชุดนี้ไปแล้ว กรณาทำการโหลดข้อมูลและลองบันทึกใหม่ดูอีกครั้ง"
             ));
+        } catch (InvalidMailException ex) {
+            notifyFail(callback, new InvalidMailException("email ไม่ถูกต้อง"));
+        } catch (AlreadyExistMailException ex) {
+            notifyFail(callback, new InvalidMailException("email นี้มีถูกใช้งานแล้ว"));
+        } catch (UncheckedMailException ex) {
+            LOG.warn(null, ex);
+            notifyFail(callback, new UncheckedMailException("ไม่สามารถส่ง email ได้"));
         } catch (UserException ex) {
             notifyFail(callback, ex);
         } catch (RollbackException ex) {
