@@ -71,6 +71,28 @@ public class DateUtils {
                 .toDate();
     }
 
+    public static Date toFirstDateOfYear(Date date) {
+        if (date == null) {
+            date = new Date();
+        }
+
+        return new DateTime(date.getTime())
+                .dayOfYear()
+                .withMinimumValue()
+                .toDate();
+    }
+
+    public static Date toLastDateOfYear(Date date) {
+        if (date == null) {
+            date = new Date();
+        }
+
+        return new DateTime(date.getTime())
+                .dayOfYear()
+                .withMaximumValue()
+                .toDate();
+    }
+
     public static Date toFirstDateOfWeek(Date date) {
         return toDateOfWeek(date, DateTimeConstants.MONDAY);
     }

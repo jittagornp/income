@@ -1,8 +1,52 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition  template="/income/list/template/index.xhtml"
+                 xmlns="http://www.w3.org/1999/xhtml"
                  xmlns:h="http://java.sun.com/jsf/html"
                  xmlns:p="http://primefaces.org/ui"
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:f="http://java.sun.com/jsf/core">
-    กำลังพัฒนา...
+
+    <ui:define name="itemReset">
+        #{yearIncomeItemCtrl.reset()}
+    </ui:define>
+
+    <ui:define name="itemSearch">
+        <p:inputText id="date" 
+                     value="#{yearIncomeItemCtrl.date}" 
+                     styleClass="ic-calendar">
+            <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
+        </p:inputText>
+        <p:watermark for="date" value="เลือกวันในปีนั้น"/>
+        <p:spacer width="5"/>
+        <span class="button-group">
+            <p:commandButton value="ค้นหา"
+                             icon="ui-icon-search"
+                             update="@(.block-body), @(.item-list), @form"
+                             actionListener="#{yearIncomeItemCtrl.onSearch()}"
+                             styleClass="white-button"/>
+            <p:commandButton icon="ui-icon-refresh"
+                             title="เคลียร์ผลลัพธ์"
+                             update="@(.block-body), @(.item-list), @form"
+                             actionListener="#{yearIncomeItemCtrl.onClear()}"
+                             styleClass="tooltip-w white-button"/>
+        </span>
+        <span class="date-condition">
+            เงื่อนไข
+            <h:outputText value="#{yearIncomeItemCtrl.firstDate}">
+                <f:convertDateTime pattern="#{localeCtrl.shortDateCalendarFormat}"/>
+            </h:outputText>
+            -
+            <h:outputText value="#{yearIncomeItemCtrl.lastDate}">
+                <f:convertDateTime pattern="#{localeCtrl.shortDateCalendarFormat}"/>
+            </h:outputText>
+        </span>
+    </ui:define>
+
+
+    <ui:define name="itemOptional">
+        <p:selectOneRadio value="#{yearIncomeItemCtrl.type}">
+            <f:selectItem itemLabel="ต้นปีถึงสิ้นปี" itemValue="#{yearIncomeItemCtrl.START2END}"/>
+            <f:selectItem itemLabel="ย้อนหลังไป 1 ปี (365 วัน)" itemValue="#{yearIncomeItemCtrl.MINUS365DAY}"/>
+        </p:selectOneRadio>
+    </ui:define>
 </ui:composition>
