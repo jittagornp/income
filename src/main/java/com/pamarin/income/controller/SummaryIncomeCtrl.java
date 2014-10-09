@@ -43,8 +43,17 @@ public class SummaryIncomeCtrl {
                 endDate
         );
 
-        this.startDate = summaryService.findMixIncomeDateByOwner(user);
-        this.endDate = summaryService.findMaxIncomeDateByOwner(user);
+        this.startDate = summaryService.findMixIncomeDateByOwner(
+                user,
+                startDate,
+                endDate
+        );
+        
+        this.endDate = summaryService.findMaxIncomeDateByOwner(
+                user,
+                startDate,
+                endDate
+        );
     }
 
     public Double getSummary() {

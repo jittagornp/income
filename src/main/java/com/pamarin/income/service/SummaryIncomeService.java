@@ -18,7 +18,7 @@ public interface SummaryIncomeService {
 
     Long countByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate);
 
-    Date findMaxIncomeDateByOwner(User user);
+    Date findMaxIncomeDateByOwner(User user, Date startDate, Date endDate);
     
-    Date findMixIncomeDateByOwner(User user);
+    Date findMixIncomeDateByOwner(User user, Date startDate, Date endDate);
 }

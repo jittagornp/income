@@ -43,13 +43,21 @@ public class SummaryIncomeServiceImpl implements SummaryIncomeService {
     }
 
     @Override
-    public Date findMaxIncomeDateByOwner(User user) {
-        return incomeItemRepo.findMaxIncomeDateByOwner(user);
+    public Date findMaxIncomeDateByOwner(User user, Date startDate, Date endDate) {
+        if (startDate == null || endDate == null) {
+            return incomeItemRepo.findMaxIncomeDateByOwner(user);
+        }
+
+        return incomeItemRepo.findMaxIncomeDateByOwner(user, startDate, endDate);
     }
 
     @Override
-    public Date findMixIncomeDateByOwner(User user) {
-        return incomeItemRepo.findMinIncomeDateByOwner(user);
+    public Date findMixIncomeDateByOwner(User user, Date startDate, Date endDate) {
+        if (startDate == null || endDate == null) {
+            return incomeItemRepo.findMinIncomeDateByOwner(user);
+        }
+
+        return incomeItemRepo.findMinIncomeDateByOwner(user, startDate, endDate);
     }
 
 }

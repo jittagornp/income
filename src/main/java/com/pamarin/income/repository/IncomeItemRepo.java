@@ -90,6 +90,28 @@ public interface IncomeItemRepo extends JpaRepository<IncomeItem, Integer> {
     )
     public Date findMinIncomeDateByOwner(User user);
 
+    @Query("SELECT MAX(item.incomeDate) "
+            + "FROM IncomeItem item "
+            + "WHERE item.owner = ?1"
+            + "AND (item.incomeDate BETWEEN ?2 AND ?3)"
+    )
+    public Date findMaxIncomeDateByOwner(
+            User user,
+            Date startDate,
+            Date endDate
+    );
+
+    @Query("SELECT MIN(item.incomeDate) "
+            + "FROM IncomeItem item "
+            + "WHERE item.owner = ?1"
+            + "AND (item.incomeDate BETWEEN ?2 AND ?3)"
+    )
+    public Date findMinIncomeDateByOwner(
+            User user,
+            Date startDate,
+            Date endDate
+    );
+
     @Query(
             "SELECT new com.pamarin.income.model.Statistic(item.incomeName, item.incomeValue) "
             + "FROM IncomeItem item "
