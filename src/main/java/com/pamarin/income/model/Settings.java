@@ -97,6 +97,13 @@ public class Settings implements Serializable {
         this.forceFloating = forceFloating;
     }
 
+    public static Settings createDefaults(User user) {
+        Settings settings = new Settings(user);
+        settings.setFloatingPoint(2);
+        settings.setCurrencyCode("THB");
+        return settings;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;

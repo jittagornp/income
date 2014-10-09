@@ -149,13 +149,6 @@ public class RegisterAccountCtrl {
         UrlUtils.redirectPath("/register/checkEmail/?email=" + getEmail());
     }
 
-    private void defaultSettings(User user) {
-        Settings settings = new Settings(user);
-        settings.setFloatingPoint(2);
-        settings.setCurrencyCode("THB");
-        settingsService.save(settings);
-    }
-
     private void sendEmail(final String activateCode) {
         mailSender.send(new MailCallback() {
 
@@ -177,7 +170,9 @@ public class RegisterAccountCtrl {
         User user = new User(getEmail(), encryptor.encrypt(getPassword()));
         user.setEnabled(Boolean.FALSE);
         user.setActivateCode(activateCode);
-        defaultSettings(userService.save(user));
+        user = userService.save(user);
+        settingsService.save(Settings.createDefaults(user));
+        
 
         return activateCode;
     }
