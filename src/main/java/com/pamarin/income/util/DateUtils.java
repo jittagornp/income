@@ -49,6 +49,28 @@ public class DateUtils {
         );
     }
 
+    public static Date toFirstDateOfMonth(Date date) {
+        if (date == null) {
+            date = new Date();
+        }
+
+        return new DateTime(date.getTime())
+                .dayOfMonth()
+                .withMinimumValue()
+                .toDate();
+    }
+
+    public static Date toLastDateOfMonth(Date date) {
+        if (date == null) {
+            date = new Date();
+        }
+
+        return new DateTime(date.getTime())
+                .dayOfMonth()
+                .withMaximumValue()
+                .toDate();
+    }
+
     public static Date toFirstDateOfWeek(Date date) {
         return toDateOfWeek(date, DateTimeConstants.MONDAY);
     }
