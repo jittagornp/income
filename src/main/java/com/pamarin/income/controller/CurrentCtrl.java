@@ -26,8 +26,8 @@ public class CurrentCtrl {
     @PostConstruct
     public void postContruct() {
         date = new Date();
-        firstDateOfWeek = DateUtils.findFirstDateOfWeek(date);
-        lastDateOfWeek = DateUtils.findLastDateOfWeek(date);
+        firstDateOfWeek = DateUtils.toFirstDateOfWeek(date);
+        lastDateOfWeek = DateUtils.toLastDateOfWeek(date);
     }
 
     public Date getDate() {

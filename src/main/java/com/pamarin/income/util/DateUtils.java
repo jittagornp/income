@@ -42,7 +42,7 @@ public class DateUtils {
         return instance.getTime();
     }
 
-    public static Date findFirstDateOfWeek(Date date) {
+    public static Date toFirstDateOfWeek(Date date) {
         if (date == null) {
             date = new Date();
         }
@@ -55,7 +55,7 @@ public class DateUtils {
         );
     }
 
-    public static Date findLastDateOfWeek(Date date) {
+    public static Date toLastDateOfWeek(Date date) {
         if (date == null) {
             date = new Date();
         }

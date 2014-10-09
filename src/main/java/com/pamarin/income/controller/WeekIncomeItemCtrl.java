@@ -29,8 +29,8 @@ public class WeekIncomeItemCtrl {
     }
 
     private void search(Date date) {
-        itemCtrl.setStartDate(DateUtils.findFirstDateOfWeek(date));
-        itemCtrl.setEndDate(DateUtils.findLastDateOfWeek(date));
+        itemCtrl.setStartDate(DateUtils.toFirstDateOfWeek(date));
+        itemCtrl.setEndDate(DateUtils.toLastDateOfWeek(date));
         itemCtrl.onSeach();
     }
 
