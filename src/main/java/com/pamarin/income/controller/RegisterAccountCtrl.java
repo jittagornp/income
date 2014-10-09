@@ -26,6 +26,8 @@ import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 /**
@@ -105,7 +107,7 @@ public class RegisterAccountCtrl {
         }
     }
 
-    private void immediateAuthen() throws IOException {
+    private void immediateAuthen() {
         authen.login(getEmail(), getPassword());
     }
 
@@ -113,8 +115,12 @@ public class RegisterAccountCtrl {
         try {
             validateCheckEmail();
         } catch (AlreadyExistMailException ex) {
-            immediateAuthen();
-            redirect2HomePage();
+            try {
+                immediateAuthen();
+                redirect2HomePage();
+            } catch (AuthenticationException aex) {
+                /* swallow exception */
+            }
         }
     }
 
