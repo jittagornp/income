@@ -7,7 +7,6 @@ package com.pamarin.income.controller;
 
 import com.pamarin.income.util.DateUtils;
 import java.util.Date;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -17,49 +16,25 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("view")
-public class DayIncomeItemCtrl {
+public class DayIncomeItemCtrl extends AbstractBetweenIncomeItemCtrl {
 
-    @Autowired
-    private IncomeItemCtrl itemCtrl;
-    private Date date;
-    private Date startTime;
-    private Date endTime;
-
-    public void reset() {
-        search(null);
-        date = null;
+    @Override
+    protected Date toFirstDate(Date date) {
+        return DateUtils.toStartTime(date);
     }
 
-    private void search(Date date) {
-        startTime = DateUtils.toStartTime(date);
-        endTime = DateUtils.toEndTime(date);
-
-        itemCtrl.setStartDate(startTime);
-        itemCtrl.setEndDate(endTime);
-        itemCtrl.onSeach();
+    @Override
+    protected Date toLastDate(Date date) {
+        return DateUtils.toEndTime(date);
     }
 
-    public Date getDate() {
-        return date;
+    @Override
+    protected Date toBackDate(Date date) {
+        return DateUtils.toStartTime(date);
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void onSearch() {
-        search(date);
-    }
-
-    public void onClear() {
-        reset();
+    @Override
+    protected Date toEndTime(Date date) {
+        return DateUtils.toEndTime(date);
     }
 }

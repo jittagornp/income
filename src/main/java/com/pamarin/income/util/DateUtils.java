@@ -17,13 +17,18 @@ import org.joda.time.LocalDate;
  */
 public class DateUtils {
 
-    private static Date toTime(Date date, int hour, int minute, int second) {
-        Calendar instance = Calendar.getInstance();
+    private static Date toDate(Date date) {
         if (date != null) {
-            instance.setTime(date);
+            return date;
         }
 
-        instance.set(Calendar.HOUR, hour);
+        return new Date();
+    }
+
+    private static Date toTime(Date date, int hour, int minute, int second) {
+        Calendar instance = Calendar.getInstance();
+        instance.setTime(toDate(date));
+        instance.set(Calendar.HOUR_OF_DAY, hour);
         instance.set(Calendar.MINUTE, minute);
         instance.set(Calendar.SECOND, second);
 
@@ -39,55 +44,35 @@ public class DateUtils {
     }
 
     private static Date toDateOfWeek(Date date, int index) {
-        if (date == null) {
-            date = new Date();
-        }
-
-        LocalDate now = new LocalDate(date);
+        LocalDate now = new LocalDate(toDate(date));
         return toStartTime(
                 now.withDayOfWeek(index).toDate()
         );
     }
 
     public static Date toFirstDateOfMonth(Date date) {
-        if (date == null) {
-            date = new Date();
-        }
-
-        return new DateTime(date.getTime())
+        return new DateTime(toDate(date).getTime())
                 .dayOfMonth()
                 .withMinimumValue()
                 .toDate();
     }
 
     public static Date toLastDateOfMonth(Date date) {
-        if (date == null) {
-            date = new Date();
-        }
-
-        return new DateTime(date.getTime())
+        return new DateTime(toDate(date).getTime())
                 .dayOfMonth()
                 .withMaximumValue()
                 .toDate();
     }
 
     public static Date toFirstDateOfYear(Date date) {
-        if (date == null) {
-            date = new Date();
-        }
-
-        return new DateTime(date.getTime())
+        return new DateTime(toDate(date).getTime())
                 .dayOfYear()
                 .withMinimumValue()
                 .toDate();
     }
 
     public static Date toLastDateOfYear(Date date) {
-        if (date == null) {
-            date = new Date();
-        }
-
-        return new DateTime(date.getTime())
+        return new DateTime(toDate(date).getTime())
                 .dayOfYear()
                 .withMaximumValue()
                 .toDate();
@@ -102,11 +87,7 @@ public class DateUtils {
     }
 
     public static Date minusDate(Date date, int minus) {
-        if (date == null) {
-            date = new Date();
-        }
-
-        DateTime dateTime = new DateTime(date.getTime());
+        DateTime dateTime = new DateTime(toDate(date).getTime());
         DateTime minusDays = dateTime.minusDays(minus);
         return toStartTime(minusDays.toDate());
     }

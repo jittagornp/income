@@ -32,15 +32,15 @@
         </span>
         <span class="date-condition">
             เงื่อนไข
-            <h:outputText value="#{dayIncomeItemCtrl.startTime}">
+            <h:outputText value="#{dayIncomeItemCtrl.firstDate}">
                 <f:convertDateTime pattern="#{localeCtrl.shortDateCalendarFormat}"/>
             </h:outputText>
             (
-            <h:outputText value="#{dayIncomeItemCtrl.startTime}">
+            <h:outputText value="#{dayIncomeItemCtrl.firstDate}">
                 <f:convertDateTime pattern="HH:mm"/>
             </h:outputText>
             -
-            <h:outputText value="#{dayIncomeItemCtrl.endTime}">
+            <h:outputText value="#{dayIncomeItemCtrl.lastDate}">
                 <f:convertDateTime pattern="HH:mm"/>
             </h:outputText>
             )
