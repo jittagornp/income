@@ -5,7 +5,8 @@
  */
 package com.pamarin.income.controller;
 
-import com.pamarin.income.exception.UserException;
+import com.pamarin.income.exception.InvalidOldPasswordException;
+import com.pamarin.income.exception.NewPasswordNotEqualsException;
 import com.pamarin.income.model.User;
 import com.pamarin.income.security.SecurityUtils;
 import com.pamarin.income.service.UserService;
@@ -73,11 +74,11 @@ public class AccountSettingsCtrl {
                 User user = SecurityUtils.getUser();
                 String password = user.getPassword();
                 if (!encryptor.matches(oldPassword, password)) {
-                    throw new UserException("รหัสผ่านเก่าไม่ถูกต้อง");
+                    throw new InvalidOldPasswordException();
                 }
 
                 if (!getNewPassword().equals(getConfirmPassword())) {
-                    throw new UserException("รหัสผ่านใหม่ ไม่ตรงกับ ยืนยันรหัสผ่านใหม่");
+                    throw new NewPasswordNotEqualsException();
                 }
 
                 userService.updatePassword(user, newPassword);

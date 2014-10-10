@@ -35,6 +35,14 @@ public class ErrorMessage {
             return "มีผู้ใช้ท่านอื่นได้เปลี่ยนแปลงข้อมูลชุดนี้ไปแล้ว กรณาทำการโหลดข้อมูลและลองบันทึกใหม่ดูอีกครั้ง";
         }
 
+        if (t instanceof InvalidOldPasswordException) {
+            return "รหัสผ่านเก่าไม่ถูกต้อง";
+        }
+
+        if (t instanceof NewPasswordNotEqualsException) {
+            return "รหัสผ่านใหม่ ไม่ตรงกับ ยืนยันรหัสผ่านใหม่";
+        }
+
         if (t instanceof UserException) {
             return "ผู้ใช้ไม่ดำเนินการตามขั้นตอนที่ระบบกำหนดไว้";
         }
