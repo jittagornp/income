@@ -48,8 +48,7 @@ public class IncomeItemCtrl {
     private StatisticCtrl statisticCtrl;
     @Autowired
     private ChartIncomeCtrl chartIncomeCtrl;
-    @Autowired
-    private IncomeItemTabCtrl tabCtrl;
+    private boolean showStatistic;
 
     @PostConstruct
     public void postConstruct() {
@@ -67,7 +66,9 @@ public class IncomeItemCtrl {
                 getStartDate(),
                 getEndDate()
         );
+    }
 
+    public void onProcessStatistic() {
         statisticCtrl.process(
                 getStartDate(),
                 getEndDate()
@@ -77,6 +78,12 @@ public class IncomeItemCtrl {
                 getStartDate(),
                 getEndDate()
         );
+
+        showStatistic = true;
+    }
+
+    public boolean getShowStatistic() {
+        return showStatistic;
     }
 
     public IncomeItemLazy getLazy() {
@@ -93,6 +100,7 @@ public class IncomeItemCtrl {
                 getEndDate()
         );
 
+        showStatistic = false;
         summary();
     }
 
@@ -149,6 +157,7 @@ public class IncomeItemCtrl {
             @Override
             public void onFinally() {
                 summary();
+                onProcessStatistic();
             }
 
         });
@@ -173,6 +182,7 @@ public class IncomeItemCtrl {
             @Override
             public void onFinally() {
                 summary();
+                onProcessStatistic();
             }
 
         });
