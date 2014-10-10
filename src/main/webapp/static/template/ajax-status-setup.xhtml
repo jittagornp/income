@@ -13,7 +13,7 @@
 
             $(function() {
                 function init() {
-                    var defaultMessage = 'กำลังดำเนินการ ...';
+                    var defaultMessage = 'กำลังโหลดข้อมูล...';
                     PrimeFaces.widgets.ajaxWidget.trigger = Proxy(
                             PrimeFaces.widgets.ajaxWidget.trigger,
                             function() {
@@ -29,8 +29,8 @@
                 }
 
                 setTimeout(init, 100);
-                $(document).on('mouseover', '.ajax-status-loading', function() {
-                    AjaxStatus.setMessage('กำลังโหลดข้อมูล...');
+                $(document).on('mouseover', '.ajax-status-processing', function() {
+                    AjaxStatus.setMessage('กำลังดำเนินการ ...');
                 });
             });
         })(jQuery);

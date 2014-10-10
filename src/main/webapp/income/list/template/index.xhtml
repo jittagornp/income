@@ -93,12 +93,12 @@
     </p:outputPanel>
     <h:form>
         <p:commandButton value="โหลดเพิ่มเติม"
-                         update="@(.statistic-panel)"
+                         update="@(.statistic-panel), @form"
                          styleClass="white-button"
+                         rendered="#{not incomeItemCtrl.showStatistic}"
                          actionListener="#{incomeItemCtrl.onProcessStatistic()}"/>
     </h:form>
     <p:outputPanel styleClass="statistic-panel"> 
-        <br/>
         <p:outputPanel styleClass="block" rendered="#{incomeItemCtrl.showStatistic}">
             <h3 class="block-header">สถิติ</h3>
             <p:outputPanel styleClass="block-body">
