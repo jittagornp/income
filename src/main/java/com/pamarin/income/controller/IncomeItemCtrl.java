@@ -7,10 +7,13 @@ package com.pamarin.income.controller;
 
 import com.pamarin.income.lazyload.IncomeItemLazy;
 import com.pamarin.income.model.IncomeItem;
+import com.pamarin.income.model.SummaryBeforehand;
 import com.pamarin.income.model.Tag;
 import com.pamarin.income.model.TagListener;
+import com.pamarin.income.model.User;
 import com.pamarin.income.security.SecurityUtils;
 import com.pamarin.income.service.IncomeItemService;
+import com.pamarin.income.service.SummaryBeforehandService;
 import com.pamarin.income.util.MessageNotifyCallback;
 import com.pamarin.income.util.Notification;
 import com.pamarin.income.util.RequestUtils;
@@ -47,6 +50,10 @@ public class IncomeItemCtrl {
     private StatisticCtrl statisticCtrl;
     @Autowired
     private ChartIncomeCtrl chartIncomeCtrl;
+    @Autowired
+    private SummaryBeforehandService beforehandService;
+    @Autowired
+    private IncomeItemTabCtrl tabCtrl;
 
     @PostConstruct
     public void postConstruct() {
@@ -74,6 +81,31 @@ public class IncomeItemCtrl {
                 getStartDate(),
                 getEndDate()
         );
+    }
+
+    private void beforehand() {
+        User user = SecurityUtils.getUser();
+        SummaryBeforehand beforehand = new SummaryBeforehand(user, tabCtrl.getCurrentTab());
+        beforehand.setTotalItem(summaryIncomeCtrl.getTotalItems());
+        beforehand.setPureTotalIncome(summaryIncomeCtrl.getSummary());
+        beforehand.setStartDate(summaryIncomeCtrl.getStartDate());
+        beforehand.setEndDate(summaryIncomeCtrl.getEndDate());
+
+        beforehand.setMaxItemGroupName(statisticCtrl.getMaxItemGroup().getKey());
+        beforehand.setMaxItemGroupValue(statisticCtrl.getMaxItemGroup().getValue());
+        beforehand.setMaxItemName(statisticCtrl.getMaxItem().getKey());
+        beforehand.setMaxItemValue(statisticCtrl.getMaxItem().getValue());
+        beforehand.setMaxItemTagName(statisticCtrl.getMaxItemTag().getKey());
+        beforehand.setMaxItemTagValue(statisticCtrl.getMaxItemTag().getValue());
+
+        beforehand.setMinItemGroupName(statisticCtrl.getMinItemGroup().getKey());
+        beforehand.setMinItemGroupValue(statisticCtrl.getMinItemGroup().getValue());
+        beforehand.setMinItemName(statisticCtrl.getMinItem().getKey());
+        beforehand.setMinItemValue(statisticCtrl.getMinItem().getValue());
+        beforehand.setMinItemTagName(statisticCtrl.getMinItemTag().getKey());
+        beforehand.setMinItemTagValue(statisticCtrl.getMinItemTag().getValue());
+
+        beforehandService.save(beforehand);
     }
 
     public IncomeItemLazy getLazy() {
@@ -140,13 +172,13 @@ public class IncomeItemCtrl {
 
             @Override
             public void process() throws Throwable {
-
                 itemService.save(item);
             }
 
             @Override
             public void onFinally() {
                 summary();
+                beforehand();
             }
 
         });
@@ -171,6 +203,7 @@ public class IncomeItemCtrl {
             @Override
             public void onFinally() {
                 summary();
+                beforehand();
             }
 
         });

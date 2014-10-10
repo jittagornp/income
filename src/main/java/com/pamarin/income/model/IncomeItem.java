@@ -24,6 +24,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
+import org.eclipse.persistence.annotations.Index;
 
 /**
  *
@@ -51,13 +52,16 @@ public class IncomeItem implements Serializable {
     private String incomeName;
     @Column(name = "income_value", nullable = false)
     private Double incomeValue;
+    @Index
     @Column(name = "income_date", nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date incomeDate;
-    @Column(name = "income_time", nullable = false)
+    @Index
+    @Column(name = "income_time")
     @Temporal(javax.persistence.TemporalType.TIME)
     private Date incomeTime;
     //
+    @Index
     @ManyToOne
     @JoinColumn(
             name = "user_id",

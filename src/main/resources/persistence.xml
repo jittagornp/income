@@ -8,6 +8,7 @@
     <class>com.pamarin.income.model.User</class>
     <class>com.pamarin.income.model.Suggestion</class>
     <class>com.pamarin.income.model.Settings</class>
+    <class>com.pamarin.income.model.SummaryBeforehand</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <!--
@@ -81,7 +82,6 @@
         -->
       <property name="eclipselink.weaving" value="static"/>
       <property name="eclipselink.ddl-generation" value="create-tables"/>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>

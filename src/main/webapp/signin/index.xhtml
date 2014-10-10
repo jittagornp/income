@@ -79,6 +79,7 @@
                     </p:outputPanel>
                     <p:outputPanel>
                         <h:outputText value="${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}"
+                                      rendered="#{not empty request.getParameter('authenFail')}"
                                       styleClass="red-text"/>
                     </p:outputPanel>
                 </h:panelGrid>

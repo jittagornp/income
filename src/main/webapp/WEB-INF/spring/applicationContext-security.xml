@@ -21,6 +21,7 @@
                 delete-cookies="JSSESSIONID"/>
         
         <form-login login-page="/signin/"
+                    authentication-failure-url="/signin/?authenFail=true"
                     login-processing-url="/login"
                     username-parameter="username"
                     password-parameter="password"
