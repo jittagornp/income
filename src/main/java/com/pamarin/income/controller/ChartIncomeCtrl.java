@@ -9,6 +9,8 @@ import com.pamarin.income.model.IncomeItem;
 import com.pamarin.income.model.User;
 import com.pamarin.income.security.SecurityUtils;
 import com.pamarin.income.service.IncomeItemService;
+import static com.pamarin.income.util.CollectionUtils.isEmpty;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Currency;
 import java.util.Date;
@@ -44,26 +46,25 @@ public class ChartIncomeCtrl {
         LineChartSeries series = new LineChartSeries();
         series.setLabel("รายรับ");
         List<IncomeItem> items = service.findByOwnerAndBetweenIncomeDate(user, startDate, endDate);
-        if (items != null) {
+        Format format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        if (isEmpty(items)) {
+            series.set(format.format(new Date()), 0);
+        } else {
             for (IncomeItem item : items) {
-                series.set(new SimpleDateFormat("yyyy-MM-dd").format(item.getIncomeDate()), item.getIncomeValue());
+                series.set(format.format(item.getIncomeDate()), item.getIncomeValue());
             }
-
-            LOG.debug("chart size --> {}", items.size());
         }
 
         lineChartModel.addSeries(series);
         lineChartModel.setTitle("ภาพรวมรายรับ");
-        lineChartModel.setAnimate(true);
-        lineChartModel.setZoom(true);
         lineChartModel.setLegendPosition("ne");
         Axis yAxis = lineChartModel.getAxis(AxisType.Y);
         yAxis.setMin(0);
-        yAxis.setLabel("จำนวนเงิน (" + Currency.getInstance(user.getSettings().getCurrencyCode()).getSymbol()+ ")");
+        yAxis.setLabel("จำนวนเงิน (" + Currency.getInstance(user.getSettings().getCurrencyCode()).getSymbol() + ")");
         DateAxis axis = new DateAxis("วัน/เวลา");
         axis.setTickAngle(-50);
         axis.setTickFormat("%b %#d, %y");
-         
+
         lineChartModel.getAxes().put(AxisType.X, axis);
     }
 

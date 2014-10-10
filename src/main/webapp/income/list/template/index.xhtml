@@ -195,7 +195,9 @@
     <p:outputPanel styleClass="block">
         <h3 class="block-header">กราฟ</h3>
         <p:outputPanel styleClass="block-body">
-            
+            <p:chart type="line" 
+                     model="#{chartIncomeCtrl.lineChartModel}"
+                     style="width : 750px;"/>
         </p:outputPanel>
     </p:outputPanel>
 </ui:composition>
