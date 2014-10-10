@@ -6,6 +6,7 @@
 package com.pamarin.income.controller;
 
 import com.google.common.io.ByteStreams;
+import com.pamarin.income.App;
 import com.pamarin.income.component.MailCallback;
 import com.pamarin.income.component.MailSender;
 import com.pamarin.income.exception.UncheckedIOException;
@@ -58,6 +59,8 @@ public class SuggestionCtrl {
     private UploadedFile file;
     @Autowired
     private MailSender mailSender;
+    @Autowired
+    private App app;
 
     @PostConstruct
     public void postConstruct() {
@@ -166,7 +169,7 @@ public class SuggestionCtrl {
         return attachFile;
     }
 
-    private void sendEmail(final File attachFile) {
+    private void sendEmail2Admin(final File attachFile) {
         mailSender.send(new MailCallback() {
 
             @Override
@@ -176,9 +179,21 @@ public class SuggestionCtrl {
                     helper.addAttachment(attachFile.getName(), file);
                 }
 
-                helper.setSubject("ความคิดเห็นจากผู้ใช้");
+                helper.setSubject("ความคิดเห็นจากผู้ใช้ - " + app.getName());
                 helper.setText(getSuggestion().getType() + " : " + getSuggestion().getMessage());
                 helper.setTo(destinationReceiveEmail);
+            }
+        });
+    }
+
+    private void sendEmail2User() {
+        mailSender.send(new MailCallback() {
+
+            @Override
+            public void execute(MimeMessageHelper helper) throws Exception {
+                helper.setSubject("ความคิดเห็นของผู้ใช้ - " + app.getName());
+                helper.setText("ขอบคุณสำหรับความคิดเห็น ทางเราจะรีบตรวจสอบและดำเนินการอย่างเร็วที่สุด");
+                helper.setTo(SecurityUtils.getUser().getUsername());
             }
         });
     }
@@ -202,7 +217,11 @@ public class SuggestionCtrl {
                     attachFile = saveFile();
                 }
 
-                sendEmail(attachFile);
+                sendEmail2Admin(attachFile);
+                if (!SecurityUtils.isAnonymous()) {
+                    sendEmail2User();
+                }
+                
                 service.save(suggestion);
             }
 
