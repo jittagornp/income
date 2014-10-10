@@ -4,12 +4,10 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <non-jta-data-source/>
     <class>com.pamarin.income.model.IncomeItem</class>
-    <class>com.pamarin.income.model.IncomeTag</class>
+    <class>com.pamarin.income.model.Settings</class>
+    <class>com.pamarin.income.model.Suggestion</class>
     <class>com.pamarin.income.model.Tag</class>
     <class>com.pamarin.income.model.User</class>
-    <class>com.pamarin.income.model.Suggestion</class>
-    <class>com.pamarin.income.model.Settings</class>
-    <class>com.pamarin.income.model.SummaryBeforehand</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <!--

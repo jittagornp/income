@@ -25,6 +25,7 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import org.eclipse.persistence.annotations.Index;
+import org.eclipse.persistence.annotations.Indexes;
 
 /**
  *
@@ -32,6 +33,9 @@ import org.eclipse.persistence.annotations.Index;
  */
 @Entity
 @Table(name = "income_item")
+@Indexes(value = {
+    @Index(name = "income_item_icdate_uid_index", columnNames = {"income_date", "user_id"})
+})
 public class IncomeItem implements Serializable {
 
     @Id
@@ -52,11 +56,9 @@ public class IncomeItem implements Serializable {
     private String incomeName;
     @Column(name = "income_value", nullable = false)
     private Double incomeValue;
-    @Index
     @Column(name = "income_date", nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date incomeDate;
-    @Index
     @Column(name = "income_time")
     @Temporal(javax.persistence.TemporalType.TIME)
     private Date incomeTime;
