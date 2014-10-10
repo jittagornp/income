@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @author anonymous
  */
 @Component
-@Scope("application")
+@Scope("session")
 public class SessionCtrl implements Serializable {
 
     private User user;
