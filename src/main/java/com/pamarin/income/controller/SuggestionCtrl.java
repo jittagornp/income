@@ -179,7 +179,7 @@ public class SuggestionCtrl {
                     helper.addAttachment(attachFile.getName(), file);
                 }
 
-                helper.setSubject("ความคิดเห็นจากผู้ใช้ - " + app.getName());
+                helper.setSubject("ความคิดเห็นจากผู้ใช้" + app.getName());
                 helper.setText(getSuggestion().getType() + " : " + getSuggestion().getMessage());
                 helper.setTo(destinationReceiveEmail);
             }
@@ -191,7 +191,7 @@ public class SuggestionCtrl {
 
             @Override
             public void execute(MimeMessageHelper helper) throws Exception {
-                helper.setSubject("ความคิดเห็นของผู้ใช้ - " + app.getName());
+                helper.setSubject("ความคิดเห็นของผู้ใช้" + app.getName());
                 helper.setText("ขอบคุณสำหรับความคิดเห็น ทางเราจะรีบตรวจสอบและดำเนินการอย่างเร็วที่สุด");
                 helper.setTo(SecurityUtils.getUser().getUsername());
             }
