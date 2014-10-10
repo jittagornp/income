@@ -46,8 +46,8 @@
     <ui:define name="itemOptional">
         คิดแบบ
         <p:selectOneRadio value="#{weekIncomeItemCtrl.type}">
-            <f:selectItem itemLabel="วันจันทร์ถึงวันอาทิตย์" itemValue="#{weekIncomeItemCtrl.MONDAY2SUNDAY}"/>
-            <f:selectItem itemLabel="ย้อนหลังไป 7 วัน" itemValue="#{weekIncomeItemCtrl.MINUS7DAY}"/>
+            <f:selectItem itemLabel="วันจันทร์ถึงวันอาทิตย์" itemValue="#{weekIncomeItemCtrl.START2END}"/>
+            <f:selectItem itemLabel="ย้อนหลังไป 7 วัน" itemValue="#{weekIncomeItemCtrl.BACK}"/>
         </p:selectOneRadio>
     </ui:define>
 </ui:composition>

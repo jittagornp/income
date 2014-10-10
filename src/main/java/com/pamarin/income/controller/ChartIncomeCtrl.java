@@ -53,7 +53,7 @@ public class ChartIncomeCtrl {
         }
 
         lineChartModel.addSeries(series);
-        lineChartModel.setTitle("ทิศทางรายรับ");
+        lineChartModel.setTitle("ภาพรวมรายรับ");
         lineChartModel.setAnimate(true);
         lineChartModel.setZoom(true);
         lineChartModel.setLegendPosition("ne");

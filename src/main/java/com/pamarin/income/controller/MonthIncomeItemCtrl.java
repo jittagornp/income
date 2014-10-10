@@ -7,7 +7,6 @@ package com.pamarin.income.controller;
 
 import com.pamarin.income.util.DateUtils;
 import java.util.Date;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -17,77 +16,25 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("view")
-public class MonthIncomeItemCtrl {
+public class MonthIncomeItemCtrl extends AbstractBetweenIncomeItemCtrl {
 
-    private static final String START2END = "start2end";
-    private static final String MINUS30DAY = "minus30day";
-
-    @Autowired
-    private IncomeItemCtrl itemCtrl;
-    private Date date;
-    private String type;
-    //
-    private Date firstDate;
-    private Date lastDate;
-
-    public void reset() {
-        type = START2END;
-        search(null);
-        date = null;
+    @Override
+    protected Date toFirstDate(Date date) {
+        return DateUtils.toFirstDateOfMonth(date);
     }
 
-    public String getSTART2END() {
-        return START2END;
+    @Override
+    protected Date toLastDate(Date date) {
+        return DateUtils.toLastDateOfMonth(date);
     }
 
-    public String getMINUS30DAY() {
-        return MINUS30DAY;
+    @Override
+    protected Date toBackDate(Date date) {
+        return DateUtils.minusDate(date, 29);
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    private void search(Date date) {
-        if (START2END.equals(type)) {
-            firstDate = DateUtils.toFirstDateOfMonth(date);
-            lastDate = DateUtils.toLastDateOfMonth(date);
-        } else {
-            firstDate = DateUtils.minusDate(date, 29);
-            lastDate = DateUtils.toEndTime(date);
-        }
-
-        itemCtrl.setStartDate(firstDate);
-        itemCtrl.setEndDate(lastDate);
-
-        itemCtrl.onSeach();
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Date getFirstDate() {
-        return firstDate;
-    }
-
-    public Date getLastDate() {
-        return lastDate;
-    }
-
-    public void onSearch() {
-        search(date);
-    }
-
-    public void onClear() {
-        reset();
+    @Override
+    protected Date toEndTime(Date date) {
+        return DateUtils.toEndTime(date);
     }
 }
