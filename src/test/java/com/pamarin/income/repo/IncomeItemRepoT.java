@@ -34,14 +34,14 @@ public class IncomeItemRepoT extends AbstractTestNGSpringContextTests {
     @Autowired
     private IncomeItemRepo repo;
 
-//    @Test
-//    public void findMaxItemByOwner() {
-//        User owner = new User();
-//        owner.setId(1);
-//        PageRequest request = new PageRequest(0, 1, Sort.Direction.DESC, "incomeValue");
-//        Page<Statistic> result = repo.findItemByOwner(owner, request);
-//        Assert.assertEquals("yyy", result.getContent().get(0).getKey());
-//    }
+    @Test
+    public void findMaxItemByOwner() {
+        User owner = new User();
+        owner.setId(1);
+        PageRequest request = new PageRequest(0, 1, Sort.Direction.DESC, "incomeValue");
+        Page<Statistic> result = repo.findItemByOwner(owner, request);
+        Assert.assertEquals("yyy", result.getContent().get(0).getKey());
+    }
 
     @Test
     public void findByOwner() {
