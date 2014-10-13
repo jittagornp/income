@@ -8,7 +8,7 @@ package com.pamarin.income.controller;
 import com.pamarin.income.model.Statistic;
 import com.pamarin.income.model.User;
 import com.pamarin.income.security.SecurityUtils;
-import com.pamarin.income.service.StatisticService;
+import com.pamarin.income.service.StatisticIncomeService;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("view")
-public class StatisticCtrl {
+public class StatisticIncomeCtrl {
 
     private Statistic maxItem;
     private Statistic minItem;
@@ -30,7 +30,7 @@ public class StatisticCtrl {
     private Statistic minItemTag;
 
     @Autowired
-    private StatisticService service;
+    private StatisticIncomeService service;
 
     public void process(Date startDate, Date endDate) {
         User user = SecurityUtils.getUser();

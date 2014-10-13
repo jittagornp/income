@@ -13,7 +13,7 @@ import java.util.Date;
  *
  * @author jittagornp
  */
-public interface StatisticService {
+public interface StatisticIncomeService {
 
     Statistic findMaxItemByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate);
 

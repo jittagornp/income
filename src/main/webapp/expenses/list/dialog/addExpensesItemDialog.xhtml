@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:f="http://java.sun.com/jsf/core">
+    <p:dialog header="เพิ่มรายการรายจ่าย"
+              modal="true"
+              width="550"
+              resizable="false"
+              id="addExpensesItemDialog"
+              widgetVar="addExpensesItemWidgetDialog">
+        <h:form id="addExpensesItemDialogForm" 
+                prependId="false">
+            <h:panelGrid class="form-grid"
+                         columns="2">
+                <p:outputPanel>
+                    <h:outputText value="รายการ"/>
+                    <h:outputText value="*" styleClass="require"/>
+                </p:outputPanel>
+                <p:outputPanel>
+                    <p:inputText id="addExpensesName" 
+                                 required="true"
+                                 styleClass="require-title"
+                                 value="#{expensesItemCtrl.item.expensesName}"/>
+                    <p:watermark for="addExpensesName" value="พิมพ์ชื่อรายจ่าย"/>
+                </p:outputPanel>
+
+                <p:outputPanel>
+                    <h:outputText value="จำนวนเงิน"/>
+                    <h:outputText value="*" styleClass="require"/>
+                </p:outputPanel>
+                <p:outputPanel>
+                    <p:inputText id="addExpensesValue" 
+                                 required="true"
+                                 styleClass="require-title"
+                                 style="width: 300px;"
+                                 value="#{expensesItemCtrl.item.expensesValue}"/>
+                    <p:watermark for="addExpensesValue" value="พิมพ์ตัวเลขเท่านั้น"/>
+                    <p:spacer width="10"/>
+                    <h:outputText value="#{localeCtrl.currency.symbol}"/>
+                </p:outputPanel>
+
+                <p:outputPanel>
+                    <h:outputText value="วัน"/>
+                </p:outputPanel>
+                <p:outputPanel>
+                    <p:inputText id="addExpensesDate" 
+                                 style="width: 180px;"
+                                 value="#{expensesItemCtrl.item.expensesDate}" 
+                                 styleClass="ic-calendar">
+                        <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
+                    </p:inputText>
+                    <p:watermark for="addExpensesDate" value="เลือกวันที่มีรายจ่าย"/>
+                    <p:spacer width="5"/>
+                    <h:outputText value="เวลา" style="text-align: center; width: 30px; display: inline-block"/>
+                    <p:spacer width="5"/>
+                    <div style="display: inline-block" 
+                         class="input-group clockpicker" 
+                         data-placement="right" 
+                         data-align="bottom" 
+                         data-autoclose="true">
+                        <p:inputText value="#{expensesItemCtrl.item.expensesTime}"
+                                     style="width: 115px">
+                            <f:convertDateTime pattern="HH:mm"/>
+                        </p:inputText>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-time"></span>
+                        </span>
+                    </div>
+                </p:outputPanel>
+
+                <p:outputPanel>
+                    <h:outputText value="ป้ายกำกับ"/>
+                </p:outputPanel>
+                <p:outputPanel styleClass="has-tag-list">
+                    <p:dataList value="#{expensesItemCtrl.item.tags}"
+                                var="tag"
+                                rows="25"
+                                rowIndexVar="counter"
+                                styleClass="tag-list"
+                                emptyMessage="ยังไม่มีป้ายกำกับ"
+                                paginatorPosition="bottom">
+
+                        <div class="tag-item">
+                            <p:commandLink value="#{tag.name}"/>
+                            <p:commandButton icon="ui-icon-close"
+                                             update="@form"
+                                             title="ลบ"
+                                             process="@this"
+                                             actionListener="#{expensesItemCtrl.onDeleteTag()}"
+                                             styleClass="tooltip-s delete-tag-button white-button">
+                                <f:param name="tagId" value="#{tag.id}"/>
+                            </p:commandButton>
+                        </div>
+                    </p:dataList>
+                    <p:commandButton title="คลิกเพื่อเพิ่มป้ายกำกับ"
+                                     icon="ui-icon-plus"
+                                     update=":tagDialogForm"
+                                     process="@this"
+                                     actionListener="#{expensesItemCtrl.onAddTag()}" 
+                                     oncomplete="PF('tagWidgetDialog').show();"
+                                     styleClass="green-button tooltip-w"/>
+                    <div class="clear"></div>
+                </p:outputPanel>
+            </h:panelGrid>
+            <div class="dialog-footer">
+                <div class="dialog-footer-left">
+                    <p:commandButton value="เริ่มใหม่"
+                                     update="@form"
+                                     actionListener="#{expensesItemCtrl.onCreateItem()}"
+                                     styleClass="white-button"
+                                     icon="ui-icon-refresh"/>
+                </div>
+                <div class="dialog-footer-right">
+                    <p:commandButton value="เพิ่ม"
+                                     actionListener="#{expensesItemCtrl.onAddItem()}"
+                                     update="@(.item-list), @(.block-body), :notification"
+                                     oncomplete="PF('addExpensesItemWidgetDialog').hide();"
+                                     icon="ui-icon-check"
+                                     styleClass="green-button"/>
+                    <p:spacer width="10"/>
+                    <p:commandButton value="ยกเลิก"
+                                     type="button"
+                                     onclick="PF('addExpensesItemWidgetDialog').hide();"
+                                     icon="ui-icon-close"
+                                     styleClass="white-button"/>
+                </div>
+            </div>
+        </h:form>
+    </p:dialog>
+</ui:composition>

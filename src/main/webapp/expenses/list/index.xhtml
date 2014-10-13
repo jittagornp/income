@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition  template="/static/template/index.xhtml"
+                 xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="container">
+        <div class="container-header">
+            <div class="container-header-left">
+                <h1>รายจ่าย</h1>
+            </div>
+        </div>
+        <p:outputPanel styleClass="tab-header">
+            <h:form prependId="false">
+                <ul class="tab-menu">
+                    <li class="#{expensesItemTabCtrl.activeTab('all')}">
+                        <p:commandLink value="ทั้งหมด"
+                                       title="ตั้งแต่เริ่มบันทึก"
+                                       styleClass="ajax-status-loading"
+                                       actionListener="#{expensesItemTabCtrl.onChangeTab()}"
+                                       update="@(.tab-container), @form">
+                            <f:param name="tab" value="all"/>
+                        </p:commandLink>
+                    </li>
+                    <li class="#{expensesItemTabCtrl.activeTab('day')}">
+                        <p:commandLink value="วัน"
+                                       title="#{dateFormat.format(currentCtrl.date, 'EEEE dd MMMM yyyy')}"
+                                       styleClass="ajax-status-loading"
+                                       actionListener="#{expensesItemTabCtrl.onChangeTab()}"
+                                       update="@(.tab-container), @form">
+                            <f:param name="tab" value="day"/>
+                        </p:commandLink>
+                    </li>
+                    <li class="#{expensesItemTabCtrl.activeTab('week')}">
+                        <p:commandLink value="สัปดาห์"
+                                       title="#{dateFormat.format(currentCtrl.firstDateOfWeek, 'EEE dd MMM yyyy')} - #{dateFormat.format(currentCtrl.lastDateOfWeek, 'EEE dd MMM yyyy')}"
+                                       styleClass="ajax-status-loading"
+                                       actionListener="#{expensesItemTabCtrl.onChangeTab()}"
+                                       update="@(.tab-container), @form">
+                            <f:param name="tab" value="week"/>
+                        </p:commandLink>
+                    </li>
+                    <li class="#{expensesItemTabCtrl.activeTab('month')}">
+                        <p:commandLink value="เดือน"
+                                       title="#{dateFormat.format(currentCtrl.date, 'MMMM')}"
+                                       styleClass="ajax-status-loading"
+                                       actionListener="#{expensesItemTabCtrl.onChangeTab()}"
+                                       update="@(.tab-container), @form">
+                            <f:param name="tab" value="month"/>
+                        </p:commandLink>
+                    </li>
+                    <li class="#{expensesItemTabCtrl.activeTab('year')}">
+                        <p:commandLink value="ปี"
+                                       title="#{dateFormat.format(currentCtrl.date, 'yyyy')}"
+                                       styleClass="ajax-status-loading"
+                                       actionListener="#{expensesItemTabCtrl.onChangeTab()}"
+                                       update="@(.tab-container), @form">
+                            <f:param name="tab" value="year"/>
+                        </p:commandLink>
+                    </li>
+                    <li class="clear"></li>
+                </ul>
+            </h:form>
+        </p:outputPanel>
+        <p:outputPanel styleClass="tab-container">
+            <p:outputPanel rendered="#{expensesItemTabCtrl.isTab('all')}">
+                <ui:include src="/expenses/list/all/index.xhtml"/>
+            </p:outputPanel>
+
+            <p:outputPanel rendered="#{expensesItemTabCtrl.isTab('day')}">
+                <ui:include src="/expenses/list/day/index.xhtml"/>
+            </p:outputPanel>
+
+            <p:outputPanel rendered="#{expensesItemTabCtrl.isTab('week')}">
+                <ui:include src="/expenses/list/week/index.xhtml"/>
+            </p:outputPanel>
+            
+            <p:outputPanel rendered="#{expensesItemTabCtrl.isTab('month')}">
+                <ui:include src="/expenses/list/month/index.xhtml"/>
+            </p:outputPanel>
+            
+            <p:outputPanel rendered="#{expensesItemTabCtrl.isTab('year')}">
+                <ui:include src="/expenses/list/year/index.xhtml"/>
+            </p:outputPanel>
+        </p:outputPanel>
+    </ui:define>
+
+    <ui:define name="dialog">
+        <ui:include src="/expenses/list/dialog/addExpensesItemDialog.xhtml"/>
+        <ui:include src="/expenses/list/dialog/editExpensesItemDialog.xhtml"/>
+        <ui:include src="/expenses/list/dialog/deleteExpensesItemDialog.xhtml"/>
+        <ui:include src="/dialogs/tagDialog.xhtml"/>
+    </ui:define>
+</ui:composition>

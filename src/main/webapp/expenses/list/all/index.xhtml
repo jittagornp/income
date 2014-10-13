@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition  template="/expenses/list/template/index.xhtml"
+                 xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="itemReset">
+        #{allExpensesItemCtrl.reset()}
+    </ui:define>
+
+    <ui:define name="itemSearch">
+        <h:outputText value="ตั้งแต่ : "/>
+        <p:inputText id="startDate" 
+                     value="#{expensesItemCtrl.startDate}" 
+                     styleClass="ic-calendar">
+            <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
+        </p:inputText>
+        <p:watermark for="startDate" value="วันที่"/>
+        <h:outputText value=" ถึง : "/>
+        <p:inputText id="endDate" 
+                     value="#{expensesItemCtrl.endDate}" 
+                     styleClass="ic-calendar">
+            <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
+        </p:inputText>
+        <p:watermark for="endDate" value="วันที่"/>
+        <p:spacer width="5"/>
+        <span class="button-group">
+            <p:commandButton value="ค้นหา"
+                             icon="ui-icon-search"
+                             update="@(.block-body), @(.item-list), @form"
+                             actionListener="#{expensesItemCtrl.onSeach()}"
+                             styleClass="white-button"/>
+            <p:commandButton icon="ui-icon-refresh"
+                             title="เคลียร์ผลลัพธ์"
+                             update="@(.block-body), @(.item-list), @form"
+                             actionListener="#{expensesItemCtrl.onClear()}"
+                             styleClass="tooltip-w white-button"/>
+        </span>
+    </ui:define>
+</ui:composition>

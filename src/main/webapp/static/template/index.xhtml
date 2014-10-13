@@ -91,6 +91,9 @@
                     <li style="display: #{empty facesContext.externalContext.userPrincipal.name ? 'none' : 'list-item'}">
                         <h:outputLink value="#{facesContext.externalContext.requestContextPath}/income/list/">รายรับ</h:outputLink>
                     </li>
+                    <li style="display: #{empty facesContext.externalContext.userPrincipal.name ? 'none' : 'list-item'}">
+                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/expenses/list/">รายจ่าย</h:outputLink>
+                    </li>
                 </ul>
             </div>
             <div class="container">

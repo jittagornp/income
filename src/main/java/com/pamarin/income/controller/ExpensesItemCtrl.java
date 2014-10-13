@@ -5,13 +5,12 @@
  */
 package com.pamarin.income.controller;
 
-import com.pamarin.income.lazyload.IncomeItemLazy;
-import com.pamarin.income.model.IncomeItem;
+import com.pamarin.income.lazyload.ExpensesItemLazy;
+import com.pamarin.income.model.ExpensesItem;
 import com.pamarin.income.model.Tag;
 import com.pamarin.income.model.TagListener;
-import com.pamarin.income.model.User;
 import com.pamarin.income.security.SecurityUtils;
-import com.pamarin.income.service.IncomeItemService;
+import com.pamarin.income.service.ExpensesItemService;
 import com.pamarin.income.util.MessageNotifyCallback;
 import com.pamarin.income.util.Notification;
 import com.pamarin.income.util.RequestUtils;
@@ -29,13 +28,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("view")
-public class IncomeItemCtrl {
+public class ExpensesItemCtrl {
 
-    private static final Logger LOG = LoggerFactory.getLogger(IncomeItemCtrl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ExpensesItemCtrl.class);
     @Autowired
-    private IncomeItemService itemService;
-    private IncomeItemLazy lazy;
-    private IncomeItem item;
+    private ExpensesItemService itemService;
+    private ExpensesItemLazy lazy;
+    private ExpensesItem item;
     @Autowired
     private TagCtrl tagCtrl;
     //
@@ -43,11 +42,11 @@ public class IncomeItemCtrl {
     private Date endDate;
     //
     @Autowired
-    private SummaryIncomeCtrl summaryIncomeCtrl;
+    private SummaryExpensesCtrl summaryExpensesCtrl;
     @Autowired
-    private StatisticIncomeCtrl statisticCtrl;
+    private StatisticExpensesCtrl statisticCtrl;
     @Autowired
-    private ChartIncomeCtrl chartIncomeCtrl;
+    private ChartExpensesCtrl chartExpensesCtrl;
     private boolean showStatistic;
 
     @PostConstruct
@@ -62,7 +61,7 @@ public class IncomeItemCtrl {
     }
 
     private void summary() {
-        summaryIncomeCtrl.summary(
+        summaryExpensesCtrl.summary(
                 getStartDate(),
                 getEndDate()
         );
@@ -74,7 +73,7 @@ public class IncomeItemCtrl {
                 getEndDate()
         );
 
-        chartIncomeCtrl.createChart(
+        chartExpensesCtrl.createChart(
                 getStartDate(),
                 getEndDate()
         );
@@ -86,16 +85,16 @@ public class IncomeItemCtrl {
         return showStatistic;
     }
 
-    public IncomeItemLazy getLazy() {
+    public ExpensesItemLazy getLazy() {
         if (lazy == null) {
-            lazy = new IncomeItemLazy();
+            lazy = new ExpensesItemLazy();
         }
 
         return lazy;
     }
 
     public void onSeach() {
-        lazy = new IncomeItemLazy(
+        lazy = new ExpensesItemLazy(
                 getStartDate(),
                 getEndDate()
         );
@@ -110,11 +109,11 @@ public class IncomeItemCtrl {
         onSeach();
     }
 
-    public void setLazy(IncomeItemLazy lazy) {
+    public void setLazy(ExpensesItemLazy lazy) {
         this.lazy = lazy;
     }
 
-    public IncomeItem getItem() {
+    public ExpensesItem getItem() {
         if (item == null) {
             onCreateItem();
         }
@@ -122,13 +121,13 @@ public class IncomeItemCtrl {
         return item;
     }
 
-    public void setItem(IncomeItem item) {
+    public void setItem(ExpensesItem item) {
         this.item = item;
     }
 
     public void onCreateItem() {
-        item = new IncomeItem();
-        item.setIncomeDate(new Date());
+        item = new ExpensesItem();
+        item.setExpensesDate(new Date());
         item.setOwner(SecurityUtils.getUser());
     }
 

@@ -7,9 +7,9 @@ package com.pamarin.income.service.impl;
 
 import com.pamarin.income.model.Statistic;
 import com.pamarin.income.model.User;
-import com.pamarin.income.repository.IncomeItemRepo;
-import com.pamarin.income.repository.NativeIncomeItemRepo;
-import com.pamarin.income.service.StatisticService;
+import com.pamarin.income.repository.ExpensesItemRepo;
+import com.pamarin.income.repository.NativeExpensesItemRepo;
+import com.pamarin.income.service.StatisticExpensesService;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,20 +24,20 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class StatisticServiceImpl implements StatisticService {
+public class StatisticExpensesServiceImpl implements StatisticExpensesService {
 
     @Autowired
-    private IncomeItemRepo repo;
+    private ExpensesItemRepo repo;
     @Autowired
-    private NativeIncomeItemRepo nativeRepo;
+    private NativeExpensesItemRepo nativeRepo;
 
-    private Statistic findItemByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate, Sort.Direction direction) {
-        PageRequest request = new PageRequest(0, 1, direction, "incomeValue");
+    private Statistic findItemByOwnerAndBetweenExpensesDate(User user, Date startDate, Date endDate, Sort.Direction direction) {
+        PageRequest request = new PageRequest(0, 1, direction, "expensesValue");
         Page<Statistic> result;
         if (startDate == null || endDate == null) {
             result = repo.findItemByOwner(user, request);
         } else {
-            result = repo.findItemByOwnerAndBetweenIncomeDate(user, startDate, endDate, request);
+            result = repo.findItemByOwnerAndBetweenExpensesDate(user, startDate, endDate, request);
         }
 
         if (result.getTotalElements() == 0) {
@@ -48,8 +48,8 @@ public class StatisticServiceImpl implements StatisticService {
     }
 
     @Override
-    public Statistic findMaxItemByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate) {
-        return findItemByOwnerAndBetweenIncomeDate(
+    public Statistic findMaxItemByOwnerAndBetweenExpensesDate(User user, Date startDate, Date endDate) {
+        return findItemByOwnerAndBetweenExpensesDate(
                 user,
                 startDate,
                 endDate,
@@ -58,8 +58,8 @@ public class StatisticServiceImpl implements StatisticService {
     }
 
     @Override
-    public Statistic findMinItemByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate) {
-        return findItemByOwnerAndBetweenIncomeDate(
+    public Statistic findMinItemByOwnerAndBetweenExpensesDate(User user, Date startDate, Date endDate) {
+        return findItemByOwnerAndBetweenExpensesDate(
                 user,
                 startDate,
                 endDate,
@@ -68,7 +68,7 @@ public class StatisticServiceImpl implements StatisticService {
     }
 
     @Override
-    public Statistic findMaxItemGroupByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate) {
+    public Statistic findMaxItemGroupByOwnerAndBetweenExpensesDate(User user, Date startDate, Date endDate) {
         return nativeRepo.findItemGroupByOwner(
                 user,
                 "DESC",
@@ -78,7 +78,7 @@ public class StatisticServiceImpl implements StatisticService {
     }
 
     @Override
-    public Statistic findMinItemGroupByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate) {
+    public Statistic findMinItemGroupByOwnerAndBetweenExpensesDate(User user, Date startDate, Date endDate) {
         return nativeRepo.findItemGroupByOwner(
                 user,
                 "ASC",
@@ -88,7 +88,7 @@ public class StatisticServiceImpl implements StatisticService {
     }
 
     @Override
-    public Statistic findMaxItemTagByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate) {
+    public Statistic findMaxItemTagByOwnerAndBetweenExpensesDate(User user, Date startDate, Date endDate) {
         return nativeRepo.findItemTagByOwner(
                 user,
                 "DESC",
@@ -98,7 +98,7 @@ public class StatisticServiceImpl implements StatisticService {
     }
 
     @Override
-    public Statistic findMinItemTagByOwnerAndBetweenIncomeDate(User user, Date startDate, Date endDate) {
+    public Statistic findMinItemTagByOwnerAndBetweenExpensesDate(User user, Date startDate, Date endDate) {
         return nativeRepo.findItemTagByOwner(
                 user,
                 "ASC",

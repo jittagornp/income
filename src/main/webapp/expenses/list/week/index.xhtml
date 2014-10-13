@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition  template="/expenses/list/template/index.xhtml"
+                 xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="itemReset">
+        #{weekExpensesItemCtrl.reset()}
+    </ui:define>
+
+    <ui:define name="itemSearch">
+        <p:inputText id="date" 
+                     value="#{weekExpensesItemCtrl.date}" 
+                     styleClass="ic-calendar">
+            <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
+        </p:inputText>
+        <p:watermark for="date" value="เลือกวันในสัปดาห์นั้น"/>
+        <p:spacer width="5"/>
+        <span class="button-group">
+            <p:commandButton value="ค้นหา"
+                             icon="ui-icon-search"
+                             update="@(.block-body), @(.item-list), @form"
+                             actionListener="#{weekExpensesItemCtrl.onSearch()}"
+                             styleClass="white-button"/>
+            <p:commandButton icon="ui-icon-refresh"
+                             title="เคลียร์ผลลัพธ์"
+                             update="@(.block-body), @(.item-list), @form"
+                             actionListener="#{weekExpensesItemCtrl.onClear()}"
+                             styleClass="tooltip-w white-button"/>
+        </span>
+        <span class="date-condition">
+            เงื่อนไข
+            <h:outputText value="#{weekExpensesItemCtrl.firstDate}">
+                <f:convertDateTime pattern="#{localeCtrl.shortDateCalendarFormat}"/>
+            </h:outputText>
+            -
+            <h:outputText value="#{weekExpensesItemCtrl.lastDate}">
+                <f:convertDateTime pattern="#{localeCtrl.shortDateCalendarFormat}"/>
+            </h:outputText>
+        </span>
+    </ui:define>
+
+
+    <ui:define name="itemOptional">
+        คิดแบบ
+        <p:selectOneRadio value="#{weekExpensesItemCtrl.type}">
+            <f:selectItem itemLabel="วันจันทร์ถึงวันอาทิตย์" itemValue="#{weekExpensesItemCtrl.START2END}"/>
+            <f:selectItem itemLabel="ย้อนหลังไป 7 วัน" itemValue="#{weekExpensesItemCtrl.BACK}"/>
+        </p:selectOneRadio>
+    </ui:define>
+</ui:composition>

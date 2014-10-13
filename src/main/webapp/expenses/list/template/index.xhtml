@@ -19,15 +19,15 @@
                         <span class="button-group">
                             <p:commandButton value="รายการ"
                                              title="ดูในมุมมองรายการ"
-                                             styleClass="tooltip-s white-button #{incomeItemViewCtrl.active('item')}"
-                                             actionListener="#{incomeItemViewCtrl.onChangeView()}"
+                                             styleClass="tooltip-s white-button #{expensesItemViewCtrl.active('item')}"
+                                             actionListener="#{expensesItemViewCtrl.onChangeView()}"
                                              update="@form, @(.view-panel)">
                                 <f:param name="view" value="item"/>
                             </p:commandButton>
                             <p:commandButton icon="ui-icon-tag"
                                              title="ดูในมุมมองป้ายกำกับ"
-                                             styleClass="tooltip-s white-button #{incomeItemViewCtrl.active('tag')}"
-                                             actionListener="#{incomeItemViewCtrl.onChangeView()}"
+                                             styleClass="tooltip-s white-button #{expensesItemViewCtrl.active('tag')}"
+                                             actionListener="#{expensesItemViewCtrl.onChangeView()}"
                                              update="@form, @(.view-panel)">
                                 <f:param name="view" value="tag"/>
                             </p:commandButton>
@@ -35,19 +35,19 @@
                     </ui:remove>
                     <p:spacer width="10"/>
                     <p:commandButton value="เพิ่มรายการ"
-                                     actionListener="#{incomeItemCtrl.onCreateItem()}"
-                                     update=":addIncomeItemDialogForm"
+                                     actionListener="#{expensesItemCtrl.onCreateItem()}"
+                                     update=":addExpensesItemDialogForm"
                                      styleClass="green-button"
-                                     oncomplete="PF('addIncomeItemWidgetDialog').show();"
+                                     oncomplete="PF('addExpensesItemWidgetDialog').show();"
                                      icon="ui-icon-plus"/>
                 </div>
             </div>
         </h:form>
         <p:outputPanel styleClass="view-panel">
-            <p:outputPanel rendered="#{incomeItemViewCtrl.isView('item')}">
+            <p:outputPanel rendered="#{expensesItemViewCtrl.isView('item')}">
                 <ui:include src="item/index.xhtml"/>
             </p:outputPanel>
-            <p:outputPanel rendered="#{incomeItemViewCtrl.isView('tag')}">
+            <p:outputPanel rendered="#{expensesItemViewCtrl.isView('tag')}">
                 <ui:include src="tag/index.xhtml"/>
             </p:outputPanel>
         </p:outputPanel>
@@ -62,7 +62,7 @@
                     รายรับ <br/> (ยังไม่หักรายจ่าย)
                 </p:outputPanel>
                 <p:outputPanel>
-                    <h:outputText value="#{numberFormat.format(summaryIncomeCtrl.summary)}" styleClass="green-text"/>
+                    <h:outputText value="#{numberFormat.format(summaryExpensesCtrl.summary)}" styleClass="green-text"/>
                     <p:spacer width="10"/>
                     <h:outputText value="#{localeCtrl.currency.symbol}"/>
                 </p:outputPanel>
@@ -70,7 +70,7 @@
                     จำนวน 
                 </p:outputPanel>
                 <p:outputPanel>
-                    <h:outputText value="#{summaryIncomeCtrl.totalItems}" styleClass="green-text"/>
+                    <h:outputText value="#{summaryExpensesCtrl.totalItems}" styleClass="green-text"/>
                     <p:spacer width="10"/>
                     <h:outputText value="รายการ"/>
                 </p:outputPanel>
@@ -78,7 +78,7 @@
                     ตั้งแต่วันที่
                 </p:outputPanel>
                 <p:outputPanel>
-                    <h:outputText value="#{summaryIncomeCtrl.startDate}" styleClass="green-text">
+                    <h:outputText value="#{summaryExpensesCtrl.startDate}" styleClass="green-text">
                         <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
                     </h:outputText>
                 </p:outputPanel>
@@ -86,7 +86,7 @@
                     ถึงวันที่
                 </p:outputPanel>
                 <p:outputPanel>
-                    <h:outputText value="#{summaryIncomeCtrl.endDate}" styleClass="green-text">
+                    <h:outputText value="#{summaryExpensesCtrl.endDate}" styleClass="green-text">
                         <f:convertDateTime pattern="#{localeCtrl.calendarFormat}"/>
                     </h:outputText>
                 </p:outputPanel>
@@ -97,11 +97,11 @@
         <p:commandButton value="โหลดเพิ่มเติม"
                          update="@(.statistic-panel), @form"
                          styleClass="white-button"
-                         rendered="#{not incomeItemCtrl.showStatistic}"
-                         actionListener="#{incomeItemCtrl.onProcessStatistic()}"/>
+                         rendered="#{not expensesItemCtrl.showStatistic}"
+                         actionListener="#{expensesItemCtrl.onProcessStatistic()}"/>
     </h:form>
     <p:outputPanel styleClass="statistic-panel"> 
-        <p:outputPanel styleClass="block" rendered="#{incomeItemCtrl.showStatistic}">
+        <p:outputPanel styleClass="block" rendered="#{expensesItemCtrl.showStatistic}">
             <h3 class="block-header">สถิติ</h3>
             <p:outputPanel styleClass="block-body">
                 <div>มองทีละรายการ</div>
@@ -111,13 +111,13 @@
                         รายรับสูงสุด &#8593;
                     </p:outputPanel>
                     <p:outputPanel>
-                        <h:outputText value="#{statisticIncomeCtrl.maxItem.key}" styleClass="green-text"/>
+                        <h:outputText value="#{statisticExpensesCtrl.maxItem.key}" styleClass="green-text"/>
                     </p:outputPanel>
                     <p:outputPanel>
                         เป็นจำนวนเงิน
                     </p:outputPanel>
                     <p:outputPanel>
-                        <h:outputText value="#{numberFormat.format(statisticIncomeCtrl.maxItem.value)}" styleClass="green-text"/>
+                        <h:outputText value="#{numberFormat.format(statisticExpensesCtrl.maxItem.value)}" styleClass="green-text"/>
                         <p:spacer width="10"/>
                         <h:outputText value="#{localeCtrl.currency.symbol}"/>
                     </p:outputPanel>
@@ -125,13 +125,13 @@
                         รายรับต่ำสุด &#8595;
                     </p:outputPanel>
                     <p:outputPanel>
-                        <h:outputText value="#{statisticIncomeCtrl.minItem.key}" styleClass="green-text"/>
+                        <h:outputText value="#{statisticExpensesCtrl.minItem.key}" styleClass="green-text"/>
                     </p:outputPanel>
                     <p:outputPanel>
                         เป็นจำนวนเงิน
                     </p:outputPanel>
                     <p:outputPanel>
-                        <h:outputText value="#{numberFormat.format(statisticIncomeCtrl.minItem.value)}" styleClass="green-text"/>
+                        <h:outputText value="#{numberFormat.format(statisticExpensesCtrl.minItem.value)}" styleClass="green-text"/>
                         <p:spacer width="10"/>
                         <h:outputText value="#{localeCtrl.currency.symbol}"/>
                     </p:outputPanel>
@@ -143,13 +143,13 @@
                         รายรับสูงสุด &#8593;
                     </p:outputPanel>
                     <p:outputPanel>
-                        <h:outputText value="#{statisticIncomeCtrl.maxItemGroup.key}" styleClass="green-text"/>
+                        <h:outputText value="#{statisticExpensesCtrl.maxItemGroup.key}" styleClass="green-text"/>
                     </p:outputPanel>
                     <p:outputPanel>
                         เป็นจำนวนเงิน
                     </p:outputPanel>
                     <p:outputPanel>
-                        <h:outputText value="#{numberFormat.format(statisticIncomeCtrl.maxItemGroup.value)}" styleClass="green-text"/>
+                        <h:outputText value="#{numberFormat.format(statisticExpensesCtrl.maxItemGroup.value)}" styleClass="green-text"/>
                         <p:spacer width="10"/>
                         <h:outputText value="#{localeCtrl.currency.symbol}"/>
                     </p:outputPanel>
@@ -157,13 +157,13 @@
                         รายรับต่ำสุด &#8595;
                     </p:outputPanel>
                     <p:outputPanel>
-                        <h:outputText value="#{statisticIncomeCtrl.minItemGroup.key}" styleClass="green-text"/>
+                        <h:outputText value="#{statisticExpensesCtrl.minItemGroup.key}" styleClass="green-text"/>
                     </p:outputPanel>
                     <p:outputPanel>
                         เป็นจำนวนเงิน
                     </p:outputPanel>
                     <p:outputPanel>
-                        <h:outputText value="#{numberFormat.format(statisticIncomeCtrl.minItemGroup.value)}" styleClass="green-text"/>
+                        <h:outputText value="#{numberFormat.format(statisticExpensesCtrl.minItemGroup.value)}" styleClass="green-text"/>
                         <p:spacer width="10"/>
                         <h:outputText value="#{localeCtrl.currency.symbol}"/>
                     </p:outputPanel>
@@ -175,13 +175,13 @@
                         รายรับสูงสุด &#8593;
                     </p:outputPanel>
                     <p:outputPanel>
-                        <h:outputText value="#{statisticIncomeCtrl.maxItemTag.key}" styleClass="green-text"/>
+                        <h:outputText value="#{statisticExpensesCtrl.maxItemTag.key}" styleClass="green-text"/>
                     </p:outputPanel>
                     <p:outputPanel>
                         เป็นจำนวนเงิน
                     </p:outputPanel>
                     <p:outputPanel>
-                        <h:outputText value="#{numberFormat.format(statisticIncomeCtrl.maxItemTag.value)}" styleClass="green-text"/>
+                        <h:outputText value="#{numberFormat.format(statisticExpensesCtrl.maxItemTag.value)}" styleClass="green-text"/>
                         <p:spacer width="10"/>
                         <h:outputText value="#{localeCtrl.currency.symbol}"/>
                     </p:outputPanel>
@@ -189,24 +189,24 @@
                         รายรับต่ำสุด &#8595;
                     </p:outputPanel>
                     <p:outputPanel>
-                        <h:outputText value="#{statisticIncomeCtrl.minItemTag.key}" styleClass="green-text"/>
+                        <h:outputText value="#{statisticExpensesCtrl.minItemTag.key}" styleClass="green-text"/>
                     </p:outputPanel>
                     <p:outputPanel>
                         เป็นจำนวนเงิน
                     </p:outputPanel>
                     <p:outputPanel>
-                        <h:outputText value="#{numberFormat.format(statisticIncomeCtrl.minItemTag.value)}" styleClass="green-text"/>
+                        <h:outputText value="#{numberFormat.format(statisticExpensesCtrl.minItemTag.value)}" styleClass="green-text"/>
                         <p:spacer width="10"/>
                         <h:outputText value="#{localeCtrl.currency.symbol}"/>
                     </p:outputPanel>
                 </h:panelGrid>
             </p:outputPanel>
         </p:outputPanel>
-        <p:outputPanel styleClass="block" rendered="#{incomeItemCtrl.showStatistic}">
+        <p:outputPanel styleClass="block" rendered="#{expensesItemCtrl.showStatistic}">
             <h3 class="block-header">กราฟ</h3>
             <p:outputPanel styleClass="block-body">
                 <p:chart type="line" 
-                         model="#{chartIncomeCtrl.lineChartModel}"
+                         model="#{chartExpensesCtrl.lineChartModel}"
                          style="width : 750px;"/>
             </p:outputPanel>
         </p:outputPanel>
