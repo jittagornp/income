@@ -13,7 +13,8 @@ import java.util.Objects;
  */
 public class Statistic {
 
-    public static final Statistic EMPTY = new Statistic("ไม่ทราบ", null);
+    private static final String UNKNOWN = "ไม่ทราบ";
+    public static final Statistic EMPTY = new Statistic(UNKNOWN, null);
 
     private String key;
     private Double value;
@@ -25,7 +26,7 @@ public class Statistic {
 
     public String getKey() {
         if (key == null) {
-            key = "ไม่ทราบ";
+            key = UNKNOWN;
         }
 
         return key;

@@ -8,6 +8,7 @@ package com.pamarin.income.util;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import org.springframework.web.jsf.FacesContextUtils;
 
 /**
  *
@@ -23,6 +24,8 @@ public class FacesUtils {
     }
 
     public static ServletContext getServletContext() {
-        return getSession().getServletContext();
+        return FacesContextUtils
+                .getRequiredWebApplicationContext(FacesContext.getCurrentInstance())
+                .getServletContext();
     }
 }

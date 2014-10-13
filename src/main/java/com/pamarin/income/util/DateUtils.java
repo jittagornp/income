@@ -17,7 +17,7 @@ import org.joda.time.LocalDate;
  */
 public class DateUtils {
 
-    private static Date toDate(Date date) {
+    private static Date filterDate(Date date) {
         if (date != null) {
             return date;
         }
@@ -27,7 +27,7 @@ public class DateUtils {
 
     private static Date toTime(Date date, int hour, int minute, int second) {
         Calendar instance = Calendar.getInstance();
-        instance.setTime(toDate(date));
+        instance.setTime(filterDate(date));
         instance.set(Calendar.HOUR_OF_DAY, hour);
         instance.set(Calendar.MINUTE, minute);
         instance.set(Calendar.SECOND, second);
@@ -44,35 +44,35 @@ public class DateUtils {
     }
 
     private static Date toDateOfWeek(Date date, int index) {
-        LocalDate now = new LocalDate(toDate(date));
+        LocalDate now = new LocalDate(filterDate(date));
         return toStartTime(
                 now.withDayOfWeek(index).toDate()
         );
     }
 
     public static Date toFirstDateOfMonth(Date date) {
-        return new DateTime(toDate(date).getTime())
+        return new DateTime(filterDate(date).getTime())
                 .dayOfMonth()
                 .withMinimumValue()
                 .toDate();
     }
 
     public static Date toLastDateOfMonth(Date date) {
-        return new DateTime(toDate(date).getTime())
+        return new DateTime(filterDate(date).getTime())
                 .dayOfMonth()
                 .withMaximumValue()
                 .toDate();
     }
 
     public static Date toFirstDateOfYear(Date date) {
-        return new DateTime(toDate(date).getTime())
+        return new DateTime(filterDate(date).getTime())
                 .dayOfYear()
                 .withMinimumValue()
                 .toDate();
     }
 
     public static Date toLastDateOfYear(Date date) {
-        return new DateTime(toDate(date).getTime())
+        return new DateTime(filterDate(date).getTime())
                 .dayOfYear()
                 .withMaximumValue()
                 .toDate();
@@ -86,9 +86,14 @@ public class DateUtils {
         return toDateOfWeek(date, DateTimeConstants.SUNDAY);
     }
 
-    public static Date minusDate(Date date, int minus) {
-        DateTime dateTime = new DateTime(toDate(date).getTime());
-        DateTime minusDays = dateTime.minusDays(minus);
+    /**
+     * @param date
+     * @param minusDate
+     * @return 
+     */
+    public static Date minusDate(Date date, int minusDate) {
+        DateTime dateTime = new DateTime(filterDate(date).getTime());
+        DateTime minusDays = dateTime.minusDays(minusDate);
         return toStartTime(minusDays.toDate());
     }
 
@@ -107,12 +112,12 @@ public class DateUtils {
     }
 
     /**
-     * @param dayOfMonth start with 01
+     * @param dayOfMonth start with 1
      * @param month start with 01
      * @param year
-     * @param hourOfDay 00 - 23
-     * @param minute
-     * @param second
+     * @param hourOfDay 0 - 23
+     * @param minute start with 0
+     * @param second start with 0
      * @return
      */
     public static Date buildDateTime(
