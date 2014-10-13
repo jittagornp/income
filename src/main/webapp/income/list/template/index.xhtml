@@ -15,22 +15,24 @@
                     <span class="operation-optional">
                         <ui:insert name="itemOptional"/>
                     </span>
-                    <span class="button-group">
-                        <p:commandButton value="รายการ"
-                                         title="ดูในมุมมองรายการ"
-                                         styleClass="tooltip-s white-button #{incomeItemViewCtrl.active('item')}"
-                                         actionListener="#{incomeItemViewCtrl.onChangeView()}"
-                                         update="@form, @(.view-panel)">
-                            <f:param name="view" value="item"/>
-                        </p:commandButton>
-                        <p:commandButton icon="ui-icon-tag"
-                                         title="ดูในมุมมองป้ายกำกับ"
-                                         styleClass="tooltip-s white-button #{incomeItemViewCtrl.active('tag')}"
-                                         actionListener="#{incomeItemViewCtrl.onChangeView()}"
-                                         update="@form, @(.view-panel)">
-                            <f:param name="view" value="tag"/>
-                        </p:commandButton>
-                    </span>
+                    <ui:remove>
+                        <span class="button-group">
+                            <p:commandButton value="รายการ"
+                                             title="ดูในมุมมองรายการ"
+                                             styleClass="tooltip-s white-button #{incomeItemViewCtrl.active('item')}"
+                                             actionListener="#{incomeItemViewCtrl.onChangeView()}"
+                                             update="@form, @(.view-panel)">
+                                <f:param name="view" value="item"/>
+                            </p:commandButton>
+                            <p:commandButton icon="ui-icon-tag"
+                                             title="ดูในมุมมองป้ายกำกับ"
+                                             styleClass="tooltip-s white-button #{incomeItemViewCtrl.active('tag')}"
+                                             actionListener="#{incomeItemViewCtrl.onChangeView()}"
+                                             update="@form, @(.view-panel)">
+                                <f:param name="view" value="tag"/>
+                            </p:commandButton>
+                        </span>
+                    </ui:remove>
                     <p:spacer width="10"/>
                     <p:commandButton value="เพิ่มรายการ"
                                      actionListener="#{incomeItemCtrl.onCreateItem()}"
