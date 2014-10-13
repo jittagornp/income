@@ -15,11 +15,21 @@
             <title>#{app.name}</title>
             <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/static/image/favicon.png"/>
             <link rel="stylesheet/less" href="#{facesContext.externalContext.requestContextPath}/static/style/less/integrated.less"/>
+            <script>
+                window.IX = window.IX || {};
+                window.IX.config = {
+                    HOST: '#{facesContext.externalContext.requestScheme}://#{facesContext.externalContext.request.getHeader("Host")}',
+                    CONTEXT_PATH: '#{facesContext.externalContext.requestContextPath}'
+                };
+
+                window.IX.callback = {};
+            </script>
             <script src="#{facesContext.externalContext.requestContextPath}/static/js/org/lesscss/less.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/onehackoranother/jQueryTipsy.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/PrimefacesDialog.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/Windows.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/DialogReposition.js"></script>
+            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/SidebarMenu.js"></script>
             <ui:include src="bugstyle.xhtml"/>
             <script>
                 var Proxy = function(origin, callback) {
