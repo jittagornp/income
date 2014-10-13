@@ -99,8 +99,8 @@ public class RequestUtils {
         });
     }
 
-    public static abstract class RequestFilter {
+    public static interface RequestFilter {
 
-        public abstract boolean filterParam(Map.Entry<String, String> entryParam);
+        boolean filterParam(Map.Entry<String, String> entryParam);
     }
 }

@@ -38,16 +38,20 @@ public class NormalSettingsCtrl {
         settings = settingsService.findByOwner(SecurityUtils.getUser());
     }
 
+    private void sortBySymbol() {
+        Collections.sort(currencys, new Comparator<Currency>() {
+
+            @Override
+            public int compare(Currency o1, Currency o2) {
+                return o1.getSymbol().compareTo(o2.getSymbol());
+            }
+        });
+    }
+
     public List<Currency> getCurrencys() {
         if (currencys == null) {
             currencys = new ArrayList<>(Currency.getAvailableCurrencies());
-            Collections.sort(currencys, new Comparator<Currency>() {
-
-                @Override
-                public int compare(Currency o1, Currency o2) {
-                    return o1.getSymbol().compareTo(o2.getSymbol());
-                }
-            });
+            sortBySymbol();
         }
 
         return currencys;
