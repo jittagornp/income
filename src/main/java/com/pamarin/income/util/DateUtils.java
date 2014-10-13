@@ -89,7 +89,7 @@ public class DateUtils {
     /**
      * @param date
      * @param minusDate
-     * @return 
+     * @return
      */
     public static Date minusDate(Date date, int minusDate) {
         DateTime dateTime = new DateTime(filterDate(date).getTime());
@@ -99,14 +99,17 @@ public class DateUtils {
 
     public static Date mergeDateTime(Date date, Date time) {
         Calendar dateC = Calendar.getInstance();
-        Calendar timeC = Calendar.getInstance();
+        if (date != null) {
+            dateC.setTime(date);
+        }
 
-        dateC.setTime(date);
-        timeC.setTime(time);
-
-        dateC.set(Calendar.HOUR_OF_DAY, timeC.get(Calendar.HOUR_OF_DAY));
-        dateC.set(Calendar.MINUTE, timeC.get(Calendar.MINUTE));
-        dateC.set(Calendar.SECOND, timeC.get(Calendar.SECOND));
+        if (time != null) {
+            Calendar timeC = Calendar.getInstance();
+            timeC.setTime(time);
+            dateC.set(Calendar.HOUR_OF_DAY, timeC.get(Calendar.HOUR_OF_DAY));
+            dateC.set(Calendar.MINUTE, timeC.get(Calendar.MINUTE));
+            dateC.set(Calendar.SECOND, timeC.get(Calendar.SECOND));
+        }
 
         return dateC.getTime();
     }
@@ -127,7 +130,7 @@ public class DateUtils {
             int hourOfDay,
             int minute,
             int second
-    ) { 
+    ) {
         Calendar dateC = Calendar.getInstance();
 
         dateC.set(Calendar.DAY_OF_MONTH, dayOfMonth);
