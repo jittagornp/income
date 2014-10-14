@@ -169,7 +169,7 @@ public class UrlUtils {
         return protocol + "://" + domain + port + contextPath;
     }
 
-    public static void redirectPath(String path) throws IOException {
+    public static void redirectPath2(String path) throws IOException {
         FacesContext
                 .getCurrentInstance()
                 .getExternalContext()

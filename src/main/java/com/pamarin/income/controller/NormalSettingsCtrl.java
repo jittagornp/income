@@ -38,7 +38,7 @@ public class NormalSettingsCtrl {
         settings = settingsService.findByOwner(SecurityUtils.getUser());
     }
 
-    private void sortBySymbol() {
+    private void sortBySymbolAscending() {
         Collections.sort(currencys, new Comparator<Currency>() {
 
             @Override
@@ -51,7 +51,7 @@ public class NormalSettingsCtrl {
     public List<Currency> getCurrencys() {
         if (currencys == null) {
             currencys = new ArrayList<>(Currency.getAvailableCurrencies());
-            sortBySymbol();
+            sortBySymbolAscending();
         }
 
         return currencys;

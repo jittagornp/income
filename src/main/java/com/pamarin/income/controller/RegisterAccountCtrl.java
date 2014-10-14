@@ -141,11 +141,11 @@ public class RegisterAccountCtrl {
     }
 
     private void redirect2HomePage() throws IOException {
-        UrlUtils.redirectPath("/");
+        UrlUtils.redirectPath2("/");
     }
 
     private void redirect2CheckEmail() throws IOException {
-        UrlUtils.redirectPath("/register/checkEmail/?email=" + getEmail());
+        UrlUtils.redirectPath2("/register/checkEmail/?email=" + getEmail());
     }
 
     private void sendEmail(final String activateCode) {
