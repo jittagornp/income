@@ -11,7 +11,7 @@
     </style>
     <script>
         var activeDialog = null;
-        (function(PD, $, win) {
+        (function(PD, $, win, PF) {
             var dialogs = [];
             var scrollTop;
             PD.on('show', function(dialog) {
@@ -34,14 +34,19 @@
                     activeDialog = null;
                 }
             });
-        })(PrimefacesDialog, jQuery, window);
+        })(PrimefacesDialog, jQuery, window, PF);
     </script>
     <script>
         (function(win, $, JSON) {
             /**
              * primefaces 5.0 only
              */
-            var PRIMEFACES_COMPLETE_METHOD = 'Object.PrimeFaces.ab.onco';
+            var PRIMEFACES_AJAX_COMPLETE_METHOD = 'Object.PrimeFaces.ab.onco';
+            
+            function isCompleteMethod(source){
+                return source.indexOf(PRIMEFACES_AJAX_COMPLETE_METHOD) !== -1;
+            }
+            
             function proxyHide() {
                 activeDialog.hide = Proxy(
                         activeDialog.hide,
@@ -50,7 +55,7 @@
                                 throw new Error();
                             } catch (error) {
                                 var source = error.stack.split('\n')[3];
-                                if (source.indexOf(PRIMEFACES_COMPLETE_METHOD) !== -1) {
+                                if (isCompleteMethod(source)) {
                                     return false;
                                 }
                             }
