@@ -69,7 +69,7 @@
                     if ($extension.length) {
                         var jsonObj = JSON.parse($extension.text());
                         if (jsonObj) {
-                            jsonObj.validationFailed ? proxyHide(false) : proxyHide(true);
+                            proxyHide(!jsonObj.validationFailed);
                         }
                     }
                 }
