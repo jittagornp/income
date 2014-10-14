@@ -21,6 +21,7 @@
                 <p:outputPanel>
                     <p:inputText id="addIncomeName" 
                                  required="true"
+                                 requiredMessage="บังคับกรอก"
                                  styleClass="require-title"
                                  value="#{incomeItemCtrl.item.incomeName}"/>
                     <p:watermark for="addIncomeName" value="พิมพ์ชื่อรายรับ"/>
@@ -33,9 +34,12 @@
                 <p:outputPanel>
                     <p:inputText id="addIncomeValue" 
                                  required="true"
+                                 requiredMessage="บังคับกรอก"
+                                 validatorMessage="พิมพ์ตัวเลขเท่านั้น"
                                  styleClass="require-title"
                                  style="width: 300px;"
-                                 value="#{incomeItemCtrl.item.incomeValue}"/>
+                                 value="#{incomeItemCtrl.item.incomeValue}">
+                    </p:inputText>
                     <p:watermark for="addIncomeValue" value="พิมพ์ตัวเลขเท่านั้น"/>
                     <p:spacer width="10"/>
                     <h:outputText value="#{localeCtrl.currency.symbol}"/>
@@ -87,6 +91,7 @@
                             <p:commandButton icon="ui-icon-close"
                                              update="@form"
                                              title="ลบ"
+                                             validateClient="true"
                                              process="@this"
                                              actionListener="#{incomeItemCtrl.onDeleteTag()}"
                                              styleClass="tooltip-s delete-tag-button white-button">

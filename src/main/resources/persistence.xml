@@ -9,6 +9,7 @@
     <class>com.pamarin.income.model.Tag</class>
     <class>com.pamarin.income.model.User</class>
     <class>com.pamarin.income.model.ExpensesItem</class>
+    <class>com.pamarin.income.model.AutoIncomeItem</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <!--
@@ -82,7 +83,7 @@
         -->
       <property name="eclipselink.weaving" value="static"/>
       <property name="eclipselink.ddl-generation" value="create-tables"/>
-      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>

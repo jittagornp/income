@@ -32,36 +32,36 @@ import org.eclipse.persistence.annotations.Indexes;
  * @author jittagornp
  */
 @Entity
-@Table(name = "expenses_item")
+@Table(name = "autoic_item")
 @Indexes(value = {
-    @Index(name = "expenses_item_xcdate_uid_index", columnNames = {"expenses_date", "user_id"})
+    @Index(name = "autoic_item_icdate_uid_index", columnNames = {"income_date", "user_id"})
 })
-public class ExpensesItem implements Serializable {
+public class AutoIncomeItem implements Serializable {
 
     @Id
     @TableGenerator(
-            name = "expenses_item_generator",
+            name = "autoic_item_generator",
             table = "income_sequence",
             pkColumnName = "name",
             valueColumnName = "value",
-            pkColumnValue = "expenses_item"
+            pkColumnValue = "autoic_item"
     )
     @GeneratedValue(
-            generator = "expenses_item_generator",
+            generator = "autoic_item_generator",
             strategy = GenerationType.TABLE
     )
     @Column(name = "item_id")
     private Integer id;
-    @Column(name = "expenses_name", nullable = false)
-    private String expensesName;
-    @Column(name = "expenses_value", nullable = false)
-    private Double expensesValue;
-    @Column(name = "expenses_date", nullable = false)
+    @Column(name = "income_name", nullable = false)
+    private String incomeName;
+    @Column(name = "income_value", nullable = false)
+    private Double incomeValue;
+    @Column(name = "income_date", nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date expensesDate;
-    @Column(name = "expenses_time")
+    private Date incomeDate;
+    @Column(name = "income_time")
     @Temporal(javax.persistence.TemporalType.TIME)
-    private Date expensesTime;
+    private Date incomeTime;
     //
     @Index
     @ManyToOne
@@ -72,7 +72,7 @@ public class ExpensesItem implements Serializable {
     private User owner;
     @ManyToMany
     @JoinTable(
-            name = "ex_item_tag",
+            name = "aic_item_tag",
             joinColumns = {
                 @JoinColumn(
                         name = "item_id",
@@ -96,36 +96,36 @@ public class ExpensesItem implements Serializable {
         this.id = id;
     }
 
-    public String getExpensesName() {
-        return expensesName;
+    public String getIncomeName() {
+        return incomeName;
     }
 
-    public void setExpensesName(String expensesName) {
-        this.expensesName = expensesName;
+    public void setIncomeName(String incomeName) {
+        this.incomeName = incomeName;
     }
 
-    public Double getExpensesValue() {
-        return expensesValue;
+    public Double getIncomeValue() {
+        return incomeValue;
     }
 
-    public void setExpensesValue(Double expensesValue) {
-        this.expensesValue = expensesValue;
+    public void setIncomeValue(Double incomeValue) {
+        this.incomeValue = incomeValue;
     }
 
-    public Date getExpensesDate() {
-        return expensesDate;
+    public Date getIncomeDate() {
+        return incomeDate;
     }
 
-    public void setExpensesDate(Date expensesDate) {
-        this.expensesDate = expensesDate;
+    public void setIncomeDate(Date incomeDate) {
+        this.incomeDate = incomeDate;
     }
 
-    public Date getExpensesTime() {
-        return expensesTime;
+    public Date getIncomeTime() {
+        return incomeTime;
     }
 
-    public void setExpensesTime(Date expensesTime) {
-        this.expensesTime = expensesTime;
+    public void setIncomeTime(Date incomeTime) {
+        this.incomeTime = incomeTime;
     }
 
     public User getOwner() {
@@ -176,8 +176,8 @@ public class ExpensesItem implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + Objects.hashCode(this.id);
+        int hash = 7;
+        hash = 83 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -189,7 +189,7 @@ public class ExpensesItem implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ExpensesItem other = (ExpensesItem) obj;
+        final AutoIncomeItem other = (AutoIncomeItem) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }

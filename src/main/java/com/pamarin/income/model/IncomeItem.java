@@ -72,7 +72,7 @@ public class IncomeItem implements Serializable {
     private User owner;
     @ManyToMany
     @JoinTable(
-            name = "item_tag",
+            name = "ic_item_tag",
             joinColumns = {
                 @JoinColumn(
                         name = "item_id",
