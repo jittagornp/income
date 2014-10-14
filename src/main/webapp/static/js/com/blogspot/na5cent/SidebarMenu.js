@@ -2,7 +2,7 @@
  * @author jittagorn pitakmetagoon
  * create 13/10/2014
  */
-(function($) {
+(function($, conf) {
     function notInclude(str, notation) {
         var index = str.indexOf(notation);
         if (index === -1) {
@@ -21,10 +21,10 @@
             href = notInclude(href, '?');
             href = notInclude(href, ';');
 
-            var url = IX.config.HOST + href;
+            var url = conf.HOST + href;
             if (url === location.href) {
                 $item.addClass('active');
             }
         });
     });
-})(jQuery);
+})(jQuery, IX.config);

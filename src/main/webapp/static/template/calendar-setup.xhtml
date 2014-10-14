@@ -22,7 +22,7 @@
     <!-- clock -->
 
     <script type="text/javascript">
-        (function($) {
+        (function($, win) {
             $(function() {
                 function addCalendar($element) {
                     $element.calendarsPicker({
@@ -36,7 +36,7 @@
                 }
 
                 addCalendar($('.ic-calendar'));
-                window.addResponseListner(function() {
+                win.addResponseListner(function() {
                     var t = setTimeout(function() {
                         clearTimeout(t);
                         $('.ic-calendar').each(function() {
@@ -49,7 +49,7 @@
                 });
 
                 addClockPicker($('.clockpicker'));
-                window.addResponseListner(function() {
+                win.addResponseListner(function() {
                     var t = setTimeout(function() {
                         clearTimeout(t);
                         $('.clockpicker').each(function() {
@@ -63,6 +63,6 @@
 
 
             });
-        }).call(this, jQuery);
+        }).call(this, jQuery, window);
     </script>
 </ui:composition>

@@ -10,12 +10,12 @@
         }
     </style>
     <script>
-        (function(PD, $) {
+        (function(PD, $, win) {
             var dialogs = [];
             var scrollTop;
             PD.on('show', function(dialog) {
                 if (dialogs.length === 0) {
-                    scrollTop = $(window).scrollTop();
+                    scrollTop = $(win).scrollTop();
                     $('.container')
                             .addClass('body-fixed')
                             .css('top', -scrollTop + $('.toolbar').height() + 'px');
@@ -28,9 +28,9 @@
                     $('.container')
                             .removeClass('body-fixed')
                             .css('top', $('.toolbar').height() + 'px');
-                    $(window).scrollTop(scrollTop);
+                    $(win).scrollTop(scrollTop);
                 }
             });
-        })(PrimefacesDialog, jQuery);
+        })(PrimefacesDialog, jQuery, window);
     </script>
 </ui:composition>
