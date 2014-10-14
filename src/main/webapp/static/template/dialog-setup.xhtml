@@ -31,6 +31,7 @@
                             .removeClass('body-fixed')
                             .css('top', $('.toolbar').height() + 'px');
                     $(win).scrollTop(scrollTop);
+                    activeDialog = null;
                 }
             });
         })(PrimefacesDialog, jQuery, window);
