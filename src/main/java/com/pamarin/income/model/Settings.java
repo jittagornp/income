@@ -38,7 +38,7 @@ public class Settings implements Serializable {
     @Column(name = "floating_point", nullable = false)
     private Integer floatingPoint;
     @Column(name = "force_floating", nullable = false)
-    private Boolean forceFloating = Boolean.FALSE;
+    private Boolean forceFloating = Boolean.TRUE;
 
     public Settings() {
     }
