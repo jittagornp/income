@@ -24,6 +24,18 @@
 
                 window.IX.callback = {};
             </script>
+            <script>
+                var Proxy = function(origin, callback) {
+                    return function() {
+                        var val = callback.apply(this, arguments);
+                        if(val === false){
+                            return false;
+                        }
+                        
+                        return origin.apply(this, arguments);
+                    };
+                };
+            </script>
             <script src="#{facesContext.externalContext.requestContextPath}/static/js/org/lesscss/less.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/onehackoranother/jQueryTipsy.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/PrimefacesDialog.js"></script>
@@ -31,14 +43,6 @@
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/DialogReposition.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/SidebarMenu.js"></script>
             <ui:include src="bugstyle.xhtml"/>
-            <script>
-                var Proxy = function(origin, callback) {
-                    return function() {
-                        callback.apply(this, arguments);
-                        return origin.apply(this, arguments);
-                    };
-                };
-            </script>
             <script>
                 (function() {
                     window.responseHandlers = [];

@@ -10,6 +10,7 @@
         }
     </style>
     <script>
+        var activeDialog = null;
         (function(PD, $, win) {
             var dialogs = [];
             var scrollTop;
@@ -21,6 +22,7 @@
                             .css('top', -scrollTop + $('.toolbar').height() + 'px');
                 }
 
+                activeDialog = PF(dialog);
                 dialogs.push(dialog);
             }).on('hide', function() {
                 dialogs.pop();
@@ -32,5 +34,36 @@
                 }
             });
         })(PrimefacesDialog, jQuery, window);
+    </script>
+    <script>
+        (function(win, $, JSON) {
+            /**
+             * primefaces 5.0 only
+             */
+            var PRIMEFACES_COMPLETE_METHOD = 'Object.PrimeFaces.ab.onco';
+            win.addResponseListner(function() {
+                var $xml = $(arguments[2].responseText);
+                var $extension = $xml.find('extension');
+                if ($extension.length) {
+                    var jsonObj = JSON.parse($extension.text());
+                    if (jsonObj) {
+                        if (jsonObj.validationFailed) {
+                            activeDialog.hide = Proxy(
+                                    activeDialog.hide,
+                                    function() {
+                                        try {
+                                            throw new Error();
+                                        } catch (error) {
+                                            var source = error.stack.split('\n')[3];
+                                            if (source.indexOf(PRIMEFACES_COMPLETE_METHOD) !== -1) {
+                                                return false;
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                }
+            });
+        })(window, jQuery, JSON);
     </script>
 </ui:composition>
