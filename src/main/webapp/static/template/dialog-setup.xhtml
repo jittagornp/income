@@ -48,18 +48,20 @@
                     var jsonObj = JSON.parse($extension.text());
                     if (jsonObj) {
                         if (jsonObj.validationFailed) {
-                            activeDialog.hide = Proxy(
-                                    activeDialog.hide,
-                                    function() {
-                                        try {
-                                            throw new Error();
-                                        } catch (error) {
-                                            var source = error.stack.split('\n')[3];
-                                            if (source.indexOf(PRIMEFACES_COMPLETE_METHOD) !== -1) {
-                                                return false;
+                            if (activeDialog){
+                                activeDialog.hide = Proxy(
+                                        activeDialog.hide,
+                                        function() {
+                                            try {
+                                                throw new Error();
+                                            } catch (error) {
+                                                var source = error.stack.split('\n')[3];
+                                                if (source.indexOf(PRIMEFACES_COMPLETE_METHOD) !== -1) {
+                                                    return false;
+                                                }
                                             }
-                                        }
-                                    });
+                                        });
+                            }
                         }
                     }
                 }
