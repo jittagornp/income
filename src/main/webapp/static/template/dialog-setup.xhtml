@@ -42,12 +42,12 @@
              * primefaces 5.0 only
              */
             var PRIMEFACES_AJAX_COMPLETE_METHOD = 'Object.PrimeFaces.ab.onco';
-            
-            function isCompleteMethod(source){
+
+            function isCompleteMethod(source) {
                 return source.indexOf(PRIMEFACES_AJAX_COMPLETE_METHOD) !== -1;
             }
-            
-            function proxyHide() {
+
+            function proxyHide(hide) {
                 activeDialog.hide = Proxy(
                         activeDialog.hide,
                         function() {
@@ -56,7 +56,7 @@
                             } catch (error) {
                                 var source = error.stack.split('\n')[3];
                                 if (isCompleteMethod(source)) {
-                                    return false;
+                                    return hide;
                                 }
                             }
                         });
@@ -70,7 +70,11 @@
                     if (jsonObj) {
                         if (jsonObj.validationFailed) {
                             if (activeDialog) {
-                                proxyHide();
+                                proxyHide(false);
+                            }
+                        } else {
+                            if (activeDialog) {
+                                proxyHide(true);
                             }
                         }
                     }
