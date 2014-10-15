@@ -15,27 +15,7 @@
             <title>#{app.name}</title>
             <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/static/image/favicon.png"/>
             <link rel="stylesheet/less" href="#{facesContext.externalContext.requestContextPath}/static/style/less/integrated.less"/>
-            <script>
-                window.IX = window.IX || {};
-                window.IX.config = {
-                    HOST: '#{facesContext.externalContext.requestScheme}://#{facesContext.externalContext.request.getHeader("Host")}',
-                    CONTEXT_PATH: '#{facesContext.externalContext.requestContextPath}'
-                };
-
-                window.IX.callback = {};
-            </script>
-            <script>
-                var Proxy = function(origin, callback) {
-                    return function() {
-                        var val = callback.apply(this, arguments);
-                        if(val === false){
-                            return false;
-                        }
-                        
-                        return origin.apply(this, arguments);
-                    };
-                };
-            </script>
+            <ui:include src="script-setup.xhtml"/>
             <script src="#{facesContext.externalContext.requestContextPath}/static/js/org/lesscss/less.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/onehackoranother/jQueryTipsy.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/PrimefacesDialog.js"></script>
@@ -44,27 +24,6 @@
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/SidebarMenu.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/Validator.js"></script>
             <ui:include src="bugstyle.xhtml"/>
-            <script>
-                (function() {
-                    window.responseHandlers = [];
-                    window.responseHandlerSize = 0;
-                    window.addResponseListner = function(listener) {
-                        responseHandlers[responseHandlerSize++] = listener;
-                    };
-                    /**
-                     * primefaces 5.0 only
-                     */
-                    PrimeFaces.ajax.Response.handle = Proxy(
-                            PrimeFaces.ajax.Response.handle,
-                            function() {
-                                var length = window.responseHandlers.length;
-                                while (length !== 0) {
-                                    window.responseHandlers[--length].apply(this, arguments);
-                                }
-                            }
-                    );
-                })();
-            </script>
             <ui:include src="tooltip-setup.xhtml"/>
             <ui:include src="dialog-setup.xhtml"/>
 
