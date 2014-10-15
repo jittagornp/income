@@ -3,7 +3,7 @@
  * create 19/04/2014
  * source http://na5cent.blogspot.com/2014/04/primefaces-dialog-listener-javascript.html
  */
-window.PrimefacesDialog = window.PrimefacesDialog || (function(global) {
+window.PrimefacesDialog = window.PrimefacesDialog || (function(global, $) {
 
     var listener = [];
 
@@ -39,10 +39,14 @@ window.PrimefacesDialog = window.PrimefacesDialog || (function(global) {
     }
 
     function isDialog(object) {
-        return object && object.jq
-                && object.jq.attr
-                && object.jq.attr('class')
-                && object.jq.attr('class').indexOf('ui-dialog') !== -1;
+        try {
+            return object && object.jq
+                    && object.jq.attr
+                    && object.jq.attr('class')
+                    && object.jq.attr('class').indexOf('ui-dialog') !== -1;
+        } catch (e) {
+            return false;
+        }
     }
 
     function bind(type, name) {
@@ -71,7 +75,7 @@ window.PrimefacesDialog = window.PrimefacesDialog || (function(global) {
         });
     }
 
-    jQuery(function(){
+    $(function() {
         setTimeout(initialize, 100);
     });
 
@@ -113,4 +117,4 @@ window.PrimefacesDialog = window.PrimefacesDialog || (function(global) {
             return PrimefacesDialog;
         }
     };
-})(PrimeFaces.widgets);
+})(PrimeFaces.widgets, jQuery);
