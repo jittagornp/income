@@ -5,22 +5,22 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:f="http://java.sun.com/jsf/core">
     <script>
-        (function($) {
-            window.AjaxStatus = window.AjaxStatus || {};
-            window.AjaxStatus.setMessage = function(msg) {
-                window.AjaxStatus.message = msg;
+        (function(win, $, PF, doc) {
+            win.AjaxStatus = win.AjaxStatus || {};
+            win.AjaxStatus.setMessage = function(msg) {
+                win.AjaxStatus.message = msg;
             };
 
             $(function() {
                 function init() {
                     var defaultMessage = 'กำลังโหลดข้อมูล...';
-                    PrimeFaces.widgets.ajaxWidget.trigger = Proxy(
-                            PrimeFaces.widgets.ajaxWidget.trigger,
+                    PF.widgets.ajaxWidget.trigger = Proxy(
+                            PF.widgets.ajaxWidget.trigger,
                             function() {
                                 var loading = $('#ajax').find('.text-loader');
-                                if (window.AjaxStatus.message) {
-                                    loading.text(window.AjaxStatus.message);
-                                    window.AjaxStatus.message = null;
+                                if (win.AjaxStatus.message) {
+                                    loading.text(win.AjaxStatus.message);
+                                    win.AjaxStatus.message = null;
                                 } else {
                                     loading.text(defaultMessage);
                                 }
@@ -29,11 +29,11 @@
                 }
 
                 setTimeout(init, 100);
-                $(document).on('mouseover', '.ajax-status-processing', function() {
-                    AjaxStatus.setMessage('กำลังดำเนินการ ...');
+                $(doc).on('mouseover', '.ajax-status-processing', function() {
+                    win.AjaxStatus.setMessage('กำลังดำเนินการ ...');
                 });
             });
-        })(jQuery);
+        })(window, jQuery, PrimeFaces, document);
     </script>
 
     <p:ajaxStatus id="ajax" widgetVar="ajaxWidget">
