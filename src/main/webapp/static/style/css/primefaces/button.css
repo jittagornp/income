@@ -1,0 +1,93 @@
+.ui-button.ui-widget.ui-state-default.gray-button,
+.ui-button.ui-widget.ui-state-default.gray-button:active,
+.ui-button.ui-widget.ui-state-default.gray-button:focus {
+  background: #bdbdbd !important;
+  background: -moz-linear-gradient(top, #bdbdbd 0%, #bdbdbd 100%) !important;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #bdbdbd), color-stop(100%, #bdbdbd)) !important;
+  background: -webkit-linear-gradient(top, #bdbdbd 0%, #bdbdbd 100%) !important;
+  background: -o-linear-gradient(top, #bdbdbd 0%, #bdbdbd 100%);
+  background: -ms-linear-gradient(top, #bdbdbd 0%, #bdbdbd 100%) !important;
+  background: linear-gradient(top, #bdbdbd 0%, #bdbdbd 100%) !important;
+  box-shadow: 0 2px 2px #c0c0c0 inset, 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid #9C9C9C !important;
+}
+.ui-button.ui-widget.ui-state-default.gray-button .ui-button-text,
+.ui-button.ui-widget.ui-state-default.gray-button:active .ui-button-text,
+.ui-button.ui-widget.ui-state-default.gray-button:focus .ui-button-text {
+  font-weight: normal !important;
+  text-shadow: 0 0 0 #fff !important;
+}
+.ui-button.ui-widget.ui-state-default.white-button,
+.ui-button.ui-widget.ui-state-default.white-button:active,
+.ui-button.ui-widget.ui-state-default.white-button:focus,
+.ui-menubutton.white-button .ui-button.ui-widget.ui-state-default,
+.ui-menubutton.white-button .ui-button.ui-widget.ui-state-default:active,
+.ui-menubutton.white-button .ui-button.ui-widget.ui-state-default:focus,
+.ui-fileupload .ui-button.ui-widget.ui-state-default,
+.ui-fileupload .ui-button.ui-widget.ui-state-default:active,
+.ui-fileupload .ui-button.ui-widget.ui-state-default:focus {
+  background: #F8F8F8 !important;
+  background: -moz-linear-gradient(top, #f8f8f8 0%, #f1f1f1 100%) !important;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f8f8f8), color-stop(100%, #f1f1f1)) !important;
+  background: -webkit-linear-gradient(top, #f8f8f8 0%, #f1f1f1 100%) !important;
+  background: -o-linear-gradient(top, #f8f8f8 0%, #f1f1f1 100%);
+  background: -ms-linear-gradient(top, #f8f8f8 0%, #f1f1f1 100%) !important;
+  background: linear-gradient(top, #f8f8f8 0%, #f1f1f1 100%) !important;
+  box-shadow: 0 2px 2px #f5f5f5 inset, 0 1px 2px rgba(226, 226, 226, 0.09) !important;
+  border: 1px solid #dfdfdf !important;
+}
+.ui-button.ui-widget.ui-state-default.white-button .ui-button-text,
+.ui-button.ui-widget.ui-state-default.white-button:active .ui-button-text,
+.ui-button.ui-widget.ui-state-default.white-button:focus .ui-button-text,
+.ui-menubutton.white-button .ui-button.ui-widget.ui-state-default .ui-button-text,
+.ui-menubutton.white-button .ui-button.ui-widget.ui-state-default:active .ui-button-text,
+.ui-menubutton.white-button .ui-button.ui-widget.ui-state-default:focus .ui-button-text,
+.ui-fileupload .ui-button.ui-widget.ui-state-default .ui-button-text,
+.ui-fileupload .ui-button.ui-widget.ui-state-default:active .ui-button-text,
+.ui-fileupload .ui-button.ui-widget.ui-state-default:focus .ui-button-text {
+  text-shadow: 0 0 0 #fff !important;
+  color: #5E5E5E;
+}
+.ui-button.ui-widget.ui-state-default.white-button .ui-icon,
+.ui-button.ui-widget.ui-state-default.white-button:active .ui-icon,
+.ui-button.ui-widget.ui-state-default.white-button:focus .ui-icon,
+.ui-menubutton.white-button .ui-button.ui-widget.ui-state-default .ui-icon,
+.ui-menubutton.white-button .ui-button.ui-widget.ui-state-default:active .ui-icon,
+.ui-menubutton.white-button .ui-button.ui-widget.ui-state-default:focus .ui-icon,
+.ui-fileupload .ui-button.ui-widget.ui-state-default .ui-icon,
+.ui-fileupload .ui-button.ui-widget.ui-state-default:active .ui-icon,
+.ui-fileupload .ui-button.ui-widget.ui-state-default:focus .ui-icon {
+  opacity: .5 !important;
+  filter: alpha(opacity=50) !important;
+}
+.ui-button.ui-widget.ui-state-default.green-button,
+.ui-button.ui-widget.ui-state-default.green-button:active,
+.ui-button.ui-widget.ui-state-default.green-button:focus {
+  background: #54B654 !important;
+  background: -moz-linear-gradient(top, #54b654 0%, #609e70 100%) !important;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #54b654), color-stop(100%, #609e70)) !important;
+  background: -webkit-linear-gradient(top, #54b654 0%, #609e70 100%) !important;
+  background: -o-linear-gradient(top, #54b654 0%, #609e70 100%);
+  background: -ms-linear-gradient(top, #54b654 0%, #609e70 100%) !important;
+  background: linear-gradient(top, #54b654 0%, #609e70 100%) !important;
+  box-shadow: 0 1px 0 #83AC7E inset !important;
+  border: 1px solid #79A564 !important;
+}
+.ui-button.ui-widget.ui-state-default.red-button,
+.ui-button.ui-widget.ui-state-default.red-button:active,
+.ui-button.ui-widget.ui-state-default.red-button:focus {
+  background: #FC4848 !important;
+  background: -moz-linear-gradient(top, #fc4848 0%, #e24c4c 100%) !important;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fc4848), color-stop(100%, #e24c4c)) !important;
+  background: -webkit-linear-gradient(top, #fc4848 0%, #e24c4c 100%) !important;
+  background: -o-linear-gradient(top, #fc4848 0%, #e24c4c 100%);
+  background: -ms-linear-gradient(top, #fc4848 0%, #e24c4c 100%) !important;
+  background: linear-gradient(top, #fc4848 0%, #e24c4c 100%) !important;
+  box-shadow: 0 1px 0 #E95353 inset !important;
+  border: 1px solid #D33333 !important;
+}
+.ui-button.ui-widget.ui-state-default.red-button .ui-button-text,
+.ui-button.ui-widget.ui-state-default.red-button:active .ui-button-text,
+.ui-button.ui-widget.ui-state-default.red-button:focus .ui-button-text {
+  text-shadow: 0 -1px 0 #bb0e0e !important;
+}

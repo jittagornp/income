@@ -1,0 +1,45 @@
+.tag-item {
+  float: left;
+  padding: 0px 3px;
+  background-color: #E8F4FF;
+  margin-right: 5px;
+  display: block;
+  border: solid 1px #CEE6F7;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  margin-bottom: 5px;
+}
+.tag-item .ui-commandlink {
+  text-decoration: none;
+}
+.tag-list .ui-paginator {
+  clear: both;
+  background: none;
+  border: none;
+  position: relative;
+  top: 10px;
+}
+.tag-list .ui-widget-content {
+  border: none;
+}
+.tag-list .ui-datalist-empty-message {
+  float: left;
+}
+.tag-list .ui-datalist-item {
+  position: relative;
+  top: 2px;
+}
+.delete-tag-button {
+  width: 16px;
+  margin-left: 5px;
+  position: relative;
+}
+.delete-tag-button .ui-button-text {
+  padding: 0px;
+}
+.check-tag {
+  position: relative;
+  top: 3px;
+  margin-right: 4px;
+}

@@ -14,15 +14,19 @@
 
             <title>#{app.name}</title>
             <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/static/image/favicon.png"/>
-            <link rel="stylesheet/less" href="#{facesContext.externalContext.requestContextPath}/static/style/less/integrated.less"/>
+            <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/static/style/css/integrated.css"/>
+            <ui:remove>
+                <link rel="stylesheet/less" href="#{facesContext.externalContext.requestContextPath}/static/style/less/integrated.less"/>
+                <script src="#{facesContext.externalContext.requestContextPath}/static/js/org/lesscss/less.js"></script>
+            </ui:remove>
             <ui:include src="script-setup.xhtml"/>
-            <script src="#{facesContext.externalContext.requestContextPath}/static/js/org/lesscss/less.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/onehackoranother/jQueryTipsy.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/PrimefacesDialog.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/Windows.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/DialogReposition.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/SidebarMenu.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/Validator.js"></script>
+            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/TooltipBinding.js"></script>
             <ui:include src="bugstyle.xhtml"/>
             <ui:include src="tooltip-setup.xhtml"/>
             <ui:include src="dialog-setup.xhtml"/>

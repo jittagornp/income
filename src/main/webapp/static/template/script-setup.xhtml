@@ -14,14 +14,14 @@
         window.IX.callback = function() {};
     </script>
     <script>
-        var Proxy = function(origin, callback) {
+        var Proxy = function(origin, callback, context_opt) {
             return function() {
-                var val = callback.apply(this, arguments);
+                var val = callback.apply(context_opt || this, arguments);
                 if (val === false) {
                     return false;
                 }
 
-                return origin.apply(this, arguments);
+                return origin.apply(context_opt || this, arguments);
             };
         };
     </script>

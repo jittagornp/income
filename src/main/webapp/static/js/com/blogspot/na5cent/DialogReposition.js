@@ -2,12 +2,10 @@
  * @author jittagorn pitakmetagoon
  * create 23/12/2013
  */
-(function($) {
+(function($, Ws) {
     $(function() {
         reposition();
-        Windows.resize(function(){
-            reposition();
-        });
+        Ws.resize(reposition);
 
         function reposition() {
             var $dialogs = $('.ui-dialog');
@@ -25,4 +23,4 @@
             });
         }
     });
-}).call(this, jQuery);
+})(jQuery, Windows);

@@ -1,0 +1,10 @@
+.ui-autocomplete-panel .ui-autocomplete-table th,
+.ui-autocomplete-panel .ui-autocomplete-table td {
+  border-color: #eeeeee;
+}
+.ui-autocomplete-panel {
+  border: solid 1px #b1b1b1;
+}
+.ui-autocomplete-item td:hover {
+  cursor: default;
+}

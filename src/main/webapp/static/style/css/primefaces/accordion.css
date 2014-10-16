@@ -1,0 +1,10 @@
+.ui-accordion-header {
+  background-color: #fff !important;
+  border-top: 1px solid #F0F0F0;
+  border-radius: 0px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+}
+.ui-accordion-header:first-child {
+  border-top: none;
+}

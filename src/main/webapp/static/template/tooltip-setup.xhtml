@@ -5,111 +5,17 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:f="http://java.sun.com/jsf/core">
     <script>
-        (function($, doc, win) {
-            /**
-             * define class TooltipBinding
-             * for bind tooltip to element DOM 
-             * by .tooltip-[POSITON : {n, w, e, s}] style class 
-             */
-            var TooltipBinding = (function() {
-
-                var TIPSY_ATTRIBUTE = 'original-title';
-
-                function removeAllTooltips() {
-                    $('.tipsy').remove();
-                }
-
-                function removeTipsy($element) {
-                    var title = $element.attr(TIPSY_ATTRIBUTE);
-                    $('.tipsy-inner').each(function() {
-                        var $that = $(this);
-                        if ($that.text() !== title) {
-                            $that.parents('.tipsy').remove();
-                        }
-                    });
-                }
-
-                var timeout = null;
-                $(doc).on('mouseover', function(event) {
-                    if (timeout) {
-                        clearTimeout(timeout);
-                    }
-
-                    timeout = setTimeout(function() {
-                        clearTimeout(timeout);
-
-                        var $el = $(event.target);
-                        var parents = $el.parents('[' + TIPSY_ATTRIBUTE + ']');
-                        if (parents.length !== 0) {
-                            removeTipsy(parents);
-                            return;
-                        }
-
-                        if ($el.is('[' + TIPSY_ATTRIBUTE + ']')) {
-                            removeTipsy($el);
-                            return;
-                        }
-
-                        removeAllTooltips();
-                    }, 50);
-                });
-
-                function bind(selectror, gravity) {
-                    $(selectror).each(function() {
-                        var $item = $(this);
-                        if (!$item.attr(TIPSY_ATTRIBUTE)) {
-                            $item.tipsy({
-                                gravity: gravity
-                            });
-                        }
-                    });
-                }
-
-                function bindAndBlur(selectror, gravity) {
-                    win.addResponseListner(function() {
-                        var t = setTimeout(function() {
-                            clearTimeout(t);
-                            bind(selectror, gravity);
-                        }, 500);
-                    });
-                }
-
-                return {
-                    bind: function(selectror, gravity) {
-                        bind(selectror, gravity);
-                        bindAndBlur(selectror, gravity);
-                    }
-                };
-            }).call(this);
-
-            function bindTitle(selector, titleLabel) {
-                var t = setTimeout(function() {
-                    clearTimeout(t);
-                    $(selector).each(function() {
-                        var $that = $(this);
-                        var title = $that.attr('title');
-                        if (!title) {
-                            $that.attr('title', titleLabel);
-                        }
-                    });
-                }, 50);
-            }
-
+        (function($, TB) {
             $(function() {
-                TooltipBinding.bind('.tooltip-n', 'n');
-                TooltipBinding.bind('.tooltip-s', 's');
-                TooltipBinding.bind('.tooltip-e', 'e');
-                TooltipBinding.bind('.tooltip-w', 'w');
-                TooltipBinding.bind('.ui-dialog-titlebar-close', 's');
-                TooltipBinding.bind('.require-title', 'w');
-
-                bindTitle('.require-title', 'บังคับกรอก');
-                bindTitle('.ui-dialog-titlebar-close', 'คลิกเพื่อปิด');
-                win.addResponseListner(function() {
-                    bindTitle('.require-title', 'บังคับกรอก');
-                    bindTitle('.ui-dialog-titlebar-close', 'คลิกเพื่อปิด');
-                });
+                TB.bind('.tooltip-n', 'n');
+                TB.bind('.tooltip-s', 's');
+                TB.bind('.tooltip-e', 'e');
+                TB.bind('.tooltip-w', 'w');
+                TB.bind('.ui-dialog-titlebar-close', 's');
+                TB.bind('.require-title', 'w');
+                TB.bindTitle('.require-title', 'บังคับกรอก');
+                TB.bindTitle('.ui-dialog-titlebar-close', 'คลิกเพื่อปิด');
             });
-        })(jQuery, document, window);
+        })(jQuery, TooltipBinding);
     </script>
 </ui:composition>

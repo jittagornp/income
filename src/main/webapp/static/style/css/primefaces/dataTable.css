@@ -1,0 +1,17 @@
+.ui-datatable-data tr {
+  border-color: #E7E7E7 !important;
+}
+.ui-datatable-tablewrapper th {
+  border-color: #E7E7E7 !important;
+}
+.ui-datatable-tablewrapper th {
+  font-weight: bold !important;
+  color: #777 !important;
+}
+.ui-datatable .ui-paginator {
+  background: #fafafa;
+  border-color: #eee;
+}
+.ui-datatable th {
+  background-color: #fff;
+}

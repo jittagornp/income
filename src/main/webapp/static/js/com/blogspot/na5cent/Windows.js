@@ -2,27 +2,27 @@
  * @author jittagorn pitakmetagoon
  * create 23/12/2013
  */
-window.Windows = window.Windows || (function($, window) {
-    var $widow = $(window);
-    var DEFAULT_DELAY_TIMEOUT = 500;
+window.Windows = window.Windows || (function($, win, DELAY_TIMEOUT) {
+
+    var $widow = $(win);
 
     return {
         resize: function(callback) {
-            var timeoutReference;
+            var timeout;
 
             $widow.resize(function() {
-                if (timeoutReference) {
-                    window.clearTimeout(timeoutReference);
+                if (timeout) {
+                    clearTimeout(timeout);
                 }
 
-                timeoutReference = window.setTimeout(function() {
-                    window.clearTimeout(timeoutReference);
+                timeout = setTimeout(function() {
+                    clearTimeout(timeout);
 
                     if (typeof callback === 'function') {
                         callback();
                     }
-                }, DEFAULT_DELAY_TIMEOUT);
+                }, DELAY_TIMEOUT);
             });
         }
     };
-}).call(this, jQuery, window);
+})(jQuery, window, 500);

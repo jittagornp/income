@@ -1,0 +1,9 @@
+.ui-fileupload .fileupload-buttonbar > .ui-button + .ui-button {
+  display: none;
+}
+.ui-fileupload .fileupload-content .start {
+  display: none;
+}
+.ui-fileupload .fileupload-content .progress {
+  display: none;
+}
