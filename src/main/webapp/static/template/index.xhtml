@@ -14,19 +14,20 @@
 
             <title>#{app.name}</title>
             <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/static/image/favicon.png"/>
-            <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/static/style/css/integrated.css"/>
             <ui:remove>
-                <link rel="stylesheet/less" href="#{facesContext.externalContext.requestContextPath}/static/style/less/integrated.less"/>
-                <script src="#{facesContext.externalContext.requestContextPath}/static/js/org/lesscss/less.js"></script>
+                <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/static/style/css/integrated.css"/>
             </ui:remove>
+            <link rel="stylesheet/less" href="#{facesContext.externalContext.requestContextPath}/static/style/less/integrated.less"/>
+            <script src="#{facesContext.externalContext.requestContextPath}/static/js/org/lesscss/less.js"></script>
+
             <ui:include src="script-setup.xhtml"/>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/onehackoranother/jQueryTipsy.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/PrimefacesDialog.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/Windows.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/DialogReposition.js"></script>
-            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/SidebarMenu.js"></script>
-            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/Validator.js"></script>
+            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/SidebarAccordionMenu.js"></script>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/TooltipBinding.js"></script>
+            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/static/js/com/blogspot/na5cent/LayoutDetection.js"></script>
             <ui:include src="bugstyle.xhtml"/>
             <ui:include src="tooltip-setup.xhtml"/>
             <ui:include src="dialog-setup.xhtml"/>
@@ -44,8 +45,8 @@
                      life="10000"/>
 
             <div class="toolbar">
+                <div class="sidebar-toggle"></div>
                 <div class="appname">
-                    <img src="#{facesContext.externalContext.requestContextPath}/static/image/favicon.png"/>
                     <p:spacer width="10"/>
                     <h:outputLink value="#{facesContext.externalContext.requestContextPath}">#{app.name}</h:outputLink>
                 </div>
@@ -65,14 +66,9 @@
                 </div>
             </div>
             <div class="sidebar">
-                <ul class="sidebar-menu">
-                    <li style="display: #{empty facesContext.externalContext.userPrincipal.name ? 'none' : 'list-item'}">
-                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/income/list/">รายรับ</h:outputLink>
-                    </li>
-                    <li style="display: #{empty facesContext.externalContext.userPrincipal.name ? 'none' : 'list-item'}">
-                        <h:outputLink value="#{facesContext.externalContext.requestContextPath}/expenses/list/">รายจ่าย</h:outputLink>
-                    </li>
-                </ul>
+                <div class="sidebar-accordion-menu">
+                    <ui:include src="sidebar.xhtml"/>
+                </div> 
             </div>
             <div class="container">
                 <ui:insert name="container"/>

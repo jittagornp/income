@@ -5,13 +5,17 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets"
                  xmlns:f="http://java.sun.com/jsf/core">
     <script>
-        window.IX = window.IX || {};
-        window.IX.config = {
+        window.App = window.App || {};
+        window.App.config = {
             HOST: '#{facesContext.externalContext.requestScheme}://#{facesContext.externalContext.request.getHeader("Host")}',
-            CONTEXT_PATH: '#{facesContext.externalContext.requestContextPath}'
+            CONTEXT_PATH: '#{facesContext.externalContext.requestContextPath}',
+            sidebarMenus : {
+                '.income-menu-item' : '#{facesContext.externalContext.requestContextPath}/income/list/',
+                '.expenses-menu-item' : '#{facesContext.externalContext.requestContextPath}/expenses/list/'
+            }
         };
 
-        window.IX.callback = function() {};
+        window.App.callback = function() {};
     </script>
     <script>
         var Proxy = function(origin, callback, context_opt) {

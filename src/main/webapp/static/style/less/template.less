@@ -7,7 +7,7 @@ body{
     position: fixed;
     height : 39px;
     line-height : 40px;
-    padding-left: 10px;
+    padding-left: 50px;
     padding-right: 10px;
     background: #39A29E;
     left : 0;
@@ -19,15 +19,106 @@ body{
     border-bottom : solid 1px #0F837E;
 }
 
+.sidebar-toggle{
+    height : 40px;
+    width: 40px;
+    position : absolute;
+    left: 0;
+    top : 0;
+    background-color : #167A77;
+    background-image : url('../../image/itoggle.png');
+}
+
+.sidebar-toggle:hover{
+    cursor : pointer;
+}
+
 .sidebar{
     position: fixed;
     top : 40px;
     left : 0;
     width: 149px;
     bottom: 25px;
-    background: #555;
+    background: #fff;
     z-index: 1; 
-    border-right : 1px solid #444;
+    border-right : 1px solid #ddd;
+    .box-shadow(1px, 0, 1px, #EBEBEB);
+}
+
+.sidebar-menu li a{
+    padding: 8px 15px;
+    display: block;
+    border-bottom: 1px solid #eee;
+    font-weight: bold;
+    color: #444;
+    text-decoration: none;
+}
+
+.sidebar-accordion-menu .ui-accordion-header{
+    font-weight : bold;
+}
+
+.sidebar-accordion-menu ul{
+    margin-bottom: 10px;
+}
+
+.sidebar-accordion-menu ul > li{
+
+}
+
+.sidebar-accordion-menu ul > li.active a{
+    font-weight: bold;
+}
+
+.sidebar-accordion-menu ul > li.active{
+
+}
+
+.sidebar-accordion-menu ul{
+
+}
+
+.sidebar-accordion-menu ul > li:hover{
+
+}
+
+.sidebar-accordion-menu ul > li > a{
+    padding: 5px;
+    display: block; 
+    text-decoration: none;
+}
+
+.sidebar-accordion-menu .ui-accordion .ui-accordion-content{
+    padding: 5px;
+}
+
+.header-menu-highlight{
+    color : rgb(81, 150, 224) !important;
+}
+
+.menu-highlight{
+    background-color : rgb(237, 245, 255);
+    border-right: solid 5px rgb(98, 161, 255);
+    text-decoration: none;
+    color : rgb(96, 171, 230);
+}
+
+.menu-admin-level{
+    border-left: solid 2px rgb(16, 185, 30);
+    border-right: solid 2px rgb(16, 185, 30);
+    background-color : #fcfcfc !important;    
+}
+
+.sidebar-accordion-menu > .ui-accordion{
+    //border : solid 1px #fff;
+    border-top : solid 2px #A4CAEE;
+    margin-top : 5px;
+    margin-bottom : 15px;
+}
+
+.sidebar-menu li.active a{
+    color : #fff;
+    border-left: 2px solid #FFFFFF;
 }
 
 .container{
@@ -143,20 +234,6 @@ li{
 
 .ui-dialog .ui-inputtext{
     width: 350px;
-}
-
-.sidebar-menu li a{
-    padding: 8px 15px;
-    display: block;
-    border-bottom: 1px solid #444;
-    font-weight: bold;
-    color: #C5C2C2;
-    text-decoration: none;
-}
-
-.sidebar-menu li.active a{
-    color : #fff;
-    border-left: 2px solid #FFFFFF;
 }
 
 .operation-header .ic-calendar{

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:p="http://primefaces.org/ui"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:f="http://java.sun.com/jsf/core">
+    <style>
+        .sidebar-accordion-menu .ui-accordion-header .ui-icon-triangle-1-e{
+            background-image : url('#{facesContext.externalContext.requestContextPath}/static/image/circle-menu.png') !important;
+        }
+
+        .sidebar-accordion-menu .ui-accordion-header .ui-icon-triangle-1-s{
+            background-image : url('#{facesContext.externalContext.requestContextPath}/static/image/circle-menu-active.png') !important;
+            visibility: visible;
+        }
+    </style>
+    <p:accordionPanel activeIndex="-1">
+        <p:tab title="รายรับ" titleStyleClass="income-menu-item"></p:tab>
+        <p:tab title="รายจ่าย" titleStyleClass="expenses-menu-item"></p:tab>
+    </p:accordionPanel>
+</ui:composition>
