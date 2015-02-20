@@ -8,6 +8,8 @@
     <class>com.pamarin.income.model.Suggestion</class>
     <class>com.pamarin.income.model.Tag</class>
     <class>com.pamarin.income.model.User</class>
+    <class>com.pamarin.income.model.AutoIncomeItem</class>
+    <class>com.pamarin.income.model.ExpensesItem</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <!--
