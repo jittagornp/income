@@ -1,17 +1,51 @@
-.ui-datatable-data tr {
-  border-color: #E7E7E7 !important;
+.ui-datatable tr,
+.ui-datatable td {
+  border-style: dashed !important;
+  background-color: #fdfdfd;
 }
-.ui-datatable-tablewrapper th {
-  border-color: #E7E7E7 !important;
+.ui-state-highlight td {
+  background-color: #FFFAD5;
+}
+.ui-datatable-tablewrapper th,
+.ui-datatable-data tr {
+  border-color: #e2e2e2 !important;
 }
 .ui-datatable-tablewrapper th {
   font-weight: bold !important;
   color: #777 !important;
+  background-color: #fdfdfd !important;
 }
 .ui-datatable .ui-paginator {
-  background: #fafafa;
-  border-color: #eee;
+  background: #FFFFFF;
+  border-color: #F0F0F0;
+  margin-top: 20px;
+  padding: 5px;
+}
+.ui-paginator .ui-state-disabled {
+  border-color: transparent;
+  background: transparent;
 }
 .ui-datatable th {
+  background-color: #fdfdfd;
+}
+.ui-datatable tr.ui-widget-content:hover {
+  background-color: #fafafa;
+}
+.ui-datatable .ui-sortable-column-icon {
+  display: inline-block;
+  background-color: #C5C5C5;
+  border: solid 1px #C5C5C5;
+  margin: 1px 0px -3px 10px;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+.ui-paginator-current {
+  color: #999;
+}
+.ui-paginator .ui-paginator-rpp-options {
   background-color: #fff;
+  border-radius: 0;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
 }

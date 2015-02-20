@@ -5,6 +5,14 @@
     margin-left : -@width/2;
 }
 
+.plain-button(@color : #62B0FF){
+    background: @color !important;
+    box-shadow: 0 0 0 @color, inset 0 0 0 @color !important;
+    -moz-box-shadow: 0 0 0 @color, inset 0 0 0 @color !important;
+    -webkit-box-shadow: 0 0 0 @color, inset 0 0 0 @color !important;
+    border-color: @color !important;
+}
+
 .round-box(@topRight : 5px, @bottomRight : 5px, @bottomLeft : 5px, @topLeft : 5px){
     /*chrome*/
     -webkit-border-top-right-radius: @topRight;
@@ -100,4 +108,9 @@
     border-top : (@borderTopColor -  @minute) solid 1px;
     border-bottom : (@borderBottomColor -  @minute) solid 1px;
     .inner-box-shadow(0px, 2px, 10px, (@shadowColor -  @minute));
+}
+
+.opacity(@opct : 90){
+    opacity: @opct/100;
+    filter: alpha(opacity=@opct);
 }

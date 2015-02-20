@@ -1,31 +1,33 @@
 .ui-dialog-content{
-    padding : 20px !important;
+    padding : 0px 30px 30px 30px !important;
 }
 
 .ui-dialog .ui-dialog-titlebar{
     margin : 0 !important;
-    border-bottom: solid 1px #F7F7F7;
-    background : #fcfcfc !important;
-    padding : 15px;
+    //border-bottom: solid 1px #F7F7F7;
+    //background : #fcfcfc !important;
+    padding : 30px;
 }
 
 .ui-dialog .ui-dialog-titlebar-close{
-    top : 15px !important;
-    right : 15px !important;
-    border: solid 1px #EEEEEE !important;
-    border-radius : 15px !important;
-    -moz-border-radius : 15px !important;
-    -webkit-border-radius : 15px !important;
+    top : 30px !important;
+    right : 30px !important;
+    background-color : transparent !important;
+}
+
+.ui-dialog.ui-draggable-dragging{
+    border-color : #62B0FF;
 }
 
 .ui-widget-overlay{
-    //background : #000 !important;
-    opacity: .20;
-    filter: Alpha(Opacity=20);
+    background : #fff !important;
+    opacity: .55;
+    filter: Alpha(Opacity=55);
 }
 
 .ui-dialog{
-    border : solid #BBBBBB 1px;
+    border : solid 1px rgba(0, 0, 0, 0.2);//solid #CFCFCF 1px;
+    background-color : #fdfdfd;
     border-radius: 3px !important;
-    .box-shadow-important(0px, 0px, 10px, rgba(0, 0, 0, 0.11));
+    .box-shadow-important(0px, 0px, 5px, rgba(0, 0, 0, 0.15));
 }

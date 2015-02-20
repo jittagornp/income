@@ -1,15 +1,33 @@
 #notification_container{
     top : auto !important;
     right : 30px !important;
-    bottom : 20px;
+    bottom : 40px;
     z-index : 1000000 !important;
 }
 
 .ui-growl .ui-growl-item-container{
-    background : #FFF9B8 !important;
-    border-color : #F0DC76 !important;
+    background : #fafafa !important;
+    border : solid 1px #D0D0D0 !important;
+    //background: #FFFFFF !important;
     opacity : 1 !important;
     filter : alpha(opacity=100) !important;
+}
+
+#notification_container.hasError .ui-growl-item-container *{
+    color : #E26C6C;
+}
+
+#notification_container.hasInfo .ui-growl-item-container *{
+    //border-color: #3297fd !important;
+    color: #3297fd;
+}
+
+#notification_container.hasWarning .ui-growl-item-container{
+    //border-color: #FFC839 !important;
+}
+
+.ui-growl-icon-close{
+    .opacity(50);
 }
 
 .ui-growl .ui-shadow{

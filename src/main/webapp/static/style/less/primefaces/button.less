@@ -1,21 +1,32 @@
 .ui-button.ui-widget.ui-state-default.gray-button,
 .ui-button.ui-widget.ui-state-default.gray-button:active,
 .ui-button.ui-widget.ui-state-default.gray-button:focus{
-    background : #bdbdbd !important;
-    background : -moz-linear-gradient(top, #bdbdbd 0%, #bdbdbd 100%) !important;
-    background : -moz-linear-gradient(top, #bdbdbd 0%, #bdbdbd 100%) !important;
-    background : -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bdbdbd), color-stop(100%,#bdbdbd)) !important;
-    background : -webkit-linear-gradient(top, #bdbdbd 0%,#bdbdbd 100%) !important;
-    background : -o-linear-gradient(top, #bdbdbd 0%,#bdbdbd 100%);
-    background : -ms-linear-gradient(top, #bdbdbd 0%,#bdbdbd 100%) !important;
-    background : linear-gradient(top, #bdbdbd 0%,#bdbdbd 100%) !important;
+    background : #B3B3B3 !important;
 
-    box-shadow : 0 2px 2px #C0C0C0 inset, 0 1px 2px rgba(0, 0, 0, 0.2) !important;
-    border : 1px solid #9C9C9C !important;
+    box-shadow : none !important;
+    -moz-box-shadow : none !important;
+    -webkit-box-shadow : none !important;
+    border : none !important;
 
     .ui-button-text{
-        font-weight : normal !important;
-        text-shadow : 0 0 0 #fff !important;
+        color: #FFFFFF !important;
+        text-shadow: 0 0 0 #535353 !important;
+    }    
+}
+
+.ui-button.ui-widget.ui-state-default.white-plain-button,
+.ui-button.ui-widget.ui-state-default.white-plain-button:active,
+.ui-button.ui-widget.ui-state-default.white-plain-button:focus{
+    background : #fdfdfd !important;
+    box-shadow : none !important;
+    -moz-box-shadow : none !important;
+    -webkit-box-shadow : none !important;
+    border : 1px solid !important;
+    border-color : #e2e2e2 #e2e2e2 #CDCDCD #e2e2e2 !important;
+
+    .ui-button-text{
+        color: #666 !important;
+        text-shadow: 0 0 0 #535353 !important;
     }    
 }
 
@@ -30,17 +41,19 @@
 .ui-fileupload .ui-button.ui-widget.ui-state-default,
 .ui-fileupload .ui-button.ui-widget.ui-state-default:active,
 .ui-fileupload .ui-button.ui-widget.ui-state-default:focus{
-    background : #F8F8F8 !important;
-    background : -moz-linear-gradient(top, #F8F8F8 0%, #F1F1F1 100%) !important;
-    background : -moz-linear-gradient(top, #F8F8F8 0%, #F1F1F1 100%) !important;
-    background : -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F8F8F8), color-stop(100%,#F1F1F1)) !important;
-    background : -webkit-linear-gradient(top, #F8F8F8 0%,#F1F1F1 100%) !important;
-    background : -o-linear-gradient(top, #F8F8F8 0%,#F1F1F1 100%);
-    background : -ms-linear-gradient(top, #F8F8F8 0%,#F1F1F1 100%) !important;
-    background : linear-gradient(top, #F8F8F8 0%,#F1F1F1 100%) !important;
+    background : #F7f7f7 !important;
+    background : -moz-linear-gradient(top, #fdfdfd, 0%, #F7f7f7 100%) !important;
+    background : -moz-linear-gradient(top, #fdfdfd, 0%, #F7f7f7 100%) !important;
+    background : -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fdfdfd), color-stop(100%,#F7f7f7)) !important;
+    background : -webkit-linear-gradient(top, #fdfdfd, 0%,#F7f7f7 100%) !important;
+    background : -o-linear-gradient(top, #fdfdfd, 0%,#F7f7f7 100%);
+    background : -ms-linear-gradient(top, #fdfdfd, 0%,#F7f7f7 100%) !important;
+    background : linear-gradient(top, #fdfdfd, 0%,#F7f7f7 100%) !important;
 
-    box-shadow : 0 2px 2px #f5f5f5 inset, 0 1px 2px rgba(226, 226, 226, 0.09) !important;
-    border : 1px solid rgba(223, 223, 223, 1) !important;
+    box-shadow : 0 2px 2px #Fcfcfc inset, 0 1px 2px rgba(226, 226, 226, 0.09) !important;
+    -moz-box-shadow : 0 2px 2px #Fcfcfc inset, 0 1px 2px rgba(226, 226, 226, 0.09) !important;
+    -webkit-box-shadow : 0 2px 2px #Fcfcfc inset, 0 1px 2px rgba(226, 226, 226, 0.09) !important;
+    border : 1px solid #E0E0E0 !important;
 
     .ui-button-text{
         text-shadow : 0 0 0 #fff !important;
@@ -53,38 +66,79 @@
     }
 }
 
+.ui-button.ui-widget.ui-state-default.white-button:hover{
+    border-color : #ccc !important;
+    z-index : 8;
+}
+
+.ui-button.ui-widget.ui-state-default.white-button:active,
+.ui-button.ui-widget.ui-state-default.white-button:focus{
+    border-color : #3297fd !important;
+    z-index : 10;
+}
+
 .ui-button.ui-widget.ui-state-default.green-button,
 .ui-button.ui-widget.ui-state-default.green-button:active,
 .ui-button.ui-widget.ui-state-default.green-button:focus{
-    background : #54B654 !important;
-    background : -moz-linear-gradient(top, #54B654 0%, #609E70 100%) !important;
-    background : -moz-linear-gradient(top, #54B654 0%, #609E70 100%) !important;
-    background : -webkit-gradient(linear, left top, left bottom, color-stop(0%,#54B654), color-stop(100%,#609E70)) !important;
-    background : -webkit-linear-gradient(top, #54B654 0%,#609E70 100%) !important;
-    background : -o-linear-gradient(top, #54B654 0%,#609E70 100%);
-    background : -ms-linear-gradient(top, #54B654 0%,#609E70 100%) !important;
-    background : linear-gradient(top, #54B654 0%,#609E70 100%) !important;
+    background : #3CBD51 !important;
+    box-shadow : 0 1px 0 #3CBD51 inset, 1px 1px rgba(0, 0, 0, 0.12) !important;
+    -moz-box-shadow : 0 1px 0 #3CBD51 inset, 1px 1px rgba(0, 0, 0, 0.12) !important;
+    -webkit-box-shadow : 0 1px 0 #3CBD51 inset, 1px 1px rgba(0, 0, 0, 0.12) !important;
+    border : 1px solid #3CBD51 !important; 
 
-    box-shadow : 0 1px 0 #83AC7E inset !important;
-    border : 1px solid #79A564 !important; 
+    .ui-button-text{
+        text-shadow : 0 0px 0 #3CBD51 !important;
+        color : #fff;
+    }
 }
 
 .ui-button.ui-widget.ui-state-default.red-button,
 .ui-button.ui-widget.ui-state-default.red-button:active,
 .ui-button.ui-widget.ui-state-default.red-button:focus{
-    background : #FC4848 !important;
-    background : -moz-linear-gradient(top, #FC4848 0%, #E24C4C 100%) !important;
-    background : -moz-linear-gradient(top, #FC4848 0%, #E24C4C 100%) !important;
-    background : -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FC4848), color-stop(100%,#E24C4C)) !important;
-    background : -webkit-linear-gradient(top, #FC4848 0%,#E24C4C 100%) !important;
-    background : -o-linear-gradient(top, #FC4848 0%,#E24C4C 100%);
-    background : -ms-linear-gradient(top, #FC4848 0%,#E24C4C 100%) !important;
-    background : linear-gradient(top, #FC4848 0%,#E24C4C 100%) !important;
+    background : #ED5252 !important;
 
-    box-shadow : 0 1px 0 #E95353 inset !important;
-    border : 1px solid #D33333 !important; 
+    box-shadow : 0 1px 0 #ED5252 inset !important;
+    -moz-box-shadow : 0 1px 0 #ED5252 inset !important;
+    -webkit-box-shadow : 0 1px 0 #ED5252 inset !important;
+    border : 1px solid #ED5252 !important; 
 
     .ui-button-text{
-        text-shadow : 0 -1px 0 #BB0E0E !important;
+        text-shadow : 0 0px 0 #ED5252 !important;
+        color : #fff;
     }
+}
+
+.ui-button.ui-widget.ui-state-default.blue-button,
+.ui-button.ui-widget.ui-state-default.blue-button:active,
+.ui-button.ui-widget.ui-state-default.blue-button:focus{
+    background : #3297fd !important;
+
+    box-shadow : 0 -10px 10px #4597EC inset !important;
+    -moz-box-shadow : 0 -10px 10px #4597EC inset !important;
+    -webkit-box-shadow : 0 -10px 10px #4597EC inset !important;
+    border : 1px solid #419DFA !important; 
+
+    .ui-button-text{
+        text-shadow : 0 0px 0 #3297fd !important;
+        color : #fff;
+    }
+}
+
+.ui-button .ui-button-text{
+    padding : 5px 22px 5px 22px;
+}
+
+.ui-button .ui-button-icon-left + .ui-button-text{
+    padding-left : 35px;
+}
+
+.ui-button .ui-button-icon-right + .ui-button-text{
+    padding-right : 35px;
+}
+
+
+.round-button{
+    border-radius : 15px !important;
+    -moz-border-radius : 15px !important;
+    -webkit-border-radius : 15px !important;
 }

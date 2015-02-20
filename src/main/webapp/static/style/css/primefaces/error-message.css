@@ -1,0 +1,25 @@
+.ui-messages-error,
+.ui-message-error {
+  border: none;
+  background: #FDE2E2;
+}
+.ui-message-error ul,
+.ui-messages-error ul {
+  padding-left: 20px;
+}
+.ui-message-error li,
+.ui-messages-error li {
+  list-style-type: disc;
+  color: #b94a48;
+}
+.ui-corner-all.ui-message-error,
+.ui-corner-all.ui-messages-error {
+  border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  -webkit-border-radius: 0 !important;
+}
+.ui-messages-error-summary {
+  font-weight: normal;
+  margin-left: 0;
+  color: #D56F6E;
+}
