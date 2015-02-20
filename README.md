@@ -1,6 +1,6 @@
 demo : <a target="_blank" href="http://omsalung.com/">http://omsalung.com/</a>
 <p>
-before you must run Test UserServiceT for create user (login)<br/>
+Before, you must run Test UserServiceT for create user (login)<br/>
 then go to login page<br/>
 user : admin<br/>
 password : admin<br/>
