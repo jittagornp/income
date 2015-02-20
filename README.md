@@ -1,6 +1,6 @@
 demo : <a target="_blank" href="http://omsalung.com/">http://omsalung.com/</a>
 <p>
-before you must run Test UserServiceT.java 
+before you must run Test UserServiceT for create first user
 </p>
 <h1>JSF Primefaces Example</h1>
 <img src="https://lh3.googleusercontent.com/-yYp7O91kQ4M/VDLx5jTeq0I/AAAAAAAAPPg/PsWejdtl2Nk/w958-h515-no/10-4-2014%2B3-46-32%2BPM.png"/>
